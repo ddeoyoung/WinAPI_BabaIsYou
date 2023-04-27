@@ -1,29 +1,20 @@
 
 #include <Windows.h>
-#include <GameEnginePlatform/GameEngineWindow.h>
+#include <GameEngineCore/GameEngineCore.h>
 
-void TestStart(HINSTANCE _Inst)
-{
-    GameEngineWindow::MainWindow.Open("MainWindow", _Inst);
-}
-
-void TestEnd()
-{
-
-}
-
-void TestUpdate()
-{
-
-}
+//#include <GameEngineContents/PlayLevel.h>
+//#include <GameEngineContents/TitleLevel.h>
+#include <list>
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     _In_opt_ HINSTANCE hPrevInstance,
     _In_ LPWSTR    lpCmdLine,
     _In_ int       nCmdShow)
 {
-    // CallBack ¹æ½Ä
-    GameEngineWindow::MessageLoop(hInstance, TestStart, TestUpdate, TestEnd);
+
+    GameEngineCore::EngineStart("Baba Is You", hInstance);
+
     return 0;
 }
 
+  

@@ -1,0 +1,60 @@
+#pragma once
+
+// 설명 :
+class GameEngineObject
+{
+public:
+	// constrcuter destructer
+	GameEngineObject();
+	~GameEngineObject();
+
+	// delete Function
+	GameEngineObject(const GameEngineObject& _Other) = delete;
+	GameEngineObject(GameEngineObject&& _Other) noexcept = delete;
+	GameEngineObject& operator=(const GameEngineObject& _Other) = delete;
+	GameEngineObject& operator=(GameEngineObject&& _Other) noexcept = delete;
+
+	// 시작
+	virtual void Start() {}
+
+	// 행동
+	virtual void Update() {}
+
+	// 랜더
+	virtual void Render() {}
+
+	// 정리
+	virtual void Release() {}
+
+	void On()
+	{
+		IsUpdateValue = true;
+	}
+
+	void Off()
+	{
+		IsUpdateValue = false;
+	}
+
+	void Death()
+	{
+		IsDeathValue = true;
+	}
+
+	bool IsUpdate()
+	{
+		return true == IsUpdateValue && false == IsDeathValue;
+	}
+
+	bool IsDeath()
+	{
+		return IsDeathValue;
+	}
+
+protected:
+
+private:
+	bool IsUpdateValue = true; // 이걸 false로 만들면 됩니다.
+	bool IsDeathValue = false; // 아예 메모리에서 날려버리고 싶어.
+};
+

@@ -30,7 +30,8 @@ void GameEngineWindow::Open(const std::string& _Title, HINSTANCE _hInstance)
 
 void GameEngineWindow::InitInstance()
 {
-    // 윈도우 만드는 함수인
+    // 윈도우 만드는 함수
+    // hWnd 인자의 자료형을 잘 생각해야 한다 -> 함수포인터 (Title.c_str())
     // const char* == std::string
     hWnd = CreateWindowA("DefaultWindow", Title.c_str(), WS_OVERLAPPEDWINDOW,
         CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, Instance, nullptr);
@@ -66,6 +67,7 @@ LRESULT CALLBACK GameEngineWindow::WndProc(HWND hWnd, UINT message, WPARAM wPara
     return 0;
 }
 
+// 윈도우의 RegisterClass
 void GameEngineWindow::MyRegisterClass()
 {
     static bool Check = false;
@@ -101,7 +103,7 @@ void GameEngineWindow::MyRegisterClass()
 
 void GameEngineWindow::MessageLoop(HINSTANCE _Inst, void(*_Start)(HINSTANCE), void(*_Update)(), void(*_End)())
 {
-    // 윈도우가 뜨기전에 로딩해야할 이미지나 사운드 등등을 처리하는 단계
+    // 윈도우가 뜨기 전에 로딩해야 할 이미지나 사운드 등을 처리하는 단계
     if (nullptr != _Start)
     {
         _Start(_Inst);
