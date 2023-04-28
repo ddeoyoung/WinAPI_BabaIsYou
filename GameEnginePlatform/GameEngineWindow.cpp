@@ -42,6 +42,9 @@ void GameEngineWindow::InitInstance()
         return;
     }
 
+    // CreateDC()
+    Hdc = ::GetDC(hWnd);
+
     ShowWindow(hWnd, SW_SHOW);
     UpdateWindow(hWnd);
 
@@ -76,7 +79,7 @@ void GameEngineWindow::MyRegisterClass()
     {
         return;
     }
-
+    
     WNDCLASSEXA wcex;
     wcex.cbSize = sizeof(WNDCLASSEX);
     wcex.style = CS_HREDRAW | CS_VREDRAW;

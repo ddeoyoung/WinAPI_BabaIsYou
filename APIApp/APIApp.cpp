@@ -1,10 +1,7 @@
 
 #include <Windows.h>
 #include <GameEngineCore/GameEngineCore.h>
-
-//#include <GameEngineContents/PlayLevel.h>
-//#include <GameEngineContents/TitleLevel.h>
-#include <list>
+#include <Content_BabaIsYou/ContentCore.h>
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     _In_opt_ HINSTANCE hPrevInstance,
@@ -12,7 +9,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     _In_ int       nCmdShow)
 {
 
-    GameEngineCore::EngineStart("Baba Is You", hInstance);
+    GameEngineCore::EngineStart<ContentCore>("MyWindow", hInstance);
 
     return 0;
 }
