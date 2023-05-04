@@ -1,6 +1,11 @@
 #include "Player.h"
 #include <Windows.h>
+#include <GameEngineBase/GameEngineTime.h>
+#include <GameEngineBase/GameEnginePath.h>
 #include <GameEnginePlatform/GameEngineWindow.h>
+#include <GameEngineCore/GameEngineTexture.h>
+#include <GameEngineCore/ResourcesManager.h>
+
 Player::Player()
 {
 }
@@ -11,13 +16,20 @@ Player::~Player()
 
 void Player::Start()
 {
+	if (false == ResourcesManager::GetInst().IsLoadTexture("Player_Idle.Bmp"))
+	{
+		ResourcesManager::GetInst().TextureLoad("Player_Idle.Bmp");
+	}
+
 	SetPos({ 200, 200 });
 	SetScale({ 100, 100 });
 }
 
-void Player::Update()
+void Player::Update(float _Delta)
 {
-	AddPos({ 1.0f, 0.0f });
+	// float Time = GameEngineTime::MainTimer.GetDeltaTime();
+	
+	AddPos({ 100.0f * _Delta, 0.0f });
 }
 
 void Player::Render()
@@ -34,7 +46,7 @@ void Player::Render()
 		GetPos().iY() + GetScale().ihY()
 	);
 
-	// 그려야죠?
+	// 그리기
 }
 
 void Player::Release()

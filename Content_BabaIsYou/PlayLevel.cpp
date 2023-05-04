@@ -26,7 +26,7 @@ void PlayLevel::Start()
 }
 
 
-void PlayLevel::Update()
+void PlayLevel::Update(float _Delta)
 {
 }
 void PlayLevel::Render()

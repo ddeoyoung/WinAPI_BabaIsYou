@@ -29,7 +29,7 @@ void GameEngineLevel::ActorInit(GameEngineActor* _Actor)
 }
 
 // Update
-void GameEngineLevel::ActorUpdate()
+void GameEngineLevel::ActorUpdate(float _Delta)
 {
 
 	for (const std::pair<int, std::list<GameEngineActor*>>& _Pair : AllActors)

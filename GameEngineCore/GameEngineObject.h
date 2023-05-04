@@ -18,7 +18,7 @@ public:
 	virtual void Start() {}
 
 	// 행동
-	virtual void Update() {}
+	virtual void Update(float _Delta) {}
 
 	// 랜더
 	virtual void Render() {}
