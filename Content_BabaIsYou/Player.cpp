@@ -16,6 +16,7 @@ Player::~Player()
 
 void Player::Start()
 {
+	// Texture Load
 	if (false == ResourcesManager::GetInst().IsLoadTexture("Player_Idle.Bmp"))
 	{
 		ResourcesManager::GetInst().TextureLoad("Player_Idle.Bmp");

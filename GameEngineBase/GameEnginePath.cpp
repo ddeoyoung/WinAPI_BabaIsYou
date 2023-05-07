@@ -4,6 +4,10 @@ GameEnginePath::GameEnginePath()
 {
 }
 
+GameEnginePath::GameEnginePath(const std::string& _path)
+{
+}
+
 GameEnginePath::~GameEnginePath()
 {
 }
