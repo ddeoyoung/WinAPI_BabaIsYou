@@ -19,7 +19,13 @@ void Player::Start()
 	// Texture Load
 	if (false == ResourcesManager::GetInst().IsLoadTexture("Player_Idle.Bmp"))
 	{
-		ResourcesManager::GetInst().TextureLoad("Player_Idle.Bmp");
+		GameEnginePath FilePath;
+		FilePath.GetCurrentPath();
+		
+		FilePath.MoveParentToExistsChild("Resources");
+		FilePath.MoveChild("Resources\\Test.Bmp");
+
+		ResourcesManager::GetInst().TextureLoad(FilePath.GetStringPath());
 	}
 
 	SetPos({ 200, 200 });
@@ -39,13 +45,17 @@ void Player::Render()
 	//SetScale({ 100, 100 });
 
 	HDC WindowDC = GameEngineWindow::MainWindow.GetHDC();
+	GameEngineTexture* FindTexture = ResourcesManager::GetInst().FindTexture("Test.Bmp");
+	HDC ImageDC = FindTexture->GetImageDC();
 
-	Rectangle(WindowDC,
-		GetPos().iX() - GetScale().ihX(),
-		GetPos().iY() - GetScale().ihY(),
-		GetPos().iX() + GetScale().ihX(),
-		GetPos().iY() + GetScale().ihY()
-	);
+	BitBlt(WindowDC, 100, 100, 500, 500, ImageDC, 0, 0, SRCCOPY);
+
+	//Rectangle(WindowDC,
+	//	GetPos().iX() - GetScale().ihX(),
+	//	GetPos().iY() - GetScale().ihY(),
+	//	GetPos().iX() + GetScale().ihX(),
+	//	GetPos().iY() + GetScale().ihY()
+	//);
 
 	// ±×¸®±â
 }

@@ -50,7 +50,6 @@ void GameEngineCore::CoreUpdate()
 
 void GameEngineCore::CoreEnd()
 {
-
 	Process->Release();
 
 	if (nullptr != NextLevel)

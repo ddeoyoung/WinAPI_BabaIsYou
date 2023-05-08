@@ -19,7 +19,6 @@ void GameEngineTime::Reset()
 	Prev = Cur;
 }
 
-// 프레임 사이에서 실행되어야할 함수들은 다 업데이트라고 이름을 지을 것이다.
 void GameEngineTime::Update()
 {
 	QueryPerformanceCounter(&Cur);

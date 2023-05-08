@@ -1,5 +1,7 @@
 #pragma once
 #include <string>
+#include <map>
+#include <GameEngineBase/GameEnginePath.h>
 
 
 /*
@@ -30,17 +32,14 @@ public:
 	// 파일명이 곧 찾기위한 이름이 된다.
 	void TextureLoad(const std::string& _Path)
 	{
-		// _Path 파일명
-
-		// TextureLoad();
+		GameEnginePath LoadPath = _Path;
+		TextureLoad(LoadPath.GetFileName(), _Path);
 	}
 
-	void TextureLoad(const std::string& _Name, const std::string& _Path)
-	{
+	void TextureLoad(const std::string& _Name, const std::string& _Path);
 
-	}
+	GameEngineTexture* FindTexture(const std::string& _Name);
 
-	GameEngineTexture* FindTexture(const std::string& _Image);
 	bool IsLoadTexture(const std::string& _Image);
 
 protected:
@@ -52,5 +51,7 @@ private:
 	// 생성자를 private에 넣는다.
 	ResourcesManager();
 	~ResourcesManager();
+
+	std::map<std::string, GameEngineTexture*> AllTexture;
 };
 

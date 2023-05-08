@@ -38,7 +38,7 @@ void GameEngineLevel::ActorUpdate(float _Delta)
 
 		for (GameEngineActor* _Actor : Group)
 		{
-			_Actor->Update();
+			_Actor->Update(_Delta);
 		}
 	}
 }

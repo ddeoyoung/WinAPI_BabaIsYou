@@ -34,14 +34,6 @@ protected:
 
 private:
 
-	// 맵
-// 플레이어
-// 몬스터
-
-// -10번 std::list<> 액터 액터 액터 액터 
-// 0번 std::list<> 액터 액터 액터 액터
-// 1번 std::list<> 액터 액터 액터 액터
-
 	std::map<int, std::list<GameEngineActor*>> AllActors;
 
 	// Start Update Render
