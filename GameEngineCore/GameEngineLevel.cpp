@@ -1,12 +1,26 @@
 #include "GameEngineLevel.h"
+#include "GameEngineCamera.h"
 
 GameEngineLevel::GameEngineLevel()
 {
+	MainCamera = new GameEngineCamera();
+	UICamera = new GameEngineCamera();
 }
 
 GameEngineLevel::~GameEngineLevel()
 {
-	// delete Actor
+	if (nullptr != MainCamera)
+	{
+		delete MainCamera;
+		MainCamera = nullptr;
+	}
+
+	if (nullptr != UICamera)
+	{
+		delete UICamera;
+		UICamera = nullptr;
+	}
+
 	for (const std::pair<int, std::list<GameEngineActor*>>& _Pair : AllActors)
 	{
 		const std::list<GameEngineActor*>& Group = _Pair.second;
@@ -23,15 +37,16 @@ GameEngineLevel::~GameEngineLevel()
 }
 
 // Start
-void GameEngineLevel::ActorInit(GameEngineActor* _Actor)
+void GameEngineLevel::ActorInit(GameEngineActor* _Actor, int _Order)
 {
+	_Actor->Level = this;
+	_Actor->SetOrder(_Order);
 	_Actor->Start();
 }
 
 // Update
 void GameEngineLevel::ActorUpdate(float _Delta)
 {
-
 	for (const std::pair<int, std::list<GameEngineActor*>>& _Pair : AllActors)
 	{
 		const std::list<GameEngineActor*>& Group = _Pair.second;
@@ -46,6 +61,7 @@ void GameEngineLevel::ActorUpdate(float _Delta)
 // Render
 void GameEngineLevel::ActorRender()
 {
+	MainCamera->Render();
 
 	for (const std::pair<int, std::list<GameEngineActor*>>& _Pair : AllActors)
 	{

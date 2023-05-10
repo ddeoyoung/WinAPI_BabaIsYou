@@ -12,6 +12,28 @@ GameEngineWindow::GameEngineWindow()
 
 GameEngineWindow::~GameEngineWindow()
 {
+    if (nullptr != BackBuffer)
+    {
+        delete BackBuffer;
+        BackBuffer = nullptr;
+    }
+
+
+    if (nullptr != WindowBuffer)
+    {
+        delete WindowBuffer;
+        WindowBuffer = nullptr;
+    }
+}
+
+void GameEngineWindow::ClearBackBuffer()
+{
+    Rectangle(BackBuffer->GetImageDC(), 0, 0, BackBuffer->GetScale().iX(), BackBuffer->GetScale().iY());
+}
+
+void GameEngineWindow::DoubleBuffering()
+{
+    WindowBuffer->BitCopy(BackBuffer, Scale.Half(), BackBuffer->GetScale());
 }
 
 void GameEngineWindow::Open(const std::string& _Title, HINSTANCE _hInstance)
@@ -46,6 +68,14 @@ void GameEngineWindow::InitInstance()
     // CreateDC()
     Hdc = ::GetDC(hWnd);
 
+    WindowBuffer = new GameEngineWindowTexture();
+    WindowBuffer->ResCreate(Hdc);
+
+    // 더플버퍼링을 하기 위한 이미지
+    BackBuffer = new GameEngineWindowTexture();
+    BackBuffer->ResCreate(WindowBuffer->GetScale());
+
+    // CreateDC()
     ShowWindow(hWnd, SW_SHOW);
     UpdateWindow(hWnd);
 
@@ -63,8 +93,8 @@ LRESULT CALLBACK GameEngineWindow::WndProc(HWND hWnd, UINT message, WPARAM wPara
     }
     break;
     case WM_DESTROY:
-        // IsWindowUpdate = false;
-        PostQuitMessage(0);
+        IsWindowUpdate = false;
+        // PostQuitMessage(0);
         break;
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);
@@ -143,4 +173,26 @@ void GameEngineWindow::MessageLoop(HINSTANCE _Inst, void(*_Start)(HINSTANCE), vo
     }
 
     return;
+}
+
+void GameEngineWindow::SetPosAndScale(const float4& _Pos, const float4& _Scale)
+{
+    // Window에서 LP 포인터라는 뜻 Long Pointer
+    Scale = _Scale;
+
+    if (nullptr != BackBuffer)
+    {
+        delete BackBuffer;
+        BackBuffer = new GameEngineWindowTexture();
+        BackBuffer->ResCreate(Scale);
+    }
+
+    //                200           200
+    RECT Rc = { 0, 0, _Scale.iX(), _Scale.iY() };
+
+
+    AdjustWindowRect(&Rc, WS_OVERLAPPEDWINDOW, FALSE);
+
+    //                          100        100         500          500
+    SetWindowPos(hWnd, nullptr, _Pos.iX(), _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top, SWP_NOZORDER);
 }

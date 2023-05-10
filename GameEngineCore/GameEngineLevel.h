@@ -2,12 +2,15 @@
 #include "GameEngineObject.h"
 #include "GameEngineActor.h"
 #include <list>
+#include <string>
 #include <map>
 
 // 설명 : 화면(혹은 장면)을 표현한다.
 // 타이틀 장면, 플레이 장면, 엔딩 장면 등
+class GameEngineCamera;
 class GameEngineLevel : public GameEngineObject
 {
+	friend class GameEngineActor;
 	friend class GameEngineCore;
 
 public:
@@ -21,23 +24,39 @@ public:
 	GameEngineLevel& operator=(const GameEngineLevel& _Other) = delete;
 	GameEngineLevel& operator=(GameEngineLevel&& _Other) noexcept = delete;
 
+	template<typename ActorType, typename EnumType>
+	ActorType* CreateActor(EnumType _Order)
+	{
+		return CreateActor<ActorType>(static_cast<int>(_Order));
+	}
+
+
 	template<typename ActorType>
-	void CreateActor(int _Order = 0)
+	ActorType* CreateActor(int _Order = 0)
 	{
 		std::list<GameEngineActor*>& GroupList = AllActors[_Order];
 		GameEngineActor* NewActor = new ActorType();
-		ActorInit(NewActor);
+		ActorInit(NewActor, _Order);
 		GroupList.push_back(NewActor);
+
+		return dynamic_cast<ActorType*>(NewActor);
+	}
+
+	GameEngineCamera* GetMainCamera()
+	{
+		return MainCamera;
 	}
 
 protected:
 
 private:
+	GameEngineCamera* MainCamera;
+	GameEngineCamera* UICamera;
 
 	std::map<int, std::list<GameEngineActor*>> AllActors;
 
 	// Start Update Render
-	void ActorInit(GameEngineActor* _Actor);
+	void ActorInit(GameEngineActor* _Actor, int _Order);
 	void ActorUpdate(float _Delta);
 	void ActorRender();
 };
