@@ -42,6 +42,7 @@ public:
 
 	bool IsLoadTexture(const std::string& _Image);
 
+
 protected:
 
 private:

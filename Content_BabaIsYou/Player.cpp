@@ -9,6 +9,7 @@
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/GameEngineCamera.h>
+#include "Bullet.h"
 
 Player::Player()
 {
@@ -25,8 +26,8 @@ void Player::Start()
 	{
 		GameEnginePath FilePath;
 		FilePath.GetCurrentPath();
-		FilePath.MoveParentToExistsChild("ContentsResources");
-		FilePath.MoveChild("ContentsResources\\Texture\\Player\\");
+		FilePath.MoveParentToExistsChild("Resources");
+		FilePath.MoveChild("Resources\\");
 
 
 		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("Test.bmp"));
@@ -50,15 +51,11 @@ void Player::Start()
 
 	float4 WinScale = GameEngineWindow::MainWindow.GetScale();
 
-	// GetLevel()->GetMainCamera()->SetPos({ -WinScale.hX(), -WinScale.hY() });
-
 	SetPos(WinScale.Half());
 }
 
 void Player::Update(float _Delta)
 {
-	// Player->GetPos() == Monster->GetPos();
-	// float Time = GameEngineTime::MainTimer.GetDeltaTime();
 	float Speed = 200.0f;
 
 	float4 MovePos = float4::ZERO;
@@ -81,6 +78,14 @@ void Player::Update(float _Delta)
 	if (0 != GetAsyncKeyState('S'))
 	{
 		MovePos = { 0.0f, Speed * _Delta };
+	}
+
+	if (0 != GetAsyncKeyState('F'))
+	{
+		Bullet* NewBullet = GetLevel()->CreateActor<Bullet>();
+		NewBullet->Renderer->SetTexture("Test.Bmp");
+		NewBullet->SetDir(float4::RIGHT);
+		NewBullet->SetPos(GetPos());
 	}
 
 	AddPos(MovePos);

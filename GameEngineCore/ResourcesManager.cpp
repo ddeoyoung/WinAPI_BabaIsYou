@@ -24,7 +24,6 @@ ResourcesManager::~ResourcesManager()
 			delete Texture;
 			Texture = nullptr;
 		}
-
 	}
 }
 

@@ -15,10 +15,10 @@
       <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineCamera.h">
-      <Filter>Rendering</Filter>
+      <Filter>Object\Rendering</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineRenderer.h">
-      <Filter>Rendering</Filter>
+      <Filter>Object\Rendering</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -36,10 +36,10 @@
       <Filter>Resources</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineCamera.cpp">
-      <Filter>Rendering</Filter>
+      <Filter>Object\Rendering</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineRenderer.cpp">
-      <Filter>Rendering</Filter>
+      <Filter>Object\Rendering</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -49,7 +49,7 @@
     <Filter Include="Resources">
       <UniqueIdentifier>{d699090f-ca71-48da-874e-72238bd38308}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Rendering">
+    <Filter Include="Object\Rendering">
       <UniqueIdentifier>{205e198b-eef5-4a2d-8a67-d2c93a604c7b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
