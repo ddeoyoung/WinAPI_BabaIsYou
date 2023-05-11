@@ -4,6 +4,11 @@
 
 ResourcesManager ResourcesManager::Inst;
 
+// 포인터 
+// ResourcesManager* ResourcesManager::Inst = new ResourcesManager();
+// ResourcesManager* ResourcesManager::Inst;
+
+
 bool ResourcesManager::IsLoadTexture(const std::string& _Name)
 {
 	return FindTexture(_Name) != nullptr;
@@ -46,7 +51,7 @@ GameEngineWindowTexture* ResourcesManager::TextureLoad(const std::string& _Name,
 {
 	std::string UpperName = GameEngineString::ToUpperReturn(_Name);
 
-	// 동적 바인딩
+	// 동적 바인딩이라고 합니다.
 	GameEngineWindowTexture* LoadTexture = new GameEngineWindowTexture();
 
 	LoadTexture->ResLoad(_Path);

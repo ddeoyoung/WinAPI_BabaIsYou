@@ -19,43 +19,45 @@ Player::~Player()
 {
 }
 
+
 void Player::Start()
 {
-	// Texture Load
-	if (false == ResourcesManager::GetInst().IsLoadTexture("Test.Bmp"))
+	if (false == ResourcesManager::GetInst().IsLoadTexture("Baba.Bmp"))
 	{
 		GameEnginePath FilePath;
 		FilePath.GetCurrentPath();
-		FilePath.MoveParentToExistsChild("Resources");
-		FilePath.MoveChild("Resources\\");
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Texture\\Player\\");
 
 
-		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("Test.bmp"));
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("Baba.bmp"));
 		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("HPBar.bmp"));
 	}
 
-
 	{
-		GameEngineRenderer* Ptr = CreateRenderer("Test.Bmp", RenderOrder::Play);
-		Ptr->SetRenderScale({ 200, 200 });
-		Ptr->SetTexture("Test.Bmp");
+		GameEngineRenderer* Ptr = CreateRenderer("Baba.Bmp", RenderOrder::Play);
+		Ptr->SetRenderScale({ 70, 70 });
+		Ptr->SetTexture("Baba.Bmp");
 	}
 
 	{
 		GameEngineRenderer* Ptr = CreateRenderer("HPBar.bmp", RenderOrder::Play);
-		Ptr->SetRenderPos({ 0, -100 });
-		Ptr->SetRenderScale({ 200, 40 });
+		Ptr->SetRenderPos({ 0, -50 });
+		Ptr->SetRenderScale({ 70, 10 });
 		Ptr->SetTexture("HPBar.bmp");
 	}
 
 
 	float4 WinScale = GameEngineWindow::MainWindow.GetScale();
 
+
 	SetPos(WinScale.Half());
+
 }
 
 void Player::Update(float _Delta)
 {
+
 	float Speed = 200.0f;
 
 	float4 MovePos = float4::ZERO;
@@ -83,7 +85,8 @@ void Player::Update(float _Delta)
 	if (0 != GetAsyncKeyState('F'))
 	{
 		Bullet* NewBullet = GetLevel()->CreateActor<Bullet>();
-		NewBullet->Renderer->SetTexture("Test.Bmp");
+		NewBullet->Renderer->SetTexture("Baba.Bmp");
+		NewBullet->Renderer->SetRenderScale({ 20, 20 });
 		NewBullet->SetDir(float4::RIGHT);
 		NewBullet->SetPos(GetPos());
 	}
@@ -100,4 +103,5 @@ void Player::Render()
 
 void Player::Release()
 {
+
 }

@@ -10,7 +10,6 @@ CoreProcess* GameEngineCore::Process = nullptr;
 GameEngineLevel* GameEngineCore::CurLevel = nullptr;
 GameEngineLevel* GameEngineCore::NextLevel = nullptr;
 
-
 GameEngineCore::GameEngineCore()
 {
 }
@@ -37,7 +36,6 @@ void GameEngineCore::CoreUpdate()
 		GameEngineTime::MainTimer.Reset();
 	}
 
-	// MainTimer
 	GameEngineTime::MainTimer.Update();
 	float Delta = GameEngineTime::MainTimer.GetDeltaTime();
 
@@ -50,13 +48,14 @@ void GameEngineCore::CoreUpdate()
 	GameEngineWindow::MainWindow.DoubleBuffering();
 
 	CurLevel->ActorRelease();
+
 }
 
 void GameEngineCore::CoreEnd()
 {
 	Process->Release();
 
-	if (nullptr != NextLevel)
+	if (nullptr != Process)
 	{
 		delete Process;
 		Process = nullptr;
@@ -72,6 +71,7 @@ void GameEngineCore::CoreEnd()
 	}
 }
 
+
 void GameEngineCore::EngineStart(const std::string& _Title, HINSTANCE _Inst, CoreProcess* _Ptr)
 {
 	GameEngineDebug::LeckCheck();
@@ -80,7 +80,6 @@ void GameEngineCore::EngineStart(const std::string& _Title, HINSTANCE _Inst, Cor
 	WindowTitle = _Title;
 	GameEngineWindow::MessageLoop(_Inst, CoreStart, CoreUpdate, CoreEnd);
 }
-
 
 void GameEngineCore::LevelInit(GameEngineLevel* _Level)
 {

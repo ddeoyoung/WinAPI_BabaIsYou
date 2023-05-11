@@ -111,7 +111,7 @@ void GameEngineWindow::MyRegisterClass()
     {
         return;
     }
-    
+
     WNDCLASSEXA wcex;
     wcex.cbSize = sizeof(WNDCLASSEX);
     wcex.style = CS_HREDRAW | CS_VREDRAW;
@@ -150,10 +150,10 @@ void GameEngineWindow::MessageLoop(HINSTANCE _Inst, void(*_Start)(HINSTANCE), vo
     {
         if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
-            if (nullptr != _Update)
-            {
-                _Update();
-            }
+            //if (nullptr != _Update)
+            //{
+            //	_Update();
+            //}
 
             TranslateMessage(&msg);
             DispatchMessage(&msg);

@@ -18,7 +18,7 @@ PlayLevel::~PlayLevel()
 void PlayLevel::Start()
 {
 	BackGround* Back = CreateActor<BackGround>();
-	Back->Init("StageTest.Bmp");
+	Back->Init("WorldMap.Bmp");
 
 	CreateActor<Player>();
 }

@@ -9,7 +9,7 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
     _In_ int       nCmdShow)
 {
 
-    GameEngineCore::EngineStart<ContentCore>("MyWindow", hInstance);
+    GameEngineCore::EngineStart<ContentCore>("Baba Is You", hInstance);
 
     return 0;
 }

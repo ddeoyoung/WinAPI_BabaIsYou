@@ -60,11 +60,14 @@ private:
 	static HINSTANCE Instance;
 	std::string Title = "";
 	HWND hWnd = nullptr;
-	HDC Hdc = nullptr;
+
 
 	float4 Scale;
 	GameEngineWindowTexture* WindowBuffer = nullptr;
+
 	GameEngineWindowTexture* BackBuffer = nullptr;
+
+	HDC Hdc = nullptr;
 
 	static LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam);
 	void InitInstance();
