@@ -2,6 +2,7 @@
 #include "TitleLevel.h"
 #include "PlayLevel.h"
 #include "EndingLevel.h"
+#include "LogoLevel.h"
 #include <GameEnginePlatform/GameEngineWindow.h>
 
 ContentCore::ContentCore()
@@ -19,6 +20,7 @@ void ContentCore::Start()
 	GameEngineCore::CreateLevel<TitleLevel>("TitleLevel");
 	GameEngineCore::CreateLevel<PlayLevel>("PlayLevel");
 	GameEngineCore::CreateLevel<EndingLevel>("EndingLevel");
+	GameEngineCore::CreateLevel<LogoLevel>("LogogLevel");
 
 	// 이 레벨이 화면에 보여라.
 	GameEngineCore::ChangeLevel("PlayLevel");

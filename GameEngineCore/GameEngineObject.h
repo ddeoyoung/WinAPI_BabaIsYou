@@ -39,7 +39,7 @@ public:
 
 	void Death()
 	{
-		IsDeathValue = true;
+		this->IsDeathValue = true;
 	}
 
 	bool IsUpdate()

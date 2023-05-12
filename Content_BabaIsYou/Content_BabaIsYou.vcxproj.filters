@@ -23,6 +23,12 @@
     <ClInclude Include="Bullet.h">
       <Filter>Global</Filter>
     </ClInclude>
+    <ClInclude Include="LogoLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldMapLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -43,6 +49,12 @@
     </ClCompile>
     <ClCompile Include="Bullet.cpp">
       <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="LogoLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldMapLevel.cpp">
+      <Filter>Level</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

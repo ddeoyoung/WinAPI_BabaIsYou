@@ -3,6 +3,7 @@
 #include <GameEngineBase/GameEngineDebug.h>
 #include <GameEngineBase/GameEngineTime.h>
 #include "GameEngineLevel.h"
+#include <GameEnginePlatform/GameEngineInput.h>
 
 std::string GameEngineCore::WindowTitle = "";
 std::map<std::string, class GameEngineLevel*> GameEngineCore::AllLevel;
@@ -20,8 +21,11 @@ GameEngineCore::~GameEngineCore()
 
 void GameEngineCore::CoreStart(HINSTANCE _Inst)
 {
-	// 엔진쪽에 준비를 다 해고
+	// 엔진 준비
 	GameEngineWindow::MainWindow.Open(WindowTitle, _Inst);
+
+	// key설정 초기화
+	GameEngineInput::InputInit();
 
 	// 유저의 준비를 해준다.
 	Process->Start();
@@ -31,6 +35,14 @@ void GameEngineCore::CoreUpdate()
 {
 	if (nullptr != NextLevel)
 	{
+		// Change Level
+		if (nullptr != CurLevel)
+		{
+			CurLevel->LevelEnd(NextLevel);
+		}
+
+		NextLevel->LevelStart(CurLevel);
+
 		CurLevel = NextLevel;
 		NextLevel = nullptr;
 		GameEngineTime::MainTimer.Reset();
@@ -38,6 +50,16 @@ void GameEngineCore::CoreUpdate()
 
 	GameEngineTime::MainTimer.Update();
 	float Delta = GameEngineTime::MainTimer.GetDeltaTime();
+
+	// 창 내려가면 들어오는 Input Reset
+	if (true == GameEngineWindow::IsFocus())
+	{
+		GameEngineInput::Update(Delta);
+	}
+	else
+	{
+		GameEngineInput::Reset();
+	}
 
 
 	CurLevel->Update(Delta);

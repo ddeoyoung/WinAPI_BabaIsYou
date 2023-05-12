@@ -179,6 +179,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="LogoLevel.h" />
     <ClInclude Include="Player.h">
       <SubType>
       </SubType>
@@ -191,6 +192,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="WorldMapLevel.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BackGround.cpp">
@@ -209,6 +211,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="LogoLevel.cpp" />
     <ClCompile Include="Player.cpp">
       <SubType>
       </SubType>
@@ -221,6 +224,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="WorldMapLevel.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
