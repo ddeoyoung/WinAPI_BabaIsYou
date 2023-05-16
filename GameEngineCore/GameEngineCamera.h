@@ -47,6 +47,7 @@ private:
 
 	void Release();
 
-	void Render();
+	void Render(float _Delta);
+
 };
 

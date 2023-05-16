@@ -28,7 +28,15 @@ void Player::Start()
 		GameEnginePath FilePath;
 		FilePath.GetCurrentPath();
 		FilePath.MoveParentToExistsChild("ContentsResources");
+
+		GameEnginePath FolderPath = FilePath;
+
 		FilePath.MoveChild("ContentsResources\\Texture\\Player\\");
+
+
+		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("Left_Player.bmp"), 5, 17);
+		FolderPath.MoveChild("ContentsResources\\Texture\\");
+		ResourcesManager::GetInst().CreateSpriteFolder("FolderPlayer", FolderPath.PlusFilePath("FolderPlayer"));
 
 
 		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("Baba.bmp"));
@@ -36,10 +44,20 @@ void Player::Start()
 	}
 
 	{
-		GameEngineRenderer* Ptr = CreateRenderer("Baba.Bmp", RenderOrder::Play);
-		Ptr->SetRenderScale({ 70, 70 });
-		Ptr->SetTexture("Baba.Bmp");
+		MainRenderer = CreateRenderer(RenderOrder::Play);
+		MainRenderer->SetRenderScale({ 200, 200 });
+		// MainRenderer->SetSprite("Left_Player.bmp");
+
+		MainRenderer->CreateAnimation("Idle", "Left_Player.bmp", 0, 2, 0.1f, true);
+		MainRenderer->CreateAnimation("Run", "Left_Player.bmp", 3, 6, 0.1f, true);
+		MainRenderer->ChangeAnimation("Idle");
 	}
+
+	//{
+	//	GameEngineRenderer* Ptr = CreateRenderer("Baba.Bmp", RenderOrder::Play);
+	//	Ptr->SetRenderScale({ 70, 70 });
+	//	Ptr->SetTexture("Baba.Bmp");
+	//}
 
 	{
 		GameEngineRenderer* Ptr = CreateRenderer("HPBar.bmp", RenderOrder::Play);
@@ -78,6 +96,15 @@ void Player::Update(float _Delta)
 	if (true == GameEngineInput::IsPress('S'))
 	{
 		MovePos = { 0.0f, Speed * _Delta };
+	}
+
+	if (MovePos.X != 0.0f || MovePos.Y != 0.0f)
+	{
+		MainRenderer->ChangeAnimation("Run");
+	}
+	else
+	{
+		MainRenderer->ChangeAnimation("Idle");
 	}
 
 	if (true == GameEngineInput::IsUp(VK_LBUTTON))
