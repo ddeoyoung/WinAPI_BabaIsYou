@@ -49,8 +49,6 @@ void Player::Start()
 	}
 
 	float4 WinScale = GameEngineWindow::MainWindow.GetScale();
-
-
 	SetPos(WinScale.Half());
 
 }
@@ -84,6 +82,9 @@ void Player::Update(float _Delta)
 
 	if (true == GameEngineInput::IsUp(VK_LBUTTON))
 	{
+		float4 Pos = GameEngineWindow::MainWindow.GetMousePos();
+
+
 		Bullet* NewBullet = GetLevel()->CreateActor<Bullet>();
 		NewBullet->Renderer->SetTexture("Baba.Bmp");
 		NewBullet->Renderer->SetRenderScale({ 20, 20 });

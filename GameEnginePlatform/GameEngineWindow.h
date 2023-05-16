@@ -43,6 +43,8 @@ public:
 		return BackBuffer;
 	}
 
+	float4 GetMousePos();
+
 	void SetPosAndScale(const float4& _Pos, const float4& _Scale);
 
 	static void WindowLoopOff()

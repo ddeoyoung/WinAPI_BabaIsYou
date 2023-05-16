@@ -2,6 +2,8 @@
 #include <Windows.h>
 #include <map>
 #include <string>
+#include <GameEngineBase/GameEngineMath.h>
+
 
 // 설명 :
 class GameEngineInput
@@ -16,7 +18,6 @@ private:
 		bool Up = false;
 		bool Free = true;
 
-		// 의미가 없다고 봐요.
 		float PressTime = 0.0f;
 
 		int Key = -1;
@@ -70,6 +71,8 @@ public:
 	GameEngineInput(GameEngineInput&& _Other) noexcept = delete;
 	GameEngineInput& operator=(const GameEngineInput& _Other) = delete;
 	GameEngineInput& operator=(GameEngineInput&& _Other) noexcept = delete;
+
+	static float4 MousePos();
 
 	static void InputInit();
 	static void Update(float _DeltaTime);

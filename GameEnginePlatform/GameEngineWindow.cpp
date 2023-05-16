@@ -161,11 +161,6 @@ void GameEngineWindow::MessageLoop(HINSTANCE _Inst, void(*_Start)(HINSTANCE), vo
     {
         if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
-            //if (nullptr != _Update)
-            //{
-            //	_Update();
-            //}
-
             TranslateMessage(&msg);
             DispatchMessage(&msg);
             continue;
@@ -206,4 +201,13 @@ void GameEngineWindow::SetPosAndScale(const float4& _Pos, const float4& _Scale)
 
     //                          100        100         500          500
     SetWindowPos(hWnd, nullptr, _Pos.iX(), _Pos.iY(), Rc.right - Rc.left, Rc.bottom - Rc.top, SWP_NOZORDER);
+}
+
+float4 GameEngineWindow::GetMousePos()
+{
+    POINT MoniterPoint;
+    GetCursorPos(&MoniterPoint);
+    ScreenToClient(hWnd, &MoniterPoint);
+
+    return float4{ static_cast<float>(MoniterPoint.x), static_cast<float>(MoniterPoint.y) };
 }
