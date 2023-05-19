@@ -8,6 +8,7 @@
 // 설명 : 화면(혹은 장면)을 표현한다.
 // 타이틀 장면, 플레이 장면, 엔딩 장면 등
 class GameEngineCamera;
+class GameEngineCollision;
 class GameEngineLevel : public GameEngineObject
 {
 	friend class GameEngineActor;
@@ -57,13 +58,15 @@ private:
 	GameEngineCamera* UICamera;
 
 	std::map<int, std::list<GameEngineActor*>> AllActors;
+	std::map<int, std::list<GameEngineCollision*>> AllCollision;
+
+	void PushCollision(GameEngineCollision* _Collision) {};
 
 	// Start Update Render
 	void ActorInit(GameEngineActor* _Actor, int _Order);
 
 	void ActorLevelEnd();
 	void ActorLevelStart();
-
 	void ActorUpdate(float _Delta);
 	void ActorRender(float _Delta);
 	void ActorRelease();
