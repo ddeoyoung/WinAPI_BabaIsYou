@@ -62,6 +62,8 @@ public:
 	}
 
 protected:
+	virtual void LevelStart() {}
+	virtual void LevelEnd() {}
 
 private:
 	GameEngineLevel* Level;

@@ -4,6 +4,8 @@
 class GameEngineObject
 {
 	friend class GameEngineLevel;
+	friend class GameEngineCore;
+
 public:
 	// constrcuter destructer
 	GameEngineObject();

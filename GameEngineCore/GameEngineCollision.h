@@ -1,7 +1,13 @@
 #pragma once
+#include "GameEngineObject.h"
+#include <GameEngineBase/GameEngineMath.h>
+#include <string>
+#include <map>
+#include <vector>
 
 // Ό³Έν :
-class GameEngineCollision
+class GameEngineActor;
+class GameEngineCollision : public GameEngineObject
 {
 public:
 	// constrcuter destructer

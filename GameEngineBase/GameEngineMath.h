@@ -1,4 +1,6 @@
 #pragma once
+#include "GameEngineDebug.h"
+#include <math.h>
 
 // 설명 :
 class GameEngineMath
@@ -154,6 +156,39 @@ public:
 		return X == _Value.X &&
 			Y == _Value.Y &&
 			Z == _Value.Z;
+	}
+
+	inline void Normalize()
+	{
+		// 길이를 1로 만드는 함수입니다.
+		float Len = Size();
+
+		if (0.0f == Len)
+		{
+			// MsgBoxAssert("0으로 나누려고 했습니다.");
+			return;
+		}
+
+		X /= Len;
+		Y /= Len;
+		Z /= Len;
+	}
+
+
+	inline float4 NormalizeReturn()
+	{
+		float4 Result = *this;
+		Result.Normalize();
+		return Result;
+	}
+
+	inline float Size()
+	{
+		float Value = X * X + Y * Y; // == 빗변 * 빗변
+
+		Value; // 빗변
+
+		return sqrtf(Value);
 	}
 };
 
