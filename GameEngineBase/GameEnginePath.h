@@ -19,7 +19,7 @@ public:
 
 	std::string GetFileName();
 
-	void GetCurrentPath();
+	void SetCurrentPath();
 	void MoveParent();
 	void MoveParentToExistsChild(const std::string& _ChildPath);
 	void MoveChild(const std::string& _ChildPath);
@@ -33,11 +33,13 @@ public:
 
 	bool IsDirectory();
 
-protected:
+	static std::string GetParentString(const std::string& _ChildPath);
 
-private:
+protected:
 	std::filesystem::path Path;
 
-	// std::string Path;
+
+private:
+
 };
 

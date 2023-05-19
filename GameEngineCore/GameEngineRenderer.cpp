@@ -54,7 +54,10 @@ void GameEngineRenderer::SetTexture(const std::string& _Name)
 
 void GameEngineRenderer::SetRenderScaleToTexture()
 {
-	RenderScale = Texture->GetScale();
+	if (nullptr != Texture)
+	{
+		RenderScale = Texture->GetScale();
+	}
 	ScaleCheck = false;
 }
 
@@ -66,8 +69,10 @@ void GameEngineRenderer::Render(GameEngineCamera* _Camera, float _DeltaTime)
 		CurAnimation->CurInter -= _DeltaTime;
 		if (0.0f >= CurAnimation->CurInter)
 		{
+			CurAnimation->CurInter
+				= CurAnimation->Inters[CurAnimation->CurFrame - CurAnimation->StartFrame];
+
 			++CurAnimation->CurFrame;
-			CurAnimation->CurInter = CurAnimation->Inter;
 
 			if (CurAnimation->CurFrame > CurAnimation->EndFrame)
 			{
@@ -88,6 +93,12 @@ void GameEngineRenderer::Render(GameEngineCamera* _Camera, float _DeltaTime)
 		Texture = SpriteInfo.BaseTexture;
 		SetCopyPos(SpriteInfo.RenderPos);
 		SetCopyScale(SpriteInfo.RenderScale);
+
+		if (false == ScaleCheck)
+		{
+			SetRenderScale(SpriteInfo.RenderScale * ScaleRatio);
+		}
+
 	}
 
 	if (nullptr == Texture)
@@ -146,7 +157,6 @@ void GameEngineRenderer::CreateAnimation(
 	GameEngineRenderer::Animation& Animation = AllAnimation[UpperName];
 
 	Animation.Sprite = Sprite;
-	Animation.Inter = _Inter;
 
 	if (_Start != -1)
 	{
@@ -166,6 +176,12 @@ void GameEngineRenderer::CreateAnimation(
 		Animation.EndFrame = Animation.Sprite->GetSpriteCount() - 1;
 	}
 
+	Animation.Inters.resize((Animation.EndFrame - Animation.StartFrame) + 1);
+
+	for (size_t i = 0; i < Animation.Inters.size(); i++)
+	{
+		Animation.Inters[i] = _Inter;
+	}
 
 	Animation.Loop = _Loop;
 
@@ -183,7 +199,7 @@ void GameEngineRenderer::ChangeAnimation(const std::string& _AniamtionName, bool
 
 	CurAnimation = FindAnimation(_AniamtionName);
 
-	CurAnimation->CurInter = CurAnimation->Inter;
+	CurAnimation->CurInter = CurAnimation->Inters[0];
 	CurAnimation->CurFrame = CurAnimation->StartFrame;
 
 	if (nullptr == CurAnimation)

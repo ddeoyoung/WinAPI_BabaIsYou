@@ -26,7 +26,7 @@ void Player::Start()
 	if (false == ResourcesManager::GetInst().IsLoadTexture("Baba.Bmp"))
 	{
 		GameEnginePath FilePath;
-		FilePath.GetCurrentPath();
+		FilePath.SetCurrentPath();
 		FilePath.MoveParentToExistsChild("ContentsResources");
 
 		GameEnginePath FolderPath = FilePath;
@@ -45,19 +45,15 @@ void Player::Start()
 
 	{
 		MainRenderer = CreateRenderer(RenderOrder::Play);
-		MainRenderer->SetRenderScale({ 200, 200 });
-		// MainRenderer->SetSprite("Left_Player.bmp");
+		// MainRenderer->SetRenderScale({ 200, 200 });
 
 		MainRenderer->CreateAnimation("Idle", "Left_Player.bmp", 0, 2, 0.1f, true);
 		MainRenderer->CreateAnimation("Run", "Left_Player.bmp", 3, 6, 0.1f, true);
 		MainRenderer->ChangeAnimation("Idle");
+		MainRenderer->SetRenderScaleToTexture();
+
 	}
 
-	//{
-	//	GameEngineRenderer* Ptr = CreateRenderer("Baba.Bmp", RenderOrder::Play);
-	//	Ptr->SetRenderScale({ 70, 70 });
-	//	Ptr->SetTexture("Baba.Bmp");
-	//}
 
 	{
 		GameEngineRenderer* Ptr = CreateRenderer("HPBar.bmp", RenderOrder::Play);

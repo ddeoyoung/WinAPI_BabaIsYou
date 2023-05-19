@@ -59,7 +59,7 @@ void BackGround::Init(const std::string& _FileName)
 	{
 
 		GameEnginePath FilePath;
-		FilePath.GetCurrentPath();
+		FilePath.SetCurrentPath();
 
 		// ContentsResources
 		FilePath.MoveParentToExistsChild("ContentsResources");

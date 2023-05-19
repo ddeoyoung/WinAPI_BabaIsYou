@@ -3,6 +3,7 @@
 #include <GameEngineBase/GameEngineMath.h>
 #include <string>
 #include <map>
+#include <vector>
 
 
 // Ό³Έν :
@@ -51,16 +52,23 @@ public:
 		CopyScale = _Value;
 	}
 
+	void SetScaleRatio(const float& _Scale)
+	{
+		ScaleRatio = _Scale;
+	}
+
 	void SetRenderScaleToTexture();
 
 	bool IsDeath() override;
 
 protected:
 
-private:
+private: 
 	GameEngineActor* Master = nullptr;
 	GameEngineWindowTexture* Texture = nullptr;
 	GameEngineSprite* Sprite = nullptr;
+
+	float ScaleRatio = 1.0f;
 
 
 	bool ScaleCheck = false;
@@ -82,7 +90,7 @@ private:
 		size_t StartFrame = -1;
 		size_t EndFrame = -1;
 		float CurInter = 0.0f;
-		float Inter = 0.1f;
+		std::vector<float> Inters;
 		bool Loop = true;
 	};
 
