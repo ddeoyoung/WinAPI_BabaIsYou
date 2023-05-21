@@ -26,6 +26,9 @@
     <ClInclude Include="Background_Black.h">
       <Filter>Global</Filter>
     </ClInclude>
+    <ClInclude Include="FadeAnimation.h">
+      <Filter>Global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -48,6 +51,9 @@
       <Filter>Global</Filter>
     </ClCompile>
     <ClCompile Include="Background_Black.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="FadeAnimation.cpp">
       <Filter>Global</Filter>
     </ClCompile>
   </ItemGroup>

@@ -26,15 +26,13 @@ void Logo::Start()
 		FilePath.MoveChild("ContentsResources\\Logo\\");
 		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("Logo.bmp"), 1, 3);
 
-
 		GameEngineRenderer* LogoRender = CreateRenderer("Logo.bmp", RenderOrder::PlayUI);
-		//LogoRender->SetRenderScale({ 200, 200 });
 
 		LogoRender->CreateAnimation("UI", "Logo.bmp", 0, 2, 0.2f, true);
 		LogoRender->ChangeAnimation("UI");
 		LogoRender->SetRenderScaleToTexture();
 
-		//float4 WinScale = GameEngineWindow::MainWindow.GetScale().Half();
-		//SetPos(WinScale);
+		float4 WinScale = GameEngineWindow::MainWindow.GetScale();
+		LogoRender->SetRenderScale(WinScale);
 	}
 }

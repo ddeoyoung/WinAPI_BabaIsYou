@@ -171,6 +171,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="ContentsEnum.h" />
+    <ClInclude Include="FadeAnimation.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Logo.h">
       <SubType>
       </SubType>
@@ -196,6 +200,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="ContentCore.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="FadeAnimation.cpp">
       <SubType>
       </SubType>
     </ClCompile>

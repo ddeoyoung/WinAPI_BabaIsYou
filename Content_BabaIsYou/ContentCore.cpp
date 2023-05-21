@@ -18,7 +18,7 @@ void ContentCore::Start()
 
 	GameEngineCore::CreateLevel<LogoLevel>("LogoLevel"); // 로고
 	GameEngineCore::CreateLevel<TitleLevel>("TitleLevel"); // 타이틀
-	GameEngineCore::CreateLevel<WorldMapLevel>("WorldMapLevel"); // 스테이지 선택
+	GameEngineCore::CreateLevel<WorldMapLevel>("WorldMapLevel"); // 월드맵
 
 	GameEngineCore::ChangeLevel("LogoLevel");
 }
