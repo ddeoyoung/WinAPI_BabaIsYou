@@ -10,7 +10,6 @@
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineCore/GameEngineCamera.h>
-#include "Bullet.h"
 
 Player::Player()
 {
@@ -106,13 +105,6 @@ void Player::Update(float _Delta)
 	if (true == GameEngineInput::IsUp(VK_LBUTTON))
 	{
 		float4 Pos = GameEngineWindow::MainWindow.GetMousePos();
-
-
-		Bullet* NewBullet = GetLevel()->CreateActor<Bullet>();
-		NewBullet->Renderer->SetTexture("Baba.Bmp");
-		NewBullet->Renderer->SetRenderScale({ 20, 20 });
-		NewBullet->SetDir(float4::RIGHT);
-		NewBullet->SetPos(GetPos());
 	}
 
 	AddPos(MovePos);

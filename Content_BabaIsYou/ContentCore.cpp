@@ -1,8 +1,7 @@
 #include "ContentCore.h"
-#include "TitleLevel.h"
-#include "PlayLevel.h"
-#include "EndingLevel.h"
 #include "LogoLevel.h"
+#include "TitleLevel.h"
+#include "WorldMapLevel.h"
 #include <GameEnginePlatform/GameEngineWindow.h>
 
 ContentCore::ContentCore()
@@ -17,26 +16,21 @@ void ContentCore::Start()
 {
 	GameEngineWindow::MainWindow.SetPosAndScale({ 100, 100 }, { 1280, 720 });
 
-	GameEngineCore::CreateLevel<TitleLevel>("TitleLevel");
-	GameEngineCore::CreateLevel<PlayLevel>("PlayLevel");
-	GameEngineCore::CreateLevel<EndingLevel>("EndingLevel");
-	GameEngineCore::CreateLevel<LogoLevel>("LogogLevel");
+	GameEngineCore::CreateLevel<LogoLevel>("LogoLevel"); // 로고
+	GameEngineCore::CreateLevel<TitleLevel>("TitleLevel"); // 타이틀
+	GameEngineCore::CreateLevel<WorldMapLevel>("WorldMapLevel"); // 스테이지 선택
 
-	// 이 레벨이 화면에 보여라.
-	GameEngineCore::ChangeLevel("PlayLevel");
+	GameEngineCore::ChangeLevel("LogoLevel");
 }
 
-// 행동한고.
 void ContentCore::Update(float _Delta)
 {
 }
 
-// 그려지고.
 void ContentCore::Render()
 {
 }
 
-// 정리된다.
 void ContentCore::Release()
 {
 }

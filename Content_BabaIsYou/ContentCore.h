@@ -19,14 +19,8 @@ protected:
 
 private:
 	void Start() override;
-
-	// 행동한고.
 	void Update(float _Delta) override;
-
-	// 그려지고.
 	void Render() override;
-
-	// 정리된다.
 	void Release() override;
 };
 

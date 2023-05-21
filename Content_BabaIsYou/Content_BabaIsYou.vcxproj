@@ -162,11 +162,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="BackGround.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="Bullet.h">
+    <ClInclude Include="Background_Black.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -175,7 +171,7 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="ContentsEnum.h" />
-    <ClInclude Include="EndingLevel.h">
+    <ClInclude Include="Logo.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -184,7 +180,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="PlayLevel.h">
+    <ClInclude Include="PuzzleLevel.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -195,11 +191,7 @@
     <ClInclude Include="WorldMapLevel.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BackGround.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="Bullet.cpp">
+    <ClCompile Include="Background_Black.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -207,7 +199,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="EndingLevel.cpp">
+    <ClCompile Include="Logo.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -216,7 +208,7 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="PlayLevel.cpp">
+    <ClCompile Include="PuzzleLevel.cpp">
       <SubType>
       </SubType>
     </ClCompile>

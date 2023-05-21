@@ -4,23 +4,11 @@
     <ClInclude Include="TitleLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="PlayLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="EndingLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
     <ClInclude Include="ContentCore.h" />
     <ClInclude Include="Player.h">
       <Filter>Global</Filter>
     </ClInclude>
     <ClInclude Include="ContentsEnum.h">
-      <Filter>Global</Filter>
-    </ClInclude>
-    <ClInclude Include="BackGround.h">
-      <Filter>Global</Filter>
-    </ClInclude>
-    <ClInclude Include="Bullet.h">
       <Filter>Global</Filter>
     </ClInclude>
     <ClInclude Include="LogoLevel.h">
@@ -29,25 +17,22 @@
     <ClInclude Include="WorldMapLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
+    <ClInclude Include="PuzzleLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Logo.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Background_Black.h">
+      <Filter>Global</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="PlayLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="EndingLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
     <ClCompile Include="ContentCore.cpp" />
     <ClCompile Include="Player.cpp">
-      <Filter>Global</Filter>
-    </ClCompile>
-    <ClCompile Include="BackGround.cpp">
-      <Filter>Global</Filter>
-    </ClCompile>
-    <ClCompile Include="Bullet.cpp">
       <Filter>Global</Filter>
     </ClCompile>
     <ClCompile Include="LogoLevel.cpp">
@@ -55,6 +40,15 @@
     </ClCompile>
     <ClCompile Include="WorldMapLevel.cpp">
       <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="PuzzleLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Logo.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="Background_Black.cpp">
+      <Filter>Global</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

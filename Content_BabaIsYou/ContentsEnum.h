@@ -3,7 +3,6 @@
 enum class UpdateOrder
 {
 	Player,
-	Monster,
 };
 
 enum class RenderOrder
