@@ -54,7 +54,12 @@ public:
 		return IsDeathValue;
 	}
 
-	void SetOrder(int _Order)
+	int GetOrder()
+	{
+		return Order;
+	}
+
+	virtual void SetOrder(int _Order)
 	{
 		Order = _Order;
 	}

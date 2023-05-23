@@ -11,6 +11,7 @@ class GameEngineCamera;
 class GameEngineCollision;
 class GameEngineLevel : public GameEngineObject
 {
+	friend class GameEngineCollision;
 	friend class GameEngineActor;
 	friend class GameEngineCore;
 
@@ -59,8 +60,6 @@ private:
 
 	std::map<int, std::list<GameEngineActor*>> AllActors;
 	std::map<int, std::list<GameEngineCollision*>> AllCollision;
-
-	void PushCollision(GameEngineCollision* _Collision) {};
 
 	// Start Update Render
 	void ActorInit(GameEngineActor* _Actor, int _Order);

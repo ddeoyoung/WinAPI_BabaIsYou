@@ -1,5 +1,5 @@
 #pragma once
-#include "GameEngineObject.h"
+#include "GameEngineActorSubObject.h"
 #include <GameEngineBase/GameEngineMath.h>
 #include <string>
 #include <map>
@@ -10,7 +10,7 @@
 class GameEngineSprite;
 class GameEngineActor;
 class GameEngineWindowTexture;
-class GameEngineRenderer : public GameEngineObject
+class GameEngineRenderer : public GameEngineActorSubObject
 {
 	friend class GameEngineCamera;
 	friend class GameEngineActor;
@@ -59,12 +59,13 @@ public:
 
 	void SetRenderScaleToTexture();
 
-	bool IsDeath() override;
+	void SetOrder(int _Order) override;
 
 protected:
+	void Start() override;
 
-private: 
-	GameEngineActor* Master = nullptr;
+private:
+	GameEngineCamera* Camera = nullptr;
 	GameEngineWindowTexture* Texture = nullptr;
 	GameEngineSprite* Sprite = nullptr;
 

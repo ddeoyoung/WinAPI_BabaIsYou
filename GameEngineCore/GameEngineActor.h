@@ -1,12 +1,13 @@
 #pragma once
-#include "GameEngineObject.h"
 #include <GameEngineBase/GameEngineMath.h>
+#include "GameEngineObject.h"
 #include <string>
 #include <list>
 
-// 설명 :
+// 설명 : 화면 안에 존재하는 플레이어 몬스터 총알 등 위치 표현
 class GameEngineLevel;
 class GameEngineRenderer;
+class GameEngineCollision;
 class GameEngineActor : public GameEngineObject
 {
 	friend GameEngineLevel;
@@ -21,7 +22,6 @@ public:
 	GameEngineActor& operator=(const GameEngineActor& _Other) = delete;
 	GameEngineActor& operator=(GameEngineActor&& _Other) noexcept = delete;
 
-	// 위치           
 	void SetPos(const float4& _Pos)
 	{
 		Pos = _Pos;
@@ -56,8 +56,13 @@ public:
 
 	GameEngineRenderer* CreateRenderer(const std::string& _ImageName, int _Order);
 
+	template<typename EnumType>
+	GameEngineCollision* CreateCollision(EnumType _Order)
+	{
+		return CreateCollision(static_cast<int>(_Order));
+	}
 
-	GameEngineRenderer* CreateCollision(int _Order = 0);
+	GameEngineCollision* CreateCollision(int _Order = 0);
 
 
 	GameEngineLevel* GetLevel()
@@ -75,9 +80,7 @@ private:
 	float4 Pos = float4::ZERO;
 
 	std::list<GameEngineRenderer*> AllRenderer;
-
-	void PushMainCameraRenderer(GameEngineRenderer*);
+	std::list<GameEngineCollision*> AllCollision;
 
 	void ActorRelease();
 };
-

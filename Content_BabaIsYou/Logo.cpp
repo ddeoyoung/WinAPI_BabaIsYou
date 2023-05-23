@@ -1,8 +1,8 @@
 #include "Logo.h"
 #include <GameEngineBase/GameEnginePath.h>
+#include <GameEnginePlatform/GameEngineWindow.h>
 #include <GameEngineCore/ResourcesManager.h>
 #include <GameEngineCore/GameEngineRenderer.h>
-#include <GameEnginePlatform/GameEngineWindow.h>
 #include "ContentsEnum.h"
 
 Logo::Logo()

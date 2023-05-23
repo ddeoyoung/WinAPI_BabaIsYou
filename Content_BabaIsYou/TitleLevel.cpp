@@ -1,5 +1,6 @@
 #include "TitleLevel.h"
 
+#include "TitleLogo.h"
 #include "FadeAnimation.h"
 
 
@@ -13,7 +14,7 @@ TitleLevel::~TitleLevel()
 
 void TitleLevel::Start()
 {
-	// FadeAnimation* ReverseFadeUI = CreateActor<FadeAnimation>(); 
+	TitleLogo* TitleLogoUI = CreateActor<TitleLogo>();
 }
 void TitleLevel::Update(float _Delta)
 {

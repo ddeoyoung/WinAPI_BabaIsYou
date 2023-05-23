@@ -25,16 +25,15 @@ void LogoLevel::Update(float _Delta)
 {
 	if (true == GameEngineInput::IsDown('P'))
 	{
-		// FadeAnimation
 		FadeAnimation* FadeUI = CreateActor<FadeAnimation>();
 		//GameEngineCore::ChangeLevel("TitleLevel");
 	}
 }
-void LogoLevel::Release()
+void LogoLevel::Render()
 {
 
 }
-void LogoLevel::Render()
+void LogoLevel::Release()
 {
 
 }

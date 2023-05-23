@@ -25,13 +25,12 @@ void FadeAnimation::Start()
 
 		GameEngineRenderer* FadeRender = CreateRenderer("FadeAnimation.bmp", RenderOrder::PlayUI);
 
-		FadeRender->CreateAnimation("FadeUI", "FadeAnimation.bmp", 34, 0, 0.01f, false);
+		FadeRender->CreateAnimation("FadeUI", "FadeAnimation.bmp", 0, 34, 0.01f, false);
 		FadeRender->ChangeAnimation("FadeUI");
 		FadeRender->SetRenderScaleToTexture();
 
 		float4 WinScale = GameEngineWindow::MainWindow.GetScale().Half();
 		FadeRender->SetRenderPos(WinScale);
-
 	}
 }
 
