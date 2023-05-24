@@ -23,6 +23,9 @@ void LogoLevel::Start()
 
 void LogoLevel::Update(float _Delta)
 {
+
+	// FadeUI->InAnimationEnd == true 일 때 P를 누르면 ChangeLevel
+
 	if (true == GameEngineInput::IsDown('P'))
 	{
 		FadeAnimation* FadeUI = CreateActor<FadeAnimation>();
