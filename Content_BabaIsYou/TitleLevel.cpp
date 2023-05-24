@@ -20,11 +20,3 @@ void TitleLevel::Update(float _Delta)
 {
 
 }
-void TitleLevel::Render()
-{
-
-}
-void TitleLevel::Release()
-{
-
-}

@@ -111,13 +111,3 @@ void Player::Update(float _Delta)
 	GetLevel()->GetMainCamera()->AddPos(MovePos);
 
 }
-
-void Player::Render()
-{
-
-}
-
-void Player::Release()
-{
-
-}

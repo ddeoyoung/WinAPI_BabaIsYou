@@ -23,7 +23,7 @@ void FadeAnimation::Start()
 		FilePath.MoveChild("ContentsResources\\Default\\");
 		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("FadeAnimation.bmp"), 1, 35);
 
-		GameEngineRenderer* FadeRender = CreateRenderer("FadeAnimation.bmp", RenderOrder::PlayUI);
+		FadeRender = CreateRenderer("FadeAnimation.bmp", RenderOrder::PlayUI);
 
 		FadeRender->CreateAnimation("FadeUI", "FadeAnimation.bmp", 0, 34, 0.01f, false);
 		FadeRender->ChangeAnimation("FadeUI");
@@ -32,18 +32,21 @@ void FadeAnimation::Start()
 		float4 WinScale = GameEngineWindow::MainWindow.GetScale().Half();
 		FadeRender->SetRenderPos(WinScale);
 	}
+
+	
 }
 
 
 void FadeAnimation::Update(float _Delta)
 {
-
+	if (true == FadeRender->IsAnimationEnd())
+	{
+		IsAnimationEnd = true;
+	}
 }
-void FadeAnimation::Render()
-{
 
-}
-void FadeAnimation::Release()
-{
 
+bool FadeAnimation::CheckAnimationEnd()
+{
+	return FadeRender->IsAnimationEnd();
 }

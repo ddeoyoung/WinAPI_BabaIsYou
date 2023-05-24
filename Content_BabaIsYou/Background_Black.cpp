@@ -38,11 +38,4 @@ void Background_Black::Update(float _Delta)
 {
 
 }
-void Background_Black::Render()
-{
 
-}
-void Background_Black::Release()
-{
-
-}

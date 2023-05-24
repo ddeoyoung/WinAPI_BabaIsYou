@@ -24,7 +24,7 @@ public:
 	virtual void Update(float _Delta) {}
 
 	// 랜더
-	virtual void Render() {}
+	virtual void Render(float _Delta) {}
 
 	// 정리
 	virtual void Release() {}

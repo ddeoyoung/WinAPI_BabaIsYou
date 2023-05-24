@@ -15,12 +15,15 @@ public:
 	FadeAnimation& operator=(const FadeAnimation& _Other) = delete;
 	FadeAnimation& operator=(FadeAnimation&& _Other) noexcept = delete;
 
+	bool CheckAnimationEnd();
+	bool IsAnimationEnd = false;
+
 protected:
 
 private:
 	void Start() override;
 	void Update(float _Delta) override;
-	void Render() override;
-	void Release() override;
+
+	GameEngineRenderer* FadeRender = nullptr;
 };
 
