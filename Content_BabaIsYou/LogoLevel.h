@@ -23,6 +23,13 @@ private:
 	void Start() override;
 	void Update(float _Delta) override;
 
+	// 배경
+	class Background_Black* BackgroundUI = nullptr;
+
+	// 페이드 애니메이션
 	class FadeAnimation* FadeUI = nullptr;
+
+	// 로고
+	class Logo* LogoUI = nullptr;
 };
 

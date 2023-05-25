@@ -28,8 +28,8 @@ void Logo::Start()
 
 		GameEngineRenderer* LogoRender = CreateRenderer("Logo.bmp", RenderOrder::PlayUI);
 
-		LogoRender->CreateAnimation("UI", "Logo.bmp", 0, 2, 0.2f, true);
-		LogoRender->ChangeAnimation("UI");
+		LogoRender->CreateAnimation("Logo", "Logo.bmp", 0, 2, 0.2f, true);
+		LogoRender->ChangeAnimation("Logo");
 		LogoRender->SetRenderScaleToTexture();
 
 		float4 WinScale = GameEngineWindow::MainWindow.GetScale();

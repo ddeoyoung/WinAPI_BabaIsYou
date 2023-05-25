@@ -10,16 +10,22 @@
 
 LogoLevel::LogoLevel()
 {
+
 }
 
 LogoLevel::~LogoLevel()
 {
+
 }
 
 void LogoLevel::Start()
 {
-	Background_Black* Back = CreateActor<Background_Black>();
-	Logo* LogoUI = CreateActor<Logo>();
+	BackgroundUI = CreateActor<Background_Black>();
+	BackgroundUI->Init("Background_Black.bmp");
+	LogoUI = CreateActor<Logo>();
+
+	FadeUI = CreateActor<FadeAnimation>();
+	FadeUI->FadeIn();
 }
 
 void LogoLevel::Update(float _Delta)

@@ -15,6 +15,9 @@ public:
 	FadeAnimation& operator=(const FadeAnimation& _Other) = delete;
 	FadeAnimation& operator=(FadeAnimation&& _Other) noexcept = delete;
 
+	void FadeOut();
+	void FadeIn();
+
 	bool CheckAnimationEnd();
 	bool IsAnimationEnd = false;
 

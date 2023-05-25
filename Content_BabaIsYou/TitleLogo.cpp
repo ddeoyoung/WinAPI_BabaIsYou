@@ -8,7 +8,7 @@
 TitleLogo::TitleLogo()
 {
 	float4 WinScale = GameEngineWindow::MainWindow.GetScale().Half();
-	SetPos(WinScale);
+	SetPos({ WinScale.X, WinScale.Y / 2} );
 
 	// float4 Pos = { (WinScale., 600) };
 }
@@ -32,6 +32,6 @@ void TitleLogo::Start()
 
 		TitleLogoRender->CreateAnimation("TitleLogoUI", "TitleLogo.bmp", 0, 2, 0.2f, true);
 		TitleLogoRender->ChangeAnimation("TitleLogoUI");
-		TitleLogoRender->SetRenderScaleToTexture();
+		TitleLogoRender->SetRenderScale({ 500, 250 });
 	}
 }

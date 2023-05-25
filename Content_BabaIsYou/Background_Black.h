@@ -15,11 +15,13 @@ public:
 	Background_Black& operator=(const Background_Black& _Other) = delete;
 	Background_Black& operator=(Background_Black&& _Other) noexcept = delete;
 
+	void Init(const std::string& _FileName);
+
 protected:
 
 private:
 	void Start() override;
-	void Update(float _Delta) override;
+	class GameEngineRenderer* BackRender = nullptr;
 
 };
 
