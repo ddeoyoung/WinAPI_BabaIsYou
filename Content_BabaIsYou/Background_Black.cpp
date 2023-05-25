@@ -34,8 +34,6 @@ void Background_Black::Start()
 }
 
 
-void Background_Black::Update(float _Delta)
-{
 
 }
 
