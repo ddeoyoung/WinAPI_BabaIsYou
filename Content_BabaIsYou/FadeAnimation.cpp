@@ -3,6 +3,7 @@
 #include <GameEnginePlatform/GameEngineWindow.h>
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEngineCore/ResourcesManager.h>
+#include <GameEngineCore/GameEngineCore.h>
 #include "ContentsEnum.h"
 
 FadeAnimation::FadeAnimation()
@@ -37,6 +38,11 @@ void FadeAnimation::FadeOut()
 	FadeRender->CreateAnimation("FadeOut", "FadeAnimation.bmp", 0, 34, 0.01f, false);
 	FadeRender->ChangeAnimation("FadeOut");
 	FadeRender->SetRenderScaleToTexture();
+
+	//if (true == FadeRender->IsAnimationEnd())
+	//{
+	//	GameEngineCore::ChangeLevel("TitleLevel");
+	//}
 }
 
 // 레벨 전환 후

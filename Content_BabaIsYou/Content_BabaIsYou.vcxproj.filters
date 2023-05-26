@@ -20,17 +20,20 @@
     <ClInclude Include="PuzzleLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="Logo.h">
-      <Filter>Global</Filter>
-    </ClInclude>
     <ClInclude Include="Background_Black.h">
-      <Filter>Global</Filter>
-    </ClInclude>
-    <ClInclude Include="FadeAnimation.h">
-      <Filter>Global</Filter>
+      <Filter>UIActor</Filter>
     </ClInclude>
     <ClInclude Include="TitleLogo.h">
-      <Filter>Global</Filter>
+      <Filter>UIActor</Filter>
+    </ClInclude>
+    <ClInclude Include="Logo.h">
+      <Filter>UIActor</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>UIActor</Filter>
+    </ClInclude>
+    <ClInclude Include="FadeAnimation.h">
+      <Filter>UIActor</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -50,17 +53,20 @@
     <ClCompile Include="PuzzleLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="Logo.cpp">
-      <Filter>Global</Filter>
-    </ClCompile>
     <ClCompile Include="Background_Black.cpp">
-      <Filter>Global</Filter>
-    </ClCompile>
-    <ClCompile Include="FadeAnimation.cpp">
-      <Filter>Global</Filter>
+      <Filter>UIActor</Filter>
     </ClCompile>
     <ClCompile Include="TitleLogo.cpp">
-      <Filter>Global</Filter>
+      <Filter>UIActor</Filter>
+    </ClCompile>
+    <ClCompile Include="Logo.cpp">
+      <Filter>UIActor</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>UIActor</Filter>
+    </ClCompile>
+    <ClCompile Include="FadeAnimation.cpp">
+      <Filter>UIActor</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -69,6 +75,9 @@
     </Filter>
     <Filter Include="Global">
       <UniqueIdentifier>{d0051bfc-0de9-42c1-8bb1-1ea3ae86389e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UIActor">
+      <UniqueIdentifier>{d749864a-f81f-4bd4-a531-c3c08169f47c}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

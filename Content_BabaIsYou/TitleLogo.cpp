@@ -8,7 +8,7 @@
 TitleLogo::TitleLogo()
 {
 	float4 WinScale = GameEngineWindow::MainWindow.GetScale().Half();
-	SetPos({ WinScale.X, WinScale.Y / 2} );
+	SetPos({ WinScale.X, WinScale.Y/3 *2} );
 
 	// float4 Pos = { (WinScale., 600) };
 }
@@ -26,6 +26,7 @@ void TitleLogo::Start()
 		FilePath.SetCurrentPath();
 		FilePath.MoveParentToExistsChild("ContentsResources");
 		FilePath.MoveChild("ContentsResources\\Title\\");
+
 		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("TitleLogo.bmp"), 1, 3);
 
 		GameEngineRenderer* TitleLogoRender = CreateRenderer("TitleLogo.bmp", RenderOrder::PlayUI);

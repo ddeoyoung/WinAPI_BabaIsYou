@@ -20,7 +20,7 @@ void ContentCore::Start()
 	GameEngineCore::CreateLevel<TitleLevel>("TitleLevel"); // 타이틀
 	GameEngineCore::CreateLevel<WorldMapLevel>("WorldMapLevel"); // 월드맵
 
-	GameEngineCore::ChangeLevel("LogoLevel");
+	GameEngineCore::ChangeLevel("TitleLevel");
 }
 
 void ContentCore::Update(float _Delta)
