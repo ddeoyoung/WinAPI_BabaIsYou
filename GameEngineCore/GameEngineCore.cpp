@@ -4,6 +4,8 @@
 #include <GameEngineBase/GameEngineTime.h>
 #include "GameEngineLevel.h"
 #include <GameEnginePlatform/GameEngineInput.h>
+#include <GameEnginePlatform/GameEngineSound.h>
+
 
 std::string GameEngineCore::WindowTitle = "";
 std::map<std::string, class GameEngineLevel*> GameEngineCore::AllLevel;
@@ -26,6 +28,9 @@ void GameEngineCore::CoreStart(HINSTANCE _Inst)
 
 	// key설정 초기화
 	GameEngineInput::InputInit();
+
+	//GameEngineSound::Init();
+
 
 	// 유저의 준비를 해준다.
 	Process->Start();
