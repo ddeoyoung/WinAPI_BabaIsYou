@@ -5,6 +5,11 @@
 #include <map>
 #include <vector>
 
+enum class CameraType
+{
+	MAIN,
+	UI,
+};
 
 // Ό³Έν :
 class GameEngineSprite;
@@ -116,15 +121,22 @@ public:
 		float _Inter = 0.1f,
 		bool _Loop = true);
 
-	void ChangeAnimation(const std::string& _AniamtionName, bool _ForceChange = false);
+	void ChangeAnimation(const std::string& _AniamtionName, int _StartFrame = 0, bool _ForceChange = false);
 
 	void MainCameraSetting();
 	void UICameraSetting();
+
+	size_t GetCurFrame()
+	{
+		return CurAnimation->CurFrame;
+	}
 
 	bool IsAnimationEnd()
 	{
 		return CurAnimation->IsEnd;
 	}
+
+	CameraType CameraTypeValue = CameraType::MAIN;
 
 	std::map<std::string, Animation> AllAnimation;
 	Animation* CurAnimation = nullptr;

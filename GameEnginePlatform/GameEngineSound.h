@@ -29,12 +29,13 @@ private:
 	FMOD::Channel* Control = nullptr;
 };
 
-// 설명:
+// 설명 :
 class GameEngineSound
 {
 	static float GlobalVolume;
 
 	// Management
+
 	friend class SoundSystemCreator;
 	friend class GameEngineSoundPlayer;
 
@@ -65,8 +66,9 @@ public:
 	// 1번의 재생을 하고 끝나면 그냥 종료하고 나는 컨트롤할수 없다.
 	static GameEngineSoundPlayer SoundPlay(const std::string& _Name);
 
-	static void Update();
 	static void Release();
+
+	static void Update();
 
 public:
 	// constrcuter destructer
@@ -86,5 +88,5 @@ private:
 
 	FMOD::Channel* Play();
 	void Load(const std::string& _Path);
-};
 
+};

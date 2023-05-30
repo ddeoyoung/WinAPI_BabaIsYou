@@ -204,7 +204,7 @@ void GameEngineRenderer::CreateAnimation(
 }
 
 
-void GameEngineRenderer::ChangeAnimation(const std::string& _AniamtionName, bool _ForceChange)
+void GameEngineRenderer::ChangeAnimation(const std::string& _AniamtionName, int _FrameCount, bool _ForceChange)
 {
 	Animation* ChangeAni = FindAnimation(_AniamtionName);
 
@@ -216,7 +216,7 @@ void GameEngineRenderer::ChangeAnimation(const std::string& _AniamtionName, bool
 	CurAnimation = FindAnimation(_AniamtionName);
 
 	CurAnimation->CurInter = CurAnimation->Inters[0];
-	CurAnimation->CurFrame = 0;
+	CurAnimation->CurFrame = _FrameCount;
 	CurAnimation->IsEnd = false;
 
 	if (nullptr == CurAnimation)
@@ -229,11 +229,13 @@ void GameEngineRenderer::ChangeAnimation(const std::string& _AniamtionName, bool
 void GameEngineRenderer::MainCameraSetting()
 {
 	Camera = GetActor()->GetLevel()->GetMainCamera();
+	CameraTypeValue = CameraType::MAIN;
 }
 
 void GameEngineRenderer::UICameraSetting()
 {
 	Camera = GetActor()->GetLevel()->GetUICamera();
+	CameraTypeValue = CameraType::UI;
 }
 
 void GameEngineRenderer::Start()

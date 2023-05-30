@@ -48,6 +48,8 @@ void GameEngineCore::CoreUpdate()
 
 		}
 
+		NextLevel->OverCheck(CurLevel);
+
 		NextLevel->LevelStart(CurLevel);
 		NextLevel->ActorLevelEnd();
 
@@ -84,6 +86,7 @@ void GameEngineCore::CoreUpdate()
 
 void GameEngineCore::CoreEnd()
 {
+	GameEngineSound::Release();
 	Process->Release();
 
 	if (nullptr != Process)
