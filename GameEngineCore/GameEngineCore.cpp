@@ -56,6 +56,7 @@ void GameEngineCore::CoreUpdate()
 		GameEngineTime::MainTimer.Reset();
 	}
 
+	GameEngineSound::Update();
 	GameEngineTime::MainTimer.Update();
 	float Delta = GameEngineTime::MainTimer.GetDeltaTime();
 

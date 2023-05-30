@@ -24,10 +24,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <Library Include="ThirdParty\FMOD\lib\x64\fmodL.lib">
+    <Library Include="ThirdParty\FMOD\lib\x64\fmodL_vc.lib">
       <Filter>FMOD\Debug</Filter>
     </Library>
-    <Library Include="ThirdParty\FMOD\lib\x64\fmod.lib">
+    <Library Include="ThirdParty\FMOD\lib\x64\fmod_vc.lib">
       <Filter>FMOD\Release</Filter>
     </Library>
   </ItemGroup>
