@@ -52,7 +52,7 @@ public:
 		std::string Upper = GameEngineString::ToUpperReturn(_Name);
 
 		std::map<std::string, GameEngineLevel*>::iterator Finditer = AllLevel.find(Upper);
-
+		 
 		// 이미 내부에 TitleLevel이 존재한다.
 		if (AllLevel.end() == Finditer)
 		{

@@ -22,6 +22,5 @@ protected:
 private:
 	void Start() override;
 	class GameEngineRenderer* BackRender = nullptr;
-
 };
 

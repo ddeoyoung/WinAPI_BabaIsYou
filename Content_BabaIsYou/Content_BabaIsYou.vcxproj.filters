@@ -35,6 +35,9 @@
     <ClInclude Include="FadeAnimation.h">
       <Filter>UIActor</Filter>
     </ClInclude>
+    <ClInclude Include="Background_Gray.h">
+      <Filter>UIActor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -66,6 +69,9 @@
       <Filter>UIActor</Filter>
     </ClCompile>
     <ClCompile Include="FadeAnimation.cpp">
+      <Filter>UIActor</Filter>
+    </ClCompile>
+    <ClCompile Include="Background_Gray.cpp">
       <Filter>UIActor</Filter>
     </ClCompile>
   </ItemGroup>

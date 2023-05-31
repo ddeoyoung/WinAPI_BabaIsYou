@@ -1,7 +1,8 @@
 #pragma once
+#include <GameEngineCore/GameEngineLevel.h>
 
 // Ό³Έν :
-class PuzzleLevel
+class PuzzleLevel : public GameEngineLevel
 {
 public:
 	// constrcuter destructer
@@ -17,6 +18,7 @@ public:
 protected:
 
 private:
-
+	void Start() override;
+	void Update(float _Delta) override;
 };
 
