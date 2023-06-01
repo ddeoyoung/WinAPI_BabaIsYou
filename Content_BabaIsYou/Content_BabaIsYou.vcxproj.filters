@@ -20,23 +20,29 @@
     <ClInclude Include="PuzzleLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
+    <ClInclude Include="Background_WorldMap.h">
+      <Filter>UIActor\WorldMap</Filter>
+    </ClInclude>
     <ClInclude Include="Background_Black.h">
-      <Filter>UIActor</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleLogo.h">
-      <Filter>UIActor</Filter>
-    </ClInclude>
-    <ClInclude Include="Logo.h">
-      <Filter>UIActor</Filter>
-    </ClInclude>
-    <ClInclude Include="Button.h">
-      <Filter>UIActor</Filter>
-    </ClInclude>
-    <ClInclude Include="FadeAnimation.h">
-      <Filter>UIActor</Filter>
+      <Filter>UIActor\Default</Filter>
     </ClInclude>
     <ClInclude Include="Background_Gray.h">
-      <Filter>UIActor</Filter>
+      <Filter>UIActor\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="FadeAnimation.h">
+      <Filter>UIActor\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleLogo.h">
+      <Filter>UIActor\Logo</Filter>
+    </ClInclude>
+    <ClInclude Include="Logo.h">
+      <Filter>UIActor\Logo</Filter>
+    </ClInclude>
+    <ClInclude Include="Button.h">
+      <Filter>UIActor\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="WorldMapSelect.h">
+      <Filter>UIActor\WorldMap</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -56,23 +62,29 @@
     <ClCompile Include="PuzzleLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
+    <ClCompile Include="Background_WorldMap.cpp">
+      <Filter>UIActor\WorldMap</Filter>
+    </ClCompile>
     <ClCompile Include="Background_Black.cpp">
-      <Filter>UIActor</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleLogo.cpp">
-      <Filter>UIActor</Filter>
-    </ClCompile>
-    <ClCompile Include="Logo.cpp">
-      <Filter>UIActor</Filter>
-    </ClCompile>
-    <ClCompile Include="Button.cpp">
-      <Filter>UIActor</Filter>
-    </ClCompile>
-    <ClCompile Include="FadeAnimation.cpp">
-      <Filter>UIActor</Filter>
+      <Filter>UIActor\Default</Filter>
     </ClCompile>
     <ClCompile Include="Background_Gray.cpp">
-      <Filter>UIActor</Filter>
+      <Filter>UIActor\Default</Filter>
+    </ClCompile>
+    <ClCompile Include="FadeAnimation.cpp">
+      <Filter>UIActor\Default</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleLogo.cpp">
+      <Filter>UIActor\Logo</Filter>
+    </ClCompile>
+    <ClCompile Include="Logo.cpp">
+      <Filter>UIActor\Logo</Filter>
+    </ClCompile>
+    <ClCompile Include="Button.cpp">
+      <Filter>UIActor\Default</Filter>
+    </ClCompile>
+    <ClCompile Include="WorldMapSelect.cpp">
+      <Filter>UIActor\WorldMap</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -84,6 +96,15 @@
     </Filter>
     <Filter Include="UIActor">
       <UniqueIdentifier>{d749864a-f81f-4bd4-a531-c3c08169f47c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UIActor\WorldMap">
+      <UniqueIdentifier>{60eeb197-aefb-4b2e-915a-d79f439031a9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UIActor\Default">
+      <UniqueIdentifier>{c8f22679-d618-4654-b8ba-ca0ab579f99a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UIActor\Logo">
+      <UniqueIdentifier>{52d542df-104c-4f83-a0a8-7a26f95ece9b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

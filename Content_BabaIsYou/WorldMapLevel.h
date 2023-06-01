@@ -18,6 +18,17 @@ public:
 protected:
 
 private:
+	void Start() override;
+	// void Update(float _Delta) override;
 
+	// 배경
+	class Background_Gray* BackgroundUI = nullptr;
+	class Background_WorldMap* WorldMapUI = nullptr;
+
+	// 타일맵
+	class TileMap* TileObject = nullptr;
+
+	// 페이드 애니메이션
+	class FadeAnimation* FadeUI = nullptr;
 };
 

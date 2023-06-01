@@ -29,7 +29,7 @@ void Background_Gray::Init(const std::string& _FileName)
 		GameEngineWindowTexture* Back = ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("Background_Gray.bmp"));
 	}
 
-	BackRender = CreateRenderer("Background_Black.bmp", RenderOrder::BackGround);
+	BackRender = CreateRenderer("Background_Gray.bmp", RenderOrder::BackGround);
 
 	GameEngineWindowTexture* Back = ResourcesManager::GetInst().FindTexture(_FileName);
 	float4 Scale = Back->GetScale();

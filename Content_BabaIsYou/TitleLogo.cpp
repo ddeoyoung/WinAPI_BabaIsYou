@@ -19,7 +19,6 @@ TitleLogo::~TitleLogo()
 
 void TitleLogo::Start()
 {
-
 	if (false == ResourcesManager::GetInst().IsLoadTexture("TitleLogo.Bmp"))
 	{
 		GameEnginePath FilePath;

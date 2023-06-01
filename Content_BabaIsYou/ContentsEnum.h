@@ -7,7 +7,9 @@ enum class UpdateOrder
 
 enum class RenderOrder
 {
-	BackGround,
+	BackGround = 0,
+	BackGroundUI,
 	Play,
 	PlayUI,
+	Fade,
 };

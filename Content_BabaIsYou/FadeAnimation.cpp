@@ -24,7 +24,7 @@ void FadeAnimation::Start()
 		FilePath.MoveChild("ContentsResources\\Default\\");
 		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("FadeAnimation.bmp"), 1, 35);
 
-		FadeRender = CreateRenderer("FadeAnimation.bmp", RenderOrder::PlayUI);
+		FadeRender = CreateRenderer("FadeAnimation.bmp", RenderOrder::Fade);
 
 		float4 WinScale = GameEngineWindow::MainWindow.GetScale().Half();
 		FadeRender->SetRenderPos(WinScale);
@@ -35,7 +35,7 @@ void FadeAnimation::Start()
 void FadeAnimation::FadeOut()
 {
 	GameEngineWindowTexture* FadeOutUI = ResourcesManager::GetInst().FindTexture("FadeAnimation.bmp");
-	FadeRender->CreateAnimation("FadeOut", "FadeAnimation.bmp", 0, 34, 0.01f, false);
+	FadeRender->CreateAnimation("FadeOut", "FadeAnimation.bmp", 0, 34, 0.015f, false);
 	FadeRender->ChangeAnimation("FadeOut");
 	FadeRender->SetRenderScaleToTexture();
 
@@ -49,7 +49,7 @@ void FadeAnimation::FadeOut()
 void FadeAnimation::FadeIn()
 {
 	GameEngineWindowTexture* FadeInUI = ResourcesManager::GetInst().FindTexture("FadeAnimation.bmp");
-	FadeRender->CreateAnimation("FadeIn", "FadeAnimation.bmp", 34, 0, 0.01f, false);
+	FadeRender->CreateAnimation("FadeIn", "FadeAnimation.bmp", 34, 0, 0.015f, false);
 	FadeRender->ChangeAnimation("FadeIn");
 	FadeRender->SetRenderScaleToTexture();
 }

@@ -2,6 +2,7 @@
 #include "LogoLevel.h"
 #include "TitleLevel.h"
 #include "WorldMapLevel.h"
+#include "PuzzleLevel.h"
 #include <GameEnginePlatform/GameEngineWindow.h>
 
 ContentCore::ContentCore()
@@ -19,8 +20,9 @@ void ContentCore::Start()
 	GameEngineCore::CreateLevel<LogoLevel>("LogoLevel"); // 로고
 	GameEngineCore::CreateLevel<TitleLevel>("TitleLevel"); // 타이틀
 	GameEngineCore::CreateLevel<WorldMapLevel>("WorldMapLevel"); // 월드맵
+	GameEngineCore::CreateLevel<PuzzleLevel>("PuzzleLevel"); // 월드맵
 
-	GameEngineCore::ChangeLevel("LogoLevel");
+	GameEngineCore::ChangeLevel("WorldMapLevel");
 }
 
 void ContentCore::Update(float _Delta)
