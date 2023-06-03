@@ -5,7 +5,7 @@
 #include <map>
 #include <vector>
 
-enum class CollisionType
+enum class CollisionType 
 {
 	Point, // 점
 	Rect, // 사각형
@@ -13,42 +13,42 @@ enum class CollisionType
 	Max, // 원
 };
 
-class CollisionData
+class CollisionData 
 {
 public:
 	float4 Pos;
 	float4 Scale;
 
-	float Left()
-	{
+	float Left() const
+	{ 
 		return Pos.X - Scale.hX();
 	}
-	float Right()
+	float Right() const
 	{
 		return Pos.X + Scale.hX();
 	}
-	float Top()
-	{
+	float Top() const
+	{ 
 		return Pos.Y - Scale.hY();
 	}
-	float Bot()
-	{
+	float Bot() const
+	{ 
 		return Pos.Y + Scale.hY();
 	}
 
-	int iLeft()
+	int iLeft() const
 	{
 		return static_cast<int>(Left());
 	}
-	int iRight()
+	int iRight() const
 	{
 		return static_cast<int>(Right());
 	}
-	int iTop()
+	int iTop() const
 	{
 		return static_cast<int>(Top());
 	}
-	int iBot()
+	int iBot() const
 	{
 		return static_cast<int>(Bot());
 	}
@@ -60,26 +60,23 @@ class GameEngineActor;
 class CollisionInitClass;
 class GameEngineCollision : public GameEngineActorSubObject
 {
-
 	// 함수 포인터
-	static bool (*CollisionFunction[static_cast<int>(CollisionType::Max)][static_cast<int>(CollisionType::Max)])(GameEngineCollision* _Left, GameEngineCollision* _Right);
-
-	friend GameEngineLevel;
+	static bool (*CollisionFunction[static_cast<int>(CollisionType::Max)][static_cast<int>(CollisionType::Max)])(const CollisionData& _LeftData, const CollisionData& _RightData);
+	
 	friend CollisionInitClass;
 	friend GameEngineActor;
+	friend GameEngineLevel;
 
 public:
-	static bool PointToPoint(GameEngineCollision* _Left, GameEngineCollision* _Right);
-	static bool PointToRect(GameEngineCollision* _Left, GameEngineCollision* _Right);
-	static bool PointToCirCle(GameEngineCollision* _Left, GameEngineCollision* _Right);
-
-	static bool RectToPoint(GameEngineCollision* _Left, GameEngineCollision* _Right);
-	static bool RectToRect(GameEngineCollision* _Left, GameEngineCollision* _Right);
-	static bool RectToCirCle(GameEngineCollision* _Left, GameEngineCollision* _Right);
-
-	static bool CirCleToPoint(GameEngineCollision* _Left, GameEngineCollision* _Right);
-	static bool CirCleToRect(GameEngineCollision* _Left, GameEngineCollision* _Right);
-	static bool CirCleToCirCle(GameEngineCollision* _Left, GameEngineCollision* _Right);
+	static bool PointToPoint(const CollisionData& _LeftData, const CollisionData& _RightData);
+	static bool PointToRect(const CollisionData& _LeftData, const CollisionData& _RightData);
+	static bool PointToCirCle(const CollisionData& _LeftData, const CollisionData& _RightData);
+	static bool RectToPoint(const CollisionData& _LeftData, const CollisionData& _RightData);
+	static bool RectToRect(const CollisionData& _LeftData, const CollisionData& _RightData);
+	static bool RectToCirCle(const CollisionData& _LeftData, const CollisionData& _RightData);
+	static bool CirCleToPoint(const CollisionData& _LeftData, const CollisionData& _RightData);
+	static bool CirCleToRect(const CollisionData& _LeftData, const CollisionData& _RightData);
+	static bool CirCleToCirCle(const CollisionData& _LeftData, const CollisionData& _RightData);
 
 public:
 	// constrcuter destructer
@@ -97,17 +94,20 @@ public:
 		CollisionScale = _Value;
 	}
 
-	// 플레이어 위치 기준
+	// 플레이어 위치기준.
 	void SetCollisionPos(const float4& _Value)
 	{
 		CollisionPos = _Value;
 	}
 
+	// 몇가지 문제가 있는데. 
+	// 1. 몬스터데 몬스터랑
 
-	// int _Order => _Order랑 충돌
-	// CollisionType _ThisType : 나
-	// CollisionType _OtherType : 상대
-	// std::vector<GameEngineCollision*>& _Result : 충돌한 애들 담아두기
+	// 나는 사각형
+	// int _Order => 나는 _Order 랑 충돌할거야
+	// CollisionType _ThisType 나를 점으로 봐도 사각형으로 봐죠
+	// CollisionType _OtherType 상대는 원으로 봐죠 사각형으로 봐줘
+	// std::vector<GameEngineCollision*>& _Result 충돌한 애들 여기에 담아줘.
 
 	template<typename EnumType>
 	bool Collision(EnumType _Order, std::vector<GameEngineCollision*>& _Result
@@ -134,7 +134,7 @@ public:
 		return CollisionScale;
 	}
 
-	CollisionData GetCollisionData()
+	CollisionData GetCollisionData() 
 	{
 		CollisionData Data;
 		Data.Pos = GetActorPivotPos();
@@ -147,10 +147,24 @@ public:
 		ColType = _ColType;
 	}
 
+	void On() override
+	{
+		GameEngineActorSubObject::On();
+		CollisionRenderValue = true;
+	}
+
+	void Off() override
+	{
+		GameEngineActorSubObject::Off();
+		CollisionRenderValue = false;
+	}
+
 protected:
 
 private:
 	CollisionType ColType = CollisionType::Rect;
+
+	bool CollisionRenderValue = true;
 
 	float4 CollisionPos;
 	float4 CollisionScale;

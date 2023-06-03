@@ -17,11 +17,11 @@ bool ResourcesManager::IsLoadTexture(const std::string& _Name)
 	return FindTexture(_Name) != nullptr;
 }
 
-ResourcesManager::ResourcesManager()
+ResourcesManager::ResourcesManager() 
 {
 }
 
-ResourcesManager::~ResourcesManager()
+ResourcesManager::~ResourcesManager() 
 {
 	for (const std::pair<std::string, GameEngineWindowTexture*>& Pair : AllTexture)
 	{
@@ -44,11 +44,13 @@ ResourcesManager::~ResourcesManager()
 			Sprite = nullptr;
 		}
 	}
+
 }
 
 GameEngineWindowTexture* ResourcesManager::FindTexture(const std::string& _Name)
 {
 	std::string UpperName = GameEngineString::ToUpperReturn(_Name);
+
 
 	std::map<std::string, GameEngineWindowTexture*>::iterator FindIter = AllTexture.find(UpperName);
 
@@ -56,13 +58,40 @@ GameEngineWindowTexture* ResourcesManager::FindTexture(const std::string& _Name)
 	{
 		return nullptr;
 	}
-
+	
 	return FindIter->second;
+}
+
+GameEngineWindowTexture* ResourcesManager::TextureCreate(const std::string& _Name, float4 _Scale)
+{
+	std::string UpperName = GameEngineString::ToUpperReturn(_Name);
+
+	if (AllTexture.find(UpperName) != AllTexture.end())
+	{
+		MsgBoxAssert("같은 이름의 텍스처가 이미 존재합니다.");
+		return nullptr;
+	}
+
+	// 동적 바인딩이라고 합니다.
+	GameEngineWindowTexture* CreateTexture = new GameEngineWindowTexture();
+
+	CreateTexture->ResCreate(_Scale);
+
+	AllTexture.insert(std::make_pair(UpperName, CreateTexture));
+
+	return CreateTexture;
+
 }
 
 GameEngineWindowTexture* ResourcesManager::TextureLoad(const std::string& _Name, const std::string& _Path)
 {
 	std::string UpperName = GameEngineString::ToUpperReturn(_Name);
+
+	if (AllTexture.find(UpperName) != AllTexture.end())
+	{
+		MsgBoxAssert("같은 이름의 텍스처가 이미 존재합니다.");
+		return nullptr;
+	}
 
 	// 동적 바인딩이라고 합니다.
 	GameEngineWindowTexture* LoadTexture = new GameEngineWindowTexture();
@@ -120,7 +149,7 @@ GameEngineSprite* ResourcesManager::CreateSpriteSheet(const std::string& _Sprite
 	return NewSprite;
 }
 
-GameEngineSprite* ResourcesManager::CreateSpriteFolder(const std::string& _SpriteName, const std::string& _Path)
+GameEngineSprite* ResourcesManager::CreateSpriteFolder(const std::string& _SpriteName, const std::string& _Path) 
 {
 	std::string UpperName = GameEngineString::ToUpperReturn(_SpriteName);
 
@@ -144,7 +173,7 @@ void ResourcesManager::TextureFileLoad(const std::string& _FileName, const std::
 	{
 		GameEnginePath FilePath;
 		FilePath.SetCurrentPath();
-
+		
 		std::string ParentPath = GameEnginePath::GetParentString(_Path);
 		FilePath.MoveParentToExistsChild(ParentPath);
 		FilePath.MoveChild(_Path + _FileName);
@@ -160,9 +189,14 @@ void ResourcesManager::SpriteFileLoad(const std::string& _FileName, const std::s
 	}
 
 	GameEnginePath FilePath;
-	FilePath.SetCurrentPath();
 
+	// _Path
+	// "BBB\\CCC\\DDD"
+	// "BBB\\CCC\\DDD\\FFF"
 	std::string ParentPath = GameEnginePath::GetParentString(_Path);
+	// ParentPath
+	// "BBB"
+
 	FilePath.MoveParentToExistsChild(ParentPath);
 	FilePath.MoveChild(_Path);
 

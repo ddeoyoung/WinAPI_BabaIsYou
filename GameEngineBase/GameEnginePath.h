@@ -11,7 +11,7 @@ public:
 	GameEnginePath(const std::string& _path);
 	~GameEnginePath();
 
-	// delete Function
+	//// delete Function
 	//GameEnginePath(const GameEnginePath& _Other) = delete;
 	//GameEnginePath(GameEnginePath&& _Other) noexcept = delete;
 	//GameEnginePath& operator=(const GameEnginePath& _Other) = delete;
@@ -26,7 +26,7 @@ public:
 
 	std::string PlusFilePath(const std::string& _ChildPath);
 
-	std::string GetStringPath()
+	std::string GetStringPath() 
 	{
 		return Path.string();
 	}
@@ -38,8 +38,8 @@ public:
 protected:
 	std::filesystem::path Path;
 
-
 private:
 
+	// std::string Path;
 };
 

@@ -1,6 +1,7 @@
 #pragma once
 
-// 설명 :
+// 설명 : 모든 기본적인 행동을 제안하는 클래스
+// 제안하는 클래스
 class GameEngineObject
 {
 	friend class GameEngineLevel;
@@ -17,24 +18,24 @@ public:
 	GameEngineObject& operator=(const GameEngineObject& _Other) = delete;
 	GameEngineObject& operator=(GameEngineObject&& _Other) noexcept = delete;
 
-	// 시작
+	// 시작하고.
 	virtual void Start() {}
 
-	// 행동
+	// 행동한고.
 	virtual void Update(float _Delta) {}
 
-	// 랜더
+	// 그려지고.
 	virtual void Render(float _Delta) {}
 
-	// 정리
+	// 정리된다.
 	virtual void Release() {}
 
-	void On()
+	virtual void On()
 	{
 		IsUpdateValue = true;
 	}
 
-	void Off()
+	virtual void Off()
 	{
 		IsUpdateValue = false;
 	}
@@ -44,7 +45,7 @@ public:
 		this->IsDeathValue = true;
 	}
 
-	bool IsUpdate()
+	bool IsUpdate() 
 	{
 		return true == IsUpdateValue && false == IsDeathValue;
 	}
@@ -70,25 +71,26 @@ public:
 		Order = _Order;
 	}
 
-	float GetLiveTime()
+	float GetLiveTime() 
 	{
 		return LiveTime;
 	}
 
-	void ResetLiveTime()
+	void ResetLiveTime() 
 	{
 		LiveTime = 0.0f;
 	}
 
 protected:
 
+
 private:
 	float LiveTime = 0.0f;
 	int Order = 0;
-	bool IsUpdateValue = true;
-	bool IsDeathValue = false; // 아예 메모리를 날려버리고 싶을 때
-	
-	void AddLiveTime(float _DeltaTime)
+	bool IsUpdateValue = true; // 이걸 false로 만들면 됩니다.
+	bool IsDeathValue = false; // 아예 메모리에서 날려버리고 싶어.
+
+	void AddLiveTime(float _DeltaTime) 
 	{
 		LiveTime += _DeltaTime;
 	}

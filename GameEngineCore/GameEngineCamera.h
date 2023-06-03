@@ -7,9 +7,9 @@
 class GameEngineRenderer;
 class GameEngineCamera
 {
+	friend class GameEngineRenderer;
 	friend class GameEngineActor;
 	friend class GameEngineLevel;
-	friend class GameEngineRenderer;
 
 public:
 	// constrcuter destructer
@@ -27,7 +27,7 @@ public:
 		return Pos;
 	}
 
-	void SetPos(const float4& _Value)
+	void SetPos(const float4& _Value) 
 	{
 		Pos = _Value;
 	}
@@ -47,9 +47,9 @@ private:
 	void PushRenderer(GameEngineRenderer* _Renderer, int _Order);
 
 	void Release();
+
 	void OverRelease();
 
 	void Render(float _Delta);
-
 };
 

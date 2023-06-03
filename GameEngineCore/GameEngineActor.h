@@ -4,7 +4,8 @@
 #include <string>
 #include <list>
 
-// 설명 : 화면 안에 존재하는 플레이어 몬스터 총알 등 위치 표현
+// 설명 : 화면안에 존재하는 플레이어 몬스터 총알 등등등 존재한다고 치고
+// 위치가 있다면 이 녀석으로 표현해야 합니다.
 class GameEngineLevel;
 class GameEngineRenderer;
 class GameEngineCollision;
@@ -32,7 +33,8 @@ public:
 		Pos += _Pos;
 	}
 
-	float4 GetPos()
+
+	float4 GetPos() 
 	{
 		return Pos;
 	}
@@ -56,7 +58,6 @@ public:
 
 	GameEngineRenderer* CreateRenderer(const std::string& _ImageName, int _Order);
 
-
 	template<typename EnumType>
 	GameEngineRenderer* CreateUIRenderer(EnumType _Order)
 	{
@@ -76,20 +77,16 @@ public:
 
 	GameEngineRenderer* CreateUIRenderer(const std::string& _ImageName, int _Order);
 
-
-
-
-
 	template<typename EnumType>
 	GameEngineCollision* CreateCollision(EnumType _Order)
 	{
 		return CreateCollision(static_cast<int>(_Order));
 	}
 
+
 	GameEngineCollision* CreateCollision(int _Order = 0);
 
-
-	GameEngineLevel* GetLevel()
+	GameEngineLevel* GetLevel() 
 	{
 		return Level;
 	}
@@ -114,14 +111,16 @@ protected:
 	virtual void LevelEnd() {}
 
 private:
+	// ture가 되는순간. 
+	bool IsOverValue = false;
+
 	GameEngineLevel* Level;
 
 	float4 Pos = float4::ZERO;
-
-	bool IsOverValue = false;
 
 	std::list<GameEngineRenderer*> AllRenderer;
 	std::list<GameEngineCollision*> AllCollision;
 
 	void ActorRelease();
 };
+

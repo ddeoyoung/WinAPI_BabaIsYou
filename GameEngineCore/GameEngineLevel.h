@@ -5,8 +5,10 @@
 #include <string>
 #include <map>
 
-// 설명 : 화면(혹은 장면)을 표현한다.
-// 타이틀 장면, 플레이 장면, 엔딩 장면 등
+// 설명 : 화면혹은 장면을 표현합니다.
+// 타이틀 장면
+// 플레이 장면
+// 엔딩 장면
 class GameEngineCamera;
 class GameEngineCollision;
 class GameEngineLevel : public GameEngineObject
@@ -14,7 +16,7 @@ class GameEngineLevel : public GameEngineObject
 	friend class GameEngineCollision;
 	friend class GameEngineActor;
 	friend class GameEngineCore;
-
+	
 public:
 	// constrcuter destructer
 	GameEngineLevel();
@@ -25,6 +27,7 @@ public:
 	GameEngineLevel(GameEngineLevel&& _Other) noexcept = delete;
 	GameEngineLevel& operator=(const GameEngineLevel& _Other) = delete;
 	GameEngineLevel& operator=(GameEngineLevel&& _Other) noexcept = delete;
+
 
 	template<typename ActorType, typename EnumType>
 	ActorType* CreateActor(EnumType _Order)
@@ -54,7 +57,7 @@ public:
 		return UICamera;
 	}
 
-	static void CollisionDebugRenderSwitch()
+	static void CollisionDebugRenderSwitch() 
 	{
 		IsCollisionDebugRender = !IsCollisionDebugRender;
 	}
@@ -65,26 +68,28 @@ protected:
 	virtual void LevelStart(GameEngineLevel* _PrevLevel) {}
 	virtual void LevelEnd(GameEngineLevel* _NextLevel) {}
 
-
 private:
 	static bool IsCollisionDebugRender;
 
 	GameEngineCamera* MainCamera;
 	GameEngineCamera* UICamera;
 
+
+
 	std::map<int, std::list<GameEngineActor*>> AllActors;
+
 	std::map<int, std::list<GameEngineCollision*>> AllCollision;
 
-	// Start Update Render
 	void ActorInit(GameEngineActor* _Actor, int _Order);
 
 	void ActorLevelEnd();
 	void ActorLevelStart();
-	void ActorUpdate(float _Delta);
-	void ActorRender(float _Delta);
-	void ActorRelease();
 
 	void CollisionOverRelease();
 	void CollisionRelease();
+
+	void ActorUpdate(float _Delta);
+	void ActorRender(float _Delta);
+	void ActorRelease();
 };
 

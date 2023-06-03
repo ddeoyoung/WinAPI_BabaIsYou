@@ -24,7 +24,7 @@ void TileMap::CreateTileMap(const std::string& _Sprite, int X, int Y, float4 _Ti
 	TileX = X;
 	TileY = Y;
 
-	// nullptr로 만들어진 배열 만들기
+	// nullptr로 만들어진 배열을 만들뿐이다.
 	Tiles.resize(Y);
 
 	for (size_t y = 0; y < Y; y++)
@@ -60,6 +60,9 @@ bool TileMap::IsOver(int X, int Y)
 
 float4 TileMap::IndexToPos(int X, int Y)
 {
+	// 100, 100
+	// 5 8 
+	// 500 800
 	return { TileSize.X * X, TileSize.Y * Y };
 }
 

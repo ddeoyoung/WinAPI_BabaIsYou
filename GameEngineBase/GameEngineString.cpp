@@ -2,16 +2,20 @@
 #include "GameEngineDebug.h"
 #include <Windows.h>
 
-GameEngineString::GameEngineString()
+GameEngineString::GameEngineString() 
 {
 }
 
-GameEngineString::~GameEngineString()
+GameEngineString::~GameEngineString() 
 {
 }
+
+// "" => L""
 
 std::wstring GameEngineString::AnsiToUnicode(const std::string& _Text)
 {
+	// CP_ACP 운영체제가 사용하는거니
+	// 아무것도 넣지 않으면 => _Text.c_str()이 몇바이트가 되어야 widechar로 변환할수 있는지를 리턴해줍니다.
 	int Size = MultiByteToWideChar(CP_ACP, 0, _Text.c_str(), static_cast<int>(_Text.size()), nullptr, 0);
 
 	if (0 == Size)
@@ -20,8 +24,12 @@ std::wstring GameEngineString::AnsiToUnicode(const std::string& _Text)
 		return L"";
 	}
 
+	// _Text 10
+	// Size 30
+
 	std::wstring Result;
 	Result.resize(Size);
+
 
 	Size = MultiByteToWideChar(CP_ACP, 0, _Text.c_str(), static_cast<int>(_Text.size()), &Result[0], Size);
 
@@ -36,6 +44,8 @@ std::wstring GameEngineString::AnsiToUnicode(const std::string& _Text)
 
 std::string GameEngineString::UnicodeToAnsi(const std::wstring& _Text)
 {
+	// CP_ACP 운영체제가 사용하는거니
+// 아무것도 넣지 않으면 => _Text.c_str()이 몇바이트가 되어야 widechar로 변환할수 있는지를 리턴해줍니다.
 	int Size = WideCharToMultiByte(CP_ACP, 0, _Text.c_str(), static_cast<int>(_Text.size()), nullptr, 0, nullptr, 0);
 
 	if (0 == Size)
@@ -44,8 +54,12 @@ std::string GameEngineString::UnicodeToAnsi(const std::wstring& _Text)
 		return "";
 	}
 
+	// _Text 10
+	// Size 30
+
 	std::string Result;
 	Result.resize(Size);
+
 
 	Size = WideCharToMultiByte(CP_ACP, 0, _Text.c_str(), static_cast<int>(_Text.size()), &Result[0], Size, nullptr, nullptr);
 
@@ -60,6 +74,8 @@ std::string GameEngineString::UnicodeToAnsi(const std::wstring& _Text)
 
 std::string GameEngineString::UnicodeToUTF8(const std::wstring& _Text)
 {
+	// CP_ACP 운영체제가 사용하는거니
+// 아무것도 넣지 않으면 => _Text.c_str()이 몇바이트가 되어야 widechar로 변환할수 있는지를 리턴해줍니다.
 	int Size = WideCharToMultiByte(CP_UTF8, 0, _Text.c_str(), static_cast<int>(_Text.size()), nullptr, 0, nullptr, 0);
 
 	if (0 == Size)
@@ -67,6 +83,9 @@ std::string GameEngineString::UnicodeToUTF8(const std::wstring& _Text)
 		MsgBoxAssert("문자열을 변환할수가 없습니다.");
 		return "";
 	}
+
+	// _Text 10
+	// Size 30
 
 	std::string Result;
 	Result.resize(Size);
