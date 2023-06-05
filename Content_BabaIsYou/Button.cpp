@@ -29,12 +29,12 @@ void Button::SetButton(const std::string& _FileName)
 		FilePath.MoveChild("ContentsResources\\Title\\");
 		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath(_FileName), 1, 2);
 
-		GameEngineWindowTexture* StartButton = ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath(_FileName));
+		GameEngineRenderer* ButtonRender = CreateRenderer(_FileName, RenderOrder::PlayUI);
+
+		//GameEngineWindowTexture* StartButton = ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath(_FileName));
+
+		ButtonRender->CreateAnimation("Button", _FileName, 0, 1, 0.2f, true);
+		ButtonRender->ChangeAnimation("Button");
+		ButtonRender->SetRenderScale({ 400, 60 });
 	}
-
-	ButtonRender = CreateRenderer(_FileName, RenderOrder::PlayUI);
-
-	ButtonRender->CreateAnimation("Button", _FileName, 0, 1, 0.2f, true);
-	ButtonRender->ChangeAnimation("Button");
-	ButtonRender->SetRenderScale({400, 60});
 }

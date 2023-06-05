@@ -28,20 +28,20 @@ void WorldMapLevel::Start()
 	WorldMapUI = CreateActor<Background_WorldMap>();
 
 	// ≈∏¿œ∏ 
-	//GameEnginePath FilePath;
-	//FilePath.SetCurrentPath();
-	//FilePath.MoveParentToExistsChild("ContentsResources");
-	//FilePath.MoveChild("ContentsResources\\WorldMap\\");
-	//ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("WorldMapSelect.bmp"));
-	//ResourcesManager::GetInst().CreateSpriteSheet("WorldMapSelect.bmp", 1, 3);
+	GameEnginePath FilePath;
+	FilePath.SetCurrentPath();
+	FilePath.MoveParentToExistsChild("ContentsResources");
+	FilePath.MoveChild("ContentsResources\\WorldMap\\");
+	ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("WorldMapSelect.bmp"));
+	ResourcesManager::GetInst().CreateSpriteSheet("WorldMapSelect.bmp", 1, 3);
 
-	//TileObject = CreateActor<TileMap>();
-	//TileObject->CreateTileMap("WorldMapSelect.bmp", 50, 50, { 32, 32 }, 3);
-	//for (int y = 0; y < 50; y++)
-	//{
-	//	for (int x = 0; x < 50; x++)
-	//	{
-	//		TileObject->SetTile(x, y, 0);
-	//	}
-	//}
+	TileObject = CreateActor<TileMap>();
+	TileObject->CreateTileMap("WorldMapSelect.bmp", 50, 50, { 32, 32 }, 3);
+	for (int y = 0; y < 50; y++)
+	{
+		for (int x = 0; x < 50; x++)
+		{
+			TileObject->SetTile(x, y, 0);
+		}
+	}
 }
