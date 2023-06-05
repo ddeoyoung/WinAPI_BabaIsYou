@@ -18,6 +18,11 @@ void PuzzleLevel::Start()
 	Background_Gray* BackgroundUI = CreateActor<Background_Gray>();
 	BackgroundUI->Init("Background_Gray.bmp");
 
+
+
+
+
+
 	if (false == ResourcesManager::GetInst().IsLoadTexture("Actor.Bmp"))
 	{
 		GameEnginePath FilePath;
@@ -30,16 +35,16 @@ void PuzzleLevel::Start()
 
 	}
 
-	TileObject = CreateActor<TileMap>();
+	//TileObject = CreateActor<TileMap>();
 
-	TileObject->CreateTileMap("Actor.bmp", 20, 20, { 50, 50 }, 0);
-	for (int y = 0; y < 20; y++)
-	{
-		for (int x = 0; x < 20; x++)
-		{
-			TileObject->SetTile(x, y, 0);
-		}
-	}
+	//TileObject->CreateTileMap("Actor.bmp", 20, 20, { 50, 50 }, 0);
+	//for (int y = 0; y < 20; y++)
+	//{
+	//	for (int x = 0; x < 20; x++)
+	//	{
+	//		TileObject->SetTile(x, y, 0);
+	//	}
+	//}
 }
 void PuzzleLevel::Update(float _Delta)
 {

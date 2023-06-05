@@ -22,7 +22,7 @@ void ContentCore::Start()
 	GameEngineCore::CreateLevel<WorldMapLevel>("WorldMapLevel"); // ¿ùµå¸Ê
 	GameEngineCore::CreateLevel<PuzzleLevel>("PuzzleLevel"); // ¿ùµå¸Ê
 
-	GameEngineCore::ChangeLevel("TitleLevel");
+	GameEngineCore::ChangeLevel("PuzzleLevel");
 }
 
 void ContentCore::Update(float _Delta)

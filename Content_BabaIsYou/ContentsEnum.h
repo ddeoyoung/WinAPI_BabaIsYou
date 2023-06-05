@@ -9,6 +9,7 @@ enum class RenderOrder
 {
 	BackGround = 0,
 	BackGroundUI,
+	Grid,
 	Play,
 	PlayUI,
 	Fade,
