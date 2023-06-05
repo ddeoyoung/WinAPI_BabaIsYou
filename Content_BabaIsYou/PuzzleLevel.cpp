@@ -4,6 +4,7 @@
 
 
 #include "Background_Gray.h"
+#include "Background_Black.h"
 
 PuzzleLevel::PuzzleLevel()
 {
@@ -15,12 +16,11 @@ PuzzleLevel::~PuzzleLevel()
 
 void PuzzleLevel::Start()
 {
-	Background_Gray* BackgroundUI = CreateActor<Background_Gray>();
-	BackgroundUI->Init("Background_Gray.bmp");
+	Background_Gray* BackgroundUI_Gray = CreateActor<Background_Gray>();
+	BackgroundUI_Gray->Init("Background_Gray.bmp");
 
-
-
-
+	Background_Black* BackgroundUI_Black = CreateActor<Background_Black>();
+	BackgroundUI_Black->Init("Background_Black.bmp");
 
 
 	if (false == ResourcesManager::GetInst().IsLoadTexture("Actor.Bmp"))
