@@ -41,6 +41,9 @@
     <ClInclude Include="WorldMapSelect.h">
       <Filter>UIActor\WorldMap</Filter>
     </ClInclude>
+    <ClInclude Include="PuzzleActor.h">
+      <Filter>UIActor\Default</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -79,6 +82,9 @@
     </ClCompile>
     <ClCompile Include="WorldMapSelect.cpp">
       <Filter>UIActor\WorldMap</Filter>
+    </ClCompile>
+    <ClCompile Include="PuzzleActor.cpp">
+      <Filter>UIActor\Default</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
