@@ -1,8 +1,9 @@
 #include "PuzzleLevel.h"
 #include <GameEngineCore/TileMap.h>
 #include <GameEngineCore/ResourcesManager.h>
+#include <GameEnginePlatform/GameEngineWindow.h>
 
-
+#include "ContentsEnum.h"
 #include "Background_Gray.h"
 #include "Background_Black.h"
 
@@ -20,7 +21,7 @@ void PuzzleLevel::Start()
 	BackgroundUI_Gray->Init("Background_Gray.bmp");
 
 	Background_Black* BackgroundUI_Black = CreateActor<Background_Black>();
-	BackgroundUI_Black->Init("Background_Black.bmp");
+	BackgroundUI_Black->Init("Background_Black.bmp", {850, 600});
 
 
 	if (false == ResourcesManager::GetInst().IsLoadTexture("Actor.Bmp"))
@@ -32,20 +33,23 @@ void PuzzleLevel::Start()
 		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("Actor.bmp"));
 
 		ResourcesManager::GetInst().CreateSpriteSheet("Actor.bmp", 24, 40);
-
 	}
 
-	//TileObject = CreateActor<TileMap>();
+	float4 WinScale = GameEngineWindow::MainWindow.GetScale().Half();
 
-	//TileObject->CreateTileMap("Actor.bmp", 20, 20, { 50, 50 }, 0);
-	//for (int y = 0; y < 20; y++)
-	//{
-	//	for (int x = 0; x < 20; x++)
-	//	{
-	//		TileObject->SetTile(x, y, 0);
-	//	}
-	//}
+	// 34 x 24 개의 타일맵을 Background_Black 에 생성
+	TileGrid = CreateActor<TileMap>();
+	TileGrid->CreateTileMap("Actor.bmp", 21, 15, { 40 , 40 }, 2);
+	for (int y = 0; y < 24; y++)
+	{
+		for (int x = 0; x < 34; x++)
+		{
+			// TilePos : Background_Black Pos와 같이
+			TileGrid->SetTile(x, y, 3, { WinScale.X - 425, WinScale.Y - 300 });
+		}
+	}
 }
+
 void PuzzleLevel::Update(float _Delta)
 {
 

@@ -21,7 +21,7 @@ LogoLevel::~LogoLevel()
 void LogoLevel::Start()
 {
 	BackgroundUI = CreateActor<Background_Black>();
-	BackgroundUI->Init("Background_Black.bmp");
+	BackgroundUI->Init("Background_Black.bmp", {1280, 720});
 	LogoUI = CreateActor<Logo>();
 
 	FadeUI = CreateActor<FadeAnimation>();

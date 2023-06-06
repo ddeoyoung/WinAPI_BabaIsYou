@@ -18,7 +18,7 @@ void TitleLevel::Start()
 {
 	TitleLogo* TitleLogoUI = CreateActor<TitleLogo>();
 	Background_Black* BackgroundUI = CreateActor<Background_Black>();
-	BackgroundUI->Init("Background_Black.bmp");
+	BackgroundUI->Init("Background_Black.bmp", { 1280, 720 });
 
 	Button* StartButton = CreateActor<Button>();
 	StartButton->SetButton("StartButton.bmp");

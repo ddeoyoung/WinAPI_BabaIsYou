@@ -21,6 +21,6 @@ private:
 	void Start() override;
 	void Update(float _Delta) override;
 
-	class TileMap* TileObject;
+	class TileMap* TileGrid;
 };
 

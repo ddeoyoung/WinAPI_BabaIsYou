@@ -2,6 +2,7 @@
 #include <GameEngineCore/ResourcesManager.h>
 #include <GameEnginePlatform/GameEngineWindow.h>
 #include <GameEngineCore/GameEngineRenderer.h>
+#include <GameEngineCore/TileMap.h>
 #include "ContentsEnum.h"
 
 Background_Black::Background_Black()
@@ -17,7 +18,7 @@ void Background_Black::Start()
 
 }
 
-void Background_Black::Init(const std::string& _FileName)
+void Background_Black::Init(const std::string& _FileName, float4 _Scale)
 {
 	if (false == ResourcesManager::GetInst().IsLoadTexture(_FileName))
 	{
@@ -29,11 +30,12 @@ void Background_Black::Init(const std::string& _FileName)
 		GameEngineWindowTexture* Back = ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("Background_Black.bmp"));
 	}
 
-	BackRender = CreateRenderer("Background_Black.bmp", RenderOrder::Grid);
-
 	GameEngineWindowTexture* Back = ResourcesManager::GetInst().FindTexture(_FileName);
-	float4 Scale = Back->GetScale();
-	BackRender->SetRenderScale(Scale);
-	SetPos({ Scale.hX(), Scale.hY() });
+	BackRender = CreateRenderer("Background_Black.bmp", RenderOrder::Grid);
+	BackRender->SetRenderScale(_Scale);
+
+	float4 WinScale = GameEngineWindow::MainWindow.GetScale().Half();
+	SetPos(WinScale);
+
 }
 
