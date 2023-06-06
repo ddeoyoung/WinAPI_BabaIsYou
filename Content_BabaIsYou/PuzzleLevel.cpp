@@ -58,7 +58,7 @@ void PuzzleLevel::Start()
 	//TileGrid->SetTile(5, 2, 2, BackGridPos);
 
 	GameEngineRenderer* TileRenderer = TileGrid->GetTile(5, 2);
-	//TileRenderer->CreateAnimation("Test", "Actor.bmp", 504, 505, 0.1f, true);
+	//TileRenderer->CreateAnimation("Test", "Actor.bmp", 504, 508, 0.1f, true);
 	TileRenderer->CreateAnimationToFrame("Test", "Actor.bmp", {2, 26, 50}, 0.1f, true);
 	TileRenderer->ChangeAnimation("Test");
 }
