@@ -1,6 +1,7 @@
 #pragma once
 #include "GameEngineActorSubObject.h"
 #include <GameEngineBase/GameEngineMath.h>
+#include <GameEngineCore/GameEngineCamera.h>
 #include <string>
 #include <map>
 #include <vector>
