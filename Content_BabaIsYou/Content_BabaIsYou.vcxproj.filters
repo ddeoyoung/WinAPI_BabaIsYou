@@ -44,6 +44,9 @@
     <ClInclude Include="PuzzleActor.h">
       <Filter>UIActor\Default</Filter>
     </ClInclude>
+    <ClInclude Include="Background_Pixel.h">
+      <Filter>UIActor\Default</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -84,6 +87,9 @@
       <Filter>UIActor\WorldMap</Filter>
     </ClCompile>
     <ClCompile Include="PuzzleActor.cpp">
+      <Filter>UIActor\Default</Filter>
+    </ClCompile>
+    <ClCompile Include="Background_Pixel.cpp">
       <Filter>UIActor\Default</Filter>
     </ClCompile>
   </ItemGroup>

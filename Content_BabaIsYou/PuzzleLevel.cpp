@@ -3,11 +3,13 @@
 #include <GameEngineCore/ResourcesManager.h>
 #include <GameEnginePlatform/GameEngineWindow.h>
 #include <GameEngineCore/GameEngineRenderer.h>
+#include <GameEnginePlatform/GameEngineWindowTexture.h>
+
 
 #include "ContentsEnum.h"
 #include "Background_Gray.h"
 #include "Background_Black.h"
-#include "PuzzleActor.h"
+#include "Background_Pixel.h"
 
 PuzzleLevel::PuzzleLevel()
 {
@@ -24,10 +26,6 @@ void PuzzleLevel::Start()
 
 	Background_Black* BackgroundUI_Black = CreateActor<Background_Black>();
 	BackgroundUI_Black->Init("Background_Black.bmp", {850, 600});
-
-	//PuzzleActor* PuzzleUI = CreateActor<PuzzleActor>();
-	//PuzzleUI->SetPuzzle("Grass_Idle", {(1,1), (2,2), (3,3)});
-
 
 	// Puzzle Tile ¼³Á¤
 	if (false == ResourcesManager::GetInst().IsLoadTexture("Actor.Bmp"))
@@ -192,6 +190,14 @@ void PuzzleLevel::Start()
 	TileRenderer = TileGrid->GetTile(18, 7);
 	TileRenderer->CreateAnimationToFrame("GRASS", "Actor.bmp", { 506, 530, 554 }, 0.2f, true);
 	TileRenderer->ChangeAnimation("GRASS");
+
+
+
+	Background_Pixel* BackgroundUI_Pixel = CreateActor<Background_Pixel>();
+	BackgroundUI_Pixel->Init("stage1.bmp", { 850, 600 });
+
+	BackgroundUI_Pixel->GetColor
+	
 
 }
 
