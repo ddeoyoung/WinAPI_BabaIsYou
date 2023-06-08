@@ -16,12 +16,10 @@ public:
 	Background_Pixel& operator=(Background_Pixel&& _Other) noexcept = delete;
 
 	void Init(const std::string& _FileName, float4 _Scale);
-	void GetPixelColor();
 
 protected:
 
 private:
-	GameEngineWindowTexture* Back = nullptr;
-	GameEngineRenderer* BackRender = nullptr;
+	class GameEngineWindowTexture* Back = nullptr;
+	class GameEngineRenderer* BackRender = nullptr;
 };
-

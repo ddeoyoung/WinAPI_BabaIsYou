@@ -196,7 +196,7 @@ void PuzzleLevel::Start()
 	Background_Pixel* BackgroundUI_Pixel = CreateActor<Background_Pixel>();
 	BackgroundUI_Pixel->Init("stage1.bmp", { 850, 600 });
 
-	BackgroundUI_Pixel->GetColor
+	//BackgroundUI_Pixel->GetColor
 	
 
 }

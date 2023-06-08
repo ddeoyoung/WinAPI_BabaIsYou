@@ -34,7 +34,7 @@ void Background_Pixel::Init(const std::string& _FileName, float4 _Scale)
 
 }
 
-void GetPixelColor()
-{
-	
-}
+//void GetPixelColor()
+//{
+//	
+//}
