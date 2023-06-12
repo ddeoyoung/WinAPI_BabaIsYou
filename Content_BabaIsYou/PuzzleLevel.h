@@ -23,5 +23,6 @@ private:
 	void Update(float _Delta) override;
 
 	class TileMap* TileGrid = nullptr;
+	GameEngineRenderer* TileRenderer = nullptr;
 };
 
