@@ -18,7 +18,7 @@ public:
 	Background_Pixel& operator=(Background_Pixel&& _Other) noexcept = delete;
 
 	void Init(const std::string& _FileName, float4 _Scale);
-	//void GetPixelColor(GameEngineWindowTexture* _Image);
+	void GetPixelColor(int _X, int _Y);
 
 protected:
 

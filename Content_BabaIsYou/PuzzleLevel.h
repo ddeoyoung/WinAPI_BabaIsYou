@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineLevel.h>
+#include <Windows.h>
 
 // Ό³Έν :
 class PuzzleLevel : public GameEngineLevel

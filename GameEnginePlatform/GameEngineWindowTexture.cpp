@@ -195,7 +195,7 @@ unsigned int GameEngineWindowTexture::GetColor(unsigned int _DefaultColor, float
 
 void GameEngineWindowTexture::FillTexture(unsigned int _Color)
 {
-	RECT Rc; 
+	RECT Rc;
 	Rc.left = 0;
 	Rc.top = 0;
 	Rc.right = GetScale().iX();

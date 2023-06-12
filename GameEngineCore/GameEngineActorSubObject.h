@@ -22,10 +22,11 @@ public:
 	bool IsDeath() override;
 	bool IsUpdate() override;
 
-	GameEngineActor* GetActor() 
+	GameEngineActor* GetActor()
 	{
 		return Master;
 	}
+
 
 protected:
 
