@@ -193,11 +193,23 @@ void PuzzleLevel::Start()
 
 
 
-	Background_Pixel* BackgroundUI_Pixel = CreateActor<Background_Pixel>();
-	BackgroundUI_Pixel->Init("stage1.bmp", { 850, 600 });
+	//Background_Pixel* MapDataImage = CreateActor<Background_Pixel>();
+	//MapDataImage->Init("stage1.bmp", { 850, 600 });
 
-	//BackgroundUI_Pixel->GetColor
-	
+	//MapDataImage->GetColor
+
+	for (int y = 0; y < 15; y++)
+	{
+		for (int x = 0; x < 21; x++)
+		{
+			/*
+			if (MapDataImage->GetPixel(x, y) == RGB(255, 0, 0) )
+			{
+				TileGrid->SetTile(x, y, 0, BackGridPos);
+			}
+			*/
+		}
+	}
 
 }
 

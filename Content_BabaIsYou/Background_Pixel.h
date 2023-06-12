@@ -5,6 +5,8 @@
 class Background_Pixel : public GameEngineActor
 {
 public:
+	//friend GameEngineWindowTexture;
+
 	// constrcuter destructer
 	Background_Pixel();
 	~Background_Pixel();
@@ -16,6 +18,7 @@ public:
 	Background_Pixel& operator=(Background_Pixel&& _Other) noexcept = delete;
 
 	void Init(const std::string& _FileName, float4 _Scale);
+	//void GetPixelColor(GameEngineWindowTexture* _Image);
 
 protected:
 

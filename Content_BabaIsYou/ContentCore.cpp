@@ -20,7 +20,7 @@ void ContentCore::Start()
 	GameEngineCore::CreateLevel<LogoLevel>("LogoLevel"); // ·Î°í
 	GameEngineCore::CreateLevel<TitleLevel>("TitleLevel"); // Å¸ÀÌÆ²
 	GameEngineCore::CreateLevel<WorldMapLevel>("WorldMapLevel"); // ¿ùµå¸Ê
-	GameEngineCore::CreateLevel<PuzzleLevel>("PuzzleLevel"); // ¿ùµå¸Ê
+	GameEngineCore::CreateLevel<PuzzleLevel>("PuzzleLevel"); // ÆÛÁñ
 
 	GameEngineCore::ChangeLevel("PuzzleLevel");
 }
