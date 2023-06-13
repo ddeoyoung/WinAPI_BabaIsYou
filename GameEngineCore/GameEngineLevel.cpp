@@ -170,6 +170,8 @@ void GameEngineLevel::CollisionRelease()
 void GameEngineLevel::ActorRelease()
 {
 	MainCamera->Release();
+	UICamera->Release();
+
 
 	CollisionRelease();
 
