@@ -63,6 +63,19 @@ void WorldMapLevel::Start()
 		ResourcesManager::GetInst().CreateSpriteSheet("WorldMapNumberBack.bmp", 2, 3);
 	}
 
+	// PuzzleActor
+	if (false == ResourcesManager::GetInst().IsLoadTexture("Actor.Bmp"))
+	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Default\\");
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("Actor.bmp"));
+		ResourcesManager::GetInst().CreateSpriteSheet("Actor.bmp", 24, 40);
+	}
+
+
+
 	float4 WinScale = GameEngineWindow::MainWindow.GetScale().Half();
 	float4 BackScale = { 1190 , 650 };
 	float4 BackGridPos = { WinScale.X - (BackScale.X / 2) - 10, WinScale.Y - (BackScale.Y / 2) - 5};
@@ -79,12 +92,13 @@ void WorldMapLevel::Start()
 	{
 		for (int x = 0; x < 31; x++)
 		{
+			// NumberGrid 0번 : 이미지 없음
 			//TileGrid->SetTile(x, y, 0, BackGridPos);
 			NumberGrid->SetTile(x, y, 0, BackGridPos);
 		}
 	}
 
-	// 숫자 뒤 배경
+	// 스테이지 숫자 뒤 배경
 	// 0
 	TileGrid->SetTile(9, 14, 0, BackGridPos);
 	TileRenderer = TileGrid->GetTile(9, 14);
@@ -111,8 +125,7 @@ void WorldMapLevel::Start()
 
 
 
-
-	// 숫자
+	// 스테이지 숫자
 	//0
 	NumberGrid->SetTile(9, 14, 1, BackGridPos);
 	//1
@@ -121,5 +134,35 @@ void WorldMapLevel::Start()
 	NumberGrid->SetTile(10, 11, 3, BackGridPos);
 	//3
 	NumberGrid->SetTile(11, 12, 4, BackGridPos);
+
+
+
+
+	// BABA IS YOU
+	TileRenderer = NumberGrid->GetTile(28, 14);
+	TileRenderer->CreateAnimationToFrame("BABA_TEXT", "Actor.bmp", { 0, 24, 48 }, 0.2f, true);
+	TileRenderer->ChangeAnimation("BABA_TEXT");
+
+	TileRenderer = NumberGrid->GetTile(29, 14);
+	TileRenderer->CreateAnimationToFrame("IS_TEXT", "Actor.bmp", { 792, 816, 840 }, 0.2f, true);
+	TileRenderer->ChangeAnimation("IS_TEXT");
+
+	TileRenderer = NumberGrid->GetTile(30, 14);
+	TileRenderer->CreateAnimationToFrame("YOU_TEXT", "Actor.bmp", { 864, 888, 912 }, 0.2f, true);
+	TileRenderer->ChangeAnimation("YOU_TEXT");
+
+
+	// FLAG IS WIN
+	TileRenderer = NumberGrid->GetTile(28, 16);
+	TileRenderer->CreateAnimationToFrame("FLAG_TEXT", "Actor.bmp", { 726, 750, 774 }, 0.2f, true);
+	TileRenderer->ChangeAnimation("FLAG_TEXT");
+
+	TileRenderer = NumberGrid->GetTile(29, 16);
+	TileRenderer->CreateAnimationToFrame("IS_TEXT", "Actor.bmp", { 792, 816, 840 }, 0.2f, true);
+	TileRenderer->ChangeAnimation("IS_TEXT");
+
+	TileRenderer = NumberGrid->GetTile(30, 16);
+	TileRenderer->CreateAnimationToFrame("WIN_TEXT", "Actor.bmp", { 866, 890, 914 }, 0.2f, true);
+	TileRenderer->ChangeAnimation("WIN_TEXT");
 
 }
