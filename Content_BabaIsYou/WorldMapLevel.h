@@ -31,6 +31,8 @@ private:
 	class TileMap* NumberGrid = nullptr;
 	GameEngineRenderer* NumberRenderer = nullptr;
 
+	class TileMap* SelectGrid = nullptr;
+
 	// 페이드 애니메이션
 	class FadeAnimation* FadeUI = nullptr;
 };

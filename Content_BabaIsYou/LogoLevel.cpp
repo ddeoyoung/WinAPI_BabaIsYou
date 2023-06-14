@@ -36,8 +36,8 @@ void LogoLevel::Update(float _Delta)
 		FadeUI->FadeOut();
 
 	}
-	if (FadeUI->FadeRender->IsAnimationEnd())
-	{
-		GameEngineCore::ChangeLevel("TitleLevel");
-	}
+	//if (FadeUI->FadeRender->IsAnimationEnd())
+	//{
+	//	GameEngineCore::ChangeLevel("TitleLevel");
+	//}
 }

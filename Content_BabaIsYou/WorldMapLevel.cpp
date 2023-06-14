@@ -99,6 +99,9 @@ void WorldMapLevel::Start()
 	NumberGrid = CreateActor<TileMap>();
 	NumberGrid->CreateTileMap("Text.bmp", 31, 17, { 38, 38 }, 3);
 
+	SelectGrid = CreateActor<TileMap>();
+	SelectGrid->CreateTileMap("Text.bmp", 31, 17, { 38, 38 }, 4);
+
 	for (int y = 0; y < 17; y++)
 	{
 		for (int x = 0; x < 31; x++)
@@ -106,6 +109,7 @@ void WorldMapLevel::Start()
 			// NumberGrid 0번 : 이미지 없음
 			//TileGrid->SetTile(x, y, 0, BackGridPos);
 			NumberGrid->SetTile(x, y, 0, BackGridPos);
+			SelectGrid->SetTile(x, y, 0, BackGridPos);
 		}
 	}
 
@@ -186,5 +190,8 @@ void WorldMapLevel::Start()
 	TileRenderer = NumberGrid->GetTile(10, 13);
 	TileRenderer->CreateAnimationToFrame("LINE_10", "WorldMapLine.bmp", { 10, 26, 42 }, 0.2f, true);
 	TileRenderer->ChangeAnimation("LINE_10");
+
+
+
 
 }
