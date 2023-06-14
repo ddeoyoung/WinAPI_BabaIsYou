@@ -31,21 +31,16 @@ void FadeAnimation::Start()
 	}
 }
 
-// 레벨 전환 전
+// 사라지는 애니메이션 (레벨 전환 전)
 void FadeAnimation::FadeOut()
 {
 	GameEngineWindowTexture* FadeOutUI = ResourcesManager::GetInst().FindTexture("FadeAnimation.bmp");
 	FadeRender->CreateAnimation("FadeOut", "FadeAnimation.bmp", 0, 34, 0.015f, false);
 	FadeRender->ChangeAnimation("FadeOut");
 	FadeRender->SetRenderScaleToTexture();
-
-	//if (true == FadeRender->IsAnimationEnd())
-	//{
-	//	GameEngineCore::ChangeLevel("TitleLevel");
-	//}
 }
 
-// 레벨 전환 후
+// 나타나는 애니메이션 (레벨 전환 후) 
 void FadeAnimation::FadeIn()
 {
 	GameEngineWindowTexture* FadeInUI = ResourcesManager::GetInst().FindTexture("FadeAnimation.bmp");

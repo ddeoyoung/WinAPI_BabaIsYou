@@ -26,6 +26,7 @@ void LogoLevel::Start()
 
 	FadeUI = CreateActor<FadeAnimation>();
 	FadeUI->FadeIn();
+
 }
 
 void LogoLevel::Update(float _Delta)
@@ -34,14 +35,9 @@ void LogoLevel::Update(float _Delta)
 	{
 		FadeUI->FadeOut();
 
-		//if (nullptr != FadeUI && true == FadeUI->IsAnimationEnd)
-		//{
-		//	GameEngineCore::ChangeLevel("TitleLevel");
-		//}
-
-		if (true == FadeUI->CheckAnimationEnd())
-		{
-			GameEngineCore::ChangeLevel("TitleLevel");
-		}
+	}
+	if (FadeUI->FadeRender->IsAnimationEnd())
+	{
+		GameEngineCore::ChangeLevel("TitleLevel");
 	}
 }

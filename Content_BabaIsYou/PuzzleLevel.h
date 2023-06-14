@@ -24,5 +24,7 @@ private:
 
 	class TileMap* TileGrid = nullptr;
 	GameEngineRenderer* TileRenderer = nullptr;
+
+	class GameEngineWindowTexture* MapTexture = nullptr;
 };
 

@@ -31,5 +31,6 @@ void Background_WorldMap::Start()
 		BackRender->CreateAnimation("WorldMapBackUI", "WorldMap.bmp", 0, 2, 0.2f, true);
 		BackRender->ChangeAnimation("WorldMapBackUI");
 		BackRender->SetRenderScaleToTexture();
+		//BackRender->SetRenderScale({ 1190 , 650 });
 	}
 }

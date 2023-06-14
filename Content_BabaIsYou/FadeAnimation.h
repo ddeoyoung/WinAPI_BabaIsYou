@@ -21,12 +21,12 @@ public:
 	bool CheckAnimationEnd();
 	bool IsAnimationEnd = false;
 
+	GameEngineRenderer* FadeRender = nullptr;
 protected:
 
 private:
 	void Start() override;
 	void Update(float _Delta) override;
 
-	GameEngineRenderer* FadeRender = nullptr;
 };
 

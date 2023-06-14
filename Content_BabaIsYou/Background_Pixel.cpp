@@ -21,7 +21,7 @@ void Background_Pixel::Init(const std::string& _FileName, float4 _Scale)
 		GameEnginePath FilePath;
 		FilePath.SetCurrentPath();
 		FilePath.MoveParentToExistsChild("ContentsResources");
-		FilePath.MoveChild("ContentsResources\\Texture\\");
+		FilePath.MoveChild("ContentsResources\\MapTexture\\");
 		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath(_FileName));
 	}
 

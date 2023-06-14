@@ -59,12 +59,14 @@ void PuzzleLevel::Start()
 
 
 	// MapTexture - Stage 1
-
 	Background_Pixel* MapDataImage = CreateActor<Background_Pixel>();
 	MapDataImage->Init("stage1.bmp", { 850, 600 });
-	MapDataImage->Off();
+	MapTexture = ResourcesManager::GetInst().FindTexture("stage1.bmp");
 
-	GameEngineWindowTexture* MapTexture = ResourcesManager::GetInst().FindTexture("stage1.bmp");
+	//MapDataImage->Init("WallTest.bmp", { 850, 600 });
+	//MapTexture = ResourcesManager::GetInst().FindTexture("WallTest.bmp");
+
+	MapDataImage->Off();
 
 	for (int y = 0; y < 15; y++)
 	{
@@ -77,7 +79,7 @@ void PuzzleLevel::Start()
 
 			// WALL
 			if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(255, 0, 0))
-			{
+			{ 
 				TileGrid->SetTile(x, y, 290, BackGridPos);
 				TileRenderer->CreateAnimationToFrame("WALL", "Actor.bmp", { 290, 314, 338 }, 0.2f, true);
 				TileRenderer->ChangeAnimation("WALL");
