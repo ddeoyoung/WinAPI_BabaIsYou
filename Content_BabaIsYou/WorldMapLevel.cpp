@@ -63,6 +63,17 @@ void WorldMapLevel::Start()
 		ResourcesManager::GetInst().CreateSpriteSheet("WorldMapNumberBack.bmp", 2, 3);
 	}
 
+	// WorldMapLine
+	if (false == ResourcesManager::GetInst().IsLoadTexture("WorldMapLine.Bmp"))
+	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\WorldMap\\");
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("WorldMapLine.bmp"));
+		ResourcesManager::GetInst().CreateSpriteSheet("WorldMapLine.bmp", 16, 3);
+	}
+
 	// PuzzleActor
 	if (false == ResourcesManager::GetInst().IsLoadTexture("Actor.Bmp"))
 	{
@@ -164,5 +175,16 @@ void WorldMapLevel::Start()
 	TileRenderer = NumberGrid->GetTile(30, 16);
 	TileRenderer->CreateAnimationToFrame("WIN_TEXT", "Actor.bmp", { 866, 890, 914 }, 0.2f, true);
 	TileRenderer->ChangeAnimation("WIN_TEXT");
+
+
+
+	// WorldMapLine
+	TileRenderer = NumberGrid->GetTile(10, 14);
+	TileRenderer->CreateAnimationToFrame("LINE_6", "WorldMapLine.bmp", { 6, 22, 38 }, 0.2f, true);
+	TileRenderer->ChangeAnimation("LINE_6");
+
+	TileRenderer = NumberGrid->GetTile(10, 13);
+	TileRenderer->CreateAnimationToFrame("LINE_10", "WorldMapLine.bmp", { 10, 26, 42 }, 0.2f, true);
+	TileRenderer->ChangeAnimation("LINE_10");
 
 }
