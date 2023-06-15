@@ -1,4 +1,7 @@
 #include "TitleLevel.h"
+#include <GameEnginePlatform/GameEngineInput.h>
+#include <GameEngineCore/GameEngineRenderer.h>
+#include <GameEngineCore/GameEngineCore.h>
 
 #include "Background_Black.h"
 #include "TitleLogo.h"
@@ -24,13 +27,21 @@ void TitleLevel::Start()
 	StartButton->SetButton("StartButton.bmp");
 	StartButton->SetPos({ 640, 450 });
 
-	//Button* ExitButton = CreateActor<Button>();
-	//ExitButton->SetButton("ExitButton.bmp");
-	//ExitButton->SetPos({ 640, 750 });
+	FadeUI = CreateActor<FadeAnimation>();
+	FadeUI->FadeIn();
 
 }
 void TitleLevel::Update(float _Delta)
 {
+	if (true == GameEngineInput::IsDown('P'))
+	{
+		FadeUI->FadeOut();
+	}
 
+	if (true == FadeUI->FadeRender->IsAnimation("FadeOut")
+		&& true == FadeUI->FadeRender->IsAnimationEnd())
+	{
+		GameEngineCore::ChangeLevel("WorldMapLevel");
+	}
 }
 

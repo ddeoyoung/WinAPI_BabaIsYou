@@ -30,6 +30,8 @@ void WorldMapLevel::Start()
 	WorldMapUI = CreateActor<Background_WorldMap>();
 	//FadeUI = CreateActor<FadeAnimation>();
 
+
+
 	// WorldMapSelect
 	if (false == ResourcesManager::GetInst().IsLoadTexture("WorldMapSelect.Bmp"))
 	{

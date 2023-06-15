@@ -22,6 +22,7 @@ public:
 	bool IsAnimationEnd = false;
 
 	GameEngineRenderer* FadeRender = nullptr;
+
 protected:
 
 private:
