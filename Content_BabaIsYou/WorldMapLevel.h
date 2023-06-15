@@ -19,6 +19,7 @@ protected:
 
 private:
 	void Start() override;
+	void Update(float _Delta) override;
 
 	// ¹è°æ
 	class Background_Gray* BackgroundUI = nullptr;

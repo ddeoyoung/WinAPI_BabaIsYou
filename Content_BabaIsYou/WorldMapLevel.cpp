@@ -28,7 +28,8 @@ void WorldMapLevel::Start()
 	BackgroundUI->Init("Background_Gray.bmp");
 
 	WorldMapUI = CreateActor<Background_WorldMap>();
-	//FadeUI = CreateActor<FadeAnimation>();
+	FadeUI = CreateActor<FadeAnimation>();
+	FadeUI->FadeIn();
 
 
 
@@ -195,5 +196,17 @@ void WorldMapLevel::Start()
 
 
 
+	// WorldMapSelect
+	SelectGrid->SetTile(9, 14, 0, BackGridPos, true);
+	TileRenderer = SelectGrid->GetTile(9, 14);
+	TileRenderer->CreateAnimation("SELECT_UI", "WorldMapSelect.bmp", 0, 2, 0.2f, true);
+	TileRenderer->ChangeAnimation("SELECT_UI");
+
+	
+
+}
+
+void WorldMapLevel::Update(float _Delta)
+{
 
 }
