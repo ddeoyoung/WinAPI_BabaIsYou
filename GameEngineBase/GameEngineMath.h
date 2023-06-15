@@ -1,12 +1,24 @@
 #pragma once
 #include "GameEngineDebug.h"
+#include <Windows.h>
 
 // 설명 :
 class GameEngineMath
 {
+public:
+	static const float PI;
+	static const float PI2;
+
+	static const float D2R;
+	static const float R2D;
+
+	// 3.14 => 180도
+	// float R = 3.14;
+	// float Result = R * (180.0f / 3.14);
+
 };
 
-class float4 
+class float4
 {
 public:
 	static const float4 ZERO;
@@ -15,10 +27,6 @@ public:
 	static const float4 UP;
 	static const float4 DOWN;
 
-	// 실수는 기본적으로 == 이 거의 불가능하다. 
-	// 해도 정확하지 않는다. 실수를 처리하는 방식이 애초에 정확하지 않기 때문이다.
-	// 부동소수점 계산방식은 기본적으로 오차를 가지고 있고
-	// + - 등을 할때 여러분들의 생각과는 다른 값이 존재할 가능성이 높다. 
 	float X = 0.0f;
 	float Y = 0.0f;
 	float Z = 0.0f;
@@ -57,7 +65,7 @@ public:
 
 	inline float4 Half() const
 	{
-		return {hX(), hY(), Z, W};
+		return { hX(), hY(), Z, W };
 	}
 
 	float4 operator-() const
@@ -94,7 +102,7 @@ public:
 		return ReturnValue;
 	}
 
-	float4 operator*(const float4& _Other) const 
+	float4 operator*(const float4& _Other) const
 	{
 		float4 ReturnValue;
 
@@ -117,7 +125,7 @@ public:
 		return ReturnValue;
 	}
 
-	float4& operator+=(const float4& _Other) 
+	float4& operator+=(const float4& _Other)
 	{
 		X += _Other.X;
 		Y += _Other.Y;
@@ -157,11 +165,11 @@ public:
 	bool operator==(const float4 _Value) const
 	{
 		return X == _Value.X &&
-		Y == _Value.Y &&
-		Z == _Value.Z;
+			Y == _Value.Y &&
+			Z == _Value.Z;
 	}
 
-	inline void Normalize() 
+	inline void Normalize()
 	{
 		// 길이를 1로 만드는 함수입니다.
 		float Len = Size();
@@ -184,9 +192,9 @@ public:
 		return Result;
 	}
 
-	inline float Size() 
+	inline float Size()
 	{
-		float Value = X* X + Y * Y; // == 빗변 * 빗변
+		float Value = X * X + Y * Y; // == 빗변 * 빗변
 
 		// 제곱수이다.
 		// 제곱을 풀어서 제곱근이라고 합니다.
@@ -200,17 +208,138 @@ public:
 		return X > Y ? X : Y;
 	}
 
-public:
-	float PI = 3.141592f;
-
-	inline float4 GetUnitVectorFromAngle(const float _Degree)
+	POINT WindowPOINT()
 	{
-		float Angle = _Degree * (PI / 180.0f);
+		return POINT{ iX(), iY() };
+	}
 
-		float Base = static_cast<float>(cos(Angle));
-		float Height = static_cast<float>(sin(Angle));
+	float4 	GetRotationToDegZ(const float _Angle) const
+	{
+		return GetRotationToDegZ(*this, _Angle);
+	}
 
-		return float4{ Base , Height };
+
+
+
+public:
+	inline float AngleDeg()
+	{
+		return AngleRad() * GameEngineMath::R2D;
+	}
+
+	inline float AngleRad()
+	{
+		float4 AngleVector = NormalizeReturn();
+
+		// 라디안 각도만 나오게 된다. = acosf(AngleVector.X);
+
+		float Angle = acosf(AngleVector.X);
+
+		if (0 >= AngleVector.Y)
+		{
+			Angle = GameEngineMath::PI + GameEngineMath::PI - Angle;
+		}
+
+		return Angle;
+	}
+
+	static float4 GetRotationToDegZ(const float4& _Value, const float _Deg)
+	{
+		return GetRotationToRadZ(_Value, _Deg * GameEngineMath::D2R);
+	}
+
+	static float4 GetRotationToRadZ(const float4& _Value, const float _Rad)
+	{
+		float4 Rot;
+		Rot.X = _Value.X * cosf(_Rad) - _Value.Y * sinf(_Rad);
+		Rot.Y = _Value.X * sinf(_Rad) + _Value.Y * cosf(_Rad);
+		return Rot;
+	}
+
+	// GetUnitVectorFromDeg(45)
+
+	static float4 GetUnitVectorFromDeg(const float _Degree)
+	{
+		// 90 => 1.57
+		return GetUnitVectorFromRad(_Degree * GameEngineMath::D2R);
+	}
+
+	//                                       90.0f
+	static float4 GetUnitVectorFromRad(const float _Rad)
+	{
+		// cosf(_Rad)반지름의 길이 1일때의 cosf값이 구해집니다.
+		// sinf(_Rad)반지름의 길이 1일때의 sinf값이 구해집니다.
+		// => 빗변의 길이가 1일때의 결과가 나온다.
+
+		// 1.57
+		return { cosf(_Rad) , sinf(_Rad) };
 	}
 };
 
+class GameEngineRect
+{
+public:
+	float4 Scale;
+	float4 Pos;
+
+public:
+	float4 CenterLeftTop()
+	{
+		return { CenterLeft(), CenterTop() };
+	}
+
+	float4 CenterRightTop()
+	{
+		return{ CenterRight(), CenterTop() };
+	}
+
+	float4 CenterLeftBot()
+	{
+		return{ CenterLeft(), CenterBot() };
+	}
+
+	float4 CenterRightBot()
+	{
+		return{ CenterRight(), CenterBot() };
+	}
+
+	float CenterLeft()
+	{
+		return Pos.X - Scale.hX();
+	}
+
+	float CenterRight()
+	{
+		return Pos.X + Scale.hX();
+	}
+
+	float CenterTop()
+	{
+		return Pos.Y - Scale.hY();
+	}
+
+	float CenterBot()
+	{
+		return Pos.Y + Scale.hY();
+	}
+
+	int iCenterLeft()
+	{
+		return Pos.iX() - Scale.ihX();
+	}
+
+	int iCenterRight()
+	{
+		return Pos.iX() + Scale.ihX();
+	}
+
+	int iCenterTop()
+	{
+		return Pos.iY() - Scale.ihY();
+	}
+
+	int iCenterBot()
+	{
+		return Pos.iY() + Scale.ihY();
+	}
+};
