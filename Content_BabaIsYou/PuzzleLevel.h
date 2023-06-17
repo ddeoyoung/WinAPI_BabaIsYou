@@ -26,5 +26,6 @@ private:
 	GameEngineRenderer* TileRenderer = nullptr;
 
 	class GameEngineWindowTexture* MapTexture = nullptr;
+
 };
 

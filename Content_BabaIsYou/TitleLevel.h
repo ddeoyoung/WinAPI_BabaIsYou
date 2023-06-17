@@ -2,6 +2,10 @@
 #include <GameEngineCore/GameEngineLevel.h>
 
 // Ό³Έν :
+class TitleLogo;
+class Background_Black;
+class FadeAnimation;
+class Button;
 class TitleLevel : public GameEngineLevel
 {
 public:
@@ -22,6 +26,12 @@ private:
 	void Start() override;
 	void Update(float _Delta) override;
 
-	class FadeAnimation* FadeUI = nullptr;
+	TitleLogo* TitleLogoUI = nullptr;
+
+	Background_Black* BackgroundUI = nullptr;
+
+	FadeAnimation* FadeUI = nullptr;
+
+	Button* StartButton = nullptr;
 };
 

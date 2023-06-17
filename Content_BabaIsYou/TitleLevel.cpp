@@ -2,6 +2,7 @@
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEngineCore/GameEngineCore.h>
+#include <GameEngineCore/GameEngineCollision.h>
 
 #include "Background_Black.h"
 #include "TitleLogo.h"
@@ -19,14 +20,25 @@ TitleLevel::~TitleLevel()
 
 void TitleLevel::Start()
 {
-	TitleLogo* TitleLogoUI = CreateActor<TitleLogo>();
-	Background_Black* BackgroundUI = CreateActor<Background_Black>();
+	// Background
+	BackgroundUI = CreateActor<Background_Black>();
 	BackgroundUI->Init("Background_Black.bmp", { 1280, 720 });
 
-	Button* StartButton = CreateActor<Button>();
+	// Title Logo
+	TitleLogoUI = CreateActor<TitleLogo>();
+
+	// Title Button
+	StartButton = CreateActor<Button>();
 	StartButton->SetButton("StartButton.bmp");
 	StartButton->SetPos({ 640, 450 });
 
+	// Button Collision
+	StartButton->Collision = StartButton->CreateCollision();
+	StartButton->Collision->SetCollisionScale(StartButton->GetScale());
+
+
+
+	// Fade Animation
 	FadeUI = CreateActor<FadeAnimation>();
 	FadeUI->FadeIn();
 

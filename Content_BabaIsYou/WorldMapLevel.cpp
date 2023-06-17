@@ -11,6 +11,7 @@
 #include "Background_Gray.h"
 #include "Background_WorldMap.h"
 #include "FadeAnimation.h"
+#include "WorldMapSelect.h"
 
 WorldMapLevel::WorldMapLevel()
 {
@@ -31,18 +32,7 @@ void WorldMapLevel::Start()
 	FadeUI = CreateActor<FadeAnimation>();
 	FadeUI->FadeIn();
 
-
-
-	// WorldMapSelect
-	if (false == ResourcesManager::GetInst().IsLoadTexture("WorldMapSelect.Bmp"))
-	{
-		GameEnginePath FilePath;
-		FilePath.SetCurrentPath();
-		FilePath.MoveParentToExistsChild("ContentsResources");
-		FilePath.MoveChild("ContentsResources\\WorldMap\\");
-		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("WorldMapSelect.bmp"));
-		ResourcesManager::GetInst().CreateSpriteSheet("WorldMapSelect.bmp", 1, 3);
-	}
+	WorldMapSelect* SelectUI = CreateActor<WorldMapSelect>();
 
 	// Text
 	if (false == ResourcesManager::GetInst().IsLoadTexture("Text.Bmp"))
@@ -102,8 +92,10 @@ void WorldMapLevel::Start()
 	NumberGrid = CreateActor<TileMap>();
 	NumberGrid->CreateTileMap("Text.bmp", 31, 17, { 38, 38 }, 3);
 
+
+
 	SelectGrid = CreateActor<TileMap>();
-	SelectGrid->CreateTileMap("Text.bmp", 31, 17, { 38, 38 }, 4);
+	SelectGrid->CreateTileMap("WorldMapSelect.bmp", 31, 17, { 38, 38 }, 4);
 
 	for (int y = 0; y < 17; y++)
 	{
@@ -202,7 +194,6 @@ void WorldMapLevel::Start()
 	TileRenderer->CreateAnimation("SELECT_UI", "WorldMapSelect.bmp", 0, 2, 0.2f, true);
 	TileRenderer->ChangeAnimation("SELECT_UI");
 
-	
 
 }
 

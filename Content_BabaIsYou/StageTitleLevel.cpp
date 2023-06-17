@@ -3,6 +3,7 @@
 #include <GameEngineBase/GameEnginePath.h>
 
 #include "FadeAnimation.h"
+#include "Background_Gray.h"
 
 StageTitleLevel::StageTitleLevel()
 {
