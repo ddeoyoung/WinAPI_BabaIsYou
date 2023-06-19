@@ -10,11 +10,11 @@
 #include "GameEngineLevel.h"
 #include <math.h>
 
-GameEngineRenderer::GameEngineRenderer() 
+GameEngineRenderer::GameEngineRenderer()
 {
 }
 
-GameEngineRenderer::~GameEngineRenderer() 
+GameEngineRenderer::~GameEngineRenderer()
 {
 }
 
@@ -111,13 +111,8 @@ void GameEngineRenderer::TextRender(float _DeltaTime)
 	return;
 }
 
-void GameEngineRenderer::Render(float _DeltaTime) 
+void GameEngineRenderer::Update(float _Delta)
 {
-	if ("" != Text)
-	{
-		TextRender(_DeltaTime);
-		return;
-	}
 
 	if (nullptr != CurAnimation)
 	{
@@ -126,7 +121,7 @@ void GameEngineRenderer::Render(float _DeltaTime)
 			CurAnimation->IsEnd = false;
 		}
 
-		CurAnimation->CurInter -= _DeltaTime;
+		CurAnimation->CurInter -= _Delta;
 		if (0.0f >= CurAnimation->CurInter)
 		{
 			++CurAnimation->CurFrame;
@@ -140,7 +135,7 @@ void GameEngineRenderer::Render(float _DeltaTime)
 				{
 					CurAnimation->CurFrame = 0;
 				}
-				else 
+				else
 				{
 					--CurAnimation->CurFrame;
 				}
@@ -164,6 +159,15 @@ void GameEngineRenderer::Render(float _DeltaTime)
 			SetRenderScale(SpriteInfo.RenderScale * ScaleRatio);
 		}
 	}
+}
+
+void GameEngineRenderer::Render(float _DeltaTime)
+{
+	if ("" != Text)
+	{
+		TextRender(_DeltaTime);
+		return;
+	}
 
 	if (nullptr == Texture)
 	{
@@ -171,8 +175,6 @@ void GameEngineRenderer::Render(float _DeltaTime)
 	}
 
 	GameEngineWindowTexture* BackBuffer = GameEngineWindow::MainWindow.GetBackBuffer();
-
-	BackBuffer->TransCopy(Texture, GetActor()->GetPos() + RenderPos - Camera->GetPos(), RenderScale, CopyPos, CopyScale);
 
 	if (0 == Angle)
 	{
@@ -217,7 +219,7 @@ void GameEngineRenderer::CreateAnimation(
 
 	GameEngineSprite* Sprite = ResourcesManager::GetInst().FindSprite(_SpriteName);
 
-	if (nullptr ==  Sprite)
+	if (nullptr == Sprite)
 	{
 		MsgBoxAssert("존재하지 않는 스프라이트로 애니메이션을 만들려고 했습니다." + _SpriteName);
 		return;
@@ -232,7 +234,7 @@ void GameEngineRenderer::CreateAnimation(
 	{
 		Animation.StartFrame = _Start;
 	}
-	else 
+	else
 	{
 		Animation.StartFrame = 0;
 	}
@@ -241,7 +243,7 @@ void GameEngineRenderer::CreateAnimation(
 	{
 		Animation.EndFrame = _End;
 	}
-	else 
+	else
 	{
 		Animation.EndFrame = Animation.Sprite->GetSpriteCount() - 1;
 	}
@@ -316,6 +318,7 @@ void GameEngineRenderer::CreateAnimationToFrame(
 }
 
 
+
 void GameEngineRenderer::ChangeAnimation(const std::string& _AniamtionName, int _FrameCount, bool _ForceChange)
 {
 	Animation* ChangeAni = FindAnimation(_AniamtionName);
@@ -350,7 +353,7 @@ void GameEngineRenderer::UICameraSetting()
 	CameraTypeValue = CameraType::UI;
 }
 
-void GameEngineRenderer::Start() 
+void GameEngineRenderer::Start()
 {
 }
 

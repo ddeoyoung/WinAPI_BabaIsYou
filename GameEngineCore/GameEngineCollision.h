@@ -5,7 +5,7 @@
 #include <map>
 #include <vector>
 
-enum class CollisionType 
+enum class CollisionType
 {
 	Point, // 점
 	Rect, // 사각형
@@ -13,14 +13,14 @@ enum class CollisionType
 	Max, // 원
 };
 
-class CollisionData 
+class CollisionData
 {
 public:
 	float4 Pos;
 	float4 Scale;
 
 	float Left() const
-	{ 
+	{
 		return Pos.X - Scale.hX();
 	}
 	float Right() const
@@ -28,11 +28,11 @@ public:
 		return Pos.X + Scale.hX();
 	}
 	float Top() const
-	{ 
+	{
 		return Pos.Y - Scale.hY();
 	}
 	float Bot() const
-	{ 
+	{
 		return Pos.Y + Scale.hY();
 	}
 
@@ -62,7 +62,7 @@ class GameEngineCollision : public GameEngineActorSubObject
 {
 	// 함수 포인터
 	static bool (*CollisionFunction[static_cast<int>(CollisionType::Max)][static_cast<int>(CollisionType::Max)])(const CollisionData& _LeftData, const CollisionData& _RightData);
-	
+
 	friend CollisionInitClass;
 	friend GameEngineActor;
 	friend GameEngineLevel;
@@ -121,9 +121,25 @@ public:
 		, CollisionType _ThisType = CollisionType::CirCle
 		, CollisionType _OtherType = CollisionType::CirCle);
 
+	template<typename EnumType>
+	bool CollisionNext(const float4& _NextPos, EnumType _Order, std::vector<GameEngineCollision*>& _Result
+		, CollisionType _ThisType = CollisionType::CirCle
+		, CollisionType _OtherType = CollisionType::CirCle)
+	{
+		return CollisionNext(static_cast<int>(_Order), _Result, _ThisType, _OtherType);
+	}
+
+	bool CollisionNext(const float4& _NextPos, int _Order, std::vector<GameEngineCollision*>& _Result
+		, CollisionType _ThisType = CollisionType::CirCle
+		, CollisionType _OtherType = CollisionType::CirCle);
+
 	void SetOrder(int _Order) override;
 
 	bool CollisonCheck(GameEngineCollision* _Other
+		, CollisionType _ThisType
+		, CollisionType _OtherType);
+
+	bool CollisonCheckNext(const CollisionData& _Next, GameEngineCollision* _Other
 		, CollisionType _ThisType
 		, CollisionType _OtherType);
 
@@ -134,7 +150,7 @@ public:
 		return CollisionScale;
 	}
 
-	CollisionData GetCollisionData() 
+	CollisionData GetCollisionData()
 	{
 		CollisionData Data;
 		Data.Pos = GetActorPivotPos();
