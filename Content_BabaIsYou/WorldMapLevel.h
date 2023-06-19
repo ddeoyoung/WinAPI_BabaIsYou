@@ -21,20 +21,25 @@ private:
 	void Start() override;
 	void Update(float _Delta) override;
 
-	// 배경
+	float4 BackGridPos = { 0, 0 };
+
+	int Select_X = 0;
+	int Select_Y = 0;
+
+	bool IsStageSelect = false;
+
+	// Background
 	class Background_Gray* BackgroundUI = nullptr;
 	class Background_WorldMap* WorldMapUI = nullptr;
 
-	// 타일맵
+	// TileMap
 	class TileMap* TileGrid = nullptr;
-	GameEngineRenderer* TileRenderer = nullptr;
-
 	class TileMap* NumberGrid = nullptr;
-	GameEngineRenderer* NumberRenderer = nullptr;
-
 	class TileMap* SelectGrid = nullptr;
 
-	// 페이드 애니메이션
+	GameEngineRenderer* TileRenderer = nullptr;
+
+	// Fade Animation
 	class FadeAnimation* FadeUI = nullptr;
 };
 

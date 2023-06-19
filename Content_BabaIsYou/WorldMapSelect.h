@@ -15,12 +15,25 @@ public:
 	WorldMapSelect& operator=(const WorldMapSelect& _Other) = delete;
 	WorldMapSelect& operator=(WorldMapSelect&& _Other) noexcept = delete;
 
-	GameEngineRenderer* MainRenderer = nullptr;
+	GameEngineRenderer* SelectRender = nullptr;
+
+	void Init();
+
+	float4 GetSelectPos()
+	{
+		return SelectPos;
+	}
+
+	void SetSelectPos(float4 _Pos)
+	{
+		SelectPos = _Pos;
+	}
 
 protected:
 
 private:
 	void Start() override;
 	void Update(float _Delta) override;
-};
 
+	float4 SelectPos = { 0, 0 };
+};

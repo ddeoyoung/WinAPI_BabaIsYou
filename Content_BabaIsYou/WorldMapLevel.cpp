@@ -1,12 +1,11 @@
 #include "WorldMapLevel.h"
+#include <GameEngineBase/GameEnginePath.h>
 #include <GameEnginePlatform/GameEngineInput.h>
+#include <GameEnginePlatform/GameEngineWindow.h>
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEngineCore/GameEngineCore.h>
 #include <GameEngineCore/TileMap.h>
-
-#include <GameEngineBase/GameEnginePath.h>
 #include <GameEngineCore/ResourcesManager.h>
-#include <GameEnginePlatform/GameEngineWindow.h>
 
 #include "Background_Gray.h"
 #include "Background_WorldMap.h"
@@ -31,8 +30,6 @@ void WorldMapLevel::Start()
 	WorldMapUI = CreateActor<Background_WorldMap>();
 	FadeUI = CreateActor<FadeAnimation>();
 	FadeUI->FadeIn();
-
-	WorldMapSelect* SelectUI = CreateActor<WorldMapSelect>();
 
 	// Text
 	if (false == ResourcesManager::GetInst().IsLoadTexture("Text.Bmp"))
@@ -78,11 +75,22 @@ void WorldMapLevel::Start()
 		ResourcesManager::GetInst().CreateSpriteSheet("Actor.bmp", 24, 40);
 	}
 
+	// WorldMapSelect
+	if (false == ResourcesManager::GetInst().IsLoadTexture("WorldMapSelect.Bmp"))
+	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\WorldMap\\");
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("WorldMapSelect.bmp"));
+		ResourcesManager::GetInst().CreateSpriteSheet("WorldMapSelect.bmp", 1, 3);
+	}
+
 
 
 	float4 WinScale = GameEngineWindow::MainWindow.GetScale().Half();
 	float4 BackScale = { 1190 , 650 };
-	float4 BackGridPos = { WinScale.X - (BackScale.X / 2) - 10, WinScale.Y - (BackScale.Y / 2) - 5};
+	BackGridPos = { WinScale.X - (BackScale.X / 2) - 10, WinScale.Y - (BackScale.Y / 2) - 5};
 
 
 	// 31 x 17 개의 타일맵 생성
@@ -92,10 +100,8 @@ void WorldMapLevel::Start()
 	NumberGrid = CreateActor<TileMap>();
 	NumberGrid->CreateTileMap("Text.bmp", 31, 17, { 38, 38 }, 3);
 
-
-
 	SelectGrid = CreateActor<TileMap>();
-	SelectGrid->CreateTileMap("WorldMapSelect.bmp", 31, 17, { 38, 38 }, 4);
+	SelectGrid->CreateTileMap("Text.bmp", 31, 17, { 38, 38 }, 4);
 
 	for (int y = 0; y < 17; y++)
 	{
@@ -187,10 +193,20 @@ void WorldMapLevel::Start()
 	TileRenderer->ChangeAnimation("LINE_10");
 
 
-
 	// WorldMapSelect
 	SelectGrid->SetTile(9, 14, 0, BackGridPos, true);
-	TileRenderer = SelectGrid->GetTile(9, 14);
+	SelectGrid->SetTile(10, 14, 0, BackGridPos, true);
+	SelectGrid->SetTile(10, 13, 0, BackGridPos, true);
+	SelectGrid->SetTile(10, 12, 0, BackGridPos, true);
+	SelectGrid->SetTile(10, 11, 0, BackGridPos, true);
+	SelectGrid->SetTile(11, 12, 0, BackGridPos, true);
+
+
+	Select_X = 9;
+	Select_Y = 14;
+
+	//SelectGrid->SetTile(Select_X, Select_Y, 0, BackGridPos, true);
+	TileRenderer = SelectGrid->GetTile(Select_X, Select_Y);
 	TileRenderer->CreateAnimation("SELECT_UI", "WorldMapSelect.bmp", 0, 2, 0.2f, true);
 	TileRenderer->ChangeAnimation("SELECT_UI");
 
@@ -199,5 +215,49 @@ void WorldMapLevel::Start()
 
 void WorldMapLevel::Update(float _Delta)
 {
+	if (true == GameEngineInput::IsDown('D'))
+	{
+		SelectGrid->GetTile(Select_X, Select_Y)->Off();
 
+		Select_X += 1;
+		TileRenderer = SelectGrid->GetTile(Select_X, Select_Y);
+		TileRenderer->CreateAnimation("SELECT_UI", "WorldMapSelect.bmp", 0, 2, 0.2f, true);
+		TileRenderer->ChangeAnimation("SELECT_UI");
+	}
+
+	else if (true == GameEngineInput::IsDown('W'))
+	{
+		SelectGrid->GetTile(Select_X, Select_Y)->Off();
+
+		Select_Y -= 1;
+		TileRenderer = SelectGrid->GetTile(Select_X, Select_Y);
+		TileRenderer->CreateAnimation("SELECT_UI", "WorldMapSelect.bmp", 0, 2, 0.2f, true);
+		TileRenderer->ChangeAnimation("SELECT_UI");
+	}
+
+	else if (true == GameEngineInput::IsDown('A'))
+	{
+		SelectGrid->GetTile(Select_X, Select_Y)->Off();
+
+		Select_X -= 1;
+		TileRenderer = SelectGrid->GetTile(Select_X, Select_Y);
+		TileRenderer->CreateAnimation("SELECT_UI", "WorldMapSelect.bmp", 0, 2, 0.2f, true);
+		TileRenderer->ChangeAnimation("SELECT_UI");
+	}
+
+	else if (true == GameEngineInput::IsDown('S'))
+	{
+		SelectGrid->GetTile(Select_X, Select_Y)->Off();
+
+		Select_Y += 1;
+		TileRenderer = SelectGrid->GetTile(Select_X, Select_Y);
+		TileRenderer->CreateAnimation("SELECT_UI", "WorldMapSelect.bmp", 0, 2, 0.2f, true);
+		TileRenderer->ChangeAnimation("SELECT_UI");
+	}
+
+	// 스테이지 이동
+	else if (true == GameEngineInput::IsDown(VK_SPACE))
+	{
+		return;
+	}
 }
