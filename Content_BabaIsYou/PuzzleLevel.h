@@ -22,12 +22,14 @@ private:
 	void Start() override;
 	void Update(float _Delta) override;
 
+	class Background_Black* BackgroundUI_Black = nullptr;
+	class Background_Gray* BackgroundUI_Gray = nullptr;
 	class TileMap* TileGrid = nullptr;
-	GameEngineRenderer* TileRenderer = nullptr;
-
 	class FadeAnimation* FadeUI = nullptr;
-
+	class TextUI* Text = nullptr;
 	class GameEngineWindowTexture* MapTexture = nullptr;
 
+	GameEngineRenderer* TileRenderer = nullptr;
+	GameEngineRenderer* TextRenderer = nullptr;
 };
 

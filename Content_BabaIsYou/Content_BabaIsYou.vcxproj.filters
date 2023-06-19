@@ -56,6 +56,9 @@
     <ClInclude Include="Player.h">
       <Filter>UIActor\Default</Filter>
     </ClInclude>
+    <ClInclude Include="TextUI.h">
+      <Filter>UIActor\Default</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -108,6 +111,9 @@
       <Filter>UIActor\Default</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
+      <Filter>UIActor\Default</Filter>
+    </ClCompile>
+    <ClCompile Include="TextUI.cpp">
       <Filter>UIActor\Default</Filter>
     </ClCompile>
   </ItemGroup>

@@ -209,8 +209,6 @@ void WorldMapLevel::Start()
 	TileRenderer = SelectGrid->GetTile(Select_X, Select_Y);
 	TileRenderer->CreateAnimation("SELECT_UI", "WorldMapSelect.bmp", 0, 2, 0.2f, true);
 	TileRenderer->ChangeAnimation("SELECT_UI");
-
-
 }
 
 void WorldMapLevel::Update(float _Delta)

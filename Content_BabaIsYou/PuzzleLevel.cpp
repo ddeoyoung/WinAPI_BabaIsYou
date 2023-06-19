@@ -12,6 +12,7 @@
 #include "Background_Black.h"
 #include "Background_Pixel.h"
 #include "FadeAnimation.h"
+#include "TextUI.h"
 
 PuzzleLevel::PuzzleLevel()
 {
@@ -24,15 +25,24 @@ PuzzleLevel::~PuzzleLevel()
 void PuzzleLevel::Start()
 {
 	// Background
-	Background_Gray* BackgroundUI_Gray = CreateActor<Background_Gray>();
+	BackgroundUI_Gray = CreateActor<Background_Gray>();
 	BackgroundUI_Gray->Init("Background_Gray.bmp");
-
-	Background_Black* BackgroundUI_Black = CreateActor<Background_Black>();
+	BackgroundUI_Black = CreateActor<Background_Black>();
 	BackgroundUI_Black->Init("Background_Black.bmp", {850, 600});
 
 	// Fade Animation
 	FadeUI = CreateActor<FadeAnimation>();
 	FadeUI->FadeIn();
+
+	// TextUI
+	Text = CreateActor<TextUI>();
+	TextRenderer = Text->CreateUIRenderer("Text.bmp", RenderOrder::BackGroundUI);
+
+	// Stage Title
+	TextRenderer->SetSprite("Text.bmp", 11);
+	TextRenderer->SetRenderPos({500, 500});
+	TextRenderer->SetRenderScale({50, 50});
+
 
 
 	// ∆€¡Ò ≈∏¿œ SpriteSheet
