@@ -38,6 +38,12 @@ void PuzzleLevel::Start()
 	Text = CreateActor<TextUI>();
 	TextRenderer = Text->CreateUIRenderer("Text.bmp", RenderOrder::BackGroundUI);
 
+
+	//if (4.0f > FadeUI->GetLiveTime())
+	//{
+
+	//}
+
 	// Stage Title
 	TextRenderer->SetSprite("Text.bmp", 11);
 	TextRenderer->SetRenderPos({500, 500});
