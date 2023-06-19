@@ -279,8 +279,8 @@ public:
 class GameEngineRect
 {
 public:
-	float4 Scale;
 	float4 Pos;
+	float4 Scale;
 
 public:
 	float4 CenterLeftTop()
