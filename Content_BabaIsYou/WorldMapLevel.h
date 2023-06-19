@@ -28,6 +28,8 @@ private:
 
 	bool IsStageSelect = false;
 
+	std::string StageName = "";
+
 	// Background
 	class Background_Gray* BackgroundUI = nullptr;
 	class Background_WorldMap* WorldMapUI = nullptr;

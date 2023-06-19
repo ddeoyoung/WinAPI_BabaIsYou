@@ -193,15 +193,15 @@ void WorldMapLevel::Start()
 	TileRenderer->ChangeAnimation("LINE_10");
 
 
-	// WorldMapSelect
+	//// WorldMapSelect
+	//SelectGrid->SetTile(10, 14, 0, BackGridPos, true);
+	//SelectGrid->SetTile(10, 13, 0, BackGridPos, true);
+	//SelectGrid->SetTile(10, 12, 0, BackGridPos, true);
+	//SelectGrid->SetTile(10, 11, 0, BackGridPos, true);
+	//SelectGrid->SetTile(11, 12, 0, BackGridPos, true);
+
+
 	SelectGrid->SetTile(9, 14, 0, BackGridPos, true);
-	SelectGrid->SetTile(10, 14, 0, BackGridPos, true);
-	SelectGrid->SetTile(10, 13, 0, BackGridPos, true);
-	SelectGrid->SetTile(10, 12, 0, BackGridPos, true);
-	SelectGrid->SetTile(10, 11, 0, BackGridPos, true);
-	SelectGrid->SetTile(11, 12, 0, BackGridPos, true);
-
-
 	Select_X = 9;
 	Select_Y = 14;
 
@@ -217,47 +217,45 @@ void WorldMapLevel::Update(float _Delta)
 {
 	if (true == GameEngineInput::IsDown('D'))
 	{
-		SelectGrid->GetTile(Select_X, Select_Y)->Off();
-
-		Select_X += 1;
-		TileRenderer = SelectGrid->GetTile(Select_X, Select_Y);
-		TileRenderer->CreateAnimation("SELECT_UI", "WorldMapSelect.bmp", 0, 2, 0.2f, true);
-		TileRenderer->ChangeAnimation("SELECT_UI");
+		if (true == SelectGrid->MoveTile(Select_X, Select_Y, Select_X + 1, Select_Y, BackGridPos))
+		{
+			Select_X += 1;
+		}
 	}
 
 	else if (true == GameEngineInput::IsDown('W'))
 	{
-		SelectGrid->GetTile(Select_X, Select_Y)->Off();
-
+		SelectGrid->MoveTile(Select_X, Select_Y, Select_X, Select_Y - 1, BackGridPos);
 		Select_Y -= 1;
-		TileRenderer = SelectGrid->GetTile(Select_X, Select_Y);
-		TileRenderer->CreateAnimation("SELECT_UI", "WorldMapSelect.bmp", 0, 2, 0.2f, true);
-		TileRenderer->ChangeAnimation("SELECT_UI");
 	}
 
 	else if (true == GameEngineInput::IsDown('A'))
 	{
-		SelectGrid->GetTile(Select_X, Select_Y)->Off();
-
+		SelectGrid->MoveTile(Select_X, Select_Y, Select_X - 1, Select_Y, BackGridPos);
 		Select_X -= 1;
-		TileRenderer = SelectGrid->GetTile(Select_X, Select_Y);
-		TileRenderer->CreateAnimation("SELECT_UI", "WorldMapSelect.bmp", 0, 2, 0.2f, true);
-		TileRenderer->ChangeAnimation("SELECT_UI");
 	}
 
 	else if (true == GameEngineInput::IsDown('S'))
 	{
-		SelectGrid->GetTile(Select_X, Select_Y)->Off();
-
+		SelectGrid->MoveTile(Select_X, Select_Y, Select_X, Select_Y + 1, BackGridPos);
 		Select_Y += 1;
-		TileRenderer = SelectGrid->GetTile(Select_X, Select_Y);
-		TileRenderer->CreateAnimation("SELECT_UI", "WorldMapSelect.bmp", 0, 2, 0.2f, true);
-		TileRenderer->ChangeAnimation("SELECT_UI");
 	}
+
+
 
 	// 스테이지 이동
 	else if (true == GameEngineInput::IsDown(VK_SPACE))
 	{
-		return;
+		if (Select_X == 10 && Select_Y == 12)
+		{
+			FadeUI->FadeOut();
+			StageName = "PuzzleLevel";
+		}
+	}
+
+	if (true == FadeUI->FadeRender->IsAnimation("FadeOut")
+		&& true == FadeUI->FadeRender->IsAnimationEnd())
+	{
+		GameEngineCore::ChangeLevel(StageName);
 	}
 }

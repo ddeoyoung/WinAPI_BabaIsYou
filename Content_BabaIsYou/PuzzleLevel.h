@@ -25,6 +25,8 @@ private:
 	class TileMap* TileGrid = nullptr;
 	GameEngineRenderer* TileRenderer = nullptr;
 
+	class FadeAnimation* FadeUI = nullptr;
+
 	class GameEngineWindowTexture* MapTexture = nullptr;
 
 };

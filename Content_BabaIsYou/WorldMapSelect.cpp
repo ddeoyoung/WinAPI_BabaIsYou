@@ -39,8 +39,5 @@ void WorldMapSelect::Init()
 
 void WorldMapSelect::Update(float _Delta)
 {
-	if (true == GameEngineInput::IsDown('W'))
-	{
-		
-	}
+
 }
