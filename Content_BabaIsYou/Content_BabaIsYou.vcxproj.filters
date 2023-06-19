@@ -50,6 +50,12 @@
     <ClInclude Include="StageTitleLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
+    <ClInclude Include="Cursor.h">
+      <Filter>UIActor\Default</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>UIActor\Default</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -97,6 +103,12 @@
     </ClCompile>
     <ClCompile Include="StageTitleLevel.cpp">
       <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Cursor.cpp">
+      <Filter>UIActor\Default</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>UIActor\Default</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

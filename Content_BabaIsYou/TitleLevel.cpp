@@ -8,7 +8,9 @@
 #include "TitleLogo.h"
 #include "FadeAnimation.h"
 #include "Button.h"
+#include "Cursor.h"
 
+#include "ContentsEnum.h"
 
 TitleLevel::TitleLevel()
 {
@@ -27,6 +29,10 @@ void TitleLevel::Start()
 	// Title Logo
 	TitleLogoUI = CreateActor<TitleLogo>();
 
+	// Fade Animation
+	FadeUI = CreateActor<FadeAnimation>();
+	FadeUI->FadeIn();
+
 	// Title Button
 	StartButton = CreateActor<Button>();
 	StartButton->SetButton("StartButton.bmp");
@@ -35,16 +41,19 @@ void TitleLevel::Start()
 	// Button Collision
 	StartButton->Collision = StartButton->CreateCollision();
 	StartButton->Collision->SetCollisionScale(StartButton->GetScale());
-
-
-
-	// Fade Animation
-	FadeUI = CreateActor<FadeAnimation>();
-	FadeUI->FadeIn();
+	StartButton->Collision->Off();
 
 }
 void TitleLevel::Update(float _Delta)
 {
+	// Collision Check
+	//std::vector<GameEngineCollision*> _Collision;
+
+	//if (true == Cursor::MainCursor->GetCursorCollision()->Collision(CollisionOrder::Button, _Collision, CollisionType::Rect, CollisionType::Rect))
+	//{
+	//}
+
+
 	if (true == GameEngineInput::IsDown('P'))
 	{
 		FadeUI->FadeOut();

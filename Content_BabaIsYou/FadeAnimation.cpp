@@ -2,7 +2,6 @@
 #include <GameEngineCore/ResourcesManager.h>
 #include <GameEnginePlatform/GameEngineWindow.h>
 #include <GameEngineCore/GameEngineRenderer.h>
-#include <GameEngineCore/ResourcesManager.h>
 #include <GameEngineCore/GameEngineCore.h>
 #include "ContentsEnum.h"
 

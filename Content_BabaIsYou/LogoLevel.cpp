@@ -23,10 +23,8 @@ void LogoLevel::Start()
 	BackgroundUI = CreateActor<Background_Black>();
 	BackgroundUI->Init("Background_Black.bmp", {1280, 720});
 	LogoUI = CreateActor<Logo>();
-
 	FadeUI = CreateActor<FadeAnimation>();
 	FadeUI->FadeIn();
-
 }
 
 void LogoLevel::Update(float _Delta)
@@ -34,7 +32,6 @@ void LogoLevel::Update(float _Delta)
 	if (true == GameEngineInput::IsDown('P'))
 	{
 		FadeUI->FadeOut();
-
 	}
 
 	if (true == FadeUI->FadeRender->IsAnimation("FadeOut")

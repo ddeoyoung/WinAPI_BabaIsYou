@@ -24,7 +24,7 @@ void ContentCore::Start()
 	GameEngineCore::CreateLevel<StageTitleLevel>("StageTitleLevel"); // 스테이지 타이틀
 	GameEngineCore::CreateLevel<PuzzleLevel>("PuzzleLevel"); // 퍼즐
 
-	GameEngineCore::ChangeLevel("LogoLevel");
+	GameEngineCore::ChangeLevel("WorldMapLevel");
 }
 
 void ContentCore::Update(float _Delta)

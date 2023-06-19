@@ -104,7 +104,7 @@ void WorldMapLevel::Start()
 			// NumberGrid 0번 : 이미지 없음
 			//TileGrid->SetTile(x, y, 0, BackGridPos);
 			NumberGrid->SetTile(x, y, 0, BackGridPos);
-			SelectGrid->SetTile(x, y, 0, BackGridPos);
+			//SelectGrid->SetTile(x, y, 0, BackGridPos);
 		}
 	}
 

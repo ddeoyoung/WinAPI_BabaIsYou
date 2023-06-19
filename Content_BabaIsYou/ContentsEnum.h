@@ -2,7 +2,9 @@
 
 enum class UpdateOrder
 {
-	Player,
+	BackGround = 0,
+	BackGroundUI,
+	Play,
 };
 
 enum class RenderOrder
@@ -13,4 +15,10 @@ enum class RenderOrder
 	Play,
 	PlayUI,
 	Fade,
+};
+
+enum class CollisionOrder
+{
+	Button,
+	Cursor,
 };
