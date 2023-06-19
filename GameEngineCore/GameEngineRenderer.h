@@ -67,6 +67,8 @@ public:
 		return CameraTypeValue;
 	}
 
+	void SetAlpha(unsigned char _Alpha);
+
 	void SetAngle(float _Angle);
 
 	void SetSprite(const std::string& _Name, size_t _Index = 0);
@@ -96,6 +98,7 @@ private:
 	std::string Text;
 
 	float Angle = 0.0f;
+	unsigned char Alpha = 255;
 
 	void TextRender(float _DeltaTime);
 
