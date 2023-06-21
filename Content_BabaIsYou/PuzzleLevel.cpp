@@ -34,22 +34,12 @@ void PuzzleLevel::Start()
 	FadeUI = CreateActor<FadeAnimation>();
 	FadeUI->FadeIn();
 
-	// TextUI
-	Text = CreateActor<TextUI>();
-	TextRenderer = Text->CreateUIRenderer("Text.bmp", RENDER_ORDER::BACKGROUND_UI);
+	//// TextUI
+	//Text = CreateActor<TextUI>();
 
-
-	//if (4.0f > FadeUI->GetLiveTime())
-	//{
-	
-	//}
-
-	// Stage Title
-	//TextRenderer->SetSprite("Text.bmp", 11);
-	//TextRenderer->SetRenderPos({500, 500});
-	//TextRenderer->SetRenderScale({50, 50});
-
-
+	//Text->SetPuzzleText('A');
+	//Text->SetTextScale({ 30, 30 });
+	//Text->SetPos({50, 50});
 
 	// ∆€¡Ò ≈∏¿œ SpriteSheet
 	if (false == ResourcesManager::GetInst().IsLoadTexture("Actor.Bmp"))

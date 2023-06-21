@@ -34,19 +34,19 @@ enum class TEXT_COLOR
 
 enum class ACTOR_TYPE
 {
-	None	= 0,
-	Actor,
-	Subject_Text,
-	Verb_Text,
-	Define_Text,
+	NONE	= 0,
+	ACTOR,
+	SUBJECT_TEXT,
+	VERB_TEXT,
+	DEFINE_TEXT,
 };
 
 enum class ACTOR_DEFINE
 {
-	None	= 0,
-	You,
-	Win,
-	Stop,
-	Push,
-	Defeat,
+	NONE	= 0,
+	YOU,
+	WIN,
+	STOP,
+	PUSH,
+	DEFEAT,
 };

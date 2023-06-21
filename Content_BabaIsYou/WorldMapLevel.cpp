@@ -11,6 +11,7 @@
 #include "Background_WorldMap.h"
 #include "FadeAnimation.h"
 #include "WorldMapSelect.h"
+#include "TextUI.h"
 
 WorldMapLevel::WorldMapLevel()
 {
@@ -30,6 +31,14 @@ void WorldMapLevel::Start()
 	WorldMapUI = CreateActor<Background_WorldMap>();
 	FadeUI = CreateActor<FadeAnimation>();
 	FadeUI->FadeIn();
+
+	// TextUI
+	Text = CreateActor<TextUI>();
+
+	Text->SetPuzzleText('A');
+	Text->SetTextScale({ 30, 30 });
+	Text->SetPos({ 50, 20 });
+
 
 	// Text
 	if (false == ResourcesManager::GetInst().IsLoadTexture("Text.Bmp"))

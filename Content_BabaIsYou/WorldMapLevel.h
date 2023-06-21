@@ -43,5 +43,8 @@ private:
 
 	// Fade Animation
 	class FadeAnimation* FadeUI = nullptr;
+
+	// TextUI
+	class TextUI* Text = nullptr;
 };
 

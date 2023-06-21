@@ -17,14 +17,13 @@ public:
 	TextUI& operator=(const TextUI& _Other) = delete;
 	TextUI& operator=(TextUI&& _Other) noexcept = delete;
 
-	void SetText(char _Text);
+	virtual void SetPuzzleText(char _Text);
+	virtual void SetTextScale(const float4& _Scale);
 
 	void SetTextColor(TEXT_COLOR _Color)
 	{
 		TextColor = _Color;
 	}
-
-	void SetTextScale();
 
 	void ShakeText();
 
@@ -37,6 +36,9 @@ private:
 	class GameEngineSprite* Text = nullptr;
 
 	TEXT_COLOR TextColor = TEXT_COLOR::WHITE;
+
+	int SpriteIndex;
 	char CurText;
+	float4 TextScale;
 };
 
