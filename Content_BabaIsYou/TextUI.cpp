@@ -29,3 +29,13 @@ void TextUI::SetText()
 {
 
 }
+
+void TextUI::SetTextScale()
+{
+
+}
+
+void TextUI::ShakeText()
+{
+
+}
