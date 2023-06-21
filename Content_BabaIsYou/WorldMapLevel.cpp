@@ -241,7 +241,7 @@ void WorldMapLevel::Update(float _Delta)
 
 
 
-	// 스테이지 이동
+	// 스테이지 이동 
 	else if (true == GameEngineInput::IsDown(VK_SPACE))
 	{
 		if (Select_X == 10 && Select_Y == 12)

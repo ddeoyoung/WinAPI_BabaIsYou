@@ -15,6 +15,12 @@ public:
 	TextUI& operator=(const TextUI& _Other) = delete;
 	TextUI& operator=(TextUI&& _Other) noexcept = delete;
 
+	void SetText();
+
+	void SetTextScale();
+
+	void ShakeText();
+
 protected:
 
 private:

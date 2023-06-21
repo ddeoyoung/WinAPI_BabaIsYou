@@ -24,3 +24,8 @@ void TextUI::Start()
 		Text = ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("Text.bmp"), 38, 2);
 	}
 }
+
+void TextUI::SetText()
+{
+
+}

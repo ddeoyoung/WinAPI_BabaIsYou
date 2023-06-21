@@ -2,14 +2,14 @@
 
 enum class UpdateOrder
 {
-	BackGround = 0,
+	BackGround	= 0,
 	BackGroundUI,
 	Play,
 };
 
 enum class RenderOrder
 {
-	BackGround = 0,
+	BackGround	= 0,
 	BackGroundUI,
 	Grid,
 	Play,
@@ -19,6 +19,12 @@ enum class RenderOrder
 
 enum class CollisionOrder
 {
-	Button,
+	Button	= 0,
 	Cursor,
+};
+
+enum class TextColor
+{
+	white	= 0,
+	pink,
 };

@@ -41,13 +41,13 @@ void PuzzleLevel::Start()
 
 	//if (4.0f > FadeUI->GetLiveTime())
 	//{
-
+	
 	//}
 
 	// Stage Title
-	TextRenderer->SetSprite("Text.bmp", 11);
-	TextRenderer->SetRenderPos({500, 500});
-	TextRenderer->SetRenderScale({50, 50});
+	//TextRenderer->SetSprite("Text.bmp", 11);
+	//TextRenderer->SetRenderPos({500, 500});
+	//TextRenderer->SetRenderScale({50, 50});
 
 
 
@@ -201,6 +201,11 @@ void PuzzleLevel::Start()
 			}
 		}
 	}
+
+
+
+
+
 }
 
 void PuzzleLevel::Update(float _Delta)
