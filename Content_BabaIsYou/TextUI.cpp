@@ -25,9 +25,9 @@ void TextUI::Start()
 	}
 }
 
-void TextUI::SetText()
+void TextUI::SetText(char _Text)
 {
-
+	CurText = _Text;
 }
 
 void TextUI::SetTextScale()

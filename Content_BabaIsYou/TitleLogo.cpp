@@ -28,7 +28,7 @@ void TitleLogo::Start()
 
 		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("TitleLogo.bmp"), 1, 3);
 
-		GameEngineRenderer* TitleLogoRender = CreateRenderer("TitleLogo.bmp", RenderOrder::PlayUI);
+		GameEngineRenderer* TitleLogoRender = CreateRenderer("TitleLogo.bmp", RENDER_ORDER::PLAY_UI);
 
 		TitleLogoRender->CreateAnimation("TitleLogoUI", "TitleLogo.bmp", 0, 2, 0.2f, true);
 		TitleLogoRender->ChangeAnimation("TitleLogoUI");

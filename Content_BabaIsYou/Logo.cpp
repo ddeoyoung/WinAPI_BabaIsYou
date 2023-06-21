@@ -26,7 +26,7 @@ void Logo::Start()
 		FilePath.MoveChild("ContentsResources\\Logo\\");
 		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("Logo.bmp"), 1, 3);
 
-		GameEngineRenderer* LogoRender = CreateRenderer("Logo.bmp", RenderOrder::PlayUI);
+		GameEngineRenderer* LogoRender = CreateRenderer("Logo.bmp", RENDER_ORDER::PLAY_UI);
 
 		LogoRender->CreateAnimation("Logo", "Logo.bmp", 0, 2, 0.2f, true);
 		LogoRender->ChangeAnimation("Logo");

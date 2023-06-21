@@ -26,7 +26,7 @@ void Background_WorldMap::Start()
 
 		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("WorldMap.bmp"), 1, 3);
 
-		GameEngineRenderer* BackRender = CreateRenderer("WorldMap.bmp", RenderOrder::BackGroundUI);
+		GameEngineRenderer* BackRender = CreateRenderer("WorldMap.bmp", RENDER_ORDER::BACKGROUND_UI);
 
 		BackRender->CreateAnimation("WorldMapBackUI", "WorldMap.bmp", 0, 2, 0.2f, true);
 		BackRender->ChangeAnimation("WorldMapBackUI");

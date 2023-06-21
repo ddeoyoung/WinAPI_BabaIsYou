@@ -36,7 +36,7 @@ void PuzzleLevel::Start()
 
 	// TextUI
 	Text = CreateActor<TextUI>();
-	TextRenderer = Text->CreateUIRenderer("Text.bmp", RenderOrder::BackGroundUI);
+	TextRenderer = Text->CreateUIRenderer("Text.bmp", RENDER_ORDER::BACKGROUND_UI);
 
 
 	//if (4.0f > FadeUI->GetLiveTime())

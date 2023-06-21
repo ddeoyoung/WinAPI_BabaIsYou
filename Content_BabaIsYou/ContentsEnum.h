@@ -1,49 +1,52 @@
 #pragma once
 
-enum class UpdateOrder
+enum class UPDATE_ORDER
 {
-	BackGround	= 0,
-	BackGroundUI,
-	Play,
+	BACKGROUND = 0,
+	BACKGROUND_UI,
+	PLAY,
 };
 
-enum class RenderOrder
+enum class RENDER_ORDER
 {
-	BackGround	= 0,
-	BackGroundUI,
-	Grid,
-	Play,
-	PlayUI,
-	Fade,
+	BACKGROUND	= 0,
+	BACKGROUND_UI,
+	GRID,
+	PLAY,
+	PLAY_UI,
+	FADE,
 };
 
-enum class CollisionOrder
+enum class COLLISION_ORDER
 {
-	Button	= 0,
-	Cursor,
+	BUTTON	= 0,
+	CURSOR,
 };
 
-enum class TextColor
+enum class TEXT_COLOR
 {
-	white	= 0,
-	pink,
+	WHITE	= 0,
+	PICK,
 };
 
 
 // Actor - 1.Type	2.Define	3. 
 
-enum class ActorType
+enum class ACTOR_TYPE
 {
+	None	= 0,
 	Actor,
 	Subject_Text,
 	Verb_Text,
 	Define_Text,
 };
 
-enum class ActorDefine
+enum class ACTOR_DEFINE
 {
-	You = 0,
+	None	= 0,
+	You,
 	Win,
 	Stop,
-
+	Push,
+	Defeat,
 };

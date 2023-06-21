@@ -24,7 +24,7 @@ void FadeAnimation::Start()
 		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("FadeAnimation.bmp"), 1, 35);
 	}
 
-	FadeRender = CreateRenderer("FadeAnimation.bmp", RenderOrder::Fade);
+	FadeRender = CreateRenderer("FadeAnimation.bmp", RENDER_ORDER::FADE);
 
 	float4 WinScale = GameEngineWindow::MainWindow.GetScale().Half();
 	FadeRender->SetRenderPos(WinScale);

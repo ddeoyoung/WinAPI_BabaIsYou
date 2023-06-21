@@ -31,7 +31,7 @@ void Background_Black::Init(const std::string& _FileName, float4 _Scale)
 	}
 
 	GameEngineWindowTexture* Back = ResourcesManager::GetInst().FindTexture(_FileName);
-	BackRender = CreateRenderer("Background_Black.bmp", RenderOrder::Grid);
+	BackRender = CreateRenderer("Background_Black.bmp", RENDER_ORDER::GRID);
 	BackRender->SetRenderScale(_Scale);
 
 	float4 WinScale = GameEngineWindow::MainWindow.GetScale().Half();

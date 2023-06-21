@@ -32,7 +32,7 @@ void Button::SetButton(const std::string& _FileName)
 		Texture = ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath(FileName), 1, 2);
 	}
 
-	ButtonRender = CreateRenderer(FileName, RenderOrder::PlayUI);
+	ButtonRender = CreateRenderer(FileName, RENDER_ORDER::PLAY_UI);
 
 	Scale = { 400, 60 };
 

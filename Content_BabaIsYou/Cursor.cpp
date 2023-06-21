@@ -20,7 +20,12 @@ Cursor::~Cursor()
 
 void Cursor::Start()
 {
-	CursorCollision = CreateCollision(CollisionOrder::Cursor);
+	CursorPos = GameEngineWindow::MainWindow.GetMousePos();
+
+	//CursorRender = CreateRenderer();
+	//CursorRender->UICameraSetting();
+	//CursorRender->SetRenderScaleToTexture();
+	CursorCollision = CreateCollision(COLLISION_ORDER::CURSOR);
 	CursorCollision->SetCollisionScale({50, 50});
 }
 

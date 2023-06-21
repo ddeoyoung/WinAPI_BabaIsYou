@@ -27,7 +27,7 @@ void WorldMapSelect::Start()
 		ResourcesManager::GetInst().CreateSpriteSheet("WorldMapSelect.bmp", 1, 3);
 	}
 
-	SelectRender = CreateRenderer("WorldMapSelect.bmp", RenderOrder::PlayUI);
+	SelectRender = CreateRenderer("WorldMapSelect.bmp", RENDER_ORDER::PLAY_UI);
 	SelectRender->CreateAnimation("SELECT", "WorldMapSelect.bmp", 0, 2, 0.2f, true);
 	SelectRender->ChangeAnimation("SELECT");
 }
