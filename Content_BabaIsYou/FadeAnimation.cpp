@@ -37,14 +37,12 @@ void FadeAnimation::Start()
 // 사라지는 애니메이션 (레벨 전환 전)
 void FadeAnimation::FadeOut()
 {
-	FadeRender->On();
 	FadeRender->ChangeAnimation("FadeOut");
 }
 
 // 나타나는 애니메이션 (레벨 전환 후) 
 void FadeAnimation::FadeIn()
 {
-	FadeRender->On();
 	FadeRender->ChangeAnimation("FadeIn");
 }
 
@@ -54,7 +52,6 @@ void FadeAnimation::Update(float _Delta)
 	if (true == FadeRender->IsAnimationEnd())
 	{
 		IsAnimationEnd = true;
-		//FadeRender->Off();
 	}
 }
 

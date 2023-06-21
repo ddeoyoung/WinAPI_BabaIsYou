@@ -31,7 +31,14 @@ void LogoLevel::Update(float _Delta)
 {
 	if (true == GameEngineInput::IsDown('P'))
 	{
+		FadeUI->On();
 		FadeUI->FadeOut();
+	}
+
+	if (true == FadeUI->FadeRender->IsAnimation("FadeIn")
+		&& true == FadeUI->FadeRender->IsAnimationEnd())
+	{
+		FadeUI->Off();
 	}
 
 	if (true == FadeUI->FadeRender->IsAnimation("FadeOut")

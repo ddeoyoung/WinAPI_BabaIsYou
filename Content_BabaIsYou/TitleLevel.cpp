@@ -46,16 +46,16 @@ void TitleLevel::Start()
 }
 void TitleLevel::Update(float _Delta)
 {
-	// Collision Check
-	//std::vector<GameEngineCollision*> _Collision;
-
-	//if (true == Cursor::MainCursor->GetCursorCollision()->Collision(CollisionOrder::Button, _Collision, CollisionType::Rect, CollisionType::Rect))
-	//{
-	//}
-
 	if (true == GameEngineInput::IsDown('P'))
 	{
+		FadeUI->On();
 		FadeUI->FadeOut();
+	}
+
+	if (true == FadeUI->FadeRender->IsAnimation("FadeIn")
+		&& true == FadeUI->FadeRender->IsAnimationEnd())
+	{
+		FadeUI->Off();
 	}
 
 	if (true == FadeUI->FadeRender->IsAnimation("FadeOut")

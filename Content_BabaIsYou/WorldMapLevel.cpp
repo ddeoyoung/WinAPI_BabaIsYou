@@ -255,9 +255,16 @@ void WorldMapLevel::Update(float _Delta)
 	{
 		if (Select_X == 10 && Select_Y == 12)
 		{
+			FadeUI->On();
 			FadeUI->FadeOut();
 			StageName = "PuzzleLevel";
 		}
+	}
+
+	if (true == FadeUI->FadeRender->IsAnimation("FadeIn")
+		&& true == FadeUI->FadeRender->IsAnimationEnd())
+	{
+		FadeUI->Off();
 	}
 
 	if (true == FadeUI->FadeRender->IsAnimation("FadeOut")
