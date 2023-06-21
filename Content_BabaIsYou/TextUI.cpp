@@ -70,7 +70,7 @@ void TextUI::SetPuzzleString(std::string _TextString)
 }
 
 
-void TextUI::ShakeText()
+void TextUI::MoveText()
 {
 
 }

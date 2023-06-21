@@ -27,7 +27,7 @@ public:
 		TextColor = _Color;
 	}
 
-	void ShakeText();
+	void MoveText();
 
 protected:
 

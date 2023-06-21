@@ -50,3 +50,11 @@ enum class ACTOR_DEFINE
 	PUSH,
 	DEFEAT,
 };
+
+enum class BABA_DIR
+{
+	LEFT	= 0,
+	RIGHT,
+	UP,
+	DOWN,
+};

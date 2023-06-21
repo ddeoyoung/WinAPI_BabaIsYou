@@ -163,6 +163,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Baba.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Background_Black.h">
       <SubType>
       </SubType>
@@ -228,6 +232,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="Baba.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Background_Black.cpp">
       <SubType>
       </SubType>

@@ -5,6 +5,7 @@
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEnginePlatform/GameEngineWindowTexture.h>
 #include <GameEnginePlatform/GameEngineWindow.h>
+#include <GameEnginePlatform/GameEngineInput.h>
 
 
 #include "ContentsEnum.h"
@@ -13,6 +14,7 @@
 #include "Background_Pixel.h"
 #include "FadeAnimation.h"
 #include "TextUI.h"
+#include "Baba.h"
 
 PuzzleLevel::PuzzleLevel()
 {
@@ -35,11 +37,8 @@ void PuzzleLevel::Start()
 	FadeUI->FadeIn();
 
 	//// TextUI
-	//Text = CreateActor<TextUI>();
-
-	//Text->SetPuzzleText('A');
-	//Text->SetTextScale({ 30, 30 });
-	//Text->SetPos({50, 50});
+	// Text = CreateActor<TextUI>();
+	// Text->Off();
 
 	// 퍼즐 타일 SpriteSheet
 	if (false == ResourcesManager::GetInst().IsLoadTexture("Actor.Bmp"))
@@ -52,9 +51,9 @@ void PuzzleLevel::Start()
 		ResourcesManager::GetInst().CreateSpriteSheet("Actor.bmp", 24, 40);
 	}
 
-	float4 WinScale = GameEngineWindow::MainWindow.GetScale().Half();
-	float4 BackScale = { 840, 600 };
-	float4 BackGridPos = { WinScale.X - (BackScale.X / 2), WinScale.Y - (BackScale.Y / 2) };
+	WinScale = GameEngineWindow::MainWindow.GetScale().Half();
+	BackGridPos = { WinScale.X - (BackScale.X / 2), WinScale.Y - (BackScale.Y / 2) };
+
 
 	// 21 x 15 개의 타일맵 생성
 	TileGrid = CreateActor<TileMap>();
@@ -68,6 +67,8 @@ void PuzzleLevel::Start()
 		}
 	}
 
+	ActorGrid = CreateActor<TileMap>();
+	ActorGrid->CreateTileMap("Actor.bmp", 21, 15, { 40 , 40 }, 3);
 
 
 	// MapTexture - Stage 1
@@ -108,9 +109,9 @@ void PuzzleLevel::Start()
 			// BABA
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(0, 0, 0))
 			{
-				TileGrid->SetTile(x, y, 10, BackGridPos);
-				TileRenderer->CreateAnimationToFrame("BABA", "Actor.bmp", { 2, 26, 50 }, 0.2f, true);
-				TileRenderer->ChangeAnimation("BABA");
+				//TileGrid->SetTile(x, y, 10, BackGridPos);
+				//TileRenderer->CreateAnimationToFrame("BABA", "Actor.bmp", { 2, 26, 50 }, 0.2f, true);
+				//TileRenderer->ChangeAnimation("BABA");
 			}
 
 			// BLOCK
@@ -192,13 +193,53 @@ void PuzzleLevel::Start()
 		}
 	}
 
+	You_X = 13;
+	You_Y = 11;
 
+	ActorGrid->SetTile(You_X, You_Y, 2, BackGridPos);
+	//TileRenderer = ActorGrid->GetTile(13, 11);
+	//TileRenderer->CreateAnimationToFrame("BABA", "Actor.bmp", { 2, 26, 50 }, 0.2f, true);
+	//TileRenderer->ChangeAnimation("BABA");
 
-
+	Baba_Actor = CreateActor<Baba>();
+	Baba_Actor->Off();
+	
+	TileRenderer = ActorGrid->GetTile(You_X, You_Y);
+	TileRenderer->CreateAnimationToFrame("Baba_Left", "Actor.bmp", { 10, 34, 58 }, 0.2f, true);
+	TileRenderer->ChangeAnimation("Baba_Left");
 
 }
 
 void PuzzleLevel::Update(float _Delta)
 {
 
+
+	if (true == GameEngineInput::IsDown('D'))
+	{
+		// BABA_DIR::RIGHT
+
+		ActorGrid->MoveTile(You_X, You_Y, You_X + 1, You_Y, BackGridPos);
+		You_X += 1;
+	}
+
+	else if (true == GameEngineInput::IsDown('W'))
+	{
+		// BABA_DIR::UP
+		ActorGrid->MoveTile(You_X, You_Y, You_X, You_Y - 1, BackGridPos);
+		You_Y -= 1;
+	}
+
+	else if (true == GameEngineInput::IsDown('A'))
+	{
+		// BABA_DIR::LEFT
+		ActorGrid->MoveTile(You_X, You_Y, You_X - 1, You_Y, BackGridPos);
+		You_X -= 1;
+	}
+
+	else if (true == GameEngineInput::IsDown('S'))
+	{
+		// BABA_DIR::DOWN
+		ActorGrid->MoveTile(You_X, You_Y, You_X, You_Y + 1, BackGridPos);
+		You_Y += 1;
+	}
 }
