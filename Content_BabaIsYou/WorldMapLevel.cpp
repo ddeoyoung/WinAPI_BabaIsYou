@@ -24,32 +24,27 @@ WorldMapLevel::~WorldMapLevel()
 
 void WorldMapLevel::Start()
 {
-
+	// Background
 	BackgroundUI = CreateActor<Background_Gray>();
 	BackgroundUI->Init("Background_Gray.bmp");
-
 	WorldMapUI = CreateActor<Background_WorldMap>();
+
+	// FadeAnimation
 	FadeUI = CreateActor<FadeAnimation>();
 	FadeUI->FadeIn();
+
+	// WorldMapSelect
+	SelectUI = CreateActor<WorldMapSelect>();
+	SelectUI->Off();
 
 	// TextUI
 	Text = CreateActor<TextUI>();
 
-	Text->SetPuzzleText('A');
-	Text->SetTextScale({ 30, 30 });
 	Text->SetPos({ 50, 20 });
+	
+	// Text->SetPuzzleString("WHERE DO I GO?");
+	Text->SetPuzzleText('Z', { 30, 30 });
 
-
-	// Text
-	if (false == ResourcesManager::GetInst().IsLoadTexture("Text.Bmp"))
-	{
-		GameEnginePath FilePath;
-		FilePath.SetCurrentPath();
-		FilePath.MoveParentToExistsChild("ContentsResources");
-		FilePath.MoveChild("ContentsResources\\WorldMap\\");
-		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("Text.bmp"));
-		ResourcesManager::GetInst().CreateSpriteSheet("Text.bmp", 38, 2);
-	}
 
 	// WorldMapNumberBack
 	if (false == ResourcesManager::GetInst().IsLoadTexture("WorldMapNumberBack.Bmp"))
@@ -82,17 +77,6 @@ void WorldMapLevel::Start()
 		FilePath.MoveChild("ContentsResources\\Default\\");
 		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("Actor.bmp"));
 		ResourcesManager::GetInst().CreateSpriteSheet("Actor.bmp", 24, 40);
-	}
-
-	// WorldMapSelect
-	if (false == ResourcesManager::GetInst().IsLoadTexture("WorldMapSelect.Bmp"))
-	{
-		GameEnginePath FilePath;
-		FilePath.SetCurrentPath();
-		FilePath.MoveParentToExistsChild("ContentsResources");
-		FilePath.MoveChild("ContentsResources\\WorldMap\\");
-		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("WorldMapSelect.bmp"));
-		ResourcesManager::GetInst().CreateSpriteSheet("WorldMapSelect.bmp", 1, 3);
 	}
 
 

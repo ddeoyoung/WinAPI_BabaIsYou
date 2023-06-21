@@ -201,19 +201,11 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="LogoLevel.h" />
-    <ClInclude Include="Player.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="PuzzleActor.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="PuzzleLevel.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="StageTitleLevel.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -273,19 +265,11 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="LogoLevel.cpp" />
-    <ClCompile Include="Player.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="PuzzleActor.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="PuzzleLevel.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="StageTitleLevel.cpp">
       <SubType>
       </SubType>
     </ClCompile>

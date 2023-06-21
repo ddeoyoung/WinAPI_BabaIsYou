@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
+#include <string>
 
 #include "ContentsEnum.h"
 
@@ -17,8 +18,9 @@ public:
 	TextUI& operator=(const TextUI& _Other) = delete;
 	TextUI& operator=(TextUI&& _Other) noexcept = delete;
 
-	virtual void SetPuzzleText(char _Text);
-	virtual void SetTextScale(const float4& _Scale);
+	virtual void SetPuzzleText(char _Text, const float4& _Scale);
+
+	void SetPuzzleString(std::string _TextString);
 
 	void SetTextColor(TEXT_COLOR _Color)
 	{

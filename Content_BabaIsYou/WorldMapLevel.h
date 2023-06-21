@@ -46,5 +46,8 @@ private:
 
 	// TextUI
 	class TextUI* Text = nullptr;
+
+	// WorldMapSelect
+	class WorldMapSelect* SelectUI = nullptr;
 };
 

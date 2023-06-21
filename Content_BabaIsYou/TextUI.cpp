@@ -3,8 +3,6 @@
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEngineBase/GameEngineString.h>
 
-#include "ContentsEnum.h"
-
 TextUI::TextUI()
 {
 }
@@ -31,7 +29,7 @@ void TextUI::Start()
 	//TextRender->SetRenderPos({ 50, 50 });
 }
 
-void TextUI::SetPuzzleText(char _Text)
+void TextUI::SetPuzzleText(char _Text, const float4& _Scale)
 {
 	CurText = _Text;
 	//CurText = toupper(_Text);
@@ -40,9 +38,8 @@ void TextUI::SetPuzzleText(char _Text)
 
 	if ('0' <= CurText && '9' >= CurText)
 	{
-		// Index 0 : None
-		// Index 1 : 0
-		// Index 2 ~ 8 : 1 ~ 9
+		// SpriteIndex 0 = None
+		// SpriteIndex 1 ~ 10 = 0 ~ 9
 		// ¼ýÀÚ = ColorIndex + 1
 		SpriteIndex = ColorIndex + CurText - '0' + 1;
 		TextRender->SetSprite("Text.bmp", SpriteIndex);
@@ -62,13 +59,16 @@ void TextUI::SetPuzzleText(char _Text)
 		SpriteIndex = ColorIndex + 0;
 		TextRender->SetSprite("Text.bmp", SpriteIndex);
 	}
-}
 
-void TextUI::SetTextScale(const float4& _Scale)
-{
 	TextScale = _Scale;
 	TextRender->SetRenderScale(TextScale);
 }
+
+void TextUI::SetPuzzleString(std::string _TextString) 
+{
+
+}
+
 
 void TextUI::ShakeText()
 {
