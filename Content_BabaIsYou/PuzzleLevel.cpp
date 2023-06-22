@@ -58,18 +58,6 @@ void PuzzleLevel::Start()
 	// 21 x 15 개의 타일맵 생성
 	TileGrid = CreateActor<TileMap>();
 	TileGrid->CreateTileMap("Actor.bmp", 21, 15, { 40 , 40 }, 2);
-	for (int y = 0; y < 15; y++)
-	{
-		for (int x = 0; x < 21; x++)
-		{
-			// 22, 23 : 이미지 없음
-			TileGrid->SetTile(x, y, 22, BackGridPos);
-		}
-	}
-
-	ActorGrid = CreateActor<TileMap>();
-	ActorGrid->CreateTileMap("Actor.bmp", 21, 15, { 40 , 40 }, 3);
-
 
 	// MapTexture - Stage 1
 	Background_Pixel* MapDataImage = CreateActor<Background_Pixel>();
@@ -88,12 +76,12 @@ void PuzzleLevel::Start()
 			float fx = x;
 			float fy = y;
 			
-			TileRenderer = TileGrid->GetTile(x, y);
 
 			// WALL
 			if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(255, 0, 0))
 			{ 
-				TileGrid->SetTile(x, y, 290, BackGridPos);
+				TileRenderer = TileGrid->SetTile(x, y, 290, BackGridPos);
+
 				TileRenderer->CreateAnimationToFrame("WALL", "Actor.bmp", { 290, 314, 338 }, 0.2f, true);
 				TileRenderer->ChangeAnimation("WALL");
 			}
@@ -101,7 +89,7 @@ void PuzzleLevel::Start()
 			// GRASS
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(0, 180, 0))
 			{
-				TileGrid->SetTile(x, y, 506, BackGridPos);
+				TileRenderer = TileGrid->SetTile(x, y, 506, BackGridPos);
 				TileRenderer->CreateAnimationToFrame("GRASS", "Actor.bmp", { 506, 530, 554 }, 0.2f, true);
 				TileRenderer->ChangeAnimation("GRASS");
 			}
@@ -109,15 +97,44 @@ void PuzzleLevel::Start()
 			// BABA
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(0, 0, 0))
 			{
-				//TileGrid->SetTile(x, y, 10, BackGridPos);
-				//TileRenderer->CreateAnimationToFrame("BABA", "Actor.bmp", { 2, 26, 50 }, 0.2f, true);
-				//TileRenderer->ChangeAnimation("BABA");
+				//Baba_Actor = CreateActor<Baba>();
+
+				//float4 Pos = TileGrid->IndexToPos(x, y);
+				//float4 TileSize = TileGrid->GetTileSize().Half();
+				//Baba_Actor->SetPos(Pos + BackGridPos + TileSize);
+
+				TileRenderer = TileGrid->SetTile(x, y, 2, BackGridPos);
+				TileRenderer->CreateAnimationToFrame("Baba_Left", "Actor.bmp", { 10, 34, 58 }, 0.2f, true);
+				TileRenderer->CreateAnimationToFrame("Baba_Right", "Actor.bmp", { 2, 26, 50 }, 0.2f, true);
+				TileRenderer->CreateAnimationToFrame("Baba_Up", "Actor.bmp", { 6, 30, 54 }, 0.2f, true);
+				TileRenderer->CreateAnimationToFrame("Baba_Down", "Actor.bmp", { 14, 38, 62 }, 0.2f, true);
+
+				TileRenderer->CreateAnimationToFrame("Baba_Left2", "Actor.bmp", { 11, 35, 59 }, 0.2f, true);
+				TileRenderer->CreateAnimationToFrame("Baba_Right2", "Actor.bmp", { 3, 27, 51 }, 0.2f, true);
+				TileRenderer->CreateAnimationToFrame("Baba_Up2", "Actor.bmp", { 7, 31, 55 }, 0.2f, true);
+				TileRenderer->CreateAnimationToFrame("Baba_Down2", "Actor.bmp", { 15, 39, 63 }, 0.2f, true);
+
+				TileRenderer->CreateAnimationToFrame("Baba_Left3", "Actor.bmp", { 12, 36, 60 }, 0.2f, true);
+				TileRenderer->CreateAnimationToFrame("Baba_Right3", "Actor.bmp", { 4, 28, 52 }, 0.2f, true);
+				TileRenderer->CreateAnimationToFrame("Baba_Up3", "Actor.bmp", { 8, 32, 56 }, 0.2f, true);
+				TileRenderer->CreateAnimationToFrame("Baba_Down3", "Actor.bmp", { 16, 40, 64 }, 0.2f, true);
+
+				TileRenderer->CreateAnimationToFrame("Baba_Left4", "Actor.bmp", { 13, 37, 61 }, 0.2f, true);
+				TileRenderer->CreateAnimationToFrame("Baba_Right4", "Actor.bmp", { 5, 29, 53 }, 0.2f, true);
+				TileRenderer->CreateAnimationToFrame("Baba_Up4", "Actor.bmp", { 9, 33, 57 }, 0.2f, true);
+				TileRenderer->CreateAnimationToFrame("Baba_Down4", "Actor.bmp", { 17, 41, 65 }, 0.2f, true);
+				TileRenderer->ChangeAnimation("Baba_Down");
+
+				MainRenderer = TileRenderer;
+
 			}
+
+
 
 			// BLOCK
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(0, 0, 100))
 			{
-				TileGrid->SetTile(x, y, 737, BackGridPos);
+				TileRenderer = TileGrid->SetTile(x, y, 737, BackGridPos);
 				TileRenderer->CreateAnimationToFrame("BLOCK", "Actor.bmp", { 737, 761, 785 }, 0.2f, true);
 				TileRenderer->ChangeAnimation("BLOCK");
 			}
@@ -125,7 +142,7 @@ void PuzzleLevel::Start()
 			// FLAG
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(255, 255, 0))
 			{
-				TileGrid->SetTile(x, y, 728, BackGridPos);
+				TileRenderer = TileGrid->SetTile(x, y, 728, BackGridPos);
 				TileRenderer->CreateAnimationToFrame("FLAG", "Actor.bmp", { 728, 752, 776 }, 0.2f, true);
 				TileRenderer->ChangeAnimation("FLAG");
 			}
@@ -133,7 +150,7 @@ void PuzzleLevel::Start()
 			// WALL_TEXT
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(50, 50, 50))
 			{
-				TileGrid->SetTile(x, y, 288, BackGridPos);
+				TileRenderer = TileGrid->SetTile(x, y, 288, BackGridPos);
 				TileRenderer->CreateAnimationToFrame("WALL_TEXT", "Actor.bmp", { 288, 312, 336 }, 0.2f, true);
 				TileRenderer->ChangeAnimation("WALL_TEXT");
 			}
@@ -141,7 +158,7 @@ void PuzzleLevel::Start()
 			// IS_TEXT
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(200, 200, 200))
 			{
-				TileGrid->SetTile(x, y, 792, BackGridPos);
+				TileRenderer = TileGrid->SetTile(x, y, 792, BackGridPos);
 				TileRenderer->CreateAnimationToFrame("IS_TEXT", "Actor.bmp", { 792, 816, 840 }, 0.2f, true);
 				TileRenderer->ChangeAnimation("IS_TEXT");
 			}
@@ -149,7 +166,7 @@ void PuzzleLevel::Start()
 			// FLAG_TEXT
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(255, 200, 0))
 			{
-				TileGrid->SetTile(x, y, 726, BackGridPos);
+				TileRenderer = TileGrid->SetTile(x, y, 726, BackGridPos);
 				//TileRenderer->CreateAnimationToFrame("FLAG_TEXT", "Actor.bmp", { 726, 750, 774 }, 0.2f, true);
 				TileRenderer->CreateAnimationToFrame("FLAG_TEXT", "Actor.bmp", { 727, 751, 775 }, 0.2f, true);
 				TileRenderer->ChangeAnimation("FLAG_TEXT");
@@ -158,7 +175,7 @@ void PuzzleLevel::Start()
 			// BABA_TEXT
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(255, 100, 100))
 			{
-				TileGrid->SetTile(x, y, 0, BackGridPos);
+				TileRenderer = TileGrid->SetTile(x, y, 0, BackGridPos);
 				TileRenderer->CreateAnimationToFrame("BABA_TEXT", "Actor.bmp", { 0, 24, 48 }, 0.2f, true);
 				//TileRenderer->CreateAnimationToFrame("BABA_TEXT", "Actor.bmp", { 1, 25, 49 }, 0.2f, true);
 				TileRenderer->ChangeAnimation("BABA_TEXT");
@@ -167,7 +184,7 @@ void PuzzleLevel::Start()
 			// YOU_TEXT
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(100, 50, 50))
 			{
-				TileGrid->SetTile(x, y, 864, BackGridPos);
+				TileRenderer = TileGrid->SetTile(x, y, 864, BackGridPos);
 				TileRenderer->CreateAnimationToFrame("YOU_TEXT", "Actor.bmp", { 864, 888, 912 }, 0.2f, true);
 				//TileRenderer->CreateAnimationToFrame("YOU_TEXT", "Actor.bmp", { 865, 889, 913 }, 0.2f, true);
 				TileRenderer->ChangeAnimation("YOU_TEXT");
@@ -176,7 +193,7 @@ void PuzzleLevel::Start()
 			// WIN_TEXT
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(200, 200, 0))
 			{
-				TileGrid->SetTile(x, y, 864, BackGridPos);
+				TileRenderer = TileGrid->SetTile(x, y, 864, BackGridPos);
 				//TileRenderer->CreateAnimationToFrame("WIN_TEXT", "Actor.bmp", { 866, 890, 914 }, 0.2f, true);
 				TileRenderer->CreateAnimationToFrame("WIN_TEXT", "Actor.bmp", { 867, 891, 915 }, 0.2f, true);
 				TileRenderer->ChangeAnimation("WIN_TEXT");
@@ -185,61 +202,46 @@ void PuzzleLevel::Start()
 			// STOP_TEXT
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(0, 100, 0))
 			{
-				TileGrid->SetTile(x, y, 868, BackGridPos);
+				TileRenderer = TileGrid->SetTile(x, y, 868, BackGridPos);
 				TileRenderer->CreateAnimationToFrame("STOP_TEXT", "Actor.bmp", { 868, 892, 916 }, 0.2f, true);
 				//TileRenderer->CreateAnimationToFrame("STOP_TEXT", "Actor.bmp", { 869, 893, 917 }, 0.2f, true);
 				TileRenderer->ChangeAnimation("STOP_TEXT");
 			}
 		}
 	}
-
-	You_X = 13;
-	You_Y = 11;
-
-	ActorGrid->SetTile(You_X, You_Y, 2, BackGridPos);
-	//TileRenderer = ActorGrid->GetTile(13, 11);
-	//TileRenderer->CreateAnimationToFrame("BABA", "Actor.bmp", { 2, 26, 50 }, 0.2f, true);
-	//TileRenderer->ChangeAnimation("BABA");
-
-	Baba_Actor = CreateActor<Baba>();
-	Baba_Actor->Off();
-	
-	TileRenderer = ActorGrid->GetTile(You_X, You_Y);
-	TileRenderer->CreateAnimationToFrame("Baba_Left", "Actor.bmp", { 10, 34, 58 }, 0.2f, true);
-	TileRenderer->ChangeAnimation("Baba_Left");
-
 }
 
 void PuzzleLevel::Update(float _Delta)
 {
-
-
+	// RIGHT
 	if (true == GameEngineInput::IsDown('D'))
 	{
-		// BABA_DIR::RIGHT
-
-		ActorGrid->MoveTile(You_X, You_Y, You_X + 1, You_Y, BackGridPos);
+		MainRenderer->ChangeAnimation("Baba_Right");
+		TileGrid->MoveTile(You_X, You_Y, You_X + 1, You_Y, BackGridPos);
 		You_X += 1;
 	}
 
+	// UP
 	else if (true == GameEngineInput::IsDown('W'))
 	{
-		// BABA_DIR::UP
-		ActorGrid->MoveTile(You_X, You_Y, You_X, You_Y - 1, BackGridPos);
+		MainRenderer->ChangeAnimation("Baba_Up");
+		TileGrid->MoveTile(You_X, You_Y, You_X, You_Y - 1, BackGridPos);
 		You_Y -= 1;
 	}
 
+	// LEFT
 	else if (true == GameEngineInput::IsDown('A'))
 	{
-		// BABA_DIR::LEFT
-		ActorGrid->MoveTile(You_X, You_Y, You_X - 1, You_Y, BackGridPos);
+		MainRenderer->ChangeAnimation("Baba_Left");
+		TileGrid->MoveTile(You_X, You_Y, You_X - 1, You_Y, BackGridPos);
 		You_X -= 1;
 	}
 
+	// DOWN
 	else if (true == GameEngineInput::IsDown('S'))
 	{
-		// BABA_DIR::DOWN
-		ActorGrid->MoveTile(You_X, You_Y, You_X, You_Y + 1, BackGridPos);
+		MainRenderer->ChangeAnimation("Baba_Down");
+		TileGrid->MoveTile(You_X, You_Y, You_X, You_Y + 1, BackGridPos);
 		You_Y += 1;
 	}
 }

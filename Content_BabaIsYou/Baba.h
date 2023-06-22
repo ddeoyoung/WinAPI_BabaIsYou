@@ -17,7 +17,8 @@ public:
 	Baba& operator=(const Baba& _Other) = delete;
 	Baba& operator=(Baba&& _Other) noexcept = delete;
 
-	void StateUpdate(float _Delta);
+	void CheckDir();
+	void ChangeAnimationState(BABA_DIR _Dir);
 
 
 protected:
@@ -28,6 +29,9 @@ private:
 
 	GameEngineRenderer* BabaRenderer = nullptr;
 
+	std::string AnimationName = "";
+
 	BABA_DIR Dir = BABA_DIR::LEFT;
+
 };
 

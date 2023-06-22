@@ -27,9 +27,9 @@ public:
 
 	bool MoveTile(int X1, int Y1, int X2, int Y2, float4 _TilePos);
 
-	void SetTile(int X, int Y, int _Index, float4 _TilePos = float4::ZERO, bool _IsImageSize = false);
+	GameEngineRenderer* SetTile(int X, int Y, int _Index, float4 _TilePos = float4::ZERO, bool _IsImageSize = false);
 
-	void SetTile(float4 _Pos, int _Index, float4 _TilePos = float4::ZERO, bool _IsImageSize = false);
+	GameEngineRenderer* SetTile(float4 _Pos, int _Index, float4 _TilePos = float4::ZERO, bool _IsImageSize = false);
 
 	bool IsOver(int X, int Y);
 
@@ -38,6 +38,11 @@ public:
 	float4 PosToIndex(float4 _Pos);
 
 	void Update(float _DeltaTime) override;
+
+	float4 GetTileSize()
+	{
+		return TileSize;
+	}
 
 protected:
 

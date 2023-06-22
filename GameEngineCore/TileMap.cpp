@@ -81,18 +81,18 @@ float4 TileMap::PosToIndex(float4 _Pos)
 	return { _Pos.X / TileSize.X , _Pos.Y / TileSize.Y };
 }
 
-void TileMap::SetTile(float4 _Pos, int _Index, float4 _TilePos, bool _IsImageSize/* = false*/)
+GameEngineRenderer* TileMap::SetTile(float4 _Pos, int _Index, float4 _TilePos, bool _IsImageSize/* = false*/)
 {
 	float4 Index = PosToIndex(_Pos);
 
-	SetTile(Index.iX(), Index.iY(), _Index, _TilePos, _IsImageSize/* = false*/);
+	return SetTile(Index.iX(), Index.iY(), _Index, _TilePos, _IsImageSize/* = false*/);
 }
 
-void TileMap::SetTile(int X, int Y, int _Index, float4 _TilePos, bool _IsImageSize/* = false*/)
+GameEngineRenderer* TileMap::SetTile(int X, int Y, int _Index, float4 _TilePos, bool _IsImageSize/* = false*/)
 {
 	if (true == IsOver(X, Y))
 	{
-		return;
+		return nullptr;
 	}
 
 	if (nullptr == Tiles[Y][X])
@@ -110,6 +110,8 @@ void TileMap::SetTile(int X, int Y, int _Index, float4 _TilePos, bool _IsImageSi
 	else {
 		Tiles[Y][X]->SetRenderScaleToTexture();
 	}
+
+	return Tiles[Y][X];
 }
 
 bool TileMap::MoveTile(int X1, int Y1, int X2, int Y2, float4 _TilePos)
@@ -130,10 +132,4 @@ bool TileMap::MoveTile(int X1, int Y1, int X2, int Y2, float4 _TilePos)
 	Tiles[Y2][X2] = Tile;
 	Tile->SetRenderPos(IndexToPos(X2, Y2) + TileSize.Half() + _TilePos);
 	return true;
-
-	//Tiles[Y][X]->SetRenderPos(IndexToPos(X1, Y1) + TileSize.Half() + _TilePos);
-
-	//Tiles[Y1][X1];
-	//Tiles[Y2][X2];
-
 }

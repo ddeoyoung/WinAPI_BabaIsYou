@@ -16,8 +16,8 @@ public:
 	PuzzleLevel& operator=(const PuzzleLevel& _Other) = delete;
 	PuzzleLevel& operator=(PuzzleLevel&& _Other) noexcept = delete;
 
-	int You_X = 0;
-	int You_Y = 0;
+	int You_X = 13;
+	int You_Y = 11;
 
 	float4 YouPos = { 0, 0 };
 
@@ -45,6 +45,7 @@ private:
 
 	class Baba* Baba_Actor = nullptr;
 
+	GameEngineRenderer* MainRenderer = nullptr;
 	GameEngineRenderer* TileRenderer = nullptr;
 	GameEngineRenderer* TextRenderer = nullptr;
 };
