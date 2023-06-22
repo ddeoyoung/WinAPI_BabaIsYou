@@ -29,19 +29,16 @@ enum class TEXT_COLOR
 	PICK,
 };
 
-
-// Actor - 1.Type	2.Define	3. 
-
 enum class ACTOR_TYPE
 {
 	NONE	= 0,
 	ACTOR,
 	SUBJECT_TEXT,
 	VERB_TEXT,
-	DEFINE_TEXT,
+	BEHAVE_TEXT,
 };
 
-enum class ACTOR_DEFINE
+enum class ACTOR_BEHAVE
 {
 	NONE	= 0,
 	YOU,

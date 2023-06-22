@@ -35,6 +35,7 @@ private:
 
 	bool IsMove = false;
 
+
 	float4 WinScale = { 0, 0 };
 	float4 BackScale = { 840, 600 };
 	float4 BackGridPos = { 0, 0 };
@@ -48,8 +49,6 @@ private:
 	class FadeAnimation* FadeUI = nullptr;
 	class TextUI* Text = nullptr;
 	class GameEngineWindowTexture* MapTexture = nullptr;
-
-	class Baba* Baba_Actor = nullptr;
 
 	GameEngineRenderer* MainRenderer = nullptr;
 	GameEngineRenderer* TileRenderer = nullptr;

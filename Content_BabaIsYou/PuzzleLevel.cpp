@@ -36,11 +36,7 @@ void PuzzleLevel::Start()
 	FadeUI = CreateActor<FadeAnimation>();
 	FadeUI->FadeIn();
 
-	//// TextUI
-	// Text = CreateActor<TextUI>();
-	// Text->Off();
-
-	// ∆€¡Ò ≈∏¿œ SpriteSheet
+	// Puzzle Tiles
 	if (false == ResourcesManager::GetInst().IsLoadTexture("Actor.Bmp"))
 	{
 		GameEnginePath FilePath;
@@ -59,14 +55,12 @@ void PuzzleLevel::Start()
 	TileGrid = CreateActor<TileMap>();
 	TileGrid->CreateTileMap("Actor.bmp", 21, 15, { 40 , 40 }, 2);
 
+
+	// ∏  ºº∆√
 	// MapTexture - Stage 1
 	Background_Pixel* MapDataImage = CreateActor<Background_Pixel>();
 	MapDataImage->Init("stage1.bmp", { 850, 600 });
 	MapTexture = ResourcesManager::GetInst().FindTexture("stage1.bmp");
-
-	//MapDataImage->Init("WallTest.bmp", { 850, 600 });
-	//MapTexture = ResourcesManager::GetInst().FindTexture("WallTest.bmp");
-
 	MapDataImage->Off();
 
 	for (int y = 0; y < 15; y++)
@@ -75,13 +69,11 @@ void PuzzleLevel::Start()
 		{
 			float fx = x;
 			float fy = y;
-			
 
 			// WALL
 			if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(255, 0, 0))
 			{ 
 				TileRenderer = TileGrid->SetTile(x, y, 290, BackGridPos);
-
 				TileRenderer->CreateAnimationToFrame("WALL", "Actor.bmp", { 290, 314, 338 }, 0.2f, true);
 				TileRenderer->ChangeAnimation("WALL");
 			}
@@ -97,12 +89,6 @@ void PuzzleLevel::Start()
 			// BABA
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(0, 0, 0))
 			{
-				//Baba_Actor = CreateActor<Baba>();
-
-				//float4 Pos = TileGrid->IndexToPos(x, y);
-				//float4 TileSize = TileGrid->GetTileSize().Half();
-				//Baba_Actor->SetPos(Pos + BackGridPos + TileSize);
-
 				TileRenderer = TileGrid->SetTile(x, y, 2, BackGridPos);
 				TileRenderer->CreateAnimationToFrame("Baba_Left", "Actor.bmp", { 10, 34, 58 }, 0.2f, true);
 				TileRenderer->CreateAnimationToFrame("Baba_Right", "Actor.bmp", { 2, 26, 50 }, 0.2f, true);
@@ -206,6 +192,112 @@ void PuzzleLevel::Start()
 			}
 		}
 	}
+
+
+
+	// ∆€¡Ò ∑Í ª˝º∫
+	for (int y = 0; y < 15; y++)
+	{
+		for (int x = 0; x < 21; x++)
+		{
+			float fx = x;
+			float fy = y;
+
+			// WALL
+			if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(255, 0, 0))
+			{
+				ACTOR_TYPE Wall_Type = ACTOR_TYPE::ACTOR;
+				ACTOR_BEHAVE Wall_Behave = ACTOR_BEHAVE::STOP;
+			}
+
+			// GRASS
+			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(0, 180, 0))
+			{
+				ACTOR_TYPE Grass_Type = ACTOR_TYPE::ACTOR;
+				ACTOR_BEHAVE Grass_Behave = ACTOR_BEHAVE::NONE;
+			}
+
+			// BABA
+			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(0, 0, 0))
+			{
+				ACTOR_TYPE Baba_Type = ACTOR_TYPE::ACTOR;
+				ACTOR_BEHAVE Baba_Behave = ACTOR_BEHAVE::YOU;
+			}
+
+			// BLOCK
+			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(0, 0, 100))
+			{
+				ACTOR_TYPE Block_Type = ACTOR_TYPE::ACTOR;
+				ACTOR_BEHAVE Block_Behave = ACTOR_BEHAVE::NONE;
+			}
+
+			// FLAG
+			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(255, 255, 0))
+			{
+				ACTOR_TYPE Flag_Type = ACTOR_TYPE::ACTOR;
+				ACTOR_BEHAVE Flag_Behave = ACTOR_BEHAVE::WIN;
+			}
+
+			// WALL_TEXT
+			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(50, 50, 50))
+			{
+				ACTOR_TYPE WallText_Type = ACTOR_TYPE::SUBJECT_TEXT;
+				ACTOR_BEHAVE WallText_Behave = ACTOR_BEHAVE::PUSH;
+			}
+
+			// IS_TEXT
+			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(200, 200, 200))
+			{
+				ACTOR_TYPE IsText_Type = ACTOR_TYPE::VERB_TEXT;
+				ACTOR_BEHAVE IsText_Behave = ACTOR_BEHAVE::PUSH;
+			}
+
+			// FLAG_TEXT
+			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(255, 200, 0))
+			{
+				ACTOR_TYPE FlagText_Type = ACTOR_TYPE::SUBJECT_TEXT;
+				ACTOR_BEHAVE FlagText_Behave = ACTOR_BEHAVE::PUSH;
+			}
+
+			// BABA_TEXT
+			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(255, 100, 100))
+			{
+				ACTOR_TYPE BabaText_Type = ACTOR_TYPE::SUBJECT_TEXT;
+				ACTOR_BEHAVE BabaText_Behave = ACTOR_BEHAVE::PUSH;
+			}
+
+			// YOU_TEXT
+			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(100, 50, 50))
+			{
+				ACTOR_TYPE YouText_Type = ACTOR_TYPE::BEHAVE_TEXT;
+				ACTOR_BEHAVE YouText_Behave = ACTOR_BEHAVE::PUSH;
+			}
+
+			// WIN_TEXT
+			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(200, 200, 0))
+			{
+				ACTOR_TYPE WinText_Type = ACTOR_TYPE::BEHAVE_TEXT;
+				ACTOR_BEHAVE WinText_Behave = ACTOR_BEHAVE::PUSH;
+			}
+
+			// STOP_TEXT
+			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(0, 100, 0))
+			{
+				ACTOR_TYPE StopText_Type = ACTOR_TYPE::BEHAVE_TEXT;
+				ACTOR_BEHAVE StopText_Behave = ACTOR_BEHAVE::PUSH;
+			}
+		}
+	}
+
+
+	// Rule Check
+	for (int y = 0; y < 15; y++)
+	{
+		for (int x = 0; x < 21; x++)
+		{
+
+		}
+	}
 }
 
 void PuzzleLevel::Update(float _Delta)
@@ -213,137 +305,132 @@ void PuzzleLevel::Update(float _Delta)
 	// RIGHT
 	if (true == GameEngineInput::IsDown('D'))
 	{
-		switch (BabaMoveStep)
-		{
-		case 0:
-			MainRenderer->ChangeAnimation("Baba_Right");
-			BabaMoveStep += 1;
-			break;
-		case 1:
-			MainRenderer->ChangeAnimation("Baba_Right2");
-			BabaMoveStep += 1;
-			break;
-		case 2:
-			MainRenderer->ChangeAnimation("Baba_Right3");
-			BabaMoveStep += 1;
-			break;
-		case 3:
-			MainRenderer->ChangeAnimation("Baba_Right4");
-			BabaMoveStep = 0;
-			break;
-		default:
-			break;
-		}
-
-		//MainRenderer->ChangeAnimation("Baba_Right");
 		IsMove = TileGrid->MoveTile(Index_X, Index_Y, Index_X + 1, Index_Y, BackGridPos);
-
+		
 		if (true == IsMove)
 		{
 			Index_X += 1;
+
+			switch (BabaMoveStep)
+			{
+			case 0:
+				MainRenderer->ChangeAnimation("Baba_Right");
+				BabaMoveStep += 1;
+				break;
+			case 1:
+				MainRenderer->ChangeAnimation("Baba_Right2");
+				BabaMoveStep += 1;
+				break;
+			case 2:
+				MainRenderer->ChangeAnimation("Baba_Right3");
+				BabaMoveStep += 1;
+				break;
+			case 3:
+				MainRenderer->ChangeAnimation("Baba_Right4");
+				BabaMoveStep = 0;
+				break;
+			default:
+				break;
+			}
 		}
 	}
 
 	// UP
 	else if (true == GameEngineInput::IsDown('W'))
 	{
-
-		switch (BabaMoveStep)
-		{
-		case 0:
-			MainRenderer->ChangeAnimation("Baba_Up");
-			BabaMoveStep += 1;
-			break;
-		case 1:
-			MainRenderer->ChangeAnimation("Baba_Up2");
-			BabaMoveStep += 1;
-			break;
-		case 2:
-			MainRenderer->ChangeAnimation("Baba_Up3");
-			BabaMoveStep += 1;
-			break;
-		case 3:
-			MainRenderer->ChangeAnimation("Baba_Up4");
-			BabaMoveStep = 0;
-			break;
-		default:
-			break;
-		}
-
-		//MainRenderer->ChangeAnimation("Baba_Up");
 		IsMove = TileGrid->MoveTile(Index_X, Index_Y, Index_X, Index_Y - 1, BackGridPos);
 
 		if (true == IsMove)
 		{
 			Index_Y -= 1;
+
+			switch (BabaMoveStep)
+			{
+			case 0:
+				MainRenderer->ChangeAnimation("Baba_Up");
+				BabaMoveStep += 1;
+				break;
+			case 1:
+				MainRenderer->ChangeAnimation("Baba_Up2");
+				BabaMoveStep += 1;
+				break;
+			case 2:
+				MainRenderer->ChangeAnimation("Baba_Up3");
+				BabaMoveStep += 1;
+				break;
+			case 3:
+				MainRenderer->ChangeAnimation("Baba_Up4");
+				BabaMoveStep = 0;
+				break;
+			default:
+				break;
+			}
 		}
 	}
 
 	// LEFT
 	else if (true == GameEngineInput::IsDown('A'))
 	{
-		switch (BabaMoveStep)
-		{
-		case 0:
-			MainRenderer->ChangeAnimation("Baba_Left");
-			BabaMoveStep += 1;
-			break;
-		case 1:
-			MainRenderer->ChangeAnimation("Baba_Left2");
-			BabaMoveStep += 1;
-			break;
-		case 2:
-			MainRenderer->ChangeAnimation("Baba_Left3");
-			BabaMoveStep += 1;
-			break;
-		case 3:
-			MainRenderer->ChangeAnimation("Baba_Left4");
-			BabaMoveStep = 0;
-			break;
-		default:
-			break;
-		}
-
-		//MainRenderer->ChangeAnimation("Baba_Left");
 		IsMove = TileGrid->MoveTile(Index_X, Index_Y, Index_X - 1, Index_Y, BackGridPos);
 
 		if (true == IsMove)
 		{
 			Index_X -= 1;
+
+			switch (BabaMoveStep)
+			{
+			case 0:
+				MainRenderer->ChangeAnimation("Baba_Left");
+				BabaMoveStep += 1;
+				break;
+			case 1:
+				MainRenderer->ChangeAnimation("Baba_Left2");
+				BabaMoveStep += 1;
+				break;
+			case 2:
+				MainRenderer->ChangeAnimation("Baba_Left3");
+				BabaMoveStep += 1;
+				break;
+			case 3:
+				MainRenderer->ChangeAnimation("Baba_Left4");
+				BabaMoveStep = 0;
+				break;
+			default:
+				break;
+			}
 		}
 	}
 
 	// DOWN
 	else if (true == GameEngineInput::IsDown('S'))
 	{
-		switch (BabaMoveStep)
-		{
-		case 0:
-			MainRenderer->ChangeAnimation("Baba_Down");
-			BabaMoveStep += 1;
-			break;
-		case 1:
-			MainRenderer->ChangeAnimation("Baba_Down2");
-			BabaMoveStep += 1;
-			break;
-		case 2:
-			MainRenderer->ChangeAnimation("Baba_Down3");
-			BabaMoveStep += 1;
-			break;
-		case 3:
-			MainRenderer->ChangeAnimation("Baba_Down4");
-			BabaMoveStep = 0;
-			break;
-		default:
-			break;
-		}
-		
-		// MainRenderer->ChangeAnimation("Baba_Down");
 		IsMove = TileGrid->MoveTile(Index_X, Index_Y, Index_X, Index_Y + 1, BackGridPos);
 
 		if (true == IsMove)
 		{
 			Index_Y += 1;
+
+			switch (BabaMoveStep)
+			{
+			case 0:
+				MainRenderer->ChangeAnimation("Baba_Down");
+				BabaMoveStep += 1;
+				break;
+			case 1:
+				MainRenderer->ChangeAnimation("Baba_Down2");
+				BabaMoveStep += 1;
+				break;
+			case 2:
+				MainRenderer->ChangeAnimation("Baba_Down3");
+				BabaMoveStep += 1;
+				break;
+			case 3:
+				MainRenderer->ChangeAnimation("Baba_Down4");
+				BabaMoveStep = 0;
+				break;
+			default:
+				break;
+			}
 		}
 	}
 }
