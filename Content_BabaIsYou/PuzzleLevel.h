@@ -45,6 +45,8 @@ private:
 
 	class Baba* Baba_Actor = nullptr;
 
+	bool IsMove = false;
+
 	GameEngineRenderer* MainRenderer = nullptr;
 	GameEngineRenderer* TileRenderer = nullptr;
 	GameEngineRenderer* TextRenderer = nullptr;

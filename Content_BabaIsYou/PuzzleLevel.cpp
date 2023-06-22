@@ -126,10 +126,7 @@ void PuzzleLevel::Start()
 				TileRenderer->ChangeAnimation("Baba_Down");
 
 				MainRenderer = TileRenderer;
-
 			}
-
-
 
 			// BLOCK
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(0, 0, 100))
@@ -217,31 +214,47 @@ void PuzzleLevel::Update(float _Delta)
 	if (true == GameEngineInput::IsDown('D'))
 	{
 		MainRenderer->ChangeAnimation("Baba_Right");
-		TileGrid->MoveTile(You_X, You_Y, You_X + 1, You_Y, BackGridPos);
-		You_X += 1;
+		IsMove = TileGrid->MoveTile(You_X, You_Y, You_X + 1, You_Y, BackGridPos);
+
+		if (true == IsMove)
+		{
+			You_X += 1;
+		}
 	}
 
 	// UP
 	else if (true == GameEngineInput::IsDown('W'))
 	{
 		MainRenderer->ChangeAnimation("Baba_Up");
-		TileGrid->MoveTile(You_X, You_Y, You_X, You_Y - 1, BackGridPos);
-		You_Y -= 1;
+		IsMove = TileGrid->MoveTile(You_X, You_Y, You_X, You_Y - 1, BackGridPos);
+
+		if (true == IsMove)
+		{
+			You_Y -= 1;
+		}
 	}
 
 	// LEFT
 	else if (true == GameEngineInput::IsDown('A'))
 	{
 		MainRenderer->ChangeAnimation("Baba_Left");
-		TileGrid->MoveTile(You_X, You_Y, You_X - 1, You_Y, BackGridPos);
-		You_X -= 1;
+		IsMove = TileGrid->MoveTile(You_X, You_Y, You_X - 1, You_Y, BackGridPos);
+
+		if (true == IsMove)
+		{
+			You_X -= 1;
+		}
 	}
 
 	// DOWN
 	else if (true == GameEngineInput::IsDown('S'))
 	{
 		MainRenderer->ChangeAnimation("Baba_Down");
-		TileGrid->MoveTile(You_X, You_Y, You_X, You_Y + 1, BackGridPos);
-		You_Y += 1;
+		IsMove = TileGrid->MoveTile(You_X, You_Y, You_X, You_Y + 1, BackGridPos);
+
+		if (true == IsMove)
+		{
+			You_Y += 1;
+		}
 	}
 }
