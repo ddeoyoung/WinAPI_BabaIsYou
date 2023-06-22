@@ -1,6 +1,8 @@
 #pragma once
 #include <GameEngineCore/GameEngineLevel.h>
 #include <Windows.h>
+#include <string>
+
 
 // Ό³Έν :
 class PuzzleLevel : public GameEngineLevel
@@ -16,10 +18,8 @@ public:
 	PuzzleLevel& operator=(const PuzzleLevel& _Other) = delete;
 	PuzzleLevel& operator=(PuzzleLevel&& _Other) noexcept = delete;
 
-	int You_X = 13;
-	int You_Y = 11;
-
-	float4 YouPos = { 0, 0 };
+	int Index_X = 13;
+	int Index_Y = 11;
 
 
 
@@ -28,6 +28,12 @@ protected:
 private:
 	void Start() override;
 	void Update(float _Delta) override;
+
+	int BabaMoveStep = 0;
+
+	std::string AnimationName = "";
+
+	bool IsMove = false;
 
 	float4 WinScale = { 0, 0 };
 	float4 BackScale = { 840, 600 };
@@ -44,8 +50,6 @@ private:
 	class GameEngineWindowTexture* MapTexture = nullptr;
 
 	class Baba* Baba_Actor = nullptr;
-
-	bool IsMove = false;
 
 	GameEngineRenderer* MainRenderer = nullptr;
 	GameEngineRenderer* TileRenderer = nullptr;

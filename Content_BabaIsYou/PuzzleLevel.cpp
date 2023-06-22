@@ -213,48 +213,137 @@ void PuzzleLevel::Update(float _Delta)
 	// RIGHT
 	if (true == GameEngineInput::IsDown('D'))
 	{
-		MainRenderer->ChangeAnimation("Baba_Right");
-		IsMove = TileGrid->MoveTile(You_X, You_Y, You_X + 1, You_Y, BackGridPos);
+		switch (BabaMoveStep)
+		{
+		case 0:
+			MainRenderer->ChangeAnimation("Baba_Right");
+			BabaMoveStep += 1;
+			break;
+		case 1:
+			MainRenderer->ChangeAnimation("Baba_Right2");
+			BabaMoveStep += 1;
+			break;
+		case 2:
+			MainRenderer->ChangeAnimation("Baba_Right3");
+			BabaMoveStep += 1;
+			break;
+		case 3:
+			MainRenderer->ChangeAnimation("Baba_Right4");
+			BabaMoveStep = 0;
+			break;
+		default:
+			break;
+		}
+
+		//MainRenderer->ChangeAnimation("Baba_Right");
+		IsMove = TileGrid->MoveTile(Index_X, Index_Y, Index_X + 1, Index_Y, BackGridPos);
 
 		if (true == IsMove)
 		{
-			You_X += 1;
+			Index_X += 1;
 		}
 	}
 
 	// UP
 	else if (true == GameEngineInput::IsDown('W'))
 	{
-		MainRenderer->ChangeAnimation("Baba_Up");
-		IsMove = TileGrid->MoveTile(You_X, You_Y, You_X, You_Y - 1, BackGridPos);
+
+		switch (BabaMoveStep)
+		{
+		case 0:
+			MainRenderer->ChangeAnimation("Baba_Up");
+			BabaMoveStep += 1;
+			break;
+		case 1:
+			MainRenderer->ChangeAnimation("Baba_Up2");
+			BabaMoveStep += 1;
+			break;
+		case 2:
+			MainRenderer->ChangeAnimation("Baba_Up3");
+			BabaMoveStep += 1;
+			break;
+		case 3:
+			MainRenderer->ChangeAnimation("Baba_Up4");
+			BabaMoveStep = 0;
+			break;
+		default:
+			break;
+		}
+
+		//MainRenderer->ChangeAnimation("Baba_Up");
+		IsMove = TileGrid->MoveTile(Index_X, Index_Y, Index_X, Index_Y - 1, BackGridPos);
 
 		if (true == IsMove)
 		{
-			You_Y -= 1;
+			Index_Y -= 1;
 		}
 	}
 
 	// LEFT
 	else if (true == GameEngineInput::IsDown('A'))
 	{
-		MainRenderer->ChangeAnimation("Baba_Left");
-		IsMove = TileGrid->MoveTile(You_X, You_Y, You_X - 1, You_Y, BackGridPos);
+		switch (BabaMoveStep)
+		{
+		case 0:
+			MainRenderer->ChangeAnimation("Baba_Left");
+			BabaMoveStep += 1;
+			break;
+		case 1:
+			MainRenderer->ChangeAnimation("Baba_Left2");
+			BabaMoveStep += 1;
+			break;
+		case 2:
+			MainRenderer->ChangeAnimation("Baba_Left3");
+			BabaMoveStep += 1;
+			break;
+		case 3:
+			MainRenderer->ChangeAnimation("Baba_Left4");
+			BabaMoveStep = 0;
+			break;
+		default:
+			break;
+		}
+
+		//MainRenderer->ChangeAnimation("Baba_Left");
+		IsMove = TileGrid->MoveTile(Index_X, Index_Y, Index_X - 1, Index_Y, BackGridPos);
 
 		if (true == IsMove)
 		{
-			You_X -= 1;
+			Index_X -= 1;
 		}
 	}
 
 	// DOWN
 	else if (true == GameEngineInput::IsDown('S'))
 	{
-		MainRenderer->ChangeAnimation("Baba_Down");
-		IsMove = TileGrid->MoveTile(You_X, You_Y, You_X, You_Y + 1, BackGridPos);
+		switch (BabaMoveStep)
+		{
+		case 0:
+			MainRenderer->ChangeAnimation("Baba_Down");
+			BabaMoveStep += 1;
+			break;
+		case 1:
+			MainRenderer->ChangeAnimation("Baba_Down2");
+			BabaMoveStep += 1;
+			break;
+		case 2:
+			MainRenderer->ChangeAnimation("Baba_Down3");
+			BabaMoveStep += 1;
+			break;
+		case 3:
+			MainRenderer->ChangeAnimation("Baba_Down4");
+			BabaMoveStep = 0;
+			break;
+		default:
+			break;
+		}
+		
+		// MainRenderer->ChangeAnimation("Baba_Down");
+		IsMove = TileGrid->MoveTile(Index_X, Index_Y, Index_X, Index_Y + 1, BackGridPos);
 
 		if (true == IsMove)
 		{
-			You_Y += 1;
+			Index_Y += 1;
 		}
 	}
 }
