@@ -18,6 +18,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Doc", "Doc", "{87A5A5BA-F352-42FD-9EA1-7F8502634377}"
 	ProjectSection(SolutionItems) = preProject
 		델타타임.txt = 델타타임.txt
+		바바이즈유 게임 규칙.txt = 바바이즈유 게임 규칙.txt
 		프로젝트 구성.txt = 프로젝트 구성.txt
 	EndProjectSection
 EndProject
