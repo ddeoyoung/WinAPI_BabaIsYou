@@ -12,6 +12,25 @@ TileMap::~TileMap()
 void TileMap::Update(float _DeltaTime)
 {
 	SetPos(float4::ZERO);
+
+	if (nullptr == LerpTileRenderer)
+	{
+		return;
+	}
+
+	// Lerp는 Start에서 end까지 정확하게 1초만에 도달하게 해줘.
+	LerpTime += _DeltaTime * LerpSpeed;
+	float4 Pos = float4::LerpClimp(StartPos, EndPos, LerpTime);
+	LerpTileRenderer->SetRenderPos(Pos);
+
+	if (1 <= LerpTime)
+	{
+		float4 Pos = PosToIndex(EndPos - TileSize.Half() - LerpTilePos);
+
+		Tiles[Pos.iY()][Pos.iX()] = LerpTileRenderer;
+
+		LerpTileRenderer = nullptr;
+	}
 }
 
 //                                                      200    300
@@ -131,5 +150,44 @@ bool TileMap::MoveTile(int X1, int Y1, int X2, int Y2, float4 _TilePos)
 
 	Tiles[Y2][X2] = Tile;
 	Tile->SetRenderPos(IndexToPos(X2, Y2) + TileSize.Half() + _TilePos);
+	return true;
+}
+
+bool TileMap::LerpTile(int X1, int Y1, int X2, int Y2, float4 _TilePos)
+{
+	if (nullptr != LerpTileRenderer)
+	{
+		return false;
+	}
+
+	if (nullptr == Tiles[Y1][X1])
+	{
+		return false;
+	}
+
+	if (nullptr != Tiles[Y2][X2])
+	{
+		return false;
+	}
+
+	// Lerp
+	// 100, 100
+
+	// 200, 200
+
+	// 200, 200 - 100, 100
+	// 100, 100
+
+	// 여기서는 이동하는게 아니라
+	// 서서히 움직일 준비를 하는 함수.
+	LerpTileRenderer = Tiles[Y1][X1];
+	Tiles[Y1][X1] = nullptr;
+	Tiles[Y2][X2] = nullptr;
+	LerpTilePos = _TilePos;
+
+	StartPos = IndexToPos(X1, Y1) + TileSize.Half() + _TilePos;
+	EndPos = IndexToPos(X2, Y2) + TileSize.Half() + _TilePos;
+	LerpTime = 0.0f;
+
 	return true;
 }

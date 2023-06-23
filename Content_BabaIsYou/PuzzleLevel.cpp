@@ -302,7 +302,7 @@ void PuzzleLevel::Update(float _Delta)
 	// RIGHT
 	if (true == GameEngineInput::IsDown('D'))
 	{
-		IsMove = TileGrid->MoveTile(Index_X, Index_Y, Index_X + 1, Index_Y, BackGridPos);
+		IsMove = TileGrid->LerpTile(Index_X, Index_Y, Index_X + 1, Index_Y, BackGridPos);
 		
 		if (true == IsMove)
 		{
@@ -335,7 +335,7 @@ void PuzzleLevel::Update(float _Delta)
 	// UP
 	else if (true == GameEngineInput::IsDown('W'))
 	{
-		IsMove = TileGrid->MoveTile(Index_X, Index_Y, Index_X, Index_Y - 1, BackGridPos);
+		IsMove = TileGrid->LerpTile(Index_X, Index_Y, Index_X, Index_Y - 1, BackGridPos);
 
 		if (true == IsMove)
 		{
@@ -368,7 +368,7 @@ void PuzzleLevel::Update(float _Delta)
 	// LEFT
 	else if (true == GameEngineInput::IsDown('A'))
 	{
-		IsMove = TileGrid->MoveTile(Index_X, Index_Y, Index_X - 1, Index_Y, BackGridPos);
+		IsMove = TileGrid->LerpTile(Index_X, Index_Y, Index_X - 1, Index_Y, BackGridPos);
 
 		if (true == IsMove)
 		{
@@ -401,7 +401,7 @@ void PuzzleLevel::Update(float _Delta)
 	// DOWN
 	else if (true == GameEngineInput::IsDown('S'))
 	{
-		IsMove = TileGrid->MoveTile(Index_X, Index_Y, Index_X, Index_Y + 1, BackGridPos);
+		IsMove = TileGrid->LerpTile(Index_X, Index_Y, Index_X, Index_Y + 1, BackGridPos);
 
 		if (true == IsMove)
 		{
