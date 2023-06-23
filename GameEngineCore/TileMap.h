@@ -41,6 +41,10 @@ public:
 
 	float4 PosToIndex(float4 _Pos);
 
+	void DeathTile(float4 _Pos);
+
+	void DeathTile(int X, int Y);
+
 	void Update(float _DeltaTime) override;
 
 	float4 GetTileSize()
