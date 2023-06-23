@@ -34,7 +34,7 @@ private:
 	std::string AnimationName = "";
 
 	bool IsMove = false;
-
+	bool IsSentence = false;
 
 	float4 WinScale = { 0, 0 };
 	float4 BackScale = { 840, 600 };

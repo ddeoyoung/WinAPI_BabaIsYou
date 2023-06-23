@@ -193,8 +193,6 @@ void PuzzleLevel::Start()
 		}
 	}
 
-
-
 	// 퍼즐 룰 생성
 	for (int y = 0; y < 15; y++)
 	{
@@ -291,13 +289,12 @@ void PuzzleLevel::Start()
 
 
 	// Rule Check
-	for (int y = 0; y < 15; y++)
-	{
-		for (int x = 0; x < 21; x++)
-		{
-
-		}
-	}
+	// 
+	// 문장 완성은 왼쪽->오른쪽, 위쪽->아래쪽 으로만 가능
+	// Is (VERB_TEXT) 기준으로 상하좌우 체크 -> 문장이 만들어진다면
+	// ACTOR_TYPE이 SUBJECT_TEXT인 타일은,  BEHAVE_TEXT의 ACTOR_BEHAVE 속성을 갖는다
+	
+	// (주어) (동사) (행동)
 }
 
 void PuzzleLevel::Update(float _Delta)
@@ -433,4 +430,5 @@ void PuzzleLevel::Update(float _Delta)
 			}
 		}
 	}
+
 }

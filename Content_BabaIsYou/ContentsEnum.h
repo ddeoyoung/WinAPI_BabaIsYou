@@ -26,7 +26,7 @@ enum class COLLISION_ORDER
 enum class TEXT_COLOR
 {
 	WHITE	= 0,
-	PICK,
+	PINK,
 };
 
 enum class ACTOR_TYPE
