@@ -7,7 +7,6 @@
 #include <GameEnginePlatform/GameEngineWindow.h>
 #include <GameEnginePlatform/GameEngineInput.h>
 
-
 #include "ContentsEnum.h"
 #include "Background_Gray.h"
 #include "Background_Black.h"
@@ -193,7 +192,7 @@ void PuzzleLevel::Start()
 		}
 	}
 
-	// ÆÛÁñ ·ê »ý¼º
+	// ÆÛÁñ Á¤ÀÇ
 	for (int y = 0; y < 15; y++)
 	{
 		for (int x = 0; x < 21; x++)
@@ -204,6 +203,7 @@ void PuzzleLevel::Start()
 			// WALL
 			if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(255, 0, 0))
 			{
+				TileRenderer->SetName("WALL");
 				ACTOR_TYPE Wall_Type = ACTOR_TYPE::ACTOR;
 				ACTOR_BEHAVE Wall_Behave = ACTOR_BEHAVE::STOP;
 			}
@@ -211,6 +211,7 @@ void PuzzleLevel::Start()
 			// GRASS
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(0, 180, 0))
 			{
+				TileRenderer->SetName("GRASS");
 				ACTOR_TYPE Grass_Type = ACTOR_TYPE::ACTOR;
 				ACTOR_BEHAVE Grass_Behave = ACTOR_BEHAVE::NONE;
 			}
@@ -218,6 +219,7 @@ void PuzzleLevel::Start()
 			// BABA
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(0, 0, 0))
 			{
+				TileRenderer->SetName("BABA");
 				ACTOR_TYPE Baba_Type = ACTOR_TYPE::ACTOR;
 				ACTOR_BEHAVE Baba_Behave = ACTOR_BEHAVE::YOU;
 			}
@@ -225,6 +227,7 @@ void PuzzleLevel::Start()
 			// BLOCK
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(0, 0, 100))
 			{
+				TileRenderer->SetName("BLOCK");
 				ACTOR_TYPE Block_Type = ACTOR_TYPE::ACTOR;
 				ACTOR_BEHAVE Block_Behave = ACTOR_BEHAVE::NONE;
 			}
@@ -232,6 +235,7 @@ void PuzzleLevel::Start()
 			// FLAG
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(255, 255, 0))
 			{
+				TileRenderer->SetName("FLAG");
 				ACTOR_TYPE Flag_Type = ACTOR_TYPE::ACTOR;
 				ACTOR_BEHAVE Flag_Behave = ACTOR_BEHAVE::WIN;
 			}
@@ -239,6 +243,7 @@ void PuzzleLevel::Start()
 			// WALL_TEXT
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(50, 50, 50))
 			{
+				TileRenderer->SetName("WALL_TEXT");
 				ACTOR_TYPE WallText_Type = ACTOR_TYPE::SUBJECT_TEXT;
 				ACTOR_BEHAVE WallText_Behave = ACTOR_BEHAVE::PUSH;
 			}
@@ -246,6 +251,7 @@ void PuzzleLevel::Start()
 			// IS_TEXT
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(200, 200, 200))
 			{
+				TileRenderer->SetName("IS_TEXT");
 				ACTOR_TYPE IsText_Type = ACTOR_TYPE::VERB_TEXT;
 				ACTOR_BEHAVE IsText_Behave = ACTOR_BEHAVE::PUSH;
 			}
@@ -253,6 +259,7 @@ void PuzzleLevel::Start()
 			// FLAG_TEXT
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(255, 200, 0))
 			{
+				TileRenderer->SetName("FLAG_TEXT");
 				ACTOR_TYPE FlagText_Type = ACTOR_TYPE::SUBJECT_TEXT;
 				ACTOR_BEHAVE FlagText_Behave = ACTOR_BEHAVE::PUSH;
 			}
@@ -260,6 +267,7 @@ void PuzzleLevel::Start()
 			// BABA_TEXT
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(255, 100, 100))
 			{
+				TileRenderer->SetName("BABA_TEXT");
 				ACTOR_TYPE BabaText_Type = ACTOR_TYPE::SUBJECT_TEXT;
 				ACTOR_BEHAVE BabaText_Behave = ACTOR_BEHAVE::PUSH;
 			}
@@ -267,6 +275,7 @@ void PuzzleLevel::Start()
 			// YOU_TEXT
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(100, 50, 50))
 			{
+				TileRenderer->SetName("YOU_TEXT");
 				ACTOR_TYPE YouText_Type = ACTOR_TYPE::BEHAVE_TEXT;
 				ACTOR_BEHAVE YouText_Behave = ACTOR_BEHAVE::PUSH;
 			}
@@ -274,6 +283,7 @@ void PuzzleLevel::Start()
 			// WIN_TEXT
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(200, 200, 0))
 			{
+				TileRenderer->SetName("WIN_TEXT");
 				ACTOR_TYPE WinText_Type = ACTOR_TYPE::BEHAVE_TEXT;
 				ACTOR_BEHAVE WinText_Behave = ACTOR_BEHAVE::PUSH;
 			}
@@ -281,6 +291,7 @@ void PuzzleLevel::Start()
 			// STOP_TEXT
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(0, 100, 0))
 			{
+				TileRenderer->SetName("STOP_TEXT");
 				ACTOR_TYPE StopText_Type = ACTOR_TYPE::BEHAVE_TEXT;
 				ACTOR_BEHAVE StopText_Behave = ACTOR_BEHAVE::PUSH;
 			}

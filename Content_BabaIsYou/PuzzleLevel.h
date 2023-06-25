@@ -2,6 +2,7 @@
 #include <GameEngineCore/GameEngineLevel.h>
 #include <Windows.h>
 #include <string>
+#include <map>
 
 
 // Ό³Έν :
