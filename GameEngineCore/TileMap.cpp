@@ -189,20 +189,21 @@ bool TileMap::LerpTile(int X1, int Y1, int X2, int Y2, float4 _TilePos)
 	// 여기서는 이동하는게 아니라
 	// 서서히 움직일 준비를 하는 함수.
 	// LerpTileRenderer = Tiles[Y1][X1];
+	LerpTileInfo NewInfo;
+	NewInfo.LerpTileRenderer = Tiles[Y1][X1];
+	NewInfo.LerpTilePos = _TilePos;
+	NewInfo.StartPos = IndexToPos(X1, Y1) + TileSize.Half() + _TilePos;
+	NewInfo.EndPos = IndexToPos(X2, Y2) + TileSize.Half() + _TilePos;
+
 	Tiles[Y1][X1] = nullptr;
 	Tiles[Y2][X2] = nullptr;
 
-	LerpTileInfo NewInfo;
 
 	//LerpTilePos = _TilePos;
 	//StartPos = IndexToPos(X1, Y1) + TileSize.Half() + _TilePos;
 	//EndPos = IndexToPos(X2, Y2) + TileSize.Half() + _TilePos;
 	//LerpTime = 0.0f;
 
-	NewInfo.LerpTileRenderer = Tiles[Y1][X1];
-	NewInfo.LerpTilePos = _TilePos;
-	NewInfo.StartPos = IndexToPos(X1, Y1) + TileSize.Half() + _TilePos;
-	NewInfo.EndPos = IndexToPos(X2, Y2) + TileSize.Half() + _TilePos;
 
 	LerpTime = 0.0f;
 
@@ -239,7 +240,7 @@ void TileMap::DeathTile(int X, int Y)
 
 bool TileMap::IsLerpRenderer(GameEngineRenderer* _Renderer)
 {
-	for (size_t i = 0; i < Tiles.size(); i++)
+	for (size_t i = 0; i < LerpInfos.size(); i++)
 	{
 		if (LerpInfos[i].LerpTileRenderer == _Renderer)
 		{

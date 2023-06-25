@@ -65,7 +65,7 @@ public:
 	bool IsLerpMove()
 	{
 
-		return LerpInfos.size() == 0;
+		return LerpInfos.size() != 0;
 		// return nullptr != LerpTileRenderer;
 	}
 
