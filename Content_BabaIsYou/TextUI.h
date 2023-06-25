@@ -39,8 +39,8 @@ private:
 
 	TEXT_COLOR TextColor = TEXT_COLOR::WHITE;
 
-	int SpriteIndex;
-	char CurText;
+	int SpriteIndex = 0;
+	char CurText = 'a';
 	float4 TextScale;
 };
 

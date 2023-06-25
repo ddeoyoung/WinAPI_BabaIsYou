@@ -34,6 +34,7 @@ private:
 
 	std::string AnimationName = "";
 
+	bool IsTile = false;
 	bool IsMove = false;
 	bool IsSentence = false;
 
