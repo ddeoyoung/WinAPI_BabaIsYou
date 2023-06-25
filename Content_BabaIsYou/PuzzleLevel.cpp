@@ -316,92 +316,80 @@ void PuzzleLevel::Update(float _Delta)
 	// RIGHT
 	if (true == GameEngineInput::IsDown('D'))
 	{
-		//// 오른쪽 타일
-		//GameEngineRenderer* NextTile = TileGrid->GetTile(Index_X + 1, Index_Y);
+		// 오른쪽 타일
+		NextTile = TileGrid->GetTile(Index_X + 1, Index_Y);
 
-		//if (nullptr != NextTile)
-		//{
-		//	for (int Cur_X = Index_X; Cur_X < 21; Cur_X++)
-		//	{
-		//		int CountTile = 0;
+		if (nullptr != NextTile)
+		{
+			TileGrid->LerpTile(Index_X + 1, Index_Y, Index_X + 2, Index_Y, BackGridPos);
+			TileGrid->LerpTile(Index_X, Index_Y, Index_X + 1, Index_Y, BackGridPos);
+			Index_X += 1;
+		}
 
-		//		GameEngineRenderer* CheckTile = TileGrid->GetTile(Cur_X, Index_Y);
-		//		if (nullptr != CheckTile)
-		//		{
-		//			CountTile += 1;
-		//			//TileGrid->LerpTile(Cur_X, Index_Y, Cur_X + 1, Index_Y, BackGridPos);
-		//		}
-		//	}
+		else if (nullptr == NextTile)
+		{
+			IsMove = TileGrid->LerpTile(Index_X, Index_Y, Index_X + 1, Index_Y, BackGridPos);
 
-		//	//TileGrid->LerpTile(Index_X + 1, Index_Y, Index_X + 2, Index_Y, BackGridPos);
-		//	//TileGrid->LerpTile(Index_X, Index_Y, Index_X + 1, Index_Y, BackGridPos);
-		//}
+			if (true == IsMove)
+			{
+				Index_X += 1;
 
-
-		//else if (nullptr == NextTile)
-		//{
-		//	IsMove = TileGrid->LerpTile(Index_X, Index_Y, Index_X + 1, Index_Y, BackGridPos);
-
-		//	if (true == IsMove)
-		//	{
-		//		Index_X += 1;
-
-		//		// 바바 애니메이션 변경
-		//		switch (BabaMoveStep)
-		//		{
-		//		case 0:
-		//			MainRenderer->ChangeAnimation("Baba_Right");
-		//			BabaMoveStep += 1;
-		//			break;
-		//		case 1:
-		//			MainRenderer->ChangeAnimation("Baba_Right2");
-		//			BabaMoveStep += 1;
-		//			break;
-		//		case 2:
-		//			MainRenderer->ChangeAnimation("Baba_Right3");
-		//			BabaMoveStep += 1;
-		//			break;
-		//		case 3:
-		//			MainRenderer->ChangeAnimation("Baba_Right4");
-		//			BabaMoveStep = 0;
-		//			break;
-		//		default:
-		//			break;
-		//		}
-		//	}
-		//}
+				// 바바 애니메이션 변경
+				switch (BabaMoveStep)
+				{
+				case 0:
+					MainRenderer->ChangeAnimation("Baba_Right");
+					BabaMoveStep += 1;
+					break;
+				case 1:
+					MainRenderer->ChangeAnimation("Baba_Right2");
+					BabaMoveStep += 1;
+					break;
+				case 2:
+					MainRenderer->ChangeAnimation("Baba_Right3");
+					BabaMoveStep += 1;
+					break;
+				case 3:
+					MainRenderer->ChangeAnimation("Baba_Right4");
+					BabaMoveStep = 0;
+					break;
+				default:
+					break;
+				}
+			}
+		}
 
 
 		// 바바 이동 13, 11 -> 14, 11
-		IsMove = TileGrid->LerpTile(Index_X, Index_Y, Index_X + 1, Index_Y, BackGridPos);
+		//IsMove = TileGrid->LerpTile(Index_X, Index_Y, Index_X + 1, Index_Y, BackGridPos);
 
-		if (true == IsMove)
-		{
-			Index_X += 1;
-			
-			// 바바 애니메이션 변경
-			switch (BabaMoveStep)
-			{
-			case 0:
-				MainRenderer->ChangeAnimation("Baba_Right");
-				BabaMoveStep += 1;
-				break;
-			case 1:
-				MainRenderer->ChangeAnimation("Baba_Right2");
-				BabaMoveStep += 1;
-				break;
-			case 2:
-				MainRenderer->ChangeAnimation("Baba_Right3");
-				BabaMoveStep += 1;
-				break;
-			case 3:
-				MainRenderer->ChangeAnimation("Baba_Right4");
-				BabaMoveStep = 0;
-				break;
-			default:
-				break;
-			}
-		}
+		//if (true == IsMove)
+		//{
+		//	Index_X += 1;
+		//	
+		//	// 바바 애니메이션 변경
+		//	switch (BabaMoveStep)
+		//	{
+		//	case 0:
+		//		MainRenderer->ChangeAnimation("Baba_Right");
+		//		BabaMoveStep += 1;
+		//		break;
+		//	case 1:
+		//		MainRenderer->ChangeAnimation("Baba_Right2");
+		//		BabaMoveStep += 1;
+		//		break;
+		//	case 2:
+		//		MainRenderer->ChangeAnimation("Baba_Right3");
+		//		BabaMoveStep += 1;
+		//		break;
+		//	case 3:
+		//		MainRenderer->ChangeAnimation("Baba_Right4");
+		//		BabaMoveStep = 0;
+		//		break;
+		//	default:
+		//		break;
+		//	}
+		//}
 	
 	}
 

@@ -55,5 +55,7 @@ private:
 	GameEngineRenderer* MainRenderer = nullptr;
 	GameEngineRenderer* TileRenderer = nullptr;
 	GameEngineRenderer* TextRenderer = nullptr;
+
+	GameEngineRenderer* NextTile = nullptr;
 };
 
