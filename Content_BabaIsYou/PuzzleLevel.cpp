@@ -298,6 +298,7 @@ void PuzzleLevel::Start()
 		}
 	}
 
+	TileGrid->SetLerpSpeed(10.0f);
 
 	// Rule Check
 	// 
