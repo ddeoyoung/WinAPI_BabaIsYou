@@ -82,14 +82,14 @@ public:
 		LiveTime = 0.0f;
 	}
 
-	void SetName(std::string _Name)
+	void SetName(const std::string& _Name)
 	{
 		Name = _Name;
 	}
 
 	std::string GetName()
 	{
-		Name;
+		return Name;
 	}
 
 protected:
