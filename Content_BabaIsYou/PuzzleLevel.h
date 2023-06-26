@@ -22,8 +22,6 @@ public:
 	int Index_X = 13;
 	int Index_Y = 11;
 
-
-
 protected:
 
 private:
@@ -33,6 +31,14 @@ private:
 	int BabaMoveStep = 0;
 
 	std::string AnimationName = "";
+
+	std::string TileName = "";
+
+	std::string SubjectTileName = "";
+	std::string VerbTileName = "";
+	std::string BehaveTileName = "";
+
+	std::string RuleResult = "";
 
 	bool IsTile = false;
 	bool IsMove = false;
@@ -57,5 +63,6 @@ private:
 	GameEngineRenderer* TextRenderer = nullptr;
 
 	GameEngineRenderer* NextTile = nullptr;
+	GameEngineRenderer* CurTile = nullptr;
 };
 

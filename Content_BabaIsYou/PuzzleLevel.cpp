@@ -54,6 +54,8 @@ void PuzzleLevel::Start()
 	TileGrid = CreateActor<TileMap>();
 	TileGrid->CreateTileMap("Actor.bmp", 21, 15, { 40 , 40 }, 2);
 
+	TileGrid->SetLerpSpeed(10.0f);
+
 
 	// 맵 세팅
 	// MapTexture - Stage 1
@@ -108,7 +110,7 @@ void PuzzleLevel::Start()
 				TileRenderer->CreateAnimationToFrame("Baba_Right4", "Actor.bmp", { 5, 29, 53 }, 0.2f, true);
 				TileRenderer->CreateAnimationToFrame("Baba_Up4", "Actor.bmp", { 9, 33, 57 }, 0.2f, true);
 				TileRenderer->CreateAnimationToFrame("Baba_Down4", "Actor.bmp", { 17, 41, 65 }, 0.2f, true);
-				TileRenderer->ChangeAnimation("Baba_Down");
+				TileRenderer->ChangeAnimation("Baba_Left");
 
 				MainRenderer = TileRenderer;
 			}
@@ -204,101 +206,75 @@ void PuzzleLevel::Start()
 			if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(255, 0, 0))
 			{
 				TileRenderer->SetName("WALL");
-				ACTOR_TYPE Wall_Type = ACTOR_TYPE::ACTOR;
-				ACTOR_BEHAVE Wall_Behave = ACTOR_BEHAVE::STOP;
 			}
 
 			// GRASS
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(0, 180, 0))
 			{
 				TileRenderer->SetName("GRASS");
-				ACTOR_TYPE Grass_Type = ACTOR_TYPE::ACTOR;
-				ACTOR_BEHAVE Grass_Behave = ACTOR_BEHAVE::NONE;
 			}
 
 			// BABA
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(0, 0, 0))
 			{
 				TileRenderer->SetName("BABA");
-				ACTOR_TYPE Baba_Type = ACTOR_TYPE::ACTOR;
-				ACTOR_BEHAVE Baba_Behave = ACTOR_BEHAVE::YOU;
 			}
 
 			// BLOCK
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(0, 0, 100))
 			{
 				TileRenderer->SetName("BLOCK");
-				ACTOR_TYPE Block_Type = ACTOR_TYPE::ACTOR;
-				ACTOR_BEHAVE Block_Behave = ACTOR_BEHAVE::NONE;
 			}
 
 			// FLAG
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(255, 255, 0))
 			{
 				TileRenderer->SetName("FLAG");
-				ACTOR_TYPE Flag_Type = ACTOR_TYPE::ACTOR;
-				ACTOR_BEHAVE Flag_Behave = ACTOR_BEHAVE::WIN;
 			}
 
 			// WALL_TEXT
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(50, 50, 50))
 			{
 				TileRenderer->SetName("WALL_TEXT");
-				ACTOR_TYPE WallText_Type = ACTOR_TYPE::SUBJECT_TEXT;
-				ACTOR_BEHAVE WallText_Behave = ACTOR_BEHAVE::PUSH;
 			}
 
 			// IS_TEXT
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(200, 200, 200))
 			{
 				TileRenderer->SetName("IS_TEXT");
-				ACTOR_TYPE IsText_Type = ACTOR_TYPE::VERB_TEXT;
-				ACTOR_BEHAVE IsText_Behave = ACTOR_BEHAVE::PUSH;
 			}
 
 			// FLAG_TEXT
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(255, 200, 0))
 			{
 				TileRenderer->SetName("FLAG_TEXT");
-				ACTOR_TYPE FlagText_Type = ACTOR_TYPE::SUBJECT_TEXT;
-				ACTOR_BEHAVE FlagText_Behave = ACTOR_BEHAVE::PUSH;
 			}
 
 			// BABA_TEXT
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(255, 100, 100))
 			{
 				TileRenderer->SetName("BABA_TEXT");
-				ACTOR_TYPE BabaText_Type = ACTOR_TYPE::SUBJECT_TEXT;
-				ACTOR_BEHAVE BabaText_Behave = ACTOR_BEHAVE::PUSH;
 			}
 
 			// YOU_TEXT
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(100, 50, 50))
 			{
 				TileRenderer->SetName("YOU_TEXT");
-				ACTOR_TYPE YouText_Type = ACTOR_TYPE::BEHAVE_TEXT;
-				ACTOR_BEHAVE YouText_Behave = ACTOR_BEHAVE::PUSH;
 			}
 
 			// WIN_TEXT
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(200, 200, 0))
 			{
 				TileRenderer->SetName("WIN_TEXT");
-				ACTOR_TYPE WinText_Type = ACTOR_TYPE::BEHAVE_TEXT;
-				ACTOR_BEHAVE WinText_Behave = ACTOR_BEHAVE::PUSH;
 			}
 
 			// STOP_TEXT
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(0, 100, 0))
 			{
 				TileRenderer->SetName("STOP_TEXT");
-				ACTOR_TYPE StopText_Type = ACTOR_TYPE::BEHAVE_TEXT;
-				ACTOR_BEHAVE StopText_Behave = ACTOR_BEHAVE::PUSH;
 			}
 		}
 	}
-
-	TileGrid->SetLerpSpeed(10.0f);
 
 	// Rule Check
 	// 
@@ -532,6 +508,61 @@ void PuzzleLevel::Update(float _Delta)
 				break;
 			default:
 				break;
+			}
+		}
+	}
+
+	// 문장 체크
+	// TileGrid->GetTile()->GetName();
+	for (int y = 0; y < 15; y++)
+	{
+		for (int x = 0; x < 21; x++)
+		{
+			CurTile = TileGrid->GetTile(x, y);
+
+			if (nullptr != CurTile)
+			{
+				TileName = CurTile->GetName();
+
+				// 주어 텍스트 체크
+				// 문장 완성은 왼쪽->오른쪽, 위쪽->아래쪽만 가능
+				if (TileName == "WALL_TEXT" ||  TileName == "FLAG_TEXT" || TileName == "BABA_TEXT" )
+				{
+					SubjectTileName = TileName + " ";
+
+					// 아래쪽 동사 텍스트 체크
+					CurTile = TileGrid->GetTile(x, y + 1);
+
+					if (nullptr != CurTile)
+					{
+						TileName = CurTile->GetName();
+
+						if (TileName == "IS_TEXT")
+						{
+							VerbTileName = TileName + " ";
+						}
+
+						// 마지막 행동 텍스트 체크
+						CurTile = TileGrid->GetTile(x, y + 2);
+
+						if (nullptr != CurTile)
+						{
+							TileName = CurTile->GetName();
+
+							if (TileName == "STOP_TEXT")
+							{
+								BehaveTileName = TileName;
+							}
+						}
+					}
+				}
+			}
+
+			RuleResult = SubjectTileName + VerbTileName + BehaveTileName;
+
+			if (RuleResult == "WALL_TEXT IS_TEXT STOP_TEXT")
+			{
+				int a = 0;
 			}
 		}
 	}
