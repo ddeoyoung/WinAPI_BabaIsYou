@@ -321,9 +321,24 @@ void PuzzleLevel::Update(float _Delta)
 
 		if (nullptr != NextTile)
 		{
-			TileGrid->LerpTile(Index_X + 1, Index_Y, Index_X + 2, Index_Y, BackGridPos);
-			TileGrid->LerpTile(Index_X, Index_Y, Index_X + 1, Index_Y, BackGridPos);
-			Index_X += 1;
+			int Count = 0;
+			// 다음 타일이 없을 때까지 체크
+			while (nullptr != NextTile)
+			{
+				Count++;
+				NextTile = TileGrid->GetTile(Index_X + Count, Index_Y);
+			}
+
+			// 여러 타일 한 번에 밀기
+			for (int i = Count; i >= 0; i--)
+			{
+				IsMove = TileGrid->LerpTile(Index_X + i, Index_Y, Index_X + i + 1, Index_Y, BackGridPos);
+			}
+
+			if (true == IsMove)
+			{
+				Index_X += 1;
+			}
 		}
 
 		else if (nullptr == NextTile)
@@ -358,7 +373,6 @@ void PuzzleLevel::Update(float _Delta)
 				}
 			}
 		}
-
 
 		// 바바 이동 13, 11 -> 14, 11
 		//IsMove = TileGrid->LerpTile(Index_X, Index_Y, Index_X + 1, Index_Y, BackGridPos);
