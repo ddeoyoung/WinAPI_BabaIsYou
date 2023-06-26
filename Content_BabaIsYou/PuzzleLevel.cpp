@@ -322,6 +322,7 @@ void PuzzleLevel::Update(float _Delta)
 		if (nullptr != NextTile)
 		{
 			int Count = 0;
+
 			// 다음 타일이 없을 때까지 체크
 			while (nullptr != NextTile)
 			{
@@ -373,69 +374,63 @@ void PuzzleLevel::Update(float _Delta)
 				}
 			}
 		}
-
-		// 바바 이동 13, 11 -> 14, 11
-		//IsMove = TileGrid->LerpTile(Index_X, Index_Y, Index_X + 1, Index_Y, BackGridPos);
-
-		//if (true == IsMove)
-		//{
-		//	Index_X += 1;
-		//	
-		//	// 바바 애니메이션 변경
-		//	switch (BabaMoveStep)
-		//	{
-		//	case 0:
-		//		MainRenderer->ChangeAnimation("Baba_Right");
-		//		BabaMoveStep += 1;
-		//		break;
-		//	case 1:
-		//		MainRenderer->ChangeAnimation("Baba_Right2");
-		//		BabaMoveStep += 1;
-		//		break;
-		//	case 2:
-		//		MainRenderer->ChangeAnimation("Baba_Right3");
-		//		BabaMoveStep += 1;
-		//		break;
-		//	case 3:
-		//		MainRenderer->ChangeAnimation("Baba_Right4");
-		//		BabaMoveStep = 0;
-		//		break;
-		//	default:
-		//		break;
-		//	}
-		//}
-	
 	}
 
 	// UP
 	else if (true == GameEngineInput::IsDown('W'))
 	{
-		IsMove = TileGrid->LerpTile(Index_X, Index_Y, Index_X, Index_Y - 1, BackGridPos);
+		NextTile = TileGrid->GetTile(Index_X, Index_Y - 1);
 
-		if (true == IsMove)
+		if (nullptr != NextTile)
 		{
-			Index_Y -= 1;
+			int Count = 0;
 
-			switch (BabaMoveStep)
+			while (nullptr != NextTile)
 			{
-			case 0:
-				MainRenderer->ChangeAnimation("Baba_Up");
-				BabaMoveStep += 1;
-				break;
-			case 1:
-				MainRenderer->ChangeAnimation("Baba_Up2");
-				BabaMoveStep += 1;
-				break;
-			case 2:
-				MainRenderer->ChangeAnimation("Baba_Up3");
-				BabaMoveStep += 1;
-				break;
-			case 3:
-				MainRenderer->ChangeAnimation("Baba_Up4");
-				BabaMoveStep = 0;
-				break;
-			default:
-				break;
+				Count++;
+				NextTile = TileGrid->GetTile(Index_X, Index_Y - Count);
+			}
+
+			for (int i = Count; i >= 0; i--)
+			{
+				IsMove = TileGrid->LerpTile(Index_X, Index_Y - i, Index_X, Index_Y - i - 1, BackGridPos);
+			}
+
+			if (true == IsMove)
+			{
+				Index_Y -= 1;
+			}
+		}
+
+		else if (nullptr == NextTile)
+		{
+			IsMove = TileGrid->LerpTile(Index_X, Index_Y, Index_X, Index_Y - 1, BackGridPos);
+
+			if (true == IsMove)
+			{
+				Index_Y -= 1;
+
+				switch (BabaMoveStep)
+				{
+				case 0:
+					MainRenderer->ChangeAnimation("Baba_Up");
+					BabaMoveStep += 1;
+					break;
+				case 1:
+					MainRenderer->ChangeAnimation("Baba_Up2");
+					BabaMoveStep += 1;
+					break;
+				case 2:
+					MainRenderer->ChangeAnimation("Baba_Up3");
+					BabaMoveStep += 1;
+					break;
+				case 3:
+					MainRenderer->ChangeAnimation("Baba_Up4");
+					BabaMoveStep = 0;
+					break;
+				default:
+					break;
+				}
 			}
 		}
 	}
@@ -443,32 +438,59 @@ void PuzzleLevel::Update(float _Delta)
 	// LEFT
 	else if (true == GameEngineInput::IsDown('A'))
 	{
-		IsMove = TileGrid->LerpTile(Index_X, Index_Y, Index_X - 1, Index_Y, BackGridPos);
+		// 왼쪽 타일
+		NextTile = TileGrid->GetTile(Index_X - 1, Index_Y);
 
-		if (true == IsMove)
+		if (nullptr != NextTile)
 		{
-			Index_X -= 1;
+			int Count = 0;
 
-			switch (BabaMoveStep)
+			while (nullptr != NextTile)
 			{
-			case 0:
-				MainRenderer->ChangeAnimation("Baba_Left");
-				BabaMoveStep += 1;
-				break;
-			case 1:
-				MainRenderer->ChangeAnimation("Baba_Left2");
-				BabaMoveStep += 1;
-				break;
-			case 2:
-				MainRenderer->ChangeAnimation("Baba_Left3");
-				BabaMoveStep += 1;
-				break;
-			case 3:
-				MainRenderer->ChangeAnimation("Baba_Left4");
-				BabaMoveStep = 0;
-				break;
-			default:
-				break;
+				Count++;
+				NextTile = TileGrid->GetTile(Index_X - Count, Index_Y);
+			}
+
+			for (int i = Count; i >= 0; i--)
+			{
+				IsMove = TileGrid->LerpTile(Index_X - i, Index_Y, Index_X - i - 1, Index_Y, BackGridPos);
+			}
+
+			if (true == IsMove)
+			{
+				Index_X -= 1;
+			}
+		}
+
+		else if (nullptr == NextTile)
+		{
+			IsMove = TileGrid->LerpTile(Index_X, Index_Y, Index_X - 1, Index_Y, BackGridPos);
+
+			if (true == IsMove)
+			{
+				Index_X -= 1;
+
+				switch (BabaMoveStep)
+				{
+				case 0:
+					MainRenderer->ChangeAnimation("Baba_Left");
+					BabaMoveStep += 1;
+					break;
+				case 1:
+					MainRenderer->ChangeAnimation("Baba_Left2");
+					BabaMoveStep += 1;
+					break;
+				case 2:
+					MainRenderer->ChangeAnimation("Baba_Left3");
+					BabaMoveStep += 1;
+					break;
+				case 3:
+					MainRenderer->ChangeAnimation("Baba_Left4");
+					BabaMoveStep = 0;
+					break;
+				default:
+					break;
+				}
 			}
 		}
 	}
@@ -476,36 +498,60 @@ void PuzzleLevel::Update(float _Delta)
 	// DOWN
 	else if (true == GameEngineInput::IsDown('S'))
 	{
-		IsMove = TileGrid->LerpTile(Index_X, Index_Y, Index_X, Index_Y + 1, BackGridPos);
+		// 아래쪽 타일
+		NextTile = TileGrid->GetTile(Index_X, Index_Y + 1);
 
-		if (true == IsMove)
+		if (nullptr != NextTile)
 		{
-			Index_Y += 1;
+			int Count = 0;
 
-			switch (BabaMoveStep)
+			while (nullptr != NextTile)
 			{
-			case 0:
-				MainRenderer->ChangeAnimation("Baba_Down");
-				BabaMoveStep += 1;
-				break;
-			case 1:
-				MainRenderer->ChangeAnimation("Baba_Down2");
-				BabaMoveStep += 1;
-				break;
-			case 2:
-				MainRenderer->ChangeAnimation("Baba_Down3");
-				BabaMoveStep += 1;
-				break;
-			case 3:
-				MainRenderer->ChangeAnimation("Baba_Down4");
-				BabaMoveStep = 0;
-				break;
-			default:
-				break;
+				Count++;
+				NextTile = TileGrid->GetTile(Index_X, Index_Y + Count);
+			}
+
+			for (int i = Count; i >= 0; i--)
+			{
+				IsMove = TileGrid->LerpTile(Index_X, Index_Y + i, Index_X, Index_Y + i + 1, BackGridPos);
+			}
+
+			if (true == IsMove)
+			{
+				Index_Y += 1;
+			}
+		}
+
+		else if (nullptr == NextTile)
+		{
+			IsMove = TileGrid->LerpTile(Index_X, Index_Y, Index_X, Index_Y + 1, BackGridPos);
+
+			if (true == IsMove)
+			{
+				Index_Y += 1;
+
+				switch (BabaMoveStep)
+				{
+				case 0:
+					MainRenderer->ChangeAnimation("Baba_Down");
+					BabaMoveStep += 1;
+					break;
+				case 1:
+					MainRenderer->ChangeAnimation("Baba_Down2");
+					BabaMoveStep += 1;
+					break;
+				case 2:
+					MainRenderer->ChangeAnimation("Baba_Down3");
+					BabaMoveStep += 1;
+					break;
+				case 3:
+					MainRenderer->ChangeAnimation("Baba_Down4");
+					BabaMoveStep = 0;
+					break;
+				default:
+					break;
+				}
 			}
 		}
 	}
-
-
-
 }
