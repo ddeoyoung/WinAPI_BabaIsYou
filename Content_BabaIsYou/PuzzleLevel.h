@@ -3,7 +3,15 @@
 #include <Windows.h>
 #include <string>
 #include <set>
+#include <vector>
 
+class ResultInfo 
+{
+public:
+	std::string Subject;
+	std::string Verb;
+	std::string Behave;
+};
 
 // Ό³Έν :
 class PuzzleLevel : public GameEngineLevel
@@ -33,16 +41,17 @@ private:
 
 	std::string AnimationName = "";
 	std::string TileName = "";
+
 	std::string SubjectTileName = "";
 	std::string VerbTileName = "";
 	std::string BehaveTileName = "";
-	std::string RuleResult = "";
 
 	std::set<std::string> SubjectSet;
 	std::set<std::string> VerbSet;
 	std::set<std::string> BehaveSet;
 
 	std::set<std::string> RuleSet;
+
 
 	bool IsTile = false;
 	bool IsMove = false;
@@ -70,7 +79,8 @@ private:
 	GameEngineRenderer* CurTile = nullptr;
 
 	void MoveCheck();
-
 	void WinCheck();
+
+	ResultInfo GetPuzzleInfo(std::string _Text);
 };
 

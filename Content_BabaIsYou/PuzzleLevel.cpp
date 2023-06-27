@@ -13,21 +13,45 @@
 #include "Background_Pixel.h"
 #include "FadeAnimation.h"
 #include "TextUI.h"
-#include "Baba.h"
+
+#include <sstream>
 
 PuzzleLevel::PuzzleLevel()
 {
-	SubjectSet.insert("BABA_TEXT");
-	SubjectSet.insert("WALL_TEXT");
-	VerbSet.insert("IS_TEXT");
-	BehaveSet.insert("STOP_TEXT");
-	BehaveSet.insert("WIN_TEXT");
-	BehaveSet.insert("YOU_TEXT");
+	SubjectSet.insert("BABA");
+	SubjectSet.insert("WALL");
+	SubjectSet.insert("FLAG");
 
+	VerbSet.insert("IS");
+
+	BehaveSet.insert("YOU");
+	BehaveSet.insert("STOP");
+	BehaveSet.insert("WIN");
 }
 
 PuzzleLevel::~PuzzleLevel()
 {
+}
+
+ResultInfo PuzzleLevel::GetPuzzleInfo(std::string _Text) 
+{
+	ResultInfo Return;
+
+	// 문자열 자르기
+	std::istringstream StringSplit(_Text);
+	std::vector<std::string> ReturnTileNames;
+	std::string ReturnTileName;
+
+	while (getline(StringSplit, ReturnTileName, ' ')) //공백 단위로 구분
+	{
+		ReturnTileNames.push_back(ReturnTileName);
+	}
+
+	Return.Subject = ReturnTileNames[0];
+	Return.Verb = ReturnTileNames[1];
+	Return.Behave = ReturnTileNames[2];
+
+	return Return;
 }
 
 void PuzzleLevel::Start()
@@ -78,29 +102,29 @@ void PuzzleLevel::Start()
 			float fx = x;
 			float fy = y;
 
-			// WALL
+			// WALL_ACTOR
 			if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(255, 0, 0))
 			{ 
 				TileRenderer = TileGrid->SetTile(x, y, 290, BackGridPos);
-				TileRenderer->SetName("WALL");
-				TileRenderer->CreateAnimationToFrame("WALL", "Actor.bmp", { 290, 314, 338 }, 0.2f, true);
-				TileRenderer->ChangeAnimation("WALL");
+				TileRenderer->SetName("WALL_ACTOR");
+				TileRenderer->CreateAnimationToFrame("WALL_ACTOR", "Actor.bmp", { 290, 314, 338 }, 0.2f, true);
+				TileRenderer->ChangeAnimation("WALL_ACTOR");
 			}
 
-			// GRASS
+			// GRASS_ACTOR
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(0, 180, 0))
 			{
 				TileRenderer = TileGrid->SetTile(x, y, 506, BackGridPos);
-				TileRenderer->SetName("GRASS");
-				TileRenderer->CreateAnimationToFrame("GRASS", "Actor.bmp", { 506, 530, 554 }, 0.2f, true);
-				TileRenderer->ChangeAnimation("GRASS");
+				TileRenderer->SetName("GRASS_ACTOR");
+				TileRenderer->CreateAnimationToFrame("GRASS_ACTOR", "Actor.bmp", { 506, 530, 554 }, 0.2f, true);
+				TileRenderer->ChangeAnimation("GRASS_ACTOR");
 			}
 
-			// BABA
+			// BABA_ACTOR
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(0, 0, 0))
 			{
 				TileRenderer = TileGrid->SetTile(x, y, 2, BackGridPos);
-				TileRenderer->SetName("BABA");
+				TileRenderer->SetName("BABA_ACTOR");
 				TileRenderer->CreateAnimationToFrame("Baba_Left", "Actor.bmp", { 10, 34, 58 }, 0.2f, true);
 				TileRenderer->CreateAnimationToFrame("Baba_Right", "Actor.bmp", { 2, 26, 50 }, 0.2f, true);
 				TileRenderer->CreateAnimationToFrame("Baba_Up", "Actor.bmp", { 6, 30, 54 }, 0.2f, true);
@@ -125,90 +149,90 @@ void PuzzleLevel::Start()
 				MainRenderer = TileRenderer;
 			}
 
-			// BLOCK
+			// BLOCK_ACTOR
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(0, 0, 100))
 			{
 				TileRenderer = TileGrid->SetTile(x, y, 737, BackGridPos);
-				TileRenderer->SetName("BLOCK");
-				TileRenderer->CreateAnimationToFrame("BLOCK", "Actor.bmp", { 737, 761, 785 }, 0.2f, true);
-				TileRenderer->ChangeAnimation("BLOCK");
+				TileRenderer->SetName("BLOCK_ACTOR");
+				TileRenderer->CreateAnimationToFrame("BLOCK_ACTOR", "Actor.bmp", { 737, 761, 785 }, 0.2f, true);
+				TileRenderer->ChangeAnimation("BLOCK_ACTOR");
 			}
 
-			// FLAG
+			// FLAG_ACTOR
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(255, 255, 0))
 			{
 				TileRenderer = TileGrid->SetTile(x, y, 728, BackGridPos);
-				TileRenderer->SetName("FLAG");
-				TileRenderer->CreateAnimationToFrame("FLAG", "Actor.bmp", { 728, 752, 776 }, 0.2f, true);
-				TileRenderer->ChangeAnimation("FLAG");
+				TileRenderer->SetName("FLAG_ACTOR");
+				TileRenderer->CreateAnimationToFrame("FLAG_ACTOR", "Actor.bmp", { 728, 752, 776 }, 0.2f, true);
+				TileRenderer->ChangeAnimation("FLAG_ACTOR");
 			}
 
-			// WALL_TEXT
+			// WALL
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(50, 50, 50))
 			{
 				TileRenderer = TileGrid->SetTile(x, y, 288, BackGridPos);
-				TileRenderer->SetName("WALL_TEXT");
-				TileRenderer->CreateAnimationToFrame("WALL_TEXT", "Actor.bmp", { 288, 312, 336 }, 0.2f, true);
-				TileRenderer->ChangeAnimation("WALL_TEXT");
+				TileRenderer->SetName("WALL");
+				TileRenderer->CreateAnimationToFrame("WALL", "Actor.bmp", { 288, 312, 336 }, 0.2f, true);
+				TileRenderer->ChangeAnimation("WALL");
 			}
 
-			// IS_TEXT
+			// IS
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(200, 200, 200))
 			{
 				TileRenderer = TileGrid->SetTile(x, y, 792, BackGridPos);
-				TileRenderer->SetName("IS_TEXT");
-				TileRenderer->CreateAnimationToFrame("IS_TEXT", "Actor.bmp", { 792, 816, 840 }, 0.2f, true);
-				TileRenderer->ChangeAnimation("IS_TEXT");
+				TileRenderer->SetName("IS");
+				TileRenderer->CreateAnimationToFrame("IS", "Actor.bmp", { 792, 816, 840 }, 0.2f, true);
+				TileRenderer->ChangeAnimation("IS");
 			}
 
-			// FLAG_TEXT
+			// FLAG
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(255, 200, 0))
 			{
 				TileRenderer = TileGrid->SetTile(x, y, 726, BackGridPos);
-				TileRenderer->SetName("FLAG_TEXT");
-				//TileRenderer->CreateAnimationToFrame("FLAG_TEXT", "Actor.bmp", { 726, 750, 774 }, 0.2f, true);
-				TileRenderer->CreateAnimationToFrame("FLAG_TEXT", "Actor.bmp", { 727, 751, 775 }, 0.2f, true);
-				TileRenderer->ChangeAnimation("FLAG_TEXT");
+				TileRenderer->SetName("FLAG");
+				//TileRenderer->CreateAnimationToFrame("FLAG", "Actor.bmp", { 726, 750, 774 }, 0.2f, true);
+				TileRenderer->CreateAnimationToFrame("FLAG", "Actor.bmp", { 727, 751, 775 }, 0.2f, true);
+				TileRenderer->ChangeAnimation("FLAG");
 			}
 
-			// BABA_TEXT
+			// BABA
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(255, 100, 100))
 			{
 				TileRenderer = TileGrid->SetTile(x, y, 0, BackGridPos);
-				TileRenderer->SetName("BABA_TEXT");
-				TileRenderer->CreateAnimationToFrame("BABA_TEXT", "Actor.bmp", { 0, 24, 48 }, 0.2f, true);
-				//TileRenderer->CreateAnimationToFrame("BABA_TEXT", "Actor.bmp", { 1, 25, 49 }, 0.2f, true);
-				TileRenderer->ChangeAnimation("BABA_TEXT");
+				TileRenderer->SetName("BABA");
+				TileRenderer->CreateAnimationToFrame("BABA", "Actor.bmp", { 0, 24, 48 }, 0.2f, true);
+				//TileRenderer->CreateAnimationToFrame("BABA", "Actor.bmp", { 1, 25, 49 }, 0.2f, true);
+				TileRenderer->ChangeAnimation("BABA");
 			}
 
-			// YOU_TEXT
+			// YOU
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(100, 50, 50))
 			{
 				TileRenderer = TileGrid->SetTile(x, y, 864, BackGridPos);
-				TileRenderer->SetName("YOU_TEXT");
-				TileRenderer->CreateAnimationToFrame("YOU_TEXT", "Actor.bmp", { 864, 888, 912 }, 0.2f, true);
-				//TileRenderer->CreateAnimationToFrame("YOU_TEXT", "Actor.bmp", { 865, 889, 913 }, 0.2f, true);
-				TileRenderer->ChangeAnimation("YOU_TEXT");
+				TileRenderer->SetName("YOU");
+				TileRenderer->CreateAnimationToFrame("YOU", "Actor.bmp", { 864, 888, 912 }, 0.2f, true);
+				//TileRenderer->CreateAnimationToFrame("YOU", "Actor.bmp", { 865, 889, 913 }, 0.2f, true);
+				TileRenderer->ChangeAnimation("YOU");
 			}
 
-			// WIN_TEXT
+			// WIN
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(200, 200, 0))
 			{
 				TileRenderer = TileGrid->SetTile(x, y, 864, BackGridPos);
-				TileRenderer->SetName("WIN_TEXT");
-				//TileRenderer->CreateAnimationToFrame("WIN_TEXT", "Actor.bmp", { 866, 890, 914 }, 0.2f, true);
-				TileRenderer->CreateAnimationToFrame("WIN_TEXT", "Actor.bmp", { 867, 891, 915 }, 0.2f, true);
-				TileRenderer->ChangeAnimation("WIN_TEXT");
+				TileRenderer->SetName("WIN");
+				//TileRenderer->CreateAnimationToFrame("WIN", "Actor.bmp", { 866, 890, 914 }, 0.2f, true);
+				TileRenderer->CreateAnimationToFrame("WIN", "Actor.bmp", { 867, 891, 915 }, 0.2f, true);
+				TileRenderer->ChangeAnimation("WIN");
 			}
 			
-			// STOP_TEXT
+			// STOP
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(0, 100, 0))
 			{
 				TileRenderer = TileGrid->SetTile(x, y, 868, BackGridPos);
-				TileRenderer->SetName("STOP_TEXT");
-				TileRenderer->CreateAnimationToFrame("STOP_TEXT", "Actor.bmp", { 868, 892, 916 }, 0.2f, true);
-				//TileRenderer->CreateAnimationToFrame("STOP_TEXT", "Actor.bmp", { 869, 893, 917 }, 0.2f, true);
-				TileRenderer->ChangeAnimation("STOP_TEXT");
+				TileRenderer->SetName("STOP");
+				TileRenderer->CreateAnimationToFrame("STOP", "Actor.bmp", { 868, 892, 916 }, 0.2f, true);
+				//TileRenderer->CreateAnimationToFrame("STOP", "Actor.bmp", { 869, 893, 917 }, 0.2f, true);
+				TileRenderer->ChangeAnimation("STOP");
 			}
 		}
 	}
@@ -230,7 +254,6 @@ void PuzzleLevel::UpdateStringRuleCheck()
 	{
 		for (int x = 0; x < 21; x++)
 		{
-			RuleResult = "";
 			SubjectTileName = "";
 			VerbTileName = "";
 			BehaveTileName = "";
@@ -244,10 +267,8 @@ void PuzzleLevel::UpdateStringRuleCheck()
 				// 주어 텍스트
 				if (SubjectSet.contains(TileName))
 				{
-					// 주어가 나오고 나서는 
 					SubjectTileName = TileName + " ";
 
-					// 네방향
 					CurTile = TileGrid->GetTile(x, y + 1);
 
 					if (nullptr != CurTile)
@@ -276,13 +297,7 @@ void PuzzleLevel::UpdateStringRuleCheck()
 				}
 			}
 
-			//RuleResult = SubjectTileName + VerbTileName + BehaveTileName;
-			//
-			//// WALL IS STOP
-			//if (RuleResult == "WALL_TEXT IS_TEXT STOP_TEXT" )
-			//{
-			//	RuleSet.insert(RuleResult);
-			//}
+
 		}
 	}
 
@@ -293,8 +308,10 @@ void PuzzleLevel::UpdateStringRuleCheck()
 
 void PuzzleLevel::Update(float _Delta)
 {
-	// 문장 룰 체크
+	// 문장 체크
 	UpdateStringRuleCheck();
+
+	GetPuzzleInfo("BABA IS YOU");
 
 	MoveCheck();
 
@@ -309,21 +326,20 @@ void PuzzleLevel::WinCheck()
 void PuzzleLevel::MoveCheck()
 {
 
-	bool Check = false;
+	//bool Check = false;
 
-	for (std::string Text : RuleSet)
-	{
-		if (std::string::npos != Text.find("YOU_TEXT"))
-		{
-			Check = true;
-		}
-	}
+	//ResultInfo Info;
 
-	if (false == Check)
-	{
-		// 게임오버
-		return;
-	}
+	//for (std::string Text : RuleSet)
+	//{
+	//	Info = GetPuzzleInfo(Text);
+	//}
+
+	//if (false == Check)
+	//{
+	//	// 게임오버
+	//	return;
+	//}
 
 	// RIGHT
 	if (true == GameEngineInput::IsDown('D'))
