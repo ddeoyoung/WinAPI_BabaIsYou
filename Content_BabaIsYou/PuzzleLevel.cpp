@@ -17,6 +17,13 @@
 
 PuzzleLevel::PuzzleLevel()
 {
+	SubjectSet.insert("BABA_TEXT");
+	SubjectSet.insert("WALL_TEXT");
+	VerbSet.insert("IS_TEXT");
+	BehaveSet.insert("STOP_TEXT");
+	BehaveSet.insert("WIN_TEXT");
+	BehaveSet.insert("YOU_TEXT");
+
 }
 
 PuzzleLevel::~PuzzleLevel()
@@ -215,6 +222,7 @@ void PuzzleLevel::Start()
 
 void PuzzleLevel::UpdateStringRuleCheck()
 {
+	RuleSet.clear();
 	// 문장이 성립되는지 체크
 	// 문장 완성은 왼쪽->오른쪽, 위쪽->아래쪽만 가능
 	// 주어 + IS + 행동
@@ -234,18 +242,19 @@ void PuzzleLevel::UpdateStringRuleCheck()
 				TileName = CurTile->GetName();
 
 				// 주어 텍스트
-				if (TileName == "WALL_TEXT")
+				if (SubjectSet.contains(TileName))
 				{
+					// 주어가 나오고 나서는 
 					SubjectTileName = TileName + " ";
 
-					// 동사 텍스트
+					// 네방향
 					CurTile = TileGrid->GetTile(x, y + 1);
 
 					if (nullptr != CurTile)
 					{
 						TileName = CurTile->GetName();
 
-						if (TileName == "IS_TEXT")
+						if (VerbSet.contains(TileName))
 						{
 							VerbTileName = TileName + " ";
 						}
@@ -257,22 +266,23 @@ void PuzzleLevel::UpdateStringRuleCheck()
 						{
 							TileName = CurTile->GetName();
 
-							if (TileName == "STOP_TEXT")
+							if (BehaveSet.contains(TileName))
 							{
 								BehaveTileName = TileName;
+								RuleSet.insert(SubjectTileName + VerbTileName + BehaveTileName);
 							}
 						}
 					}
 				}
 			}
 
-			RuleResult = SubjectTileName + VerbTileName + BehaveTileName;
-			
-			// WALL IS STOP
-			if (RuleResult == "WALL_TEXT IS_TEXT STOP_TEXT" )
-			{
-				RuleSet.insert(RuleResult);
-			}
+			//RuleResult = SubjectTileName + VerbTileName + BehaveTileName;
+			//
+			//// WALL IS STOP
+			//if (RuleResult == "WALL_TEXT IS_TEXT STOP_TEXT" )
+			//{
+			//	RuleSet.insert(RuleResult);
+			//}
 		}
 	}
 
@@ -286,6 +296,34 @@ void PuzzleLevel::Update(float _Delta)
 	// 문장 룰 체크
 	UpdateStringRuleCheck();
 
+	MoveCheck();
+
+
+}
+
+void PuzzleLevel::WinCheck()
+{
+
+}
+
+void PuzzleLevel::MoveCheck()
+{
+
+	bool Check = false;
+
+	for (std::string Text : RuleSet)
+	{
+		if (std::string::npos != Text.find("YOU_TEXT"))
+		{
+			Check = true;
+		}
+	}
+
+	if (false == Check)
+	{
+		// 게임오버
+		return;
+	}
 
 	// RIGHT
 	if (true == GameEngineInput::IsDown('D'))

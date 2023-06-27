@@ -68,5 +68,9 @@ private:
 
 	GameEngineRenderer* NextTile = nullptr;
 	GameEngineRenderer* CurTile = nullptr;
+
+	void MoveCheck();
+
+	void WinCheck();
 };
 
