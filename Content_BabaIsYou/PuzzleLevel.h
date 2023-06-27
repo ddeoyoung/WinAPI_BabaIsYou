@@ -38,6 +38,10 @@ private:
 	std::string BehaveTileName = "";
 	std::string RuleResult = "";
 
+	std::set<std::string> SubjectSet;
+	std::set<std::string> VerbSet;
+	std::set<std::string> BehaveSet;
+
 	std::set<std::string> RuleSet;
 
 	bool IsTile = false;

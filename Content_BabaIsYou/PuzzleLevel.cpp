@@ -301,7 +301,7 @@ void PuzzleLevel::UpdateStringRuleCheck()
 				TileName = CurTile->GetName();
 
 				// 주어 텍스트
-				if (TileName == "WALL_TEXT")
+				if (TileName == "WALL_TEXT" || TileName == "BABA_TEXT" || TileName == "FLAG_TEXT")
 				{
 					SubjectTileName = TileName + " ";
 
@@ -324,7 +324,7 @@ void PuzzleLevel::UpdateStringRuleCheck()
 						{
 							TileName = CurTile->GetName();
 
-							if (TileName == "STOP_TEXT")
+							if (TileName == "STOP_TEXT" || "PUSH_TEXT" || "YOU_TEXT")
 							{
 								BehaveTileName = TileName;
 							}
@@ -336,7 +336,7 @@ void PuzzleLevel::UpdateStringRuleCheck()
 			RuleResult = SubjectTileName + VerbTileName + BehaveTileName;
 			
 			// WALL IS STOP
-			if (RuleResult == "WALL_TEXT IS_TEXT STOP_TEXT")
+			if (RuleResult == "WALL_TEXT IS_TEXT STOP_TEXT" )
 			{
 				RuleSet.insert(RuleResult);
 			}
@@ -576,6 +576,5 @@ void PuzzleLevel::Update(float _Delta)
 			}
 		}
 	}
-
 
 }
