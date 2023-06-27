@@ -5,7 +5,7 @@
 #include <set>
 #include <vector>
 
-class ResultInfo 
+class RuleInfo 
 {
 public:
 	std::string Subject;
@@ -27,8 +27,6 @@ public:
 	PuzzleLevel& operator=(const PuzzleLevel& _Other) = delete;
 	PuzzleLevel& operator=(PuzzleLevel&& _Other) noexcept = delete;
 
-	void UpdateStringRuleCheck();
-
 protected:
 
 private:
@@ -46,12 +44,15 @@ private:
 	std::string VerbTileName = "";
 	std::string BehaveTileName = "";
 
+	std::string PlayerTileName = "";
+
 	std::set<std::string> SubjectSet;
 	std::set<std::string> VerbSet;
 	std::set<std::string> BehaveSet;
 
 	std::set<std::string> RuleSet;
 
+	std::vector<GameEngineRenderer*> PlayerTiles;
 
 	bool IsTile = false;
 	bool IsMove = false;
@@ -78,9 +79,12 @@ private:
 	GameEngineRenderer* NextTile = nullptr;
 	GameEngineRenderer* CurTile = nullptr;
 
+	void UpdateStringRuleCheck();
 	void MoveCheck();
 	void WinCheck();
 
-	ResultInfo GetPuzzleInfo(std::string _Text);
+	std::vector<GameEngineRenderer*> GetPlayerTile(const std::string& _PlayerTileName);
+
+	RuleInfo GetRuleInfo(const std::string& _Text);
 };
 

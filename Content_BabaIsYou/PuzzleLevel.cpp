@@ -33,9 +33,9 @@ PuzzleLevel::~PuzzleLevel()
 {
 }
 
-ResultInfo PuzzleLevel::GetPuzzleInfo(std::string _Text) 
+RuleInfo PuzzleLevel::GetRuleInfo(const std::string& _Text)
 {
-	ResultInfo Return;
+	RuleInfo Return;
 
 	// 문자열 자르기
 	std::istringstream StringSplit(_Text);
@@ -300,46 +300,72 @@ void PuzzleLevel::UpdateStringRuleCheck()
 
 		}
 	}
-
-
-
 }
 
+// Player로써 움직일 수 있는 타일 집합
+std::vector<GameEngineRenderer*> PuzzleLevel::GetPlayerTile(const std::string& _PlayerTileName)
+{
+	GameEngineRenderer* Tile = nullptr;
+	std::string TileName = "";
+
+	for (int y = 0; y < 15; y++)
+	{
+		for (int x = 0; x < 21; x++)
+		{
+			Tile = TileGrid->GetTile(x, y);
+
+			if (nullptr != Tile)
+			{
+				TileName = Tile->GetName();
+
+				if (TileName == _PlayerTileName)
+				{
+					PlayerTiles.push_back(Tile);
+				}
+			}
+		}
+	}
+
+	return PlayerTiles;
+}
 
 void PuzzleLevel::Update(float _Delta)
 {
 	// 문장 체크
 	UpdateStringRuleCheck();
 
-	GetPuzzleInfo("BABA IS YOU");
-
 	MoveCheck();
-
-
 }
 
 void PuzzleLevel::WinCheck()
 {
-
+	
 }
 
 void PuzzleLevel::MoveCheck()
 {
+	RuleInfo Rules;
 
-	//bool Check = false;
+	for (std::string Text : RuleSet)
+	{
+		Rules = GetRuleInfo(Text);
 
-	//ResultInfo Info;
+		// YOU 문장이 없을 경우 IsPlayerExist = false
+		if (Rules.Behave == "YOU")
+		{
+			break;
+		}
+	}
 
-	//for (std::string Text : RuleSet)
-	//{
-	//	Info = GetPuzzleInfo(Text);
-	//}
+	if (Rules.Behave != "YOU")
+	{
+		return;
+	}
 
-	//if (false == Check)
-	//{
-	//	// 게임오버
-	//	return;
-	//}
+	// Player로써 움직일 수 있는 타일 이름
+	PlayerTileName = Rules.Subject;
+	PlayerTiles = GetPlayerTile(PlayerTileName);
+
 
 	// RIGHT
 	if (true == GameEngineInput::IsDown('D'))
