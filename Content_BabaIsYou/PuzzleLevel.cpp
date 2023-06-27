@@ -276,19 +276,84 @@ void PuzzleLevel::Start()
 		}
 	}
 
-	// Rule Check
-	// 
-	// 문장 완성은 왼쪽->오른쪽, 위쪽->아래쪽 으로만 가능
-	// Is (VERB_TEXT) 기준으로 상하좌우 체크 -> 문장이 만들어진다면
-	// ACTOR_TYPE이 SUBJECT_TEXT인 타일은,  BEHAVE_TEXT의 ACTOR_BEHAVE 속성을 갖는다
-	
-	// (주어) (동사) (행동)
 }
 
 
 
+void PuzzleLevel::UpdateStringRuleCheck()
+{
+	// 문장이 성립되는지 체크
+	// 문장 완성은 왼쪽->오른쪽, 위쪽->아래쪽만 가능
+	// 주어 + IS + 행동
+	for (int y = 0; y < 15; y++)
+	{
+		for (int x = 0; x < 21; x++)
+		{
+			RuleResult = "";
+			SubjectTileName = "";
+			VerbTileName = "";
+			BehaveTileName = "";
+
+			CurTile = TileGrid->GetTile(x, y);
+
+			if (nullptr != CurTile)
+			{
+				TileName = CurTile->GetName();
+
+				// 주어 텍스트
+				if (TileName == "WALL_TEXT")
+				{
+					SubjectTileName = TileName + " ";
+
+					// 동사 텍스트
+					CurTile = TileGrid->GetTile(x, y + 1);
+
+					if (nullptr != CurTile)
+					{
+						TileName = CurTile->GetName();
+
+						if (TileName == "IS_TEXT")
+						{
+							VerbTileName = TileName + " ";
+						}
+
+						// 행동 텍스트
+						CurTile = TileGrid->GetTile(x, y + 2);
+
+						if (nullptr != CurTile)
+						{
+							TileName = CurTile->GetName();
+
+							if (TileName == "STOP_TEXT")
+							{
+								BehaveTileName = TileName;
+							}
+						}
+					}
+				}
+			}
+
+			RuleResult = SubjectTileName + VerbTileName + BehaveTileName;
+			
+			// WALL IS STOP
+			if (RuleResult == "WALL_TEXT IS_TEXT STOP_TEXT")
+			{
+				RuleSet.insert(RuleResult);
+			}
+		}
+	}
+
+
+
+}
+
+
 void PuzzleLevel::Update(float _Delta)
 {
+	// 문장 룰 체크
+	UpdateStringRuleCheck();
+
+
 	// RIGHT
 	if (true == GameEngineInput::IsDown('D'))
 	{
@@ -512,58 +577,5 @@ void PuzzleLevel::Update(float _Delta)
 		}
 	}
 
-	// 문장 체크
-	// TileGrid->GetTile()->GetName();
-	for (int y = 0; y < 15; y++)
-	{
-		for (int x = 0; x < 21; x++)
-		{
-			CurTile = TileGrid->GetTile(x, y);
 
-			if (nullptr != CurTile)
-			{
-				TileName = CurTile->GetName();
-
-				// 주어 텍스트 체크
-				// 문장 완성은 왼쪽->오른쪽, 위쪽->아래쪽만 가능
-				if (TileName == "WALL_TEXT" ||  TileName == "FLAG_TEXT" || TileName == "BABA_TEXT" )
-				{
-					SubjectTileName = TileName + " ";
-
-					// 아래쪽 동사 텍스트 체크
-					CurTile = TileGrid->GetTile(x, y + 1);
-
-					if (nullptr != CurTile)
-					{
-						TileName = CurTile->GetName();
-
-						if (TileName == "IS_TEXT")
-						{
-							VerbTileName = TileName + " ";
-						}
-
-						// 마지막 행동 텍스트 체크
-						CurTile = TileGrid->GetTile(x, y + 2);
-
-						if (nullptr != CurTile)
-						{
-							TileName = CurTile->GetName();
-
-							if (TileName == "STOP_TEXT")
-							{
-								BehaveTileName = TileName;
-							}
-						}
-					}
-				}
-			}
-
-			RuleResult = SubjectTileName + VerbTileName + BehaveTileName;
-
-			if (RuleResult == "WALL_TEXT IS_TEXT STOP_TEXT")
-			{
-				int a = 0;
-			}
-		}
-	}
 }

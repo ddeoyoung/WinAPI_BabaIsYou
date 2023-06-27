@@ -2,7 +2,7 @@
 #include <GameEngineCore/GameEngineLevel.h>
 #include <Windows.h>
 #include <string>
-#include <map>
+#include <set>
 
 
 // Ό³Έν :
@@ -19,8 +19,7 @@ public:
 	PuzzleLevel& operator=(const PuzzleLevel& _Other) = delete;
 	PuzzleLevel& operator=(PuzzleLevel&& _Other) noexcept = delete;
 
-	int Index_X = 13;
-	int Index_Y = 11;
+	void UpdateStringRuleCheck();
 
 protected:
 
@@ -28,17 +27,18 @@ private:
 	void Start() override;
 	void Update(float _Delta) override;
 
+	int Index_X = 13;
+	int Index_Y = 11;
 	int BabaMoveStep = 0;
 
 	std::string AnimationName = "";
-
 	std::string TileName = "";
-
 	std::string SubjectTileName = "";
 	std::string VerbTileName = "";
 	std::string BehaveTileName = "";
-
 	std::string RuleResult = "";
+
+	std::set<std::string> RuleSet;
 
 	bool IsTile = false;
 	bool IsMove = false;
