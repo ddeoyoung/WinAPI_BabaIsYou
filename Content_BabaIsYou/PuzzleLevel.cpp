@@ -278,7 +278,10 @@ void PuzzleLevel::Start()
 
 }
 
-
+// < Stage 1 문장 조합 >
+// 주어 : BABA, WALL, FLAG
+// 동사 : IS
+// 행동 : STOP, WIN, YOU
 
 void PuzzleLevel::UpdateStringRuleCheck()
 {
@@ -301,7 +304,7 @@ void PuzzleLevel::UpdateStringRuleCheck()
 				TileName = CurTile->GetName();
 
 				// 주어 텍스트
-				if (TileName == "WALL_TEXT" || TileName == "BABA_TEXT" || TileName == "FLAG_TEXT")
+				if (TileName == "WALL_TEXT")
 				{
 					SubjectTileName = TileName + " ";
 
@@ -324,7 +327,7 @@ void PuzzleLevel::UpdateStringRuleCheck()
 						{
 							TileName = CurTile->GetName();
 
-							if (TileName == "STOP_TEXT" || "PUSH_TEXT" || "YOU_TEXT")
+							if (TileName == "STOP_TEXT")
 							{
 								BehaveTileName = TileName;
 							}
