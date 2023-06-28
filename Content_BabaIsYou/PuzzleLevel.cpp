@@ -31,28 +31,9 @@ PuzzleLevel::PuzzleLevel()
 
 PuzzleLevel::~PuzzleLevel()
 {
+
 }
 
-RuleInfo PuzzleLevel::GetRuleInfo(const std::string& _Text)
-{
-	RuleInfo Return;
-
-	// 문자열 자르기
-	std::istringstream StringSplit(_Text);
-	std::vector<std::string> ReturnTileNames;
-	std::string ReturnTileName;
-
-	while (getline(StringSplit, ReturnTileName, ' ')) //공백 단위로 구분
-	{
-		ReturnTileNames.push_back(ReturnTileName);
-	}
-
-	Return.Subject = ReturnTileNames[0];
-	Return.Verb = ReturnTileNames[1];
-	Return.Behave = ReturnTileNames[2];
-
-	return Return;
-}
 
 void PuzzleLevel::Start()
 {
@@ -82,12 +63,14 @@ void PuzzleLevel::Start()
 
 
 	// 21 x 15 개의 타일맵 생성
+	// 오브젝트
 	TileGrid = CreateActor<TileMap>();
 	TileGrid->CreateTileMap("Actor.bmp", 21, 15, { 40 , 40 }, 2);
 	TileGrid->SetLerpSpeed(10.0f);
 
+	// 텍스트, 플레이어
 	UpTileGrid = CreateActor<TileMap>();
-	UpTileGrid->CreateTileMap("Actor.bmp", 21, 15, { 40 , 40 }, 10);
+	UpTileGrid->CreateTileMap("Actor.bmp", 21, 15, { 40 , 40 }, 3);
 	UpTileGrid->SetLerpSpeed(10.0f);
 
 
@@ -164,7 +147,7 @@ void PuzzleLevel::Start()
 			// FLAG_ACTOR
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(255, 255, 0))
 			{
-				TileRenderer = UpTileGrid->SetTile(x, y, 728, BackGridPos);
+				TileRenderer = TileGrid->SetTile(x, y, 728, BackGridPos);
 				TileRenderer->SetName("FLAG_ACTOR");
 				TileRenderer->CreateAnimationToFrame("FLAG_ACTOR", "Actor.bmp", { 728, 752, 776 }, 0.2f, true);
 				TileRenderer->ChangeAnimation("FLAG_ACTOR");
@@ -242,17 +225,27 @@ void PuzzleLevel::Start()
 
 }
 
+void PuzzleLevel::Update(float _Delta)
+{
+	UpdateStringRuleCheck();
+
+	MoveCheck();
+}
+
+
+
 // < Stage 1 문장 조합 >
 // 주어 : BABA, WALL, FLAG
 // 동사 : IS
 // 행동 : STOP, WIN, YOU
 
+// 문장이 성립되는지 체크
+// 문장 완성은 왼쪽->오른쪽, 위쪽->아래쪽만 가능
 void PuzzleLevel::UpdateStringRuleCheck()
 {
-	RuleSet.clear();
-	// 문장이 성립되는지 체크
-	// 문장 완성은 왼쪽->오른쪽, 위쪽->아래쪽만 가능
-	// 주어 + IS + 행동
+
+	RuleSet.clear(); // 매번 리셋
+
 	for (int y = 0; y < 15; y++)
 	{
 		for (int x = 0; x < 21; x++)
@@ -267,7 +260,7 @@ void PuzzleLevel::UpdateStringRuleCheck()
 			{
 				TileName = CurTile->GetName();
 
-				// 주어 텍스트
+				// 주어 - Subject
 				if (SubjectSet.contains(TileName))
 				{
 					SubjectTileName = TileName + " ";
@@ -278,12 +271,13 @@ void PuzzleLevel::UpdateStringRuleCheck()
 					{
 						TileName = CurTile->GetName();
 
+						// 동사 - Verb
 						if (VerbSet.contains(TileName))
 						{
 							VerbTileName = TileName + " ";
 						}
 
-						// 행동 텍스트
+						// 행동 - Behave
 						CurTile = UpTileGrid->GetTile(x, y + 2);
 
 						if (nullptr != CurTile)
@@ -300,16 +294,43 @@ void PuzzleLevel::UpdateStringRuleCheck()
 				}
 			}
 
-
 		}
 	}
 }
 
-std::vector<GameEngineRenderer*> PuzzleLevel::GetBreakTile(const std::string& _PlayerTileName)
+
+RuleInfo PuzzleLevel::GetRuleInfo(const std::string& _Text)
 {
+	RuleInfo Return;
+
+	// 문자열 자르기
+	std::istringstream StringSplit(_Text);
+	std::vector<std::string> ReturnTileNames;
+	std::string ReturnTileName;
+
+	while (getline(StringSplit, ReturnTileName, ' ')) //공백 단위로 구분
+	{
+		ReturnTileNames.push_back(ReturnTileName);
+	}
+
+	Return.Subject = ReturnTileNames[0];
+	Return.Verb = ReturnTileNames[1];
+	Return.Behave = ReturnTileNames[2];
+
+	return Return;
+}
+
+
+// 플레이어가 통과하지 못하는 타일 집합 (= STOP)
+std::vector<GameEngineRenderer*> PuzzleLevel::GetBreakTile(const std::string& _BreakTileName)
+{
+
 	GameEngineRenderer* Tile = nullptr;
 	std::string TileName = "";
 
+	BreakTiles.clear();
+
+	// UpTileGrid
 	for (int y = 0; y < 15; y++)
 	{
 		for (int x = 0; x < 21; x++)
@@ -320,7 +341,7 @@ std::vector<GameEngineRenderer*> PuzzleLevel::GetBreakTile(const std::string& _P
 			{
 				TileName = Tile->GetName();
 
-				if (TileName == _PlayerTileName)
+				if (TileName == _BreakTileName)
 				{
 					BreakTiles.push_back(Tile);
 				}
@@ -328,7 +349,7 @@ std::vector<GameEngineRenderer*> PuzzleLevel::GetBreakTile(const std::string& _P
 		}
 	}
 
-
+	// TileGrid
 	for (int y = 0; y < 15; y++)
 	{
 		for (int x = 0; x < 21; x++)
@@ -339,7 +360,8 @@ std::vector<GameEngineRenderer*> PuzzleLevel::GetBreakTile(const std::string& _P
 			{
 				TileName = Tile->GetName();
 
-				if (TileName == _PlayerTileName)
+				// WALL				WALL_ACTOR
+				if (TileName == _BreakTileName)
 				{
 					BreakTiles.push_back(Tile);
 				}
@@ -347,14 +369,14 @@ std::vector<GameEngineRenderer*> PuzzleLevel::GetBreakTile(const std::string& _P
 		}
 	}
 
-
-
 	return BreakTiles;
 }
 
-// Player로써 움직일 수 있는 타일 집합
+// Player로써 움직일 수 있는 타일 집합 (= YOU)
 std::vector<GameEngineRenderer*> PuzzleLevel::GetPlayerTile(TileMap* _TileMap, const std::string& _PlayerTileName)
 {
+	PlayerTiles.clear();
+
 	GameEngineRenderer* Tile = nullptr;
 	std::string TileName = "";
 
@@ -379,23 +401,11 @@ std::vector<GameEngineRenderer*> PuzzleLevel::GetPlayerTile(TileMap* _TileMap, c
 	return PlayerTiles;
 }
 
-void PuzzleLevel::Update(float _Delta)
-{
-	// 문장 체크
-	UpdateStringRuleCheck();
-
-	MoveCheck();
-}
-
-void PuzzleLevel::WinCheck()
-{
-	
-}
-
-void PuzzleLevel::MoveCheck()
+void PuzzleLevel::PlayerCheck()
 {
 	RuleInfo Rules;
 
+	// YOU가 포함된 문장이 있는지 체크
 	for (std::string Text : RuleSet)
 	{
 		Rules = GetRuleInfo(Text);
@@ -407,18 +417,18 @@ void PuzzleLevel::MoveCheck()
 		}
 	}
 
+	// 없으면 게임오버
 	if (Rules.Behave != "YOU")
 	{
 		return;
 	}
 
-	PlayerTiles.clear();
 
-	TileMap* CurTileMap = nullptr;
+	//PlayerTiles.clear();
+	//CurTileMap = nullptr;
 
-	// Player로써 움직일 수 있는 타일 이름
+	// Player로써 움직일 수 있는 타일 체크
 	PlayerTileName = Rules.Subject;
-	// PlayerTileName = "WALL";
 	CurTileMap = TileGrid;
 	PlayerTiles = GetPlayerTile(TileGrid, PlayerTileName + "_ACTOR");
 
@@ -432,6 +442,20 @@ void PuzzleLevel::MoveCheck()
 		}
 	}
 
+
+}
+
+void PuzzleLevel::WinCheck()
+{
+	
+}
+
+
+void PuzzleLevel::MoveCheck()
+{
+	PlayerCheck();
+
+
 	MOVEDIR Dir = MOVEDIR::NONE;
 
 	if (true == GameEngineInput::IsDown('D'))
@@ -440,6 +464,7 @@ void PuzzleLevel::MoveCheck()
 
 		if (PlayerTileName == "BABA")
 		{
+			// 플레이어 타일이 1개이면서 이름이 BABA일 경우 애니메이션 적용해야함
 			// PlayerTiles[0].change
 		}
 	}
@@ -464,31 +489,61 @@ void PuzzleLevel::MoveCheck()
 		return;
 	}
 
-	RuleInfo Rules;
 
+
+	// 플레이어가 통과하지 못하는 타일 체크
 	for (std::string Text : RuleSet)
 	{
 		Rules = GetRuleInfo(Text);
 
-		// YOU 문장이 없을 경우 IsPlayerExist = false
 		if (Rules.Behave == "STOP")
 		{
 			break;
 		}
 	}
 
-	// 막히는 타일을 다 확인해야한다.
 
+
+	BreakTileName = Rules.Subject;
+	CurTileMap = UpTileGrid;
+	BreakTiles = GetBreakTile(BreakTileName + "_ACTOR");
+
+	// 여기까지 잘되는거 확인
+
+
+	// BreakTiles는 LerpTile 못하게 막기
 	// IsMoveTile();
 
-	// return;
+
+	// PlayerTile의 Dir방향 타일들의 집합
+	std::vector<GameEngineRenderer*> NextTiles;
 
 	for (size_t i = 0; i < PlayerTiles.size(); i++)
 	{
+
+	}
+	
+
+	for (size_t i = 0; i < PlayerTiles.size(); i++)
+	{
+		// PlayerTiles의 이동방향에 BreakTile이 있으면 이동불가
 		CurTileMap->LerpTile(PlayerTiles[i], Dir, BackGridPos);
 	}
 
-	return;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 	//// RIGHT
 	//if (true == GameEngineInput::IsDown('D'))

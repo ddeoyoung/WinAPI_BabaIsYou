@@ -29,25 +29,6 @@ enum class TEXT_COLOR
 	PINK,
 };
 
-enum class ACTOR_TYPE
-{
-	NONE	= 0,
-	ACTOR,
-	SUBJECT_TEXT,
-	VERB_TEXT,
-	BEHAVE_TEXT,
-};
-
-enum class ACTOR_BEHAVE
-{
-	NONE	= 0,
-	YOU,
-	WIN,
-	STOP,
-	PUSH,
-	DEFEAT,
-};
-
 enum class BABA_DIR
 {
 	LEFT	= 0,

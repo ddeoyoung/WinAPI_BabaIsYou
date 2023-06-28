@@ -45,6 +45,7 @@ private:
 	std::string BehaveTileName = "";
 
 	std::string PlayerTileName = "";
+	std::string BreakTileName = "";
 
 	std::set<std::string> SubjectSet;
 	std::set<std::string> VerbSet;
@@ -53,8 +54,9 @@ private:
 	std::set<std::string> RuleSet;
 
 	std::vector<GameEngineRenderer*> PlayerTiles;
-
 	std::vector<GameEngineRenderer*> BreakTiles;
+
+	RuleInfo Rules;
 
 	bool IsTile = false;
 	bool IsMove = false;
@@ -70,6 +72,8 @@ private:
 	class TileMap* TileGrid = nullptr;
 	class TileMap* UpTileGrid = nullptr;
 
+	class TileMap* CurTileMap = nullptr;
+
 	class FadeAnimation* FadeUI = nullptr;
 	class TextUI* Text = nullptr;
 	class GameEngineWindowTexture* MapTexture = nullptr;
@@ -81,14 +85,17 @@ private:
 	GameEngineRenderer* NextTile = nullptr;
 	GameEngineRenderer* CurTile = nullptr;
 
+
+	RuleInfo GetRuleInfo(const std::string& _Text);
+
 	void UpdateStringRuleCheck();
 	void MoveCheck();
 	void WinCheck();
 
+	void PlayerCheck();
+
 	std::vector<GameEngineRenderer*> GetPlayerTile(TileMap* _TileMap, const std::string& _PlayerTileName);
+	std::vector<GameEngineRenderer*> GetBreakTile(const std::string& _BreakTileName);
 
-	std::vector<GameEngineRenderer*> GetBreakTile(const std::string& _PlayerTileName);
-
-	RuleInfo GetRuleInfo(const std::string& _Text);
 };
 
