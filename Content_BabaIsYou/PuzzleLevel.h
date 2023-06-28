@@ -90,11 +90,13 @@ private:
 	RuleInfo GetRuleInfo(const std::string& _Text);
 
 	void UpdateStringRuleCheck();
+	void PlayerCheck();
 	void MoveCheck();
 	void WinCheck();
 
-	void PlayerCheck();
+	void MovePuzzleTile(std::vector<GameEngineRenderer*> _PlayerTiles);
 
+	// 다음 이동방향에 막히는 타일 체크
 	bool IsMoveTile(std::vector<GameEngineRenderer*> _PlayerTiles, std::vector<GameEngineRenderer*> _BreakTiles, MOVEDIR _Dir);
 
 	std::vector<GameEngineRenderer*> GetPlayerTile(TileMap* _TileMap, const std::string& _PlayerTileName);

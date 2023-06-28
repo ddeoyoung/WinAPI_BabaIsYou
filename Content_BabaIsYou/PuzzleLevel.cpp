@@ -454,22 +454,22 @@ bool PuzzleLevel::IsMoveTile(std::vector<GameEngineRenderer*> _PlayerTiles, std:
 		float4 TilePos = PlayerTile->GetRenderPos();
 		float4 TileIndex = TileGrid->PosToIndex(TilePos);
 
-		int Playerx = TileIndex.iX();
-		int Playery = TileIndex.iY();
+		int PlayerX = TileIndex.iX();
+		int PlayerY = TileIndex.iY();
 
 		switch (_Dir)
 		{
 		case MOVEDIR::LEFT:
-			Playerx -= 1;
+			PlayerX -= 1;
 			break;
 		case MOVEDIR::RIGHT:
-			Playerx += 1;
+			PlayerX += 1;
 			break;
 		case MOVEDIR::UP:
-			Playery -= 1;
+			PlayerY -= 1;
 			break;
 		case MOVEDIR::DOWN:
-			Playery += 1;
+			PlayerY += 1;
 			break;
 		case MOVEDIR::NONE:
 			return true;
@@ -483,11 +483,11 @@ bool PuzzleLevel::IsMoveTile(std::vector<GameEngineRenderer*> _PlayerTiles, std:
 			float4 TilePos = BreakTile->GetRenderPos();
 			float4 TileIndex = TileGrid->PosToIndex(TilePos);
 
-			int Breakx = TileIndex.iX();
-			int Breaky = TileIndex.iY();
+			int BreakX = TileIndex.iX();
+			int BreakY = TileIndex.iY();
 
 
-			if (Playerx == Breakx && Playery == Breaky)
+			if (PlayerX == BreakX && PlayerY == BreakY)
 			{
 				return false;
 			}
@@ -575,22 +575,81 @@ void PuzzleLevel::MoveCheck()
 
 	CurTileMap = UpTileGrid;
 
-
-
-	// 여기까지 잘되는거 확인
-
-	// PlayerTiles가 이동할 자리에 BreakTile이 있으면 이동불가
-	
+	// PlayerTiles가 이동할 자리에 BreakTile이 존재하는지 체크
+	// 이동 가능 = true			이동 불가 = false
 	IsMove = IsMoveTile(PlayerTiles, BreakTiles, Dir);
 
+
+	// 무조건 움직일 수 있는 경우 -> BreakTile이 아닌 타일이 있다면 밀어야 함
 	if (true == IsMove)
 	{
 		for (size_t i = 0; i < PlayerTiles.size(); i++)
 		{
-			CurTileMap->LerpTile(PlayerTiles[i], Dir, BackGridPos);
+			bool Check = false;
+			GameEngineRenderer* CheckTile = PlayerTiles[i];
+			float4 TilePos = CheckTile->GetRenderPos();
+			float4 TileIndex = CurTileMap->PosToIndex(TilePos); // 플레이어[i]의 인덱스
+
+			// 밀어야 하는 타일의 처음 위치
+			int FirstX = TileIndex.iX();
+			int FirstY = TileIndex.iY();
+
+			// 밀어야 하는 타일의 다음 위치
+			int SecondX = FirstX;
+			int SecondY = FirstY;
+
+			switch (Dir)
+			{
+			case MOVEDIR::LEFT:
+				FirstX -= 1;
+				SecondX -= 2;
+				break;
+			case MOVEDIR::RIGHT:
+				FirstX += 1;
+				SecondX += 2;
+				break;
+			case MOVEDIR::UP:
+				FirstY -= 1;
+				SecondY -= 2;
+				break;
+			case MOVEDIR::DOWN:
+				FirstY += 1;
+				SecondY += 2;
+				break;
+			case MOVEDIR::NONE:
+				break;
+			default:
+				break;
+			}
+
+			// CurTileMap = UpTileGrid (텍스트, 플레이어 타일)
+			GameEngineRenderer* NextTile;
+			NextTile = CurTileMap->GetTile(FirstX, FirstY);
+
+			// 이동할 다음 위치에 타일이 없다면 그냥 플레이어만 이동
+			if (nullptr == NextTile)
+			{
+				CurTileMap->LerpTile(PlayerTiles[i], Dir, BackGridPos);
+			}
+
+			// 이동할 다음 위치에 타일이 있으면
+			else if (nullptr != NextTile)
+			{
+				// 밀어야할 타일을 처음(First) 위치에서 다음(Second) 위치로 이동
+				CurTileMap->LerpTile(FirstX, FirstY, SecondX, SecondY, BackGridPos);
+				CurTileMap->LerpTile(PlayerTiles[i], Dir, BackGridPos);
+			}
+
 		}
 	}
 
+	else if (false == IsMove)
+	{
+		return;
+	}
+}
 
-
+void PuzzleLevel::MovePuzzleTile(std::vector<GameEngineRenderer*> _PlayerTiles)
+{
+	std::vector<GameEngineRenderer*> PlayerTiles;
 }
