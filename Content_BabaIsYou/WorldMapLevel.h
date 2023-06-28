@@ -23,9 +23,10 @@ private:
 
 	float4 BackGridPos = { 0, 0 };
 
-	int Select_X = 0;
-	int Select_Y = 0;
+	int SelectX = 9;
+	int SelectY = 14;
 
+	bool IsMove = false;
 	bool IsStageSelect = false;
 
 	std::string StageName = "";
@@ -41,6 +42,8 @@ private:
 
 	GameEngineRenderer* TileRenderer = nullptr;
 
+	GameEngineRenderer* NextTile = nullptr;
+
 	// Fade Animation
 	class FadeAnimation* FadeUI = nullptr;
 
@@ -49,5 +52,8 @@ private:
 
 	// WorldMapSelect
 	class WorldMapSelect* SelectUI = nullptr;
+
+	void MoveCheck();
+	void StageTitleUI(int _SelectX, int _SelectY);
 };
 
