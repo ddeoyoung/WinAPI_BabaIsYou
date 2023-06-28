@@ -424,8 +424,8 @@ void PuzzleLevel::PlayerCheck()
 	}
 
 
-	//PlayerTiles.clear();
-	//CurTileMap = nullptr;
+	PlayerTiles.clear();
+	CurTileMap = nullptr;
 
 	// Player로써 움직일 수 있는 타일 체크
 	PlayerTileName = Rules.Subject;
@@ -585,10 +585,13 @@ void PuzzleLevel::MoveCheck()
 	{
 		for (size_t i = 0; i < PlayerTiles.size(); i++)
 		{
+
 			bool Check = false;
 			GameEngineRenderer* CheckTile = PlayerTiles[i];
+
+			float4 HaflTileSize = CurTileMap->GetTileSize().Half();
 			float4 TilePos = CheckTile->GetRenderPos();
-			float4 TileIndex = CurTileMap->PosToIndex(TilePos); // 플레이어[i]의 인덱스
+			float4 TileIndex = CurTileMap->PosToIndex(TilePos - BackGridPos - HaflTileSize); // 플레이어[i]의 인덱스
 
 			// 밀어야 하는 타일의 처음 위치
 			int FirstX = TileIndex.iX();
