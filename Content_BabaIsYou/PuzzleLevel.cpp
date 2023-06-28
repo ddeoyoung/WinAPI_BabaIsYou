@@ -84,8 +84,11 @@ void PuzzleLevel::Start()
 	// 21 x 15 개의 타일맵 생성
 	TileGrid = CreateActor<TileMap>();
 	TileGrid->CreateTileMap("Actor.bmp", 21, 15, { 40 , 40 }, 2);
-
 	TileGrid->SetLerpSpeed(10.0f);
+
+	UpTileGrid = CreateActor<TileMap>();
+	UpTileGrid->CreateTileMap("Actor.bmp", 21, 15, { 40 , 40 }, 10);
+	UpTileGrid->SetLerpSpeed(10.0f);
 
 
 	// 맵 세팅
@@ -123,7 +126,7 @@ void PuzzleLevel::Start()
 			// BABA_ACTOR
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(0, 0, 0))
 			{
-				TileRenderer = TileGrid->SetTile(x, y, 2, BackGridPos);
+				TileRenderer = UpTileGrid->SetTile(x, y, 2, BackGridPos);
 				TileRenderer->SetName("BABA_ACTOR");
 				TileRenderer->CreateAnimationToFrame("Baba_Left", "Actor.bmp", { 10, 34, 58 }, 0.2f, true);
 				TileRenderer->CreateAnimationToFrame("Baba_Right", "Actor.bmp", { 2, 26, 50 }, 0.2f, true);
@@ -161,7 +164,7 @@ void PuzzleLevel::Start()
 			// FLAG_ACTOR
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(255, 255, 0))
 			{
-				TileRenderer = TileGrid->SetTile(x, y, 728, BackGridPos);
+				TileRenderer = UpTileGrid->SetTile(x, y, 728, BackGridPos);
 				TileRenderer->SetName("FLAG_ACTOR");
 				TileRenderer->CreateAnimationToFrame("FLAG_ACTOR", "Actor.bmp", { 728, 752, 776 }, 0.2f, true);
 				TileRenderer->ChangeAnimation("FLAG_ACTOR");
@@ -170,7 +173,7 @@ void PuzzleLevel::Start()
 			// WALL
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(50, 50, 50))
 			{
-				TileRenderer = TileGrid->SetTile(x, y, 288, BackGridPos);
+				TileRenderer = UpTileGrid->SetTile(x, y, 288, BackGridPos);
 				TileRenderer->SetName("WALL");
 				TileRenderer->CreateAnimationToFrame("WALL", "Actor.bmp", { 288, 312, 336 }, 0.2f, true);
 				TileRenderer->ChangeAnimation("WALL");
@@ -179,7 +182,7 @@ void PuzzleLevel::Start()
 			// IS
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(200, 200, 200))
 			{
-				TileRenderer = TileGrid->SetTile(x, y, 792, BackGridPos);
+				TileRenderer = UpTileGrid->SetTile(x, y, 792, BackGridPos);
 				TileRenderer->SetName("IS");
 				TileRenderer->CreateAnimationToFrame("IS", "Actor.bmp", { 792, 816, 840 }, 0.2f, true);
 				TileRenderer->ChangeAnimation("IS");
@@ -188,7 +191,7 @@ void PuzzleLevel::Start()
 			// FLAG
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(255, 200, 0))
 			{
-				TileRenderer = TileGrid->SetTile(x, y, 726, BackGridPos);
+				TileRenderer = UpTileGrid->SetTile(x, y, 726, BackGridPos);
 				TileRenderer->SetName("FLAG");
 				//TileRenderer->CreateAnimationToFrame("FLAG", "Actor.bmp", { 726, 750, 774 }, 0.2f, true);
 				TileRenderer->CreateAnimationToFrame("FLAG", "Actor.bmp", { 727, 751, 775 }, 0.2f, true);
@@ -198,7 +201,7 @@ void PuzzleLevel::Start()
 			// BABA
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(255, 100, 100))
 			{
-				TileRenderer = TileGrid->SetTile(x, y, 0, BackGridPos);
+				TileRenderer = UpTileGrid->SetTile(x, y, 0, BackGridPos);
 				TileRenderer->SetName("BABA");
 				TileRenderer->CreateAnimationToFrame("BABA", "Actor.bmp", { 0, 24, 48 }, 0.2f, true);
 				//TileRenderer->CreateAnimationToFrame("BABA", "Actor.bmp", { 1, 25, 49 }, 0.2f, true);
@@ -208,7 +211,7 @@ void PuzzleLevel::Start()
 			// YOU
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(100, 50, 50))
 			{
-				TileRenderer = TileGrid->SetTile(x, y, 864, BackGridPos);
+				TileRenderer = UpTileGrid->SetTile(x, y, 864, BackGridPos);
 				TileRenderer->SetName("YOU");
 				TileRenderer->CreateAnimationToFrame("YOU", "Actor.bmp", { 864, 888, 912 }, 0.2f, true);
 				//TileRenderer->CreateAnimationToFrame("YOU", "Actor.bmp", { 865, 889, 913 }, 0.2f, true);
@@ -218,7 +221,7 @@ void PuzzleLevel::Start()
 			// WIN
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(200, 200, 0))
 			{
-				TileRenderer = TileGrid->SetTile(x, y, 864, BackGridPos);
+				TileRenderer = UpTileGrid->SetTile(x, y, 864, BackGridPos);
 				TileRenderer->SetName("WIN");
 				//TileRenderer->CreateAnimationToFrame("WIN", "Actor.bmp", { 866, 890, 914 }, 0.2f, true);
 				TileRenderer->CreateAnimationToFrame("WIN", "Actor.bmp", { 867, 891, 915 }, 0.2f, true);
@@ -228,7 +231,7 @@ void PuzzleLevel::Start()
 			// STOP
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(0, 100, 0))
 			{
-				TileRenderer = TileGrid->SetTile(x, y, 868, BackGridPos);
+				TileRenderer = UpTileGrid->SetTile(x, y, 868, BackGridPos);
 				TileRenderer->SetName("STOP");
 				TileRenderer->CreateAnimationToFrame("STOP", "Actor.bmp", { 868, 892, 916 }, 0.2f, true);
 				//TileRenderer->CreateAnimationToFrame("STOP", "Actor.bmp", { 869, 893, 917 }, 0.2f, true);
@@ -258,7 +261,7 @@ void PuzzleLevel::UpdateStringRuleCheck()
 			VerbTileName = "";
 			BehaveTileName = "";
 
-			CurTile = TileGrid->GetTile(x, y);
+			CurTile = UpTileGrid->GetTile(x, y);
 
 			if (nullptr != CurTile)
 			{
@@ -269,7 +272,7 @@ void PuzzleLevel::UpdateStringRuleCheck()
 				{
 					SubjectTileName = TileName + " ";
 
-					CurTile = TileGrid->GetTile(x, y + 1);
+					CurTile = UpTileGrid->GetTile(x, y + 1);
 
 					if (nullptr != CurTile)
 					{
@@ -281,7 +284,7 @@ void PuzzleLevel::UpdateStringRuleCheck()
 						}
 
 						// 행동 텍스트
-						CurTile = TileGrid->GetTile(x, y + 2);
+						CurTile = UpTileGrid->GetTile(x, y + 2);
 
 						if (nullptr != CurTile)
 						{
@@ -302,8 +305,7 @@ void PuzzleLevel::UpdateStringRuleCheck()
 	}
 }
 
-// Player로써 움직일 수 있는 타일 집합
-std::vector<GameEngineRenderer*> PuzzleLevel::GetPlayerTile(const std::string& _PlayerTileName)
+std::vector<GameEngineRenderer*> PuzzleLevel::GetBreakTile(const std::string& _PlayerTileName)
 {
 	GameEngineRenderer* Tile = nullptr;
 	std::string TileName = "";
@@ -312,7 +314,55 @@ std::vector<GameEngineRenderer*> PuzzleLevel::GetPlayerTile(const std::string& _
 	{
 		for (int x = 0; x < 21; x++)
 		{
+			Tile = UpTileGrid->GetTile(x, y);
+
+			if (nullptr != Tile)
+			{
+				TileName = Tile->GetName();
+
+				if (TileName == _PlayerTileName)
+				{
+					BreakTiles.push_back(Tile);
+				}
+			}
+		}
+	}
+
+
+	for (int y = 0; y < 15; y++)
+	{
+		for (int x = 0; x < 21; x++)
+		{
 			Tile = TileGrid->GetTile(x, y);
+
+			if (nullptr != Tile)
+			{
+				TileName = Tile->GetName();
+
+				if (TileName == _PlayerTileName)
+				{
+					BreakTiles.push_back(Tile);
+				}
+			}
+		}
+	}
+
+
+
+	return BreakTiles;
+}
+
+// Player로써 움직일 수 있는 타일 집합
+std::vector<GameEngineRenderer*> PuzzleLevel::GetPlayerTile(TileMap* _TileMap, const std::string& _PlayerTileName)
+{
+	GameEngineRenderer* Tile = nullptr;
+	std::string TileName = "";
+
+	for (int y = 0; y < 15; y++)
+	{
+		for (int x = 0; x < 21; x++)
+		{
+			Tile = _TileMap->GetTile(x, y);
 
 			if (nullptr != Tile)
 			{
@@ -362,232 +412,305 @@ void PuzzleLevel::MoveCheck()
 		return;
 	}
 
+	PlayerTiles.clear();
+
+	TileMap* CurTileMap = nullptr;
+
 	// Player로써 움직일 수 있는 타일 이름
 	PlayerTileName = Rules.Subject;
-	PlayerTiles = GetPlayerTile(PlayerTileName);
+	// PlayerTileName = "WALL";
+	CurTileMap = TileGrid;
+	PlayerTiles = GetPlayerTile(TileGrid, PlayerTileName + "_ACTOR");
 
+	if (0 >= PlayerTiles.size())
+	{
+		CurTileMap = UpTileGrid;
+		PlayerTiles = GetPlayerTile(UpTileGrid, PlayerTileName + "_ACTOR");
+		if (0 >= PlayerTiles.size())
+		{
+			return;
+		}
+	}
 
-	// RIGHT
+	MOVEDIR Dir = MOVEDIR::NONE;
+
 	if (true == GameEngineInput::IsDown('D'))
 	{
-		// 오른쪽 타일
-		NextTile = TileGrid->GetTile(Index_X + 1, Index_Y);
+		Dir = MOVEDIR::RIGHT;
 
-		if (nullptr != NextTile)
+		if (PlayerTileName == "BABA")
 		{
-			int Count = 0;
-
-			// 다음 타일이 없을 때까지 체크
-			while (nullptr != NextTile)
-			{
-				Count++;
-				NextTile = TileGrid->GetTile(Index_X + Count, Index_Y);
-			}
-
-			// 여러 타일 한 번에 밀기
-			for (int i = Count; i >= 0; i--)
-			{
-				IsMove = TileGrid->LerpTile(Index_X + i, Index_Y, Index_X + i + 1, Index_Y, BackGridPos);
-			}
-		}
-
-		else if (nullptr == NextTile)
-		{
-			IsMove = TileGrid->LerpTile(Index_X, Index_Y, Index_X + 1, Index_Y, BackGridPos);
-		}
-
-
-		// 바바 위치, 애니메이션 변경
-		if (true == IsMove)
-		{
-			Index_X += 1;
-
-			switch (BabaMoveStep)
-			{
-			case 0:
-				MainRenderer->ChangeAnimation("Baba_Right");
-				BabaMoveStep += 1;
-				break;
-			case 1:
-				MainRenderer->ChangeAnimation("Baba_Right2");
-				BabaMoveStep += 1;
-				break;
-			case 2:
-				MainRenderer->ChangeAnimation("Baba_Right3");
-				BabaMoveStep += 1;
-				break;
-			case 3:
-				MainRenderer->ChangeAnimation("Baba_Right4");
-				BabaMoveStep = 0;
-				break;
-			default:
-				break;
-			}
+			// PlayerTiles[0].change
 		}
 	}
 
-	// UP
-	else if (true == GameEngineInput::IsDown('W'))
+	if (true == GameEngineInput::IsDown('A'))
 	{
-		NextTile = TileGrid->GetTile(Index_X, Index_Y - 1);
-
-		if (nullptr != NextTile)
-		{
-			int Count = 0;
-
-			while (nullptr != NextTile)
-			{
-				Count++;
-				NextTile = TileGrid->GetTile(Index_X, Index_Y - Count);
-			}
-
-			for (int i = Count; i >= 0; i--)
-			{
-				IsMove = TileGrid->LerpTile(Index_X, Index_Y - i, Index_X, Index_Y - i - 1, BackGridPos);
-			}
-		}
-
-		else if (nullptr == NextTile)
-		{
-			IsMove = TileGrid->LerpTile(Index_X, Index_Y, Index_X, Index_Y - 1, BackGridPos);
-		}
-
-		if (true == IsMove)
-		{
-			Index_Y -= 1;
-
-			switch (BabaMoveStep)
-			{
-			case 0:
-				MainRenderer->ChangeAnimation("Baba_Up");
-				BabaMoveStep += 1;
-				break;
-			case 1:
-				MainRenderer->ChangeAnimation("Baba_Up2");
-				BabaMoveStep += 1;
-				break;
-			case 2:
-				MainRenderer->ChangeAnimation("Baba_Up3");
-				BabaMoveStep += 1;
-				break;
-			case 3:
-				MainRenderer->ChangeAnimation("Baba_Up4");
-				BabaMoveStep = 0;
-				break;
-			default:
-				break;
-			}
-		}
+		Dir = MOVEDIR::LEFT;
 	}
 
-	// LEFT
-	else if (true == GameEngineInput::IsDown('A'))
+	if (true == GameEngineInput::IsDown('W'))
 	{
-		// 왼쪽 타일
-		NextTile = TileGrid->GetTile(Index_X - 1, Index_Y);
-
-		if (nullptr != NextTile)
-		{
-			int Count = 0;
-
-			while (nullptr != NextTile)
-			{
-				Count++;
-				NextTile = TileGrid->GetTile(Index_X - Count, Index_Y);
-			}
-
-			for (int i = Count; i >= 0; i--)
-			{
-				IsMove = TileGrid->LerpTile(Index_X - i, Index_Y, Index_X - i - 1, Index_Y, BackGridPos);
-			}
-		}
-
-		else if (nullptr == NextTile)
-		{
-			IsMove = TileGrid->LerpTile(Index_X, Index_Y, Index_X - 1, Index_Y, BackGridPos);
-		}
-
-		if (true == IsMove)
-		{
-			Index_X -= 1;
-
-			switch (BabaMoveStep)
-			{
-			case 0:
-				MainRenderer->ChangeAnimation("Baba_Left");
-				BabaMoveStep += 1;
-				break;
-			case 1:
-				MainRenderer->ChangeAnimation("Baba_Left2");
-				BabaMoveStep += 1;
-				break;
-			case 2:
-				MainRenderer->ChangeAnimation("Baba_Left3");
-				BabaMoveStep += 1;
-				break;
-			case 3:
-				MainRenderer->ChangeAnimation("Baba_Left4");
-				BabaMoveStep = 0;
-				break;
-			default:
-				break;
-			}
-		}
+		Dir = MOVEDIR::UP;
 	}
 
-	// DOWN
-	else if (true == GameEngineInput::IsDown('S'))
+	if (true == GameEngineInput::IsDown('S'))
 	{
-		// 아래쪽 타일
-		NextTile = TileGrid->GetTile(Index_X, Index_Y + 1);
+		Dir = MOVEDIR::DOWN;
+	}
 
-		if (nullptr != NextTile)
+	if (Dir == MOVEDIR::NONE)
+	{
+		return;
+	}
+
+	RuleInfo Rules;
+
+	for (std::string Text : RuleSet)
+	{
+		Rules = GetRuleInfo(Text);
+
+		// YOU 문장이 없을 경우 IsPlayerExist = false
+		if (Rules.Behave == "STOP")
 		{
-			int Count = 0;
-
-			while (nullptr != NextTile)
-			{
-				Count++;
-				NextTile = TileGrid->GetTile(Index_X, Index_Y + Count);
-			}
-
-			for (int i = Count; i >= 0; i--)
-			{
-				IsMove = TileGrid->LerpTile(Index_X, Index_Y + i, Index_X, Index_Y + i + 1, BackGridPos);
-			}
-		}
-
-		else if (nullptr == NextTile)
-		{
-			IsMove = TileGrid->LerpTile(Index_X, Index_Y, Index_X, Index_Y + 1, BackGridPos);
-		}
-
-		if (true == IsMove)
-		{
-			Index_Y += 1;
-
-			switch (BabaMoveStep)
-			{
-			case 0:
-				MainRenderer->ChangeAnimation("Baba_Down");
-				BabaMoveStep += 1;
-				break;
-			case 1:
-				MainRenderer->ChangeAnimation("Baba_Down2");
-				BabaMoveStep += 1;
-				break;
-			case 2:
-				MainRenderer->ChangeAnimation("Baba_Down3");
-				BabaMoveStep += 1;
-				break;
-			case 3:
-				MainRenderer->ChangeAnimation("Baba_Down4");
-				BabaMoveStep = 0;
-				break;
-			default:
-				break;
-			}
+			break;
 		}
 	}
+
+	// 막히는 타일을 다 확인해야한다.
+
+	// IsMoveTile();
+
+	// return;
+
+	for (size_t i = 0; i < PlayerTiles.size(); i++)
+	{
+		CurTileMap->LerpTile(PlayerTiles[i], Dir, BackGridPos);
+	}
+
+	return;
+
+	//// RIGHT
+	//if (true == GameEngineInput::IsDown('D'))
+	//{
+	//	// 오른쪽 타일
+	//	NextTile = TileGrid->GetTile(Index_X + 1, Index_Y);
+
+	//	if (nullptr != NextTile)
+	//	{
+	//		int Count = 0;
+
+	//		// 다음 타일이 없을 때까지 체크
+	//		while (nullptr != NextTile)
+	//		{
+	//			Count++;
+	//			NextTile = TileGrid->GetTile(Index_X + Count, Index_Y);
+	//		}
+
+	//		// 여러 타일 한 번에 밀기
+	//		for (int i = Count; i >= 0; i--)
+	//		{
+	//			IsMove = TileGrid->LerpTile(Index_X + i, Index_Y, Index_X + i + 1, Index_Y, BackGridPos);
+	//		}
+	//	}
+
+	//	else if (nullptr == NextTile)
+	//	{
+	//		IsMove = TileGrid->LerpTile(Index_X, Index_Y, Index_X + 1, Index_Y, BackGridPos);
+	//	}
+
+
+	//	// 바바 위치, 애니메이션 변경
+	//	if (true == IsMove)
+	//	{
+	//		Index_X += 1;
+
+	//		switch (BabaMoveStep)
+	//		{
+	//		case 0:
+	//			MainRenderer->ChangeAnimation("Baba_Right");
+	//			BabaMoveStep += 1;
+	//			break;
+	//		case 1:
+	//			MainRenderer->ChangeAnimation("Baba_Right2");
+	//			BabaMoveStep += 1;
+	//			break;
+	//		case 2:
+	//			MainRenderer->ChangeAnimation("Baba_Right3");
+	//			BabaMoveStep += 1;
+	//			break;
+	//		case 3:
+	//			MainRenderer->ChangeAnimation("Baba_Right4");
+	//			BabaMoveStep = 0;
+	//			break;
+	//		default:
+	//			break;
+	//		}
+	//	}
+	//}
+
+	//// UP
+	//else if (true == GameEngineInput::IsDown('W'))
+	//{
+	//	NextTile = TileGrid->GetTile(Index_X, Index_Y - 1);
+
+	//	if (nullptr != NextTile)
+	//	{
+	//		int Count = 0;
+
+	//		while (nullptr != NextTile)
+	//		{
+	//			Count++;
+	//			NextTile = TileGrid->GetTile(Index_X, Index_Y - Count);
+	//		}
+
+	//		for (int i = Count; i >= 0; i--)
+	//		{
+	//			IsMove = TileGrid->LerpTile(Index_X, Index_Y - i, Index_X, Index_Y - i - 1, BackGridPos);
+	//		}
+	//	}
+
+	//	else if (nullptr == NextTile)
+	//	{
+	//		IsMove = TileGrid->LerpTile(Index_X, Index_Y, Index_X, Index_Y - 1, BackGridPos);
+	//	}
+
+	//	if (true == IsMove)
+	//	{
+	//		Index_Y -= 1;
+
+	//		switch (BabaMoveStep)
+	//		{
+	//		case 0:
+	//			MainRenderer->ChangeAnimation("Baba_Up");
+	//			BabaMoveStep += 1;
+	//			break;
+	//		case 1:
+	//			MainRenderer->ChangeAnimation("Baba_Up2");
+	//			BabaMoveStep += 1;
+	//			break;
+	//		case 2:
+	//			MainRenderer->ChangeAnimation("Baba_Up3");
+	//			BabaMoveStep += 1;
+	//			break;
+	//		case 3:
+	//			MainRenderer->ChangeAnimation("Baba_Up4");
+	//			BabaMoveStep = 0;
+	//			break;
+	//		default:
+	//			break;
+	//		}
+	//	}
+	//}
+
+	//// LEFT
+	//else if (true == GameEngineInput::IsDown('A'))
+	//{
+	//	// 왼쪽 타일
+	//	NextTile = TileGrid->GetTile(Index_X - 1, Index_Y);
+
+	//	if (nullptr != NextTile)
+	//	{
+	//		int Count = 0;
+
+	//		while (nullptr != NextTile)
+	//		{
+	//			Count++;
+	//			NextTile = TileGrid->GetTile(Index_X - Count, Index_Y);
+	//		}
+
+	//		for (int i = Count; i >= 0; i--)
+	//		{
+	//			IsMove = TileGrid->LerpTile(Index_X - i, Index_Y, Index_X - i - 1, Index_Y, BackGridPos);
+	//		}
+	//	}
+
+	//	else if (nullptr == NextTile)
+	//	{
+	//		IsMove = TileGrid->LerpTile(Index_X, Index_Y, Index_X - 1, Index_Y, BackGridPos);
+	//	}
+
+	//	if (true == IsMove)
+	//	{
+	//		Index_X -= 1;
+
+	//		switch (BabaMoveStep)
+	//		{
+	//		case 0:
+	//			MainRenderer->ChangeAnimation("Baba_Left");
+	//			BabaMoveStep += 1;
+	//			break;
+	//		case 1:
+	//			MainRenderer->ChangeAnimation("Baba_Left2");
+	//			BabaMoveStep += 1;
+	//			break;
+	//		case 2:
+	//			MainRenderer->ChangeAnimation("Baba_Left3");
+	//			BabaMoveStep += 1;
+	//			break;
+	//		case 3:
+	//			MainRenderer->ChangeAnimation("Baba_Left4");
+	//			BabaMoveStep = 0;
+	//			break;
+	//		default:
+	//			break;
+	//		}
+	//	}
+	//}
+
+	//// DOWN
+	//else if (true == GameEngineInput::IsDown('S'))
+	//{
+	//	// 아래쪽 타일
+	//	NextTile = TileGrid->GetTile(Index_X, Index_Y + 1);
+
+	//	if (nullptr != NextTile)
+	//	{
+	//		int Count = 0;
+
+	//		while (nullptr != NextTile)
+	//		{
+	//			Count++;
+	//			NextTile = TileGrid->GetTile(Index_X, Index_Y + Count);
+	//		}
+
+	//		for (int i = Count; i >= 0; i--)
+	//		{
+	//			IsMove = TileGrid->LerpTile(Index_X, Index_Y + i, Index_X, Index_Y + i + 1, BackGridPos);
+	//		}
+	//	}
+
+	//	else if (nullptr == NextTile)
+	//	{
+	//		IsMove = TileGrid->LerpTile(Index_X, Index_Y, Index_X, Index_Y + 1, BackGridPos);
+	//	}
+
+	//	if (true == IsMove)
+	//	{
+	//		Index_Y += 1;
+
+	//		switch (BabaMoveStep)
+	//		{
+	//		case 0:
+	//			MainRenderer->ChangeAnimation("Baba_Down");
+	//			BabaMoveStep += 1;
+	//			break;
+	//		case 1:
+	//			MainRenderer->ChangeAnimation("Baba_Down2");
+	//			BabaMoveStep += 1;
+	//			break;
+	//		case 2:
+	//			MainRenderer->ChangeAnimation("Baba_Down3");
+	//			BabaMoveStep += 1;
+	//			break;
+	//		case 3:
+	//			MainRenderer->ChangeAnimation("Baba_Down4");
+	//			BabaMoveStep = 0;
+	//			break;
+	//		default:
+	//			break;
+	//		}
+	//	}
+	//}
 
 }

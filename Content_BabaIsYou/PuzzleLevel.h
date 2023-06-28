@@ -54,6 +54,8 @@ private:
 
 	std::vector<GameEngineRenderer*> PlayerTiles;
 
+	std::vector<GameEngineRenderer*> BreakTiles;
+
 	bool IsTile = false;
 	bool IsMove = false;
 	bool IsSentence = false;
@@ -66,7 +68,7 @@ private:
 	class Background_Gray* BackgroundUI_Gray = nullptr;
 
 	class TileMap* TileGrid = nullptr;
-	class TileMap* ActorGrid = nullptr;
+	class TileMap* UpTileGrid = nullptr;
 
 	class FadeAnimation* FadeUI = nullptr;
 	class TextUI* Text = nullptr;
@@ -83,7 +85,9 @@ private:
 	void MoveCheck();
 	void WinCheck();
 
-	std::vector<GameEngineRenderer*> GetPlayerTile(const std::string& _PlayerTileName);
+	std::vector<GameEngineRenderer*> GetPlayerTile(TileMap* _TileMap, const std::string& _PlayerTileName);
+
+	std::vector<GameEngineRenderer*> GetBreakTile(const std::string& _PlayerTileName);
 
 	RuleInfo GetRuleInfo(const std::string& _Text);
 };

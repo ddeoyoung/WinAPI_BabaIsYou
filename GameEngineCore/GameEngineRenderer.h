@@ -33,6 +33,12 @@ public:
 	GameEngineRenderer& operator=(GameEngineRenderer&& _Other) noexcept = delete;
 
 
+	float4 GetRenderPos()
+	{
+		return RenderPos;
+	}
+
+
 	void SetRenderPos(const float4& _Value)
 	{
 		RenderPos = _Value;
