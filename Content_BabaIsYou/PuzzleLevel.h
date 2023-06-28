@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineLevel.h>
+#include <GameEngineCore/TileMap.h>
 #include <Windows.h>
 #include <string>
 #include <set>
@@ -93,6 +94,8 @@ private:
 	void WinCheck();
 
 	void PlayerCheck();
+
+	bool IsMoveTile(std::vector<GameEngineRenderer*> _PlayerTiles, std::vector<GameEngineRenderer*> _BreakTiles, MOVEDIR _Dir);
 
 	std::vector<GameEngineRenderer*> GetPlayerTile(TileMap* _TileMap, const std::string& _PlayerTileName);
 	std::vector<GameEngineRenderer*> GetBreakTile(const std::string& _BreakTileName);

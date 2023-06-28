@@ -445,6 +445,59 @@ void PuzzleLevel::PlayerCheck()
 
 }
 
+bool PuzzleLevel::IsMoveTile(std::vector<GameEngineRenderer*> _PlayerTiles, std::vector<GameEngineRenderer*> _BreakTiles, MOVEDIR _Dir)
+{
+
+	for (size_t i = 0; i < _PlayerTiles.size(); i++)
+	{
+		GameEngineRenderer* PlayerTile = _PlayerTiles[i];
+		float4 TilePos = PlayerTile->GetRenderPos();
+		float4 TileIndex = TileGrid->PosToIndex(TilePos);
+
+		int Playerx = TileIndex.iX();
+		int Playery = TileIndex.iY();
+
+		switch (_Dir)
+		{
+		case MOVEDIR::LEFT:
+			Playerx -= 1;
+			break;
+		case MOVEDIR::RIGHT:
+			Playerx += 1;
+			break;
+		case MOVEDIR::UP:
+			Playery -= 1;
+			break;
+		case MOVEDIR::DOWN:
+			Playery += 1;
+			break;
+		case MOVEDIR::NONE:
+			return true;
+		default:
+			break;
+		}
+
+		for (size_t j = 0; j < _BreakTiles.size(); j++)
+		{
+			GameEngineRenderer* BreakTile = _BreakTiles[j];
+			float4 TilePos = BreakTile->GetRenderPos();
+			float4 TileIndex = TileGrid->PosToIndex(TilePos);
+
+			int Breakx = TileIndex.iX();
+			int Breaky = TileIndex.iY();
+
+
+			if (Playerx == Breakx && Playery == Breaky)
+			{
+				return false;
+			}
+
+		}
+	}
+
+	return true;
+}
+
 void PuzzleLevel::WinCheck()
 {
 	
@@ -453,8 +506,8 @@ void PuzzleLevel::WinCheck()
 
 void PuzzleLevel::MoveCheck()
 {
-	PlayerCheck();
 
+	PlayerCheck();
 
 	MOVEDIR Dir = MOVEDIR::NONE;
 
@@ -464,24 +517,38 @@ void PuzzleLevel::MoveCheck()
 
 		if (PlayerTileName == "BABA")
 		{
-			// 플레이어 타일이 1개이면서 이름이 BABA일 경우 애니메이션 적용해야함
-			// PlayerTiles[0].change
+			PlayerTiles[0]->ChangeAnimation("Baba_Right");
 		}
 	}
 
 	if (true == GameEngineInput::IsDown('A'))
 	{
 		Dir = MOVEDIR::LEFT;
+
+		if (PlayerTileName == "BABA")
+		{
+			PlayerTiles[0]->ChangeAnimation("Baba_Left");
+		}
 	}
 
 	if (true == GameEngineInput::IsDown('W'))
 	{
 		Dir = MOVEDIR::UP;
+
+		if (PlayerTileName == "BABA")
+		{
+			PlayerTiles[0]->ChangeAnimation("Baba_Up");
+		}
 	}
 
 	if (true == GameEngineInput::IsDown('S'))
 	{
 		Dir = MOVEDIR::DOWN;
+
+		if (PlayerTileName == "BABA")
+		{
+			PlayerTiles[0]->ChangeAnimation("Baba_Down");
+		}
 	}
 
 	if (Dir == MOVEDIR::NONE)
@@ -502,270 +569,28 @@ void PuzzleLevel::MoveCheck()
 		}
 	}
 
-
-
+	//				WALL
 	BreakTileName = Rules.Subject;
-	CurTileMap = UpTileGrid;
 	BreakTiles = GetBreakTile(BreakTileName + "_ACTOR");
+
+	CurTileMap = UpTileGrid;
+
+
 
 	// 여기까지 잘되는거 확인
 
-
-	// BreakTiles는 LerpTile 못하게 막기
-	// IsMoveTile();
-
-
-	// PlayerTile의 Dir방향 타일들의 집합
-	std::vector<GameEngineRenderer*> NextTiles;
-
-	for (size_t i = 0; i < PlayerTiles.size(); i++)
-	{
-
-	}
+	// PlayerTiles가 이동할 자리에 BreakTile이 있으면 이동불가
 	
+	IsMove = IsMoveTile(PlayerTiles, BreakTiles, Dir);
 
-	for (size_t i = 0; i < PlayerTiles.size(); i++)
+	if (true == IsMove)
 	{
-		// PlayerTiles의 이동방향에 BreakTile이 있으면 이동불가
-		CurTileMap->LerpTile(PlayerTiles[i], Dir, BackGridPos);
+		for (size_t i = 0; i < PlayerTiles.size(); i++)
+		{
+			CurTileMap->LerpTile(PlayerTiles[i], Dir, BackGridPos);
+		}
 	}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	//// RIGHT
-	//if (true == GameEngineInput::IsDown('D'))
-	//{
-	//	// 오른쪽 타일
-	//	NextTile = TileGrid->GetTile(Index_X + 1, Index_Y);
-
-	//	if (nullptr != NextTile)
-	//	{
-	//		int Count = 0;
-
-	//		// 다음 타일이 없을 때까지 체크
-	//		while (nullptr != NextTile)
-	//		{
-	//			Count++;
-	//			NextTile = TileGrid->GetTile(Index_X + Count, Index_Y);
-	//		}
-
-	//		// 여러 타일 한 번에 밀기
-	//		for (int i = Count; i >= 0; i--)
-	//		{
-	//			IsMove = TileGrid->LerpTile(Index_X + i, Index_Y, Index_X + i + 1, Index_Y, BackGridPos);
-	//		}
-	//	}
-
-	//	else if (nullptr == NextTile)
-	//	{
-	//		IsMove = TileGrid->LerpTile(Index_X, Index_Y, Index_X + 1, Index_Y, BackGridPos);
-	//	}
-
-
-	//	// 바바 위치, 애니메이션 변경
-	//	if (true == IsMove)
-	//	{
-	//		Index_X += 1;
-
-	//		switch (BabaMoveStep)
-	//		{
-	//		case 0:
-	//			MainRenderer->ChangeAnimation("Baba_Right");
-	//			BabaMoveStep += 1;
-	//			break;
-	//		case 1:
-	//			MainRenderer->ChangeAnimation("Baba_Right2");
-	//			BabaMoveStep += 1;
-	//			break;
-	//		case 2:
-	//			MainRenderer->ChangeAnimation("Baba_Right3");
-	//			BabaMoveStep += 1;
-	//			break;
-	//		case 3:
-	//			MainRenderer->ChangeAnimation("Baba_Right4");
-	//			BabaMoveStep = 0;
-	//			break;
-	//		default:
-	//			break;
-	//		}
-	//	}
-	//}
-
-	//// UP
-	//else if (true == GameEngineInput::IsDown('W'))
-	//{
-	//	NextTile = TileGrid->GetTile(Index_X, Index_Y - 1);
-
-	//	if (nullptr != NextTile)
-	//	{
-	//		int Count = 0;
-
-	//		while (nullptr != NextTile)
-	//		{
-	//			Count++;
-	//			NextTile = TileGrid->GetTile(Index_X, Index_Y - Count);
-	//		}
-
-	//		for (int i = Count; i >= 0; i--)
-	//		{
-	//			IsMove = TileGrid->LerpTile(Index_X, Index_Y - i, Index_X, Index_Y - i - 1, BackGridPos);
-	//		}
-	//	}
-
-	//	else if (nullptr == NextTile)
-	//	{
-	//		IsMove = TileGrid->LerpTile(Index_X, Index_Y, Index_X, Index_Y - 1, BackGridPos);
-	//	}
-
-	//	if (true == IsMove)
-	//	{
-	//		Index_Y -= 1;
-
-	//		switch (BabaMoveStep)
-	//		{
-	//		case 0:
-	//			MainRenderer->ChangeAnimation("Baba_Up");
-	//			BabaMoveStep += 1;
-	//			break;
-	//		case 1:
-	//			MainRenderer->ChangeAnimation("Baba_Up2");
-	//			BabaMoveStep += 1;
-	//			break;
-	//		case 2:
-	//			MainRenderer->ChangeAnimation("Baba_Up3");
-	//			BabaMoveStep += 1;
-	//			break;
-	//		case 3:
-	//			MainRenderer->ChangeAnimation("Baba_Up4");
-	//			BabaMoveStep = 0;
-	//			break;
-	//		default:
-	//			break;
-	//		}
-	//	}
-	//}
-
-	//// LEFT
-	//else if (true == GameEngineInput::IsDown('A'))
-	//{
-	//	// 왼쪽 타일
-	//	NextTile = TileGrid->GetTile(Index_X - 1, Index_Y);
-
-	//	if (nullptr != NextTile)
-	//	{
-	//		int Count = 0;
-
-	//		while (nullptr != NextTile)
-	//		{
-	//			Count++;
-	//			NextTile = TileGrid->GetTile(Index_X - Count, Index_Y);
-	//		}
-
-	//		for (int i = Count; i >= 0; i--)
-	//		{
-	//			IsMove = TileGrid->LerpTile(Index_X - i, Index_Y, Index_X - i - 1, Index_Y, BackGridPos);
-	//		}
-	//	}
-
-	//	else if (nullptr == NextTile)
-	//	{
-	//		IsMove = TileGrid->LerpTile(Index_X, Index_Y, Index_X - 1, Index_Y, BackGridPos);
-	//	}
-
-	//	if (true == IsMove)
-	//	{
-	//		Index_X -= 1;
-
-	//		switch (BabaMoveStep)
-	//		{
-	//		case 0:
-	//			MainRenderer->ChangeAnimation("Baba_Left");
-	//			BabaMoveStep += 1;
-	//			break;
-	//		case 1:
-	//			MainRenderer->ChangeAnimation("Baba_Left2");
-	//			BabaMoveStep += 1;
-	//			break;
-	//		case 2:
-	//			MainRenderer->ChangeAnimation("Baba_Left3");
-	//			BabaMoveStep += 1;
-	//			break;
-	//		case 3:
-	//			MainRenderer->ChangeAnimation("Baba_Left4");
-	//			BabaMoveStep = 0;
-	//			break;
-	//		default:
-	//			break;
-	//		}
-	//	}
-	//}
-
-	//// DOWN
-	//else if (true == GameEngineInput::IsDown('S'))
-	//{
-	//	// 아래쪽 타일
-	//	NextTile = TileGrid->GetTile(Index_X, Index_Y + 1);
-
-	//	if (nullptr != NextTile)
-	//	{
-	//		int Count = 0;
-
-	//		while (nullptr != NextTile)
-	//		{
-	//			Count++;
-	//			NextTile = TileGrid->GetTile(Index_X, Index_Y + Count);
-	//		}
-
-	//		for (int i = Count; i >= 0; i--)
-	//		{
-	//			IsMove = TileGrid->LerpTile(Index_X, Index_Y + i, Index_X, Index_Y + i + 1, BackGridPos);
-	//		}
-	//	}
-
-	//	else if (nullptr == NextTile)
-	//	{
-	//		IsMove = TileGrid->LerpTile(Index_X, Index_Y, Index_X, Index_Y + 1, BackGridPos);
-	//	}
-
-	//	if (true == IsMove)
-	//	{
-	//		Index_Y += 1;
-
-	//		switch (BabaMoveStep)
-	//		{
-	//		case 0:
-	//			MainRenderer->ChangeAnimation("Baba_Down");
-	//			BabaMoveStep += 1;
-	//			break;
-	//		case 1:
-	//			MainRenderer->ChangeAnimation("Baba_Down2");
-	//			BabaMoveStep += 1;
-	//			break;
-	//		case 2:
-	//			MainRenderer->ChangeAnimation("Baba_Down3");
-	//			BabaMoveStep += 1;
-	//			break;
-	//		case 3:
-	//			MainRenderer->ChangeAnimation("Baba_Down4");
-	//			BabaMoveStep = 0;
-	//			break;
-	//		default:
-	//			break;
-	//		}
-	//	}
-	//}
 
 }
