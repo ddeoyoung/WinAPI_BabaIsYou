@@ -207,37 +207,34 @@ void WorldMapLevel::Start()
 
 void WorldMapLevel::StageTitleUI(int _SelectX, int _SelectY)
 {
-	// Stage 0
-
+	// Stage 0 - BABA IS YOU
 	if (_SelectX == 9 && _SelectY == 14)
 	{
 		Text->On();
-		Text->SetPuzzleText('0', { 30, 30});
+		Text->SetPuzzleText('A', { 30, 30 });
+		Text->SetPuzzleText('B', { 30, 30 });
 		//Text->SetPuzzleString("BABA IS YOU");
 	}
 
-	// Stage 1
+	// Stage 1 - WHERE DO I GO?
 	else if (_SelectX == 10 && _SelectY == 12)
 	{
 		Text->On();
 		Text->SetPuzzleText('1', { 30, 30 });
-		//Text->SetPuzzleString("WHERE DO I GO?");
 	}
 
-	// Stage 2
+	// Stage 2 - NOW WHAT IS THIS?
 	else if (_SelectX == 10 && _SelectY == 11)
 	{
 		Text->On();
 		Text->SetPuzzleText('2', { 30, 30 });
-		//Text->SetPuzzleString("NOW WHAT IS THIS?");
 	}
 
-	// Stage 3
+	// Stage 3 - OUT OF REACH
 	else if (_SelectX == 11 && _SelectY == 12)
 	{
 		Text->On();
 		Text->SetPuzzleText('3', { 30, 30 });
-		//Text->SetPuzzleString("OUT OF REACH");
 	}
 
 	else

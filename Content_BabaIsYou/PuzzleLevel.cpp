@@ -296,6 +296,7 @@ void PuzzleLevel::UpdateStringRuleCheck()
 
 		}
 	}
+	return;
 }
 
 
@@ -410,7 +411,6 @@ void PuzzleLevel::PlayerCheck()
 	{
 		Rules = GetRuleInfo(Text);
 
-		// YOU 문장이 없을 경우 IsPlayerExist = false
 		if (Rules.Behave == "YOU")
 		{
 			break;
@@ -520,7 +520,7 @@ void PuzzleLevel::MoveCheck()
 			PlayerTiles[0]->ChangeAnimation("Baba_Right");
 		}
 	}
-
+	
 	if (true == GameEngineInput::IsDown('A'))
 	{
 		Dir = MOVEDIR::LEFT;
@@ -650,6 +650,11 @@ void PuzzleLevel::MoveCheck()
 	{
 		return;
 	}
+}
+
+void PuzzleLevel::ChangeBabaAnimation()
+{
+
 }
 
 void PuzzleLevel::MovePuzzleTile(std::vector<GameEngineRenderer*> _PlayerTiles)
