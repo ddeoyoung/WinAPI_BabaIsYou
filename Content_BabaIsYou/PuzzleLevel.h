@@ -47,6 +47,7 @@ private:
 
 	std::string PlayerTileName = "";
 	std::string BreakTileName = "";
+	std::string WinTileName = "";
 
 	std::set<std::string> SubjectSet;
 	std::set<std::string> VerbSet;

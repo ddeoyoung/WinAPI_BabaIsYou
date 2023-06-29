@@ -230,6 +230,8 @@ void PuzzleLevel::Update(float _Delta)
 	UpdateStringRuleCheck();
 
 	MoveCheck();
+
+	WinCheck();
 }
 
 
@@ -433,6 +435,66 @@ std::vector<GameEngineRenderer*> PuzzleLevel::GetWinTile(const std::string& _Win
 }
 
 
+void PuzzleLevel::WinCheck()
+{
+	RuleInfo Rules;
+
+	// WIN이 포함된 문장이 있는지 체크
+	for (std::string Text : RuleSet)
+	{
+		Rules = GetRuleInfo(Text);
+
+		if (Rules.Behave == "WIN")
+		{
+			// Rules = 주어, IS, WIN
+			WinTileName = Rules.Subject;
+
+			WinTiles.clear();
+			CurTileMap = TileGrid;
+			WinTiles = GetWinTile(WinTileName + "_ACTOR"); // 여기까지 잘 들어오는거 확인
+
+			// PlayerTiles가 WinTiles에 닿으면 스테이지 클리어
+			PlayerCheck();
+
+			for (size_t i = 0; i < PlayerTiles.size(); i++)
+			{
+				GameEngineRenderer* CheckTile = PlayerTiles[i];
+
+				float4 HaflTileSize = CurTileMap->GetTileSize().Half();
+				float4 TilePos = CheckTile->GetRenderPos();
+				float4 TileIndex = CurTileMap->PosToIndex(TilePos - BackGridPos - HaflTileSize);
+
+				int PlayerX = TileIndex.iX();
+				int PlayerY = TileIndex.iY();
+
+				for (size_t j = 0; j < WinTiles.size(); j++)
+				{
+					GameEngineRenderer* WinTile = WinTiles[j];
+					float4 TilePos = WinTile->GetRenderPos();
+					float4 TileIndex = TileGrid->PosToIndex(TilePos);
+
+					int WinX = TileIndex.iX();
+					int WinY = TileIndex.iY();
+
+
+					// PlayerTile이 WinTile에 닿음
+					if (PlayerX == WinX && PlayerY == WinY)
+					{
+						// 스테이지 클리어
+						int a = 0;
+					}
+
+				}
+			}
+
+			int a = 0;
+			break;
+		}
+	}
+
+}
+
+
 void PuzzleLevel::PlayerCheck()
 {
 	RuleInfo Rules;
@@ -472,8 +534,6 @@ void PuzzleLevel::PlayerCheck()
 			return;
 		}
 	}
-
-
 }
 
 bool PuzzleLevel::IsMoveTile(std::vector<GameEngineRenderer*> _PlayerTiles, std::vector<GameEngineRenderer*> _BreakTiles, MOVEDIR _Dir)
@@ -527,28 +587,6 @@ bool PuzzleLevel::IsMoveTile(std::vector<GameEngineRenderer*> _PlayerTiles, std:
 	}
 
 	return true;
-}
-
-
-void PuzzleLevel::WinCheck()
-{
-	RuleInfo Rules;
-
-	// YOU가 포함된 문장이 있는지 체크
-	for (std::string Text : RuleSet)
-	{
-		Rules = GetRuleInfo(Text);
-
-		if (Rules.Behave == "WIN")
-		{
-			break;
-		}
-	}
-
-	// Rules = 주어, IS, WIN
-
-
-
 }
 
 
@@ -616,6 +654,8 @@ void PuzzleLevel::MoveCheck()
 			break;
 		}
 	}
+	
+	BreakTiles.clear();
 
 	//				WALL
 	BreakTileName = Rules.Subject;
