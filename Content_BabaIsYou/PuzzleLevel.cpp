@@ -246,8 +246,9 @@ void PuzzleLevel::Update(float _Delta)
 		IsCongratsUI = true;
 	}
 
-	// Congrats 애니메이션이 끝나면
-	// CongratCont 유지 후 일정 시간이 지나면
+	// Congrats 애니메이션이 끝나면			-> 완료
+	// CongratCont							-> 완료
+	// 일정 시간이 지나면
 	// FadeOut 후 LevelChange(WorldMapLevel)
 	
 }
