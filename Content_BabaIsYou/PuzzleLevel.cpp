@@ -243,14 +243,29 @@ void PuzzleLevel::Update(float _Delta)
 	{
 		Congratulations->On();
 		Congratulations->CongratsRender->ChangeAnimation("Congrats");
-		IsCongratsUI = true;
+
+		if (true == Congratulations->CongratsRender->IsAnimation("Congrats")
+			&& true == Congratulations->CongratsRender->IsAnimationEnd())
+		{
+			Congratulations->CongratsRender->ChangeAnimation("CongratsCont");
+			IsCongratsUI = true;
+		}
+	}
+
+	if (true == IsCongratsUI 
+		&& true == Congratulations->CongratsRender->IsAnimation("CongratsCont")
+		&& true == Congratulations->CongratsRender->IsAnimationEnd())
+	{
+		Congratulations->Off();
+		FadeUI->FadeOut();
+
+		//GameEngineCore::ChangeLevel();
 	}
 
 	// Congrats 애니메이션이 끝나면			-> 완료
 	// CongratCont							-> 완료
-	// 일정 시간이 지나면
+	// 일정 시간이 지나면					-> 완료
 	// FadeOut 후 LevelChange(WorldMapLevel)
-	
 }
 
 

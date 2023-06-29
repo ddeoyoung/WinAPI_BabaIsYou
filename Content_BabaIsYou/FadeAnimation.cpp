@@ -30,8 +30,8 @@ void FadeAnimation::Start()
 	FadeRender->SetRenderPos(WinScale);
 	FadeRender->SetRenderScaleToTexture();
 
-	FadeRender->CreateAnimation("FadeOut", "FadeAnimation.bmp", 0, 34, 0.015f, false);
-	FadeRender->CreateAnimation("FadeIn", "FadeAnimation.bmp", 34, 0, 0.015f, false);
+	FadeRender->CreateAnimation("FadeOut", "FadeAnimation.bmp", 0, 34, 0.02f, false);
+	FadeRender->CreateAnimation("FadeIn", "FadeAnimation.bmp", 34, 0, 0.02f, false);
 }
 
 // 사라지는 애니메이션 (레벨 전환 전)

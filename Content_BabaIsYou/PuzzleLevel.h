@@ -65,6 +65,7 @@ private:
 	bool IsMove = false;
 	bool IsWin = false;
 	bool IsCongratsUI = false;
+	bool IsCongratsContUI = false;
 
 	float4 WinScale = { 0, 0 };
 	float4 BackScale = { 840, 600 };

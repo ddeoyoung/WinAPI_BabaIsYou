@@ -5,6 +5,8 @@
 #include <GameEngineCore/GameEngineCore.h>
 #include "ContentsEnum.h"
 
+#include "FadeAnimation.h"
+
 CongratsUI::CongratsUI()
 {
 }
@@ -43,16 +45,12 @@ void CongratsUI::Start()
 	CongratsRender->CreateAnimation("Congrats", "CongratulationsUI.bmp", 0, 36, 0.035f, false);
 
 	// 축하메세지 유지
-	CongratsRender->CreateAnimation("CongratsCont", "Congratulations.bmp", 0, 8, 0.035f, true);
+	CongratsRender->CreateAnimation("CongratsCont", "Congratulations.bmp", 0, 8, 0.15f, false);
 }
 
 void CongratsUI::Update(float _Delta)
 {
-	if (true == CongratsRender->IsAnimation("Congrats")
-		&& true == CongratsRender->IsAnimationEnd())
-	{
-		CongratsRender->ChangeAnimation("CongratsCont");
-	}
+
 }
 
 void CongratsUI::SetCongratsAnimation()
