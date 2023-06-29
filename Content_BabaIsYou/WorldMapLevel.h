@@ -18,10 +18,13 @@ public:
 	WorldMapLevel& operator=(WorldMapLevel&& _Other) noexcept = delete;
 
 protected:
+	void LevelStart(GameEngineLevel* _PrevLevel) override;
+	void LevelEnd(GameEngineLevel* _NextLevel) override;
 
 private:
 	void Start() override;
 	void Update(float _Delta) override;
+
 
 	float4 BackGridPos = { 0, 0 };
 	float4 StageTextScale = { 30, 30 };

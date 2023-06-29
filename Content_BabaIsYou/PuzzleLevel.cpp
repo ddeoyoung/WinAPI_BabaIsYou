@@ -231,6 +231,16 @@ void PuzzleLevel::Start()
 
 }
 
+void PuzzleLevel::LevelStart(GameEngineLevel* _PrevLevel)
+{
+
+}
+
+void PuzzleLevel::LevelEnd(GameEngineLevel* _NextLevel)
+{
+
+}
+
 void PuzzleLevel::Update(float _Delta)
 {
 	UpdateStringRuleCheck();

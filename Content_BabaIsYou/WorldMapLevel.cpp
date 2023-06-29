@@ -213,57 +213,57 @@ void WorldMapLevel::Start()
 	// Stage 0 - BABA IS YOU
 	TextUI* TextB = CreateActor<TextUI>();
 	TextB->SetPuzzleText('B', StageTextScale);
-	TextB->SetPos({ 50, 20 });
+	TextB->SetPos({ 50, 17 });
 	StageTitle0.push_back(TextB);
 
 	TextUI* TextA = CreateActor<TextUI>();
 	TextA->SetPuzzleText('A', StageTextScale);
-	TextA->SetPos({ 70, 20 });
+	TextA->SetPos({ 70, 17 });
 	StageTitle0.push_back(TextA);
 
 	TextUI* TextB2 = CreateActor<TextUI>();
 	TextB2->SetPuzzleText('B', StageTextScale);
-	TextB2->SetPos({ 90, 20 });
+	TextB2->SetPos({ 90, 17 });
 	StageTitle0.push_back(TextB2);
 
 	TextUI* TextA2 = CreateActor<TextUI>();
 	TextA2->SetPuzzleText('A', StageTextScale);
-	TextA2->SetPos({ 110, 20 });
+	TextA2->SetPos({ 110, 17 });
 	StageTitle0.push_back(TextA2);
 
 	TextUI* TextSpace = CreateActor<TextUI>();
 	TextSpace->SetPuzzleText(' ', StageTextScale);
-	TextSpace->SetPos({ 130, 20 });
+	TextSpace->SetPos({ 130, 17 });
 	StageTitle0.push_back(TextSpace);
 
 	TextUI* TextI = CreateActor<TextUI>();
 	TextI->SetPuzzleText('I', StageTextScale);
-	TextI->SetPos({ 150, 20 });
+	TextI->SetPos({ 150, 17 });
 	StageTitle0.push_back(TextI);
 
 	TextUI* TextS = CreateActor<TextUI>();
 	TextS->SetPuzzleText('S', StageTextScale);
-	TextS->SetPos({ 170, 20 });
+	TextS->SetPos({ 170, 17 });
 	StageTitle0.push_back(TextS);
 
 	TextUI* TextSpace0 = CreateActor<TextUI>();
 	TextSpace0->SetPuzzleText(' ', StageTextScale);
-	TextSpace0->SetPos({ 190, 20 });
+	TextSpace0->SetPos({ 190, 17 });
 	StageTitle0.push_back(TextSpace0);
 
 	TextUI* TextY = CreateActor<TextUI>();
 	TextY->SetPuzzleText('Y', StageTextScale);
-	TextY->SetPos({ 210, 20 });
+	TextY->SetPos({ 210, 17 });
 	StageTitle0.push_back(TextY);
 
 	TextUI* TextO = CreateActor<TextUI>();
 	TextO->SetPuzzleText('O', StageTextScale);
-	TextO->SetPos({ 230, 20 });
+	TextO->SetPos({ 230, 17 });
 	StageTitle0.push_back(TextO);
 
 	TextUI* TextU = CreateActor<TextUI>();
 	TextU->SetPuzzleText('U', StageTextScale);
-	TextU->SetPos({ 250, 20 });
+	TextU->SetPos({ 250, 17 });
 	StageTitle0.push_back(TextU);
 
 
@@ -272,72 +272,72 @@ void WorldMapLevel::Start()
 	// Stage 1 - WHERE DO I GO?
 	TextUI* TextW = CreateActor<TextUI>();
 	TextW->SetPuzzleText('W', StageTextScale);
-	TextW->SetPos({ 50, 20 });
+	TextW->SetPos({ 50, 17 });
 	StageTitle1.push_back(TextW);
 
 	TextUI* TextH = CreateActor<TextUI>();
 	TextH->SetPuzzleText('H', StageTextScale);
-	TextH->SetPos({ 70, 20 });
+	TextH->SetPos({ 70, 17 });
 	StageTitle1.push_back(TextH);
 
 	TextUI* TextE = CreateActor<TextUI>();
 	TextE->SetPuzzleText('E', StageTextScale);
-	TextE->SetPos({ 90, 20 });
+	TextE->SetPos({ 90, 17 });
 	StageTitle1.push_back(TextE);
 
 	TextUI* TextR = CreateActor<TextUI>();
 	TextR->SetPuzzleText('R', StageTextScale);
-	TextR->SetPos({ 110, 20 });
+	TextR->SetPos({ 110, 17 });
 	StageTitle1.push_back(TextR);
 
 	TextUI* TextE1 = CreateActor<TextUI>();
 	TextE1->SetPuzzleText('E', StageTextScale);
-	TextE1->SetPos({ 130, 20 });
+	TextE1->SetPos({ 130, 17 });
 	StageTitle1.push_back(TextE1);
 
 	TextUI* TextSpace1 = CreateActor<TextUI>();
 	TextSpace1->SetPuzzleText(' ', StageTextScale);
-	TextSpace1->SetPos({ 150, 20 });
+	TextSpace1->SetPos({ 150, 17 });
 	StageTitle1.push_back(TextSpace1);
 
 	TextUI* TextD = CreateActor<TextUI>();
 	TextD->SetPuzzleText('D', StageTextScale);
-	TextD->SetPos({ 170, 20 });
+	TextD->SetPos({ 170, 17 });
 	StageTitle1.push_back(TextD);
 
 	TextUI* TextO1 = CreateActor<TextUI>();
 	TextO1->SetPuzzleText('O', StageTextScale);
-	TextO1->SetPos({ 190, 20 });
+	TextO1->SetPos({ 190, 17 });
 	StageTitle1.push_back(TextO1);
 
 	TextUI* TextSpace2 = CreateActor<TextUI>();
 	TextSpace2->SetPuzzleText(' ', StageTextScale);
-	TextSpace2->SetPos({ 210, 20 });
+	TextSpace2->SetPos({ 210, 17 });
 	StageTitle1.push_back(TextSpace2);
 
 	TextUI* TextI2 = CreateActor<TextUI>();
 	TextI2->SetPuzzleText('I', StageTextScale);
-	TextI2->SetPos({ 230, 20 });
+	TextI2->SetPos({ 230, 17 });
 	StageTitle1.push_back(TextI2);
 
 	TextUI* TextSpace3 = CreateActor<TextUI>();
 	TextSpace3->SetPuzzleText(' ', StageTextScale);
-	TextSpace3->SetPos({ 250, 20 });
+	TextSpace3->SetPos({ 250, 17 });
 	StageTitle1.push_back(TextSpace3);
 
 	TextUI* TextG = CreateActor<TextUI>();
 	TextG->SetPuzzleText('G', StageTextScale);
-	TextG->SetPos({ 270, 20 });
+	TextG->SetPos({ 270, 17 });
 	StageTitle1.push_back(TextG);
 
 	TextUI* TextO2 = CreateActor<TextUI>();
 	TextO2->SetPuzzleText('O', StageTextScale);
-	TextO2->SetPos({ 290, 20 });
+	TextO2->SetPos({ 290, 17 });
 	StageTitle1.push_back(TextO2);
 
 	TextUI* TextQues = CreateActor<TextUI>();
 	TextQues->SetPuzzleText('?', StageTextScale);
-	TextQues->SetPos({ 310, 20 });
+	TextQues->SetPos({ 310, 17 });
 	StageTitle1.push_back(TextQues);
 
 
@@ -345,87 +345,87 @@ void WorldMapLevel::Start()
 	// Stage 2 - NOW WHAT IS THIS?
 	TextUI* TextN = CreateActor<TextUI>();
 	TextN->SetPuzzleText('N', StageTextScale);
-	TextN->SetPos({ 50, 20 });
+	TextN->SetPos({ 50, 17 });
 	StageTitle2.push_back(TextN);
 
 	TextUI* TextO3 = CreateActor<TextUI>();
 	TextO3->SetPuzzleText('O', StageTextScale);
-	TextO3->SetPos({ 70, 20 });
+	TextO3->SetPos({ 70, 17 });
 	StageTitle2.push_back(TextO3);
 
 	TextUI* TextW1 = CreateActor<TextUI>();
 	TextW1->SetPuzzleText('W', StageTextScale);
-	TextW1->SetPos({ 90, 20 });
+	TextW1->SetPos({ 90, 17 });
 	StageTitle2.push_back(TextW1);
 
 	TextUI* TextSpace4 = CreateActor<TextUI>();
 	TextSpace4->SetPuzzleText(' ', StageTextScale);
-	TextSpace4->SetPos({ 110, 20 });
+	TextSpace4->SetPos({ 110, 17 });
 	StageTitle2.push_back(TextSpace4);
 
 	TextUI* TextW2 = CreateActor<TextUI>();
 	TextW2->SetPuzzleText('W', StageTextScale);
-	TextW2->SetPos({ 130, 20 });
+	TextW2->SetPos({ 130, 17 });
 	StageTitle2.push_back(TextW2);
 
 	TextUI* TextH1 = CreateActor<TextUI>();
 	TextH1->SetPuzzleText('H', StageTextScale);
-	TextH1->SetPos({ 150, 20 });
+	TextH1->SetPos({ 150, 17 });
 	StageTitle2.push_back(TextH1);
 
 	TextUI* TextA3 = CreateActor<TextUI>();
 	TextA3->SetPuzzleText('A', StageTextScale);
-	TextA3->SetPos({ 170, 20 });
+	TextA3->SetPos({ 170, 17 });
 	StageTitle2.push_back(TextA3);
 
 	TextUI* TextT = CreateActor<TextUI>();
 	TextT->SetPuzzleText('T', StageTextScale);
-	TextT->SetPos({ 190, 20 });
+	TextT->SetPos({ 190, 17 });
 	StageTitle2.push_back(TextT);
 
 	TextUI* TextSpace5 = CreateActor<TextUI>();
 	TextSpace5->SetPuzzleText(' ', StageTextScale);
-	TextSpace5->SetPos({ 210, 20 });
+	TextSpace5->SetPos({ 210, 17 });
 	StageTitle2.push_back(TextSpace5);
 	
 	TextUI* TextI3 = CreateActor<TextUI>();
 	TextI3->SetPuzzleText('I', StageTextScale);
-	TextI3->SetPos({ 230, 20 });
+	TextI3->SetPos({ 230, 17 });
 	StageTitle2.push_back(TextI3);
 
 	TextUI* TextS2 = CreateActor<TextUI>();
 	TextS2->SetPuzzleText('S', StageTextScale);
-	TextS2->SetPos({ 250, 20 });
+	TextS2->SetPos({ 250, 17 });
 	StageTitle2.push_back(TextS2);
 
 	TextUI* TextSpace6 = CreateActor<TextUI>();
 	TextSpace6->SetPuzzleText(' ', StageTextScale);
-	TextSpace6->SetPos({ 270, 20 });
+	TextSpace6->SetPos({ 270, 17 });
 	StageTitle2.push_back(TextSpace6);
 
 	TextUI* TextT1 = CreateActor<TextUI>();
 	TextT1->SetPuzzleText('T', StageTextScale);
-	TextT1->SetPos({ 290, 20 });
+	TextT1->SetPos({ 290, 17 });
 	StageTitle2.push_back(TextT1);
 
 	TextUI* TextH2 = CreateActor<TextUI>();
 	TextH2->SetPuzzleText('H', StageTextScale);
-	TextH2->SetPos({ 310, 20 });
+	TextH2->SetPos({ 310, 17 });
 	StageTitle2.push_back(TextH2);
 
 	TextUI* TextI4 = CreateActor<TextUI>();
 	TextI4->SetPuzzleText('I', StageTextScale);
-	TextI4->SetPos({ 330, 20 });
+	TextI4->SetPos({ 330, 17 });
 	StageTitle2.push_back(TextI4);
 
 	TextUI* TextS3 = CreateActor<TextUI>();
 	TextS3->SetPuzzleText('S', StageTextScale);
-	TextS3->SetPos({ 350, 20 });
+	TextS3->SetPos({ 350, 17 });
 	StageTitle2.push_back(TextS3);
 
 	TextUI* TextQues1 = CreateActor<TextUI>();
 	TextQues1->SetPuzzleText('?', StageTextScale);
-	TextQues1->SetPos({ 370, 20 });
+	TextQues1->SetPos({ 370, 17 });
 	StageTitle2.push_back(TextQues1);
 
 
@@ -449,6 +449,17 @@ void WorldMapLevel::Start()
 	{
 		StageTitle3[i]->Off();
 	}
+}
+
+
+void WorldMapLevel::LevelStart(GameEngineLevel* _PrevLevel)
+{
+
+}
+
+void WorldMapLevel::LevelEnd(GameEngineLevel* _NextLevel)
+{
+
 }
 
 

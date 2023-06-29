@@ -29,10 +29,13 @@ public:
 	PuzzleLevel& operator=(PuzzleLevel&& _Other) noexcept = delete;
 
 protected:
+	void LevelStart(GameEngineLevel* _PrevLevel) override;
+	void LevelEnd(GameEngineLevel* _NextLevel) override;
 
 private:
 	void Start() override;
 	void Update(float _Delta) override;
+
 
 	int Index_X = 13;
 	int Index_Y = 11;
