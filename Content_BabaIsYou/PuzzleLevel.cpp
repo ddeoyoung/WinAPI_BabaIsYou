@@ -1,11 +1,12 @@
 #include "PuzzleLevel.h"
-#include <GameEngineCore/TileMap.h>
-#include <GameEngineCore/ResourcesManager.h>
 #include <GameEnginePlatform/GameEngineWindow.h>
-#include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEnginePlatform/GameEngineWindowTexture.h>
 #include <GameEnginePlatform/GameEngineWindow.h>
 #include <GameEnginePlatform/GameEngineInput.h>
+#include <GameEngineCore/TileMap.h>
+#include <GameEngineCore/ResourcesManager.h>
+#include <GameEngineCore/GameEngineRenderer.h>
+#include <GameEngineCore/GameEngineCore.h>
 
 #include "ContentsEnum.h"
 #include "Background_Gray.h"
@@ -238,11 +239,17 @@ void PuzzleLevel::Update(float _Delta)
 
 	WinCheck();
 
-	if (true == IsWin)
+	if (true == IsWin && false == IsCongratsUI)
 	{
 		Congratulations->On();
-		Congratulations->SetCongratsAnimation();
+		Congratulations->CongratsRender->ChangeAnimation("Congrats");
+		IsCongratsUI = true;
 	}
+
+	// Congrats 애니메이션이 끝나면
+	// CongratCont 유지 후 일정 시간이 지나면
+	// FadeOut 후 LevelChange(WorldMapLevel)
+	
 }
 
 

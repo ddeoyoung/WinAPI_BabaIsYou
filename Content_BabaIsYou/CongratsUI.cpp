@@ -24,21 +24,38 @@ void CongratsUI::Start()
 		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("CongratulationsUI.bmp"), 1, 37);
 	}
 
-	FadeRender = CreateRenderer("CongratulationsUI.bmp", RENDER_ORDER::CONGRATS);
-	
-	float4 WinScale = GameEngineWindow::MainWindow.GetScale().Half();
-	FadeRender->SetRenderPos(WinScale);
-	FadeRender->SetRenderScaleToTexture();
+	if (false == ResourcesManager::GetInst().IsLoadTexture("Congratulations.Bmp"))
+	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Puzzle\\");
+		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("Congratulations.bmp"), 1, 9);
+	}
 
-	FadeRender->CreateAnimation("Congrats", "CongratulationsUI.bmp", 0, 36, 0.02f, false);
+	WinScale = GameEngineWindow::MainWindow.GetScale().Half();
+
+	CongratsRender = CreateRenderer("CongratulationsUI.bmp", RENDER_ORDER::CONGRATS);
+	CongratsRender->SetRenderPos(WinScale);
+	CongratsRender->SetRenderScaleToTexture();
+
+	// 축하메세지 나타나기
+	CongratsRender->CreateAnimation("Congrats", "CongratulationsUI.bmp", 0, 36, 0.035f, false);
+
+	// 축하메세지 유지
+	CongratsRender->CreateAnimation("CongratsCont", "Congratulations.bmp", 0, 8, 0.035f, true);
 }
 
 void CongratsUI::Update(float _Delta)
 {
-
+	if (true == CongratsRender->IsAnimation("Congrats")
+		&& true == CongratsRender->IsAnimationEnd())
+	{
+		CongratsRender->ChangeAnimation("CongratsCont");
+	}
 }
 
 void CongratsUI::SetCongratsAnimation()
 {
-	FadeRender->ChangeAnimation("Congrats");
+	CongratsRender->ChangeAnimation("Congrats");
 }

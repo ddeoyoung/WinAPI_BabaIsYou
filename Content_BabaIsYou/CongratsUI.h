@@ -15,7 +15,7 @@ public:
 	CongratsUI& operator=(const CongratsUI& _Other) = delete;
 	CongratsUI& operator=(CongratsUI&& _Other) noexcept = delete;
 
-	GameEngineRenderer* FadeRender = nullptr;
+	GameEngineRenderer* CongratsRender = nullptr;
 
 	void SetCongratsAnimation();
 
@@ -24,6 +24,8 @@ protected:
 private:
 	void Start() override;
 	void Update(float _Delta) override;
+
+	float4 WinScale = {};
 
 };
 
