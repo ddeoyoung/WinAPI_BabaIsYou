@@ -471,7 +471,7 @@ void PuzzleLevel::WinCheck()
 				{
 					GameEngineRenderer* WinTile = WinTiles[j];
 					float4 TilePos = WinTile->GetRenderPos();
-					float4 TileIndex = TileGrid->PosToIndex(TilePos);
+					float4 TileIndex = CurTileMap->PosToIndex(TilePos - BackGridPos - HaflTileSize);
 
 					int WinX = TileIndex.iX();
 					int WinY = TileIndex.iY();
@@ -651,29 +651,28 @@ void PuzzleLevel::MoveCheck()
 
 		if (Rules.Behave == "STOP")
 		{
-			break;
+			BreakTiles.clear();
+
+			//				WALL
+			BreakTileName = Rules.Subject;
+			BreakTiles = GetBreakTile(BreakTileName + "_ACTOR");
+
+			CurTileMap = UpTileGrid;
+
+			// PlayerTiles가 이동할 자리에 BreakTile이 존재하는지 체크
+			// 이동 가능 = true			이동 불가 = false
+			IsMove = IsMoveTile(PlayerTiles, BreakTiles, Dir);
+
+			//break;
 		}
 	}
-	
-	BreakTiles.clear();
-
-	//				WALL
-	BreakTileName = Rules.Subject;
-	BreakTiles = GetBreakTile(BreakTileName + "_ACTOR");
-
-	CurTileMap = UpTileGrid;
-
-	// PlayerTiles가 이동할 자리에 BreakTile이 존재하는지 체크
-	// 이동 가능 = true			이동 불가 = false
-	IsMove = IsMoveTile(PlayerTiles, BreakTiles, Dir);
-
 
 	// 무조건 움직일 수 있는 경우 -> BreakTile이 아닌 타일이 있다면 밀어야 함
 	if (true == IsMove)
 	{
 		for (size_t i = 0; i < PlayerTiles.size(); i++)
 		{
-
+			
 			bool Check = false;
 			GameEngineRenderer* CheckTile = PlayerTiles[i];
 
