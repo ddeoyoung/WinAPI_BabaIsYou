@@ -14,6 +14,7 @@ enum class RENDER_ORDER
 	GRID,
 	PLAY,
 	PLAY_UI,
+	CONGRATS,
 	FADE,
 };
 

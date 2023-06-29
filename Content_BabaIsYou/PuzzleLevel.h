@@ -63,6 +63,7 @@ private:
 
 	bool IsTile = false;
 	bool IsMove = false;
+	bool IsWin = false;
 
 	float4 WinScale = { 0, 0 };
 	float4 BackScale = { 840, 600 };
@@ -79,6 +80,9 @@ private:
 	class FadeAnimation* FadeUI = nullptr;
 	class TextUI* Text = nullptr;
 	class GameEngineWindowTexture* MapTexture = nullptr;
+
+	class CongratsUI* Congratulations = nullptr;
+
 
 	GameEngineRenderer* MainRenderer = nullptr;
 	GameEngineRenderer* TileRenderer = nullptr;

@@ -11,6 +11,7 @@
 #include "Background_Gray.h"
 #include "Background_Black.h"
 #include "Background_Pixel.h"
+#include "CongratsUI.h"
 #include "FadeAnimation.h"
 #include "TextUI.h"
 
@@ -46,6 +47,10 @@ void PuzzleLevel::Start()
 	// Fade Animation
 	FadeUI = CreateActor<FadeAnimation>();
 	FadeUI->FadeIn();
+
+	// CongratsUI
+	Congratulations = CreateActor<CongratsUI>();
+	Congratulations->Off();
 
 	// Puzzle Tiles
 	if (false == ResourcesManager::GetInst().IsLoadTexture("Actor.Bmp"))
@@ -232,6 +237,12 @@ void PuzzleLevel::Update(float _Delta)
 	MoveCheck();
 
 	WinCheck();
+
+	if (true == IsWin)
+	{
+		Congratulations->On();
+		Congratulations->SetCongratsAnimation();
+	}
 }
 
 
@@ -481,7 +492,10 @@ void PuzzleLevel::WinCheck()
 					if (PlayerX == WinX && PlayerY == WinY)
 					{
 						// 스테이지 클리어
-						int a = 0;
+						//Congratulations = CreateActor<CongratsUI>();
+						//Congratulations->SetCongratsAnimation();
+
+						IsWin = true;
 					}
 
 				}
