@@ -343,13 +343,90 @@ void WorldMapLevel::Start()
 
 	// TextUI
 	// Stage 2 - NOW WHAT IS THIS?
+	TextUI* TextN = CreateActor<TextUI>();
+	TextN->SetPuzzleText('N', StageTextScale);
+	TextN->SetPos({ 50, 20 });
+	StageTitle2.push_back(TextN);
 
+	TextUI* TextO3 = CreateActor<TextUI>();
+	TextO3->SetPuzzleText('O', StageTextScale);
+	TextO3->SetPos({ 70, 20 });
+	StageTitle2.push_back(TextO3);
 
+	TextUI* TextW1 = CreateActor<TextUI>();
+	TextW1->SetPuzzleText('W', StageTextScale);
+	TextW1->SetPos({ 90, 20 });
+	StageTitle2.push_back(TextW1);
 
+	TextUI* TextSpace4 = CreateActor<TextUI>();
+	TextSpace4->SetPuzzleText(' ', StageTextScale);
+	TextSpace4->SetPos({ 110, 20 });
+	StageTitle2.push_back(TextSpace4);
 
+	TextUI* TextW2 = CreateActor<TextUI>();
+	TextW2->SetPuzzleText('W', StageTextScale);
+	TextW2->SetPos({ 130, 20 });
+	StageTitle2.push_back(TextW2);
 
+	TextUI* TextH1 = CreateActor<TextUI>();
+	TextH1->SetPuzzleText('H', StageTextScale);
+	TextH1->SetPos({ 150, 20 });
+	StageTitle2.push_back(TextH1);
 
+	TextUI* TextA3 = CreateActor<TextUI>();
+	TextA3->SetPuzzleText('A', StageTextScale);
+	TextA3->SetPos({ 170, 20 });
+	StageTitle2.push_back(TextA3);
 
+	TextUI* TextT = CreateActor<TextUI>();
+	TextT->SetPuzzleText('T', StageTextScale);
+	TextT->SetPos({ 190, 20 });
+	StageTitle2.push_back(TextT);
+
+	TextUI* TextSpace5 = CreateActor<TextUI>();
+	TextSpace5->SetPuzzleText(' ', StageTextScale);
+	TextSpace5->SetPos({ 210, 20 });
+	StageTitle2.push_back(TextSpace5);
+	
+	TextUI* TextI3 = CreateActor<TextUI>();
+	TextI3->SetPuzzleText('I', StageTextScale);
+	TextI3->SetPos({ 230, 20 });
+	StageTitle2.push_back(TextI3);
+
+	TextUI* TextS2 = CreateActor<TextUI>();
+	TextS2->SetPuzzleText('S', StageTextScale);
+	TextS2->SetPos({ 250, 20 });
+	StageTitle2.push_back(TextS2);
+
+	TextUI* TextSpace6 = CreateActor<TextUI>();
+	TextSpace6->SetPuzzleText(' ', StageTextScale);
+	TextSpace6->SetPos({ 270, 20 });
+	StageTitle2.push_back(TextSpace6);
+
+	TextUI* TextT1 = CreateActor<TextUI>();
+	TextT1->SetPuzzleText('T', StageTextScale);
+	TextT1->SetPos({ 290, 20 });
+	StageTitle2.push_back(TextT1);
+
+	TextUI* TextH2 = CreateActor<TextUI>();
+	TextH2->SetPuzzleText('H', StageTextScale);
+	TextH2->SetPos({ 310, 20 });
+	StageTitle2.push_back(TextH2);
+
+	TextUI* TextI4 = CreateActor<TextUI>();
+	TextI4->SetPuzzleText('I', StageTextScale);
+	TextI4->SetPos({ 330, 20 });
+	StageTitle2.push_back(TextI4);
+
+	TextUI* TextS3 = CreateActor<TextUI>();
+	TextS3->SetPuzzleText('S', StageTextScale);
+	TextS3->SetPos({ 350, 20 });
+	StageTitle2.push_back(TextS3);
+
+	TextUI* TextQues1 = CreateActor<TextUI>();
+	TextQues1->SetPuzzleText('?', StageTextScale);
+	TextQues1->SetPos({ 370, 20 });
+	StageTitle2.push_back(TextQues1);
 
 
 	// TextUI - Off
@@ -385,30 +462,93 @@ void WorldMapLevel::StageTitleUI(int _SelectX, int _SelectY)
 		{
 			StageTitle0[i]->On();
 		}
+
+		for (size_t i = 0; i < StageTitle1.size(); i++)
+		{
+			StageTitle1[i]->Off();
+		}
+
+		for (size_t i = 0; i < StageTitle2.size(); i++)
+		{
+			StageTitle2[i]->Off();
+		}
+
+		for (size_t i = 0; i < StageTitle3.size(); i++)
+		{
+			StageTitle3[i]->Off();
+		}
 	}
 
 	// Stage 1 - WHERE DO I GO?
 	else if (_SelectX == 10 && _SelectY == 12)
 	{
+		for (size_t i = 0; i < StageTitle0.size(); i++)
+		{
+			StageTitle0[i]->Off();
+		}
+
 		for (size_t i = 0; i < StageTitle1.size(); i++)
 		{
 			StageTitle1[i]->On();
+		}
+
+		for (size_t i = 0; i < StageTitle2.size(); i++)
+		{
+			StageTitle2[i]->Off();
+		}
+
+		for (size_t i = 0; i < StageTitle3.size(); i++)
+		{
+			StageTitle3[i]->Off();
 		}
 	}
 
 	// Stage 2 - NOW WHAT IS THIS?
 	else if (_SelectX == 10 && _SelectY == 11)
 	{
+		for (size_t i = 0; i < StageTitle0.size(); i++)
+		{
+			StageTitle0[i]->Off();
+		}
+
+		for (size_t i = 0; i < StageTitle1.size(); i++)
+		{
+			StageTitle1[i]->Off();
+		}
+
 		for (size_t i = 0; i < StageTitle2.size(); i++)
 		{
 			StageTitle2[i]->On();
+		}
+
+		for (size_t i = 0; i < StageTitle3.size(); i++)
+		{
+			StageTitle3[i]->Off();
 		}
 	}
 
 	// Stage 3 - OUT OF REACH
 	else if (_SelectX == 11 && _SelectY == 12)
 	{
+		for (size_t i = 0; i < StageTitle0.size(); i++)
+		{
+			StageTitle0[i]->Off();
+		}
 
+		for (size_t i = 0; i < StageTitle1.size(); i++)
+		{
+			StageTitle1[i]->Off();
+		}
+
+		for (size_t i = 0; i < StageTitle2.size(); i++)
+		{
+			StageTitle2[i]->Off();
+		}
+
+		for (size_t i = 0; i < StageTitle3.size(); i++)
+		{
+			StageTitle3[i]->On();
+		}
 	}
 
 	else
