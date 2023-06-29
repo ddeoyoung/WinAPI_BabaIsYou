@@ -258,8 +258,12 @@ void PuzzleLevel::Update(float _Delta)
 	{
 		Congratulations->Off();
 		FadeUI->FadeOut();
+	}
 
-		//GameEngineCore::ChangeLevel();
+	if (true == FadeUI->FadeRender->IsAnimation("FadeOut") 
+		&& true == FadeUI->FadeRender->IsAnimationEnd())
+	{
+		GameEngineCore::ChangeLevel("WorldMapLevel");
 	}
 
 	// Congrats 애니메이션이 끝나면			-> 완료
