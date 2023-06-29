@@ -315,7 +315,7 @@ void PuzzleLevel::UpdateStringRuleCheck()
 				{
 					SubjectTileName = TileName + " ";
 
-					CurTile = UpTileGrid->GetTile(x, y + 1);
+					CurTile = UpTileGrid->GetTile(x, y + 1); // 세로 문장 체크
 
 					if (nullptr != CurTile)
 					{
@@ -341,6 +341,36 @@ void PuzzleLevel::UpdateStringRuleCheck()
 							}
 						}
 					}
+
+
+					CurTile = UpTileGrid->GetTile(x + 1, y); // 가로 문장 체크
+
+					if (nullptr != CurTile)
+					{
+						TileName = CurTile->GetName();
+
+						// 동사 - Verb
+						if (VerbSet.contains(TileName))
+						{
+							VerbTileName = TileName + " ";
+						}
+
+						// 행동 - Behave
+						CurTile = UpTileGrid->GetTile(x + 2, y);
+
+						if (nullptr != CurTile)
+						{
+							TileName = CurTile->GetName();
+
+							if (BehaveSet.contains(TileName))
+							{
+								BehaveTileName = TileName;
+								RuleSet.insert(SubjectTileName + VerbTileName + BehaveTileName);
+							}
+						}
+					}
+
+
 				}
 			}
 
