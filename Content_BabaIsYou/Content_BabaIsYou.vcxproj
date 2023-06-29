@@ -166,10 +166,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Baba.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="Background_Black.h">
       <SubType>
       </SubType>
@@ -187,6 +183,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Button.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="CongratsUI.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -208,10 +208,6 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="LogoLevel.h" />
-    <ClInclude Include="PuzzleActor.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="PuzzleLevel.h">
       <SubType>
       </SubType>
@@ -235,10 +231,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Baba.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="Background_Black.cpp">
       <SubType>
       </SubType>
@@ -259,6 +251,10 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="CongratsUI.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="ContentCore.cpp">
       <SubType>
       </SubType>
@@ -276,10 +272,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="LogoLevel.cpp" />
-    <ClCompile Include="PuzzleActor.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="PuzzleLevel.cpp">
       <SubType>
       </SubType>

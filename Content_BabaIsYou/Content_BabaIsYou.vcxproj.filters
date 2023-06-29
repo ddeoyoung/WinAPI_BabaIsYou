@@ -41,20 +41,17 @@
     <ClInclude Include="WorldMapSelect.h">
       <Filter>UIActor\WorldMap</Filter>
     </ClInclude>
-    <ClInclude Include="PuzzleActor.h">
-      <Filter>UIActor\Default</Filter>
-    </ClInclude>
-    <ClInclude Include="Background_Pixel.h">
-      <Filter>UIActor\Default</Filter>
-    </ClInclude>
     <ClInclude Include="Cursor.h">
       <Filter>UIActor\Default</Filter>
     </ClInclude>
     <ClInclude Include="TextUI.h">
       <Filter>UIActor\Default</Filter>
     </ClInclude>
-    <ClInclude Include="Baba.h">
-      <Filter>UIActor\Default</Filter>
+    <ClInclude Include="Background_Pixel.h">
+      <Filter>UIActor\Puzzle</Filter>
+    </ClInclude>
+    <ClInclude Include="CongratsUI.h">
+      <Filter>UIActor\Puzzle</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -95,20 +92,17 @@
     <ClCompile Include="WorldMapSelect.cpp">
       <Filter>UIActor\WorldMap</Filter>
     </ClCompile>
-    <ClCompile Include="PuzzleActor.cpp">
-      <Filter>UIActor\Default</Filter>
-    </ClCompile>
-    <ClCompile Include="Background_Pixel.cpp">
-      <Filter>UIActor\Default</Filter>
-    </ClCompile>
     <ClCompile Include="Cursor.cpp">
       <Filter>UIActor\Default</Filter>
     </ClCompile>
     <ClCompile Include="TextUI.cpp">
       <Filter>UIActor\Default</Filter>
     </ClCompile>
-    <ClCompile Include="Baba.cpp">
-      <Filter>UIActor\Default</Filter>
+    <ClCompile Include="Background_Pixel.cpp">
+      <Filter>UIActor\Puzzle</Filter>
+    </ClCompile>
+    <ClCompile Include="CongratsUI.cpp">
+      <Filter>UIActor\Puzzle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -129,6 +123,9 @@
     </Filter>
     <Filter Include="UIActor\Logo">
       <UniqueIdentifier>{52d542df-104c-4f83-a0a8-7a26f95ece9b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="UIActor\Puzzle">
+      <UniqueIdentifier>{05889bad-1504-40b7-a532-52340d091a20}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

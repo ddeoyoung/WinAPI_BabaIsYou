@@ -37,11 +37,6 @@ void WorldMapLevel::Start()
 	SelectUI = CreateActor<WorldMapSelect>();
 	SelectUI->Off();
 
-	// TextUI
-	Text = CreateActor<TextUI>();
-	Text->SetPos({ 50, 20 });
-	Text->Off();
-
 	// WorldMapNumberBack
 	if (false == ResourcesManager::GetInst().IsLoadTexture("WorldMapNumberBack.Bmp"))
 	{
@@ -73,6 +68,16 @@ void WorldMapLevel::Start()
 		FilePath.MoveChild("ContentsResources\\Default\\");
 		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("Actor.bmp"));
 		ResourcesManager::GetInst().CreateSpriteSheet("Actor.bmp", 24, 40);
+	}
+
+	if (false == ResourcesManager::GetInst().IsLoadTexture("Text.bmp"))
+	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Default\\");
+
+		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("Text.bmp"), 38, 2);
 	}
 
 
@@ -202,6 +207,171 @@ void WorldMapLevel::Start()
 	SelectGrid->SetTile(10, 10, 0, BackGridPos);
 	SelectGrid->SetTile(11, 11, 0, BackGridPos);
 	SelectGrid->SetTile(12, 12, 0, BackGridPos);
+
+
+	// TextUI
+	// Stage 0 - BABA IS YOU
+	TextUI* TextB = CreateActor<TextUI>();
+	TextB->SetPuzzleText('B', StageTextScale);
+	TextB->SetPos({ 50, 20 });
+	StageTitle0.push_back(TextB);
+
+	TextUI* TextA = CreateActor<TextUI>();
+	TextA->SetPuzzleText('A', StageTextScale);
+	TextA->SetPos({ 70, 20 });
+	StageTitle0.push_back(TextA);
+
+	TextUI* TextB2 = CreateActor<TextUI>();
+	TextB2->SetPuzzleText('B', StageTextScale);
+	TextB2->SetPos({ 90, 20 });
+	StageTitle0.push_back(TextB2);
+
+	TextUI* TextA2 = CreateActor<TextUI>();
+	TextA2->SetPuzzleText('A', StageTextScale);
+	TextA2->SetPos({ 110, 20 });
+	StageTitle0.push_back(TextA2);
+
+	TextUI* TextSpace = CreateActor<TextUI>();
+	TextSpace->SetPuzzleText(' ', StageTextScale);
+	TextSpace->SetPos({ 130, 20 });
+	StageTitle0.push_back(TextSpace);
+
+	TextUI* TextI = CreateActor<TextUI>();
+	TextI->SetPuzzleText('I', StageTextScale);
+	TextI->SetPos({ 150, 20 });
+	StageTitle0.push_back(TextI);
+
+	TextUI* TextS = CreateActor<TextUI>();
+	TextS->SetPuzzleText('S', StageTextScale);
+	TextS->SetPos({ 170, 20 });
+	StageTitle0.push_back(TextS);
+
+	TextUI* TextSpace0 = CreateActor<TextUI>();
+	TextSpace0->SetPuzzleText(' ', StageTextScale);
+	TextSpace0->SetPos({ 190, 20 });
+	StageTitle0.push_back(TextSpace0);
+
+	TextUI* TextY = CreateActor<TextUI>();
+	TextY->SetPuzzleText('Y', StageTextScale);
+	TextY->SetPos({ 210, 20 });
+	StageTitle0.push_back(TextY);
+
+	TextUI* TextO = CreateActor<TextUI>();
+	TextO->SetPuzzleText('O', StageTextScale);
+	TextO->SetPos({ 230, 20 });
+	StageTitle0.push_back(TextO);
+
+	TextUI* TextU = CreateActor<TextUI>();
+	TextU->SetPuzzleText('U', StageTextScale);
+	TextU->SetPos({ 250, 20 });
+	StageTitle0.push_back(TextU);
+
+
+
+	// TextUI
+	// Stage 1 - WHERE DO I GO?
+	TextUI* TextW = CreateActor<TextUI>();
+	TextW->SetPuzzleText('W', StageTextScale);
+	TextW->SetPos({ 50, 20 });
+	StageTitle1.push_back(TextW);
+
+	TextUI* TextH = CreateActor<TextUI>();
+	TextH->SetPuzzleText('H', StageTextScale);
+	TextH->SetPos({ 70, 20 });
+	StageTitle1.push_back(TextH);
+
+	TextUI* TextE = CreateActor<TextUI>();
+	TextE->SetPuzzleText('E', StageTextScale);
+	TextE->SetPos({ 90, 20 });
+	StageTitle1.push_back(TextE);
+
+	TextUI* TextR = CreateActor<TextUI>();
+	TextR->SetPuzzleText('R', StageTextScale);
+	TextR->SetPos({ 110, 20 });
+	StageTitle1.push_back(TextR);
+
+	TextUI* TextE1 = CreateActor<TextUI>();
+	TextE1->SetPuzzleText('E', StageTextScale);
+	TextE1->SetPos({ 130, 20 });
+	StageTitle1.push_back(TextE1);
+
+	TextUI* TextSpace1 = CreateActor<TextUI>();
+	TextSpace1->SetPuzzleText(' ', StageTextScale);
+	TextSpace1->SetPos({ 150, 20 });
+	StageTitle1.push_back(TextSpace1);
+
+	TextUI* TextD = CreateActor<TextUI>();
+	TextD->SetPuzzleText('D', StageTextScale);
+	TextD->SetPos({ 170, 20 });
+	StageTitle1.push_back(TextD);
+
+	TextUI* TextO1 = CreateActor<TextUI>();
+	TextO1->SetPuzzleText('O', StageTextScale);
+	TextO1->SetPos({ 190, 20 });
+	StageTitle1.push_back(TextO1);
+
+	TextUI* TextSpace2 = CreateActor<TextUI>();
+	TextSpace2->SetPuzzleText(' ', StageTextScale);
+	TextSpace2->SetPos({ 210, 20 });
+	StageTitle1.push_back(TextSpace2);
+
+	TextUI* TextI2 = CreateActor<TextUI>();
+	TextI2->SetPuzzleText('I', StageTextScale);
+	TextI2->SetPos({ 230, 20 });
+	StageTitle1.push_back(TextI2);
+
+	TextUI* TextSpace3 = CreateActor<TextUI>();
+	TextSpace3->SetPuzzleText(' ', StageTextScale);
+	TextSpace3->SetPos({ 250, 20 });
+	StageTitle1.push_back(TextSpace3);
+
+	TextUI* TextG = CreateActor<TextUI>();
+	TextG->SetPuzzleText('G', StageTextScale);
+	TextG->SetPos({ 270, 20 });
+	StageTitle1.push_back(TextG);
+
+	TextUI* TextO2 = CreateActor<TextUI>();
+	TextO2->SetPuzzleText('O', StageTextScale);
+	TextO2->SetPos({ 290, 20 });
+	StageTitle1.push_back(TextO2);
+
+	TextUI* TextQues = CreateActor<TextUI>();
+	TextQues->SetPuzzleText('?', StageTextScale);
+	TextQues->SetPos({ 310, 20 });
+	StageTitle1.push_back(TextQues);
+
+
+	// TextUI
+	// Stage 2 - NOW WHAT IS THIS?
+
+
+
+
+
+
+
+
+
+	// TextUI - Off
+	for (size_t i = 0; i < StageTitle0.size(); i++)
+	{
+		StageTitle0[i]->Off();
+	}
+
+	for (size_t i = 0; i < StageTitle1.size(); i++)
+	{
+		StageTitle1[i]->Off();
+	}
+
+	for (size_t i = 0; i < StageTitle2.size(); i++)
+	{
+		StageTitle2[i]->Off();
+	}
+
+	for (size_t i = 0; i < StageTitle3.size(); i++)
+	{
+		StageTitle3[i]->Off();
+	}
 }
 
 
@@ -210,36 +380,59 @@ void WorldMapLevel::StageTitleUI(int _SelectX, int _SelectY)
 	// Stage 0 - BABA IS YOU
 	if (_SelectX == 9 && _SelectY == 14)
 	{
-		Text->On();
-		Text->SetPuzzleText('A', { 30, 30 });
-		Text->SetPuzzleText('B', { 30, 30 });
 		//Text->SetPuzzleString("BABA IS YOU");
+		for (size_t i = 0; i < StageTitle0.size(); i++)
+		{
+			StageTitle0[i]->On();
+		}
 	}
 
 	// Stage 1 - WHERE DO I GO?
 	else if (_SelectX == 10 && _SelectY == 12)
 	{
-		Text->On();
-		Text->SetPuzzleText('1', { 30, 30 });
+		for (size_t i = 0; i < StageTitle1.size(); i++)
+		{
+			StageTitle1[i]->On();
+		}
 	}
 
 	// Stage 2 - NOW WHAT IS THIS?
 	else if (_SelectX == 10 && _SelectY == 11)
 	{
-		Text->On();
-		Text->SetPuzzleText('2', { 30, 30 });
+		for (size_t i = 0; i < StageTitle2.size(); i++)
+		{
+			StageTitle2[i]->On();
+		}
 	}
 
 	// Stage 3 - OUT OF REACH
 	else if (_SelectX == 11 && _SelectY == 12)
 	{
-		Text->On();
-		Text->SetPuzzleText('3', { 30, 30 });
+
 	}
 
 	else
 	{
-		Text->Off();
+		// Text->Off();
+		for (size_t i = 0; i < StageTitle0.size(); i++)
+		{
+			StageTitle0[i]->Off();
+		}
+
+		for (size_t i = 0; i < StageTitle1.size(); i++)
+		{
+			StageTitle1[i]->Off();
+		}
+		
+		for (size_t i = 0; i < StageTitle2.size(); i++)
+		{
+			StageTitle2[i]->Off();
+		}
+
+		for (size_t i = 0; i < StageTitle3.size(); i++)
+		{
+			StageTitle3[i]->Off();
+		}
 	}
 
 }
