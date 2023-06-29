@@ -402,6 +402,37 @@ std::vector<GameEngineRenderer*> PuzzleLevel::GetPlayerTile(TileMap* _TileMap, c
 	return PlayerTiles;
 }
 
+std::vector<GameEngineRenderer*> PuzzleLevel::GetWinTile(const std::string& _WinTileName)
+{
+	WinTiles.clear();
+
+	GameEngineRenderer* Tile = nullptr;
+	std::string TileName = "";
+	std::string WinTileName = _WinTileName;
+
+	for (int y = 0; y < 15; y++)
+	{
+		for (int x = 0; x < 21; x++)
+		{
+			// Win 타일은 TileGrid에만 존재
+			Tile = TileGrid->GetTile(x, y);
+
+			if (nullptr != Tile)
+			{
+				TileName = Tile->GetName();
+
+				if (TileName == WinTileName)
+				{
+					WinTiles.push_back(Tile);
+				}
+			}
+		}
+	}
+
+	return WinTiles;
+}
+
+
 void PuzzleLevel::PlayerCheck()
 {
 	RuleInfo Rules;
@@ -498,9 +529,26 @@ bool PuzzleLevel::IsMoveTile(std::vector<GameEngineRenderer*> _PlayerTiles, std:
 	return true;
 }
 
+
 void PuzzleLevel::WinCheck()
 {
-	
+	RuleInfo Rules;
+
+	// YOU가 포함된 문장이 있는지 체크
+	for (std::string Text : RuleSet)
+	{
+		Rules = GetRuleInfo(Text);
+
+		if (Rules.Behave == "WIN")
+		{
+			break;
+		}
+	}
+
+	// Rules = 주어, IS, WIN
+
+
+
 }
 
 

@@ -56,6 +56,7 @@ private:
 
 	std::vector<GameEngineRenderer*> PlayerTiles;
 	std::vector<GameEngineRenderer*> BreakTiles;
+	std::vector<GameEngineRenderer*> WinTiles;
 
 	RuleInfo Rules;
 
@@ -102,6 +103,7 @@ private:
 
 	std::vector<GameEngineRenderer*> GetPlayerTile(TileMap* _TileMap, const std::string& _PlayerTileName);
 	std::vector<GameEngineRenderer*> GetBreakTile(const std::string& _BreakTileName);
+	std::vector<GameEngineRenderer*> GetWinTile(const std::string& _WinTileName);
 
 };
 
