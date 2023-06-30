@@ -296,35 +296,7 @@ void PuzzleLevel::UpdateStringRuleCheck()
 	GameEngineRenderer* VerbRenderer = nullptr;
 	GameEngineRenderer* BehaveRenderer = nullptr;
 
-	for (int y = 0; y < 15; y++)
-	{
-		for (int x = 0; x < 21; x++)
-		{
-			CurTile = UpTileGrid->GetTile(x, y);
-
-			if (nullptr == CurTile)
-			{
-				continue;
-			}
-
-			std::string TileName = CurTile->GetName();
-
-			if (true == SubjectSet.contains(TileName))
-			{
-				CurTile->ChangeAnimation(TileName + "_OFF");
-			}else
-			if (true == VerbSet.contains(TileName))
-			{
-				CurTile->ChangeAnimation(TileName + "_OFF");
-			}
-			else
-			if (true == BehaveSet.contains(TileName))
-			{
-				CurTile->ChangeAnimation(TileName + "_OFF");
-			}
-
-		}
-	}
+	std::set<GameEngineRenderer*> Renders;
 
 	for (int y = 0; y < 15; y++)
 	{
@@ -378,6 +350,10 @@ void PuzzleLevel::UpdateStringRuleCheck()
 								{
 									RuleInfo Info = GetRuleInfo(SubjectTileName + VerbTileName + BehaveTileName);
 
+									Renders.insert(SubjectRenderer);
+									Renders.insert(VerbRenderer);
+									Renders.insert(BehaveRenderer);
+
 									SubjectRenderer->ChangeAnimation(Info.Subject);
 									VerbRenderer->ChangeAnimation(Info.Verb);
 									BehaveRenderer->ChangeAnimation(Info.Behave);
@@ -419,6 +395,10 @@ void PuzzleLevel::UpdateStringRuleCheck()
 								{
 									RuleInfo Info = GetRuleInfo(SubjectTileName + VerbTileName + BehaveTileName);
 
+									Renders.insert(SubjectRenderer);
+									Renders.insert(VerbRenderer);
+									Renders.insert(BehaveRenderer);
+
 									SubjectRenderer->ChangeAnimation(Info.Subject);
 									VerbRenderer->ChangeAnimation(Info.Verb);
 									BehaveRenderer->ChangeAnimation(Info.Behave);
@@ -437,6 +417,33 @@ void PuzzleLevel::UpdateStringRuleCheck()
 
 		}
 	}
+
+	for (int y = 0; y < 15; y++)
+	{
+		for (int x = 0; x < 21; x++)
+		{
+			CurTile = UpTileGrid->GetTile(x, y);
+
+			if (nullptr == CurTile)
+			{
+				continue;
+			}
+
+			std::string TileName = CurTile->GetName();
+
+			// 룰에 관련된 타일인데도
+			if (true == SubjectSet.contains(TileName) || true == VerbSet.contains(TileName) || true == BehaveSet.contains(TileName))
+			{
+				// 완성된 룰을 만드는데 사용되지 않은 랜더러들은 off 시킨다.
+				if (false == Renders.contains(CurTile))
+				{
+					CurTile->ChangeAnimation(TileName + "_OFF");
+				}
+			}
+		}
+	}
+
+
 	return;
 }
 
