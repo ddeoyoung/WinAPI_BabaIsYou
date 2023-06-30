@@ -57,6 +57,7 @@ void WorldMapLevel::Start()
 		ResourcesManager::GetInst().CreateSpriteSheet("Actor.bmp", 24, 40);
 	}
 
+	// Text
 	if (false == ResourcesManager::GetInst().IsLoadTexture("Text.bmp"))
 	{
 		GameEnginePath FilePath;
@@ -65,6 +66,17 @@ void WorldMapLevel::Start()
 		FilePath.MoveChild("ContentsResources\\Default\\");
 
 		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("Text.bmp"), 38, 2);
+	}
+
+	// WorldMapSelect
+	if (false == ResourcesManager::GetInst().IsLoadTexture("WorldMapSelect.Bmp"))
+	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\WorldMap\\");
+		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("WorldMapSelect.bmp"));
+		ResourcesManager::GetInst().CreateSpriteSheet("WorldMapSelect.bmp", 1, 3);
 	}
 
 }
@@ -83,8 +95,8 @@ void WorldMapLevel::LevelStart(GameEngineLevel* _PrevLevel)
 	FadeUI->FadeIn();
 
 	// WorldMapSelect
-	SelectUI = CreateActor<WorldMapSelect>();
-	SelectUI->Off();
+	//SelectUI = CreateActor<WorldMapSelect>();
+	//SelectUI->Off();
 
 	float4 WinScale = GameEngineWindow::MainWindow.GetScale().Half();
 	float4 BackScale = { 1190 , 650 };
@@ -192,6 +204,7 @@ void WorldMapLevel::LevelStart(GameEngineLevel* _PrevLevel)
 	TileRenderer->ChangeAnimation("LINE_10");
 
 
+	// SelectUI
 	SelectGrid->SetTile(SelectX, SelectY, 0, BackGridPos, true);
 	TileRenderer = SelectGrid->GetTile(SelectX, SelectY);
 	TileRenderer->CreateAnimation("SELECT_UI", "WorldMapSelect.bmp", 0, 2, 0.2f, true);
@@ -457,7 +470,7 @@ void WorldMapLevel::LevelStart(GameEngineLevel* _PrevLevel)
 void WorldMapLevel::LevelEnd(GameEngineLevel* _NextLevel)
 {
 	FadeUI->Off();
-	SelectUI->Off();
+	SelectGrid->DeathTile(SelectX, SelectY);
 }
 
 

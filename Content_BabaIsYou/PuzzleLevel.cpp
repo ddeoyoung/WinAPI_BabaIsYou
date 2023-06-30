@@ -170,6 +170,7 @@ void PuzzleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 				TileRenderer = UpTileGrid->SetTile(x, y, 288, BackGridPos);
 				TileRenderer->SetName("WALL");
 				TileRenderer->CreateAnimationToFrame("WALL", "Actor.bmp", { 288, 312, 336 }, 0.2f, true);
+				TileRenderer->CreateAnimationToFrame("WALL_OFF", "Actor.bmp", { 289, 313, 337 }, 0.2f, true); // Off
 				TileRenderer->ChangeAnimation("WALL");
 			}
 
@@ -179,6 +180,7 @@ void PuzzleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 				TileRenderer = UpTileGrid->SetTile(x, y, 792, BackGridPos);
 				TileRenderer->SetName("IS");
 				TileRenderer->CreateAnimationToFrame("IS", "Actor.bmp", { 792, 816, 840 }, 0.2f, true);
+				TileRenderer->CreateAnimationToFrame("IS_OFF", "Actor.bmp", { 793, 817, 841 }, 0.2f, true); // Off
 				TileRenderer->ChangeAnimation("IS");
 			}
 
@@ -187,8 +189,8 @@ void PuzzleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 			{
 				TileRenderer = UpTileGrid->SetTile(x, y, 726, BackGridPos);
 				TileRenderer->SetName("FLAG");
-				//TileRenderer->CreateAnimationToFrame("FLAG", "Actor.bmp", { 726, 750, 774 }, 0.2f, true);
-				TileRenderer->CreateAnimationToFrame("FLAG", "Actor.bmp", { 727, 751, 775 }, 0.2f, true);
+				TileRenderer->CreateAnimationToFrame("FLAG", "Actor.bmp", { 726, 750, 774 }, 0.2f, true);
+				TileRenderer->CreateAnimationToFrame("FLAG_OFF", "Actor.bmp", { 727, 751, 775 }, 0.2f, true); // Off
 				TileRenderer->ChangeAnimation("FLAG");
 			}
 
@@ -198,7 +200,7 @@ void PuzzleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 				TileRenderer = UpTileGrid->SetTile(x, y, 0, BackGridPos);
 				TileRenderer->SetName("BABA");
 				TileRenderer->CreateAnimationToFrame("BABA", "Actor.bmp", { 0, 24, 48 }, 0.2f, true);
-				//TileRenderer->CreateAnimationToFrame("BABA", "Actor.bmp", { 1, 25, 49 }, 0.2f, true);
+				TileRenderer->CreateAnimationToFrame("BABA_OFF", "Actor.bmp", { 1, 25, 49 }, 0.2f, true); // Off
 				TileRenderer->ChangeAnimation("BABA");
 			}
 
@@ -208,7 +210,7 @@ void PuzzleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 				TileRenderer = UpTileGrid->SetTile(x, y, 864, BackGridPos);
 				TileRenderer->SetName("YOU");
 				TileRenderer->CreateAnimationToFrame("YOU", "Actor.bmp", { 864, 888, 912 }, 0.2f, true);
-				//TileRenderer->CreateAnimationToFrame("YOU", "Actor.bmp", { 865, 889, 913 }, 0.2f, true);
+				TileRenderer->CreateAnimationToFrame("YOU_OFF", "Actor.bmp", { 865, 889, 913 }, 0.2f, true); // Off
 				TileRenderer->ChangeAnimation("YOU");
 			}
 
@@ -217,8 +219,8 @@ void PuzzleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 			{
 				TileRenderer = UpTileGrid->SetTile(x, y, 864, BackGridPos);
 				TileRenderer->SetName("WIN");
-				//TileRenderer->CreateAnimationToFrame("WIN", "Actor.bmp", { 866, 890, 914 }, 0.2f, true);
-				TileRenderer->CreateAnimationToFrame("WIN", "Actor.bmp", { 867, 891, 915 }, 0.2f, true);
+				TileRenderer->CreateAnimationToFrame("WIN", "Actor.bmp", { 866, 890, 914 }, 0.2f, true);
+				TileRenderer->CreateAnimationToFrame("WIN_OFF", "Actor.bmp", { 867, 891, 915 }, 0.2f, true); // Off
 				TileRenderer->ChangeAnimation("WIN");
 			}
 
@@ -228,7 +230,7 @@ void PuzzleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 				TileRenderer = UpTileGrid->SetTile(x, y, 868, BackGridPos);
 				TileRenderer->SetName("STOP");
 				TileRenderer->CreateAnimationToFrame("STOP", "Actor.bmp", { 868, 892, 916 }, 0.2f, true);
-				//TileRenderer->CreateAnimationToFrame("STOP", "Actor.bmp", { 869, 893, 917 }, 0.2f, true);
+				TileRenderer->CreateAnimationToFrame("STOP_OFF", "Actor.bmp", { 869, 893, 917 }, 0.2f, true); // Off
 				TileRenderer->ChangeAnimation("STOP");
 			}
 		}
@@ -274,11 +276,6 @@ void PuzzleLevel::Update(float _Delta)
 	{
 		GameEngineCore::ChangeLevel("WorldMapLevel");
 	}
-
-	// Congrats 애니메이션이 끝나면			-> 완료
-	// CongratCont							-> 완료
-	// 일정 시간이 지나면					-> 완료
-	// FadeOut 후 LevelChange(WorldMapLevel)
 }
 
 

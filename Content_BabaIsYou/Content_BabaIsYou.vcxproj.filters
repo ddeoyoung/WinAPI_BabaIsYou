@@ -53,6 +53,12 @@
     <ClInclude Include="CongratsUI.h">
       <Filter>UIActor\Puzzle</Filter>
     </ClInclude>
+    <ClInclude Include="TutorialLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Effect.h">
+      <Filter>UIActor\Puzzle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -102,6 +108,12 @@
       <Filter>UIActor\Puzzle</Filter>
     </ClCompile>
     <ClCompile Include="CongratsUI.cpp">
+      <Filter>UIActor\Puzzle</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Effect.cpp">
       <Filter>UIActor\Puzzle</Filter>
     </ClCompile>
   </ItemGroup>
