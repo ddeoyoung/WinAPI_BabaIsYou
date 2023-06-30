@@ -39,11 +39,16 @@ PuzzleLevel::~PuzzleLevel()
 
 void PuzzleLevel::Start()
 {
+
+}
+
+void PuzzleLevel::LevelStart(GameEngineLevel* _PrevLevel)
+{
 	// Background
 	BackgroundUI_Gray = CreateActor<Background_Gray>();
 	BackgroundUI_Gray->Init("Background_Gray.bmp");
 	BackgroundUI_Black = CreateActor<Background_Black>();
-	BackgroundUI_Black->Init("Background_Black.bmp", {850, 600});
+	BackgroundUI_Black->Init("Background_Black.bmp", { 850, 600 });
 
 	// Fade Animation
 	FadeUI = CreateActor<FadeAnimation>();
@@ -96,7 +101,7 @@ void PuzzleLevel::Start()
 
 			// WALL_ACTOR
 			if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(255, 0, 0))
-			{ 
+			{
 				TileRenderer = TileGrid->SetTile(x, y, 290, BackGridPos);
 				TileRenderer->SetName("WALL_ACTOR");
 				TileRenderer->CreateAnimationToFrame("WALL_ACTOR", "Actor.bmp", { 290, 314, 338 }, 0.2f, true);
@@ -216,7 +221,7 @@ void PuzzleLevel::Start()
 				TileRenderer->CreateAnimationToFrame("WIN", "Actor.bmp", { 867, 891, 915 }, 0.2f, true);
 				TileRenderer->ChangeAnimation("WIN");
 			}
-			
+
 			// STOP
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(0, 100, 0))
 			{
@@ -228,17 +233,11 @@ void PuzzleLevel::Start()
 			}
 		}
 	}
-
-}
-
-void PuzzleLevel::LevelStart(GameEngineLevel* _PrevLevel)
-{
-
 }
 
 void PuzzleLevel::LevelEnd(GameEngineLevel* _NextLevel)
 {
-
+	FadeUI->Off();
 }
 
 void PuzzleLevel::Update(float _Delta)
@@ -684,7 +683,27 @@ void PuzzleLevel::MoveCheck()
 
 		if (PlayerTileName == "BABA")
 		{
-			PlayerTiles[0]->ChangeAnimation("Baba_Right");
+			switch (BabaMoveStep)
+			{
+			case 0:
+				PlayerTiles[0]->ChangeAnimation("Baba_Right");
+				BabaMoveStep += 1;
+				break;
+			case 1:
+				PlayerTiles[0]->ChangeAnimation("Baba_Right2");
+				BabaMoveStep += 1;
+				break;
+			case 2:
+				PlayerTiles[0]->ChangeAnimation("Baba_Right3");
+				BabaMoveStep += 1;
+				break;
+			case 3:
+				PlayerTiles[0]->ChangeAnimation("Baba_Right4");
+				BabaMoveStep = 0;
+				break;
+			default:
+				break;
+			}
 		}
 	}
 	
@@ -694,7 +713,27 @@ void PuzzleLevel::MoveCheck()
 
 		if (PlayerTileName == "BABA")
 		{
-			PlayerTiles[0]->ChangeAnimation("Baba_Left");
+			switch (BabaMoveStep)
+			{
+			case 0:
+				PlayerTiles[0]->ChangeAnimation("Baba_Left");
+				BabaMoveStep += 1;
+				break;
+			case 1:
+				PlayerTiles[0]->ChangeAnimation("Baba_Left2");
+				BabaMoveStep += 1;
+				break;
+			case 2:
+				PlayerTiles[0]->ChangeAnimation("Baba_Left3");
+				BabaMoveStep += 1;
+				break;
+			case 3:
+				PlayerTiles[0]->ChangeAnimation("Baba_Left4");
+				BabaMoveStep = 0;
+				break;
+			default:
+				break;
+			}
 		}
 	}
 
@@ -704,7 +743,27 @@ void PuzzleLevel::MoveCheck()
 
 		if (PlayerTileName == "BABA")
 		{
-			PlayerTiles[0]->ChangeAnimation("Baba_Up");
+			switch (BabaMoveStep)
+			{
+			case 0:
+				PlayerTiles[0]->ChangeAnimation("Baba_Up");
+				BabaMoveStep += 1;
+				break;
+			case 1:
+				PlayerTiles[0]->ChangeAnimation("Baba_Up2");
+				BabaMoveStep += 1;
+				break;
+			case 2:
+				PlayerTiles[0]->ChangeAnimation("Baba_Up3");
+				BabaMoveStep += 1;
+				break;
+			case 3:
+				PlayerTiles[0]->ChangeAnimation("Baba_Up4");
+				BabaMoveStep = 0;
+				break;
+			default:
+				break;
+			}
 		}
 	}
 
@@ -714,7 +773,27 @@ void PuzzleLevel::MoveCheck()
 
 		if (PlayerTileName == "BABA")
 		{
-			PlayerTiles[0]->ChangeAnimation("Baba_Down");
+			switch (BabaMoveStep)
+			{
+			case 0:
+				PlayerTiles[0]->ChangeAnimation("Baba_Down");
+				BabaMoveStep += 1;
+				break;
+			case 1:
+				PlayerTiles[0]->ChangeAnimation("Baba_Down");
+				BabaMoveStep += 1;
+				break;
+			case 2:
+				PlayerTiles[0]->ChangeAnimation("Baba_Down");
+				BabaMoveStep += 1;
+				break;
+			case 3:
+				PlayerTiles[0]->ChangeAnimation("Baba_Down");
+				BabaMoveStep = 0;
+				break;
+			default:
+				break;
+			}
 		}
 	}
 
@@ -818,11 +897,6 @@ void PuzzleLevel::MoveCheck()
 	{
 		return;
 	}
-}
-
-void PuzzleLevel::ChangeBabaAnimation()
-{
-
 }
 
 void PuzzleLevel::MovePuzzleTile(std::vector<GameEngineRenderer*> _PlayerTiles)

@@ -24,19 +24,6 @@ WorldMapLevel::~WorldMapLevel()
 
 void WorldMapLevel::Start()
 {
-	// Background
-	BackgroundUI = CreateActor<Background_Gray>();
-	BackgroundUI->Init("Background_Gray.bmp");
-	WorldMapUI = CreateActor<Background_WorldMap>();
-
-	// FadeAnimation
-	FadeUI = CreateActor<FadeAnimation>();
-	FadeUI->FadeIn();
-
-	// WorldMapSelect
-	SelectUI = CreateActor<WorldMapSelect>();
-	SelectUI->Off();
-
 	// WorldMapNumberBack
 	if (false == ResourcesManager::GetInst().IsLoadTexture("WorldMapNumberBack.Bmp"))
 	{
@@ -80,12 +67,28 @@ void WorldMapLevel::Start()
 		ResourcesManager::GetInst().CreateSpriteSheet(FilePath.PlusFilePath("Text.bmp"), 38, 2);
 	}
 
+}
 
+
+void WorldMapLevel::LevelStart(GameEngineLevel* _PrevLevel)
+{
+
+	// Background
+	BackgroundUI = CreateActor<Background_Gray>();
+	BackgroundUI->Init("Background_Gray.bmp");
+	WorldMapUI = CreateActor<Background_WorldMap>();
+
+	// FadeAnimation
+	FadeUI = CreateActor<FadeAnimation>();
+	FadeUI->FadeIn();
+
+	// WorldMapSelect
+	SelectUI = CreateActor<WorldMapSelect>();
+	SelectUI->Off();
 
 	float4 WinScale = GameEngineWindow::MainWindow.GetScale().Half();
 	float4 BackScale = { 1190 , 650 };
-	BackGridPos = { WinScale.X - (BackScale.X / 2) - 10, WinScale.Y - (BackScale.Y / 2) - 5};
-
+	BackGridPos = { WinScale.X - (BackScale.X / 2) - 10, WinScale.Y - (BackScale.Y / 2) - 5 };
 
 	// 31 x 17 개의 타일맵 생성
 	TileGrid = CreateActor<TileMap>();
@@ -114,13 +117,13 @@ void WorldMapLevel::Start()
 	// 0
 	TileGrid->SetTile(9, 14, 0, BackGridPos);
 	TileRenderer = TileGrid->GetTile(9, 14);
-	TileRenderer->CreateAnimationToFrame("NUMBER_BACK", "WorldMapNumberBack.bmp", {0, 2, 4}, 0.2f, true);
+	TileRenderer->CreateAnimationToFrame("NUMBER_BACK", "WorldMapNumberBack.bmp", { 0, 2, 4 }, 0.2f, true);
 	TileRenderer->ChangeAnimation("NUMBER_BACK");
 
 	// 1
 	TileGrid->SetTile(10, 12, 0, BackGridPos);
 	TileRenderer = TileGrid->GetTile(10, 12);
-	TileRenderer->CreateAnimationToFrame("NUMBER_BACK", "WorldMapNumberBack.bmp", { 0, 2, 4 }, 0.2f, true);
+	//TileRenderer->CreateAnimationToFrame("NUMBER_BACK", "WorldMapNumberBack.bmp", { 0, 2, 4 }, 0.2f, true);
 	TileRenderer->ChangeAnimation("NUMBER_BACK");
 
 	// 2
@@ -195,7 +198,7 @@ void WorldMapLevel::Start()
 	TileRenderer->ChangeAnimation("SELECT_UI");
 
 
-	
+
 	SelectGrid->SetTile(8, 14, 0, BackGridPos);
 	SelectGrid->SetTile(9, 13, 0, BackGridPos);
 	SelectGrid->SetTile(9, 15, 0, BackGridPos);
@@ -387,7 +390,7 @@ void WorldMapLevel::Start()
 	TextSpace5->SetPuzzleText(' ', StageTextScale);
 	TextSpace5->SetPos({ 210, 17 });
 	StageTitle2.push_back(TextSpace5);
-	
+
 	TextUI* TextI3 = CreateActor<TextUI>();
 	TextI3->SetPuzzleText('I', StageTextScale);
 	TextI3->SetPos({ 230, 17 });
@@ -451,15 +454,10 @@ void WorldMapLevel::Start()
 	}
 }
 
-
-void WorldMapLevel::LevelStart(GameEngineLevel* _PrevLevel)
-{
-
-}
-
 void WorldMapLevel::LevelEnd(GameEngineLevel* _NextLevel)
 {
-
+	FadeUI->Off();
+	SelectUI->Off();
 }
 
 

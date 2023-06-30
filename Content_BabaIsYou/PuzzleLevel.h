@@ -106,8 +106,6 @@ private:
 
 	void MovePuzzleTile(std::vector<GameEngineRenderer*> _PlayerTiles);
 
-	void ChangeBabaAnimation();
-
 	// 다음 이동방향에 막히는 타일 체크
 	bool IsMoveTile(std::vector<GameEngineRenderer*> _PlayerTiles, std::vector<GameEngineRenderer*> _BreakTiles, MOVEDIR _Dir);
 
