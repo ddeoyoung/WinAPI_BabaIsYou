@@ -263,7 +263,7 @@ void PuzzleLevel::Update(float _Delta)
 		}
 	}
 
-	if (true == IsCongratsUI 
+	if (true == IsCongratsUI
 		&& true == Congratulations->CongratsRender->IsAnimation("CongratsCont")
 		&& true == Congratulations->CongratsRender->IsAnimationEnd())
 	{
@@ -271,7 +271,7 @@ void PuzzleLevel::Update(float _Delta)
 		FadeUI->FadeOut();
 	}
 
-	if (true == FadeUI->FadeRender->IsAnimation("FadeOut") 
+	if (true == FadeUI->FadeRender->IsAnimation("FadeOut")
 		&& true == FadeUI->FadeRender->IsAnimationEnd())
 	{
 		GameEngineCore::ChangeLevel("WorldMapLevel");
@@ -292,6 +292,40 @@ void PuzzleLevel::UpdateStringRuleCheck()
 
 	RuleSet.clear(); // 매번 리셋
 
+	GameEngineRenderer* SubjectRenderer = nullptr;
+	GameEngineRenderer* VerbRenderer = nullptr;
+	GameEngineRenderer* BehaveRenderer = nullptr;
+
+	for (int y = 0; y < 15; y++)
+	{
+		for (int x = 0; x < 21; x++)
+		{
+			CurTile = UpTileGrid->GetTile(x, y);
+
+			if (nullptr == CurTile)
+			{
+				continue;
+			}
+
+			std::string TileName = CurTile->GetName();
+
+			if (true == SubjectSet.contains(TileName))
+			{
+				CurTile->ChangeAnimation(TileName + "_OFF");
+			}else
+			if (true == VerbSet.contains(TileName))
+			{
+				CurTile->ChangeAnimation(TileName + "_OFF");
+			}
+			else
+			if (true == BehaveSet.contains(TileName))
+			{
+				CurTile->ChangeAnimation(TileName + "_OFF");
+			}
+
+		}
+	}
+
 	for (int y = 0; y < 15; y++)
 	{
 		for (int x = 0; x < 21; x++)
@@ -310,6 +344,7 @@ void PuzzleLevel::UpdateStringRuleCheck()
 				if (SubjectSet.contains(TileName))
 				{
 					SubjectTileName = TileName + " ";
+					SubjectRenderer = CurTile;
 
 					CurTile = UpTileGrid->GetTile(x, y + 1); // 세로 문장 체크
 
@@ -323,6 +358,8 @@ void PuzzleLevel::UpdateStringRuleCheck()
 							VerbTileName = TileName + " ";
 						}
 
+						VerbRenderer = CurTile;
+
 						// 행동 - Behave
 						CurTile = UpTileGrid->GetTile(x, y + 2);
 
@@ -333,7 +370,18 @@ void PuzzleLevel::UpdateStringRuleCheck()
 							if (BehaveSet.contains(TileName))
 							{
 								BehaveTileName = TileName;
+								BehaveRenderer = CurTile;
+
 								RuleSet.insert(SubjectTileName + VerbTileName + BehaveTileName);
+
+								if (nullptr != SubjectRenderer && nullptr != VerbRenderer && nullptr != BehaveRenderer)
+								{
+									RuleInfo Info = GetRuleInfo(SubjectTileName + VerbTileName + BehaveTileName);
+
+									SubjectRenderer->ChangeAnimation(Info.Subject);
+									VerbRenderer->ChangeAnimation(Info.Verb);
+									BehaveRenderer->ChangeAnimation(Info.Behave);
+								}
 							}
 						}
 					}
@@ -351,6 +399,8 @@ void PuzzleLevel::UpdateStringRuleCheck()
 							VerbTileName = TileName + " ";
 						}
 
+						VerbRenderer = CurTile;
+
 						// 행동 - Behave
 						CurTile = UpTileGrid->GetTile(x + 2, y);
 
@@ -361,13 +411,28 @@ void PuzzleLevel::UpdateStringRuleCheck()
 							if (BehaveSet.contains(TileName))
 							{
 								BehaveTileName = TileName;
+								BehaveRenderer = CurTile;
 								RuleSet.insert(SubjectTileName + VerbTileName + BehaveTileName);
+
+
+								if (nullptr != SubjectRenderer && nullptr != VerbRenderer && nullptr != BehaveRenderer)
+								{
+									RuleInfo Info = GetRuleInfo(SubjectTileName + VerbTileName + BehaveTileName);
+
+									SubjectRenderer->ChangeAnimation(Info.Subject);
+									VerbRenderer->ChangeAnimation(Info.Verb);
+									BehaveRenderer->ChangeAnimation(Info.Behave);
+								}
+
+
 							}
+
 						}
 					}
 
 
 				}
+
 			}
 
 		}
@@ -703,7 +768,7 @@ void PuzzleLevel::MoveCheck()
 			}
 		}
 	}
-	
+
 	if (true == GameEngineInput::IsDown('A'))
 	{
 		Dir = MOVEDIR::LEFT;
@@ -829,7 +894,7 @@ void PuzzleLevel::MoveCheck()
 	{
 		for (size_t i = 0; i < PlayerTiles.size(); i++)
 		{
-			
+
 			bool Check = false;
 			GameEngineRenderer* CheckTile = PlayerTiles[i];
 
