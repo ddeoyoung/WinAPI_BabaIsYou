@@ -24,7 +24,7 @@ void ContentCore::Start()
 	GameEngineCore::CreateLevel<TutorialLevel>("TutorialLevel");
 	GameEngineCore::CreateLevel<PuzzleLevel>("PuzzleLevel");
 
-	GameEngineCore::ChangeLevel("PuzzleLevel");
+	GameEngineCore::ChangeLevel("TutorialLevel");
 }
 
 void ContentCore::Update(float _Delta)

@@ -209,6 +209,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="LogoLevel.h" />
+    <ClInclude Include="MoveUI.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="PuzzleLevel.h">
       <SubType>
       </SubType>
@@ -278,6 +282,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="LogoLevel.cpp" />
+    <ClCompile Include="MoveUI.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="PuzzleLevel.cpp">
       <SubType>
       </SubType>

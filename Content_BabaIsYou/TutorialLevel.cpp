@@ -16,6 +16,7 @@
 #include "FadeAnimation.h"
 #include "TextUI.h"
 #include "Effect.h"
+#include "MoveUI.h"
 
 #include <sstream>
 
@@ -58,6 +59,10 @@ void TutorialLevel::LevelStart(GameEngineLevel* _PrevLevel)
 	// CongratsUI
 	Congratulations = CreateActor<CongratsUI>();
 	Congratulations->Off();
+
+
+	// MoveUI
+	TutorialMoveUI = CreateActor<MoveUI>();
 
 	// Puzzle Tiles
 	if (false == ResourcesManager::GetInst().IsLoadTexture("Actor.Bmp"))
@@ -984,20 +989,14 @@ void TutorialLevel::MoveCheck()
 				CurTileMap->LerpTile(PlayerTiles[i], Dir, BackGridPos);
 			}
 
-			// 플레이어 타일에 이펙트 추가
-			if (EffectInterval < 0)
-			{
-				TileEffect = CreateActor<Effect>();
-				TileEffect->EffectRender->ChangeAnimation("BABA_WALK");
-				TileEffect->SetDir(WalkDir);
-				TileEffect->EffectRender->SetRenderPos(TilePos);
-				TileEffect->EffectRender->SetRenderScale({35, 35});
-			}
-		}
 
-		if (EffectInterval < 0)
-		{
-			EffectInterval = 0.001f;
+			// 플레이어 타일에 이펙트 추가
+			TileEffect = CreateActor<Effect>();
+			TileEffect->EffectRender->ChangeAnimation("BABA_WALK");
+			TileEffect->SetDir(WalkDir);
+			TileEffect->EffectRender->SetRenderPos(TilePos);
+			TileEffect->EffectRender->SetRenderScale({ 35, 35 });
+
 		}
 	}
 

@@ -93,6 +93,8 @@ private:
 
 	class Effect* TileEffect = nullptr;
 
+	class MoveUI* TutorialMoveUI = nullptr;
+
 	GameEngineRenderer* MainRenderer = nullptr;
 	GameEngineRenderer* TileRenderer = nullptr;
 	GameEngineRenderer* TextRenderer = nullptr;
