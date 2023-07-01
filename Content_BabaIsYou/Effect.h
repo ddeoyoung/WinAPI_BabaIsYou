@@ -17,9 +17,21 @@ public:
 
 	class GameEngineRenderer* EffectRender = nullptr;
 
+	float4 GetDir()
+	{
+		return Dir;
+	}
+
+	void SetEffect();
+
 protected:
 
 private:
 	void Start() override;
+	void Update(float _Delta) override;
+
+	float4 Dir;
+
+	float Speed = 0.0f;
 };
 

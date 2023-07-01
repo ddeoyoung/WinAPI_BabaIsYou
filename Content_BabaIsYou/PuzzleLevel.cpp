@@ -60,10 +60,8 @@ void PuzzleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 	Congratulations->Off();
 
 	// EffectUI
-	TileEffect = CreateActor<Effect>();
-	TileEffect->EffectRender->CreateAnimation("FLAG_WIN", "Effect.bmp", 231, 237, 0.15f, true);
-	TileEffect->EffectRender->ChangeAnimation("FLAG_WIN");
-	TileEffect->EffectRender->SetRenderScaleToTexture();
+	//TileEffect = CreateActor<Effect>();
+	//TileEffect->EffectRender->ChangeAnimation("FLAG_WIN");
 
 	// Puzzle Tiles
 	if (false == ResourcesManager::GetInst().IsLoadTexture("Actor.Bmp"))
@@ -283,6 +281,8 @@ void PuzzleLevel::Update(float _Delta)
 	{
 		GameEngineCore::ChangeLevel("WorldMapLevel");
 	}
+
+	EffectInterval -= _Delta;
 }
 
 
@@ -625,12 +625,20 @@ void PuzzleLevel::WinCheck()
 					GameEngineRenderer* WinTile = WinTiles[j];
 					float4 TilePos = WinTile->GetRenderPos();
 					float4 TileIndex = CurTileMap->PosToIndex(TilePos - BackGridPos - HaflTileSize);
+					float4 TileScale = {35, 35};
 
 					int WinX = TileIndex.iX();
 					int WinY = TileIndex.iY();
 
+
 					// WinTilesø° ¿Ã∆Â∆Æ √ﬂ∞°
-					TileEffect->EffectRender->SetRenderPos(TilePos);
+					if (EffectInterval < 0)
+					{
+						TileEffect = CreateActor<Effect>();
+						TileEffect->EffectRender->ChangeAnimation("FLAG_WIN");
+						TileEffect->EffectRender->SetRenderPos(TilePos);
+						TileEffect->EffectRender->SetRenderScale(TileScale);
+					}
 
 					// PlayerTile¿Ã WinTileø° ¥Í¿Ω
 					if (PlayerX == WinX && PlayerY == WinY)
@@ -644,8 +652,10 @@ void PuzzleLevel::WinCheck()
 
 				}
 			}
-
-			int a = 0;
+			if (EffectInterval < 0)
+			{
+				EffectInterval = 0.5f;
+			}
 			break;
 		}
 	}
