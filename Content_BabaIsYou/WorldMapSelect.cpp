@@ -26,10 +26,6 @@ void WorldMapSelect::Start()
 		ResourcesManager::GetInst().TextureLoad(FilePath.PlusFilePath("WorldMapSelect.bmp"));
 		ResourcesManager::GetInst().CreateSpriteSheet("WorldMapSelect.bmp", 1, 3);
 	}
-
-	//SelectRender = CreateRenderer("WorldMapSelect.bmp", RENDER_ORDER::PLAY_UI);
-	//SelectRender->CreateAnimation("SELECT", "WorldMapSelect.bmp", 0, 2, 0.2f, true);
-	//SelectRender->ChangeAnimation("SELECT");
 }
 
 void WorldMapSelect::Init()

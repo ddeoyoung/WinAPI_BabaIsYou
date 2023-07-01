@@ -15,6 +15,7 @@
 #include "CongratsUI.h"
 #include "FadeAnimation.h"
 #include "TextUI.h"
+#include "Effect.h"
 
 #include <sstream>
 
@@ -57,6 +58,12 @@ void PuzzleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 	// CongratsUI
 	Congratulations = CreateActor<CongratsUI>();
 	Congratulations->Off();
+
+	// EffectUI
+	TileEffect = CreateActor<Effect>();
+	TileEffect->EffectRender->CreateAnimation("FLAG_WIN", "Effect.bmp", 231, 237, 0.15f, true);
+	TileEffect->EffectRender->ChangeAnimation("FLAG_WIN");
+	TileEffect->EffectRender->SetRenderScaleToTexture();
 
 	// Puzzle Tiles
 	if (false == ResourcesManager::GetInst().IsLoadTexture("Actor.Bmp"))
@@ -590,14 +597,14 @@ void PuzzleLevel::WinCheck()
 	{
 		Rules = GetRuleInfo(Text);
 
-		if (Rules.Behave == "WIN")
+		if (Rules.Behave == "WIN") // WIN 문장이 있다
 		{
 			// Rules = 주어, IS, WIN
 			WinTileName = Rules.Subject;
 
 			WinTiles.clear();
 			CurTileMap = TileGrid;
-			WinTiles = GetWinTile(WinTileName + "_ACTOR"); // 여기까지 잘 들어오는거 확인
+			WinTiles = GetWinTile(WinTileName + "_ACTOR");
 
 			// PlayerTiles가 WinTiles에 닿으면 스테이지 클리어
 			PlayerCheck();
@@ -622,6 +629,8 @@ void PuzzleLevel::WinCheck()
 					int WinX = TileIndex.iX();
 					int WinY = TileIndex.iY();
 
+					// WinTiles에 이펙트 추가
+					TileEffect->EffectRender->SetRenderPos(TilePos);
 
 					// PlayerTile이 WinTile에 닿음
 					if (PlayerX == WinX && PlayerY == WinY)
