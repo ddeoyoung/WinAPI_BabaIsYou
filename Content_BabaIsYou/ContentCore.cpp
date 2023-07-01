@@ -18,13 +18,13 @@ void ContentCore::Start()
 {
 	GameEngineWindow::MainWindow.SetPosAndScale({ 100, 100 }, { 1280, 720 });
 
-	GameEngineCore::CreateLevel<LogoLevel>("LogoLevel"); // 로고
-	GameEngineCore::CreateLevel<TitleLevel>("TitleLevel"); // 타이틀
-	GameEngineCore::CreateLevel<WorldMapLevel>("WorldMapLevel"); // 월드맵
-	GameEngineCore::CreateLevel<TutorialLevel>("TutorialLevel"); // 스테이지 0
-	GameEngineCore::CreateLevel<PuzzleLevel>("PuzzleLevel"); // 스테이지 1
+	GameEngineCore::CreateLevel<LogoLevel>("LogoLevel");
+	GameEngineCore::CreateLevel<TitleLevel>("TitleLevel");
+	GameEngineCore::CreateLevel<WorldMapLevel>("WorldMapLevel");
+	GameEngineCore::CreateLevel<TutorialLevel>("TutorialLevel");
+	GameEngineCore::CreateLevel<PuzzleLevel>("PuzzleLevel");
 
-	GameEngineCore::ChangeLevel("TutorialLevel");
+	GameEngineCore::ChangeLevel("PuzzleLevel");
 }
 
 void ContentCore::Update(float _Delta)

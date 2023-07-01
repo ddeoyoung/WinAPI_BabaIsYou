@@ -28,7 +28,6 @@ void Effect::Start()
 
 	EffectRender = CreateRenderer("Effect.bmp", RENDER_ORDER::PLAY_UI);
 	EffectRender->SetRenderScaleToTexture();
-
 	EffectRender->CreateAnimation("FLAG_WIN", "Effect.bmp", 231, 237, 0.1f, false);
 	EffectRender->CreateAnimation("BABA_WALK", "Effect.bmp", 0, 6, 0.1f, false);
 

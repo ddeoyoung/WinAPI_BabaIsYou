@@ -6,6 +6,15 @@
 #include <set>
 #include <vector>
 
+#include "PuzzleLevel.h"
+
+class TutorialRuleInfo
+{
+public:
+	std::string Subject;
+	std::string Verb;
+	std::string Behave;
+};
 
 // 설명 :
 class TutorialLevel : public GameEngineLevel
@@ -54,7 +63,7 @@ private:
 	std::vector<GameEngineRenderer*> BreakTiles;
 	std::vector<GameEngineRenderer*> WinTiles;
 
-	//RuleInfo Rules;
+	TutorialRuleInfo Rules;
 
 	bool IsTile = false;
 	bool IsMove = false;
@@ -92,14 +101,13 @@ private:
 	GameEngineRenderer* CurTile = nullptr;
 
 
-	//RuleInfo GetRuleInfo(const std::string& _Text);
+	TutorialRuleInfo GetTutorialRuleInfo(const std::string& _Text);
 
 	void UpdateStringRuleCheck();
 	void PlayerCheck();
 	void MoveCheck();
 	void WinCheck();
 
-	// 다음 이동방향에 막히는 타일 체크
 	bool IsMoveTile(std::vector<GameEngineRenderer*> _PlayerTiles, std::vector<GameEngineRenderer*> _BreakTiles, MOVEDIR _Dir);
 
 	std::vector<GameEngineRenderer*> GetPlayerTile(TileMap* _TileMap, const std::string& _PlayerTileName);
