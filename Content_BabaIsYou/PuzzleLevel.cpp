@@ -988,23 +988,17 @@ void PuzzleLevel::MoveCheck()
 			}
 
 			// 플레이어 타일에 이펙트 추가
-			if (EffectInterval < 0)
-			{
-				Effect* TileEffect = nullptr;
+			Effect* TileEffect = nullptr;
 
-				TileEffect = CreateActor<Effect>();
-				TileEffect->EffectRender->ChangeAnimation("BABA_WALK");
+			TileEffect = CreateActor<Effect>();
+			TileEffect->EffectRender->ChangeAnimation("BABA_WALK");
 
-				TileEffect->SetDir(WalkDir);
-				TileEffect->EffectRender->SetRenderPos({ TilePos.X , TilePos.Y + 5 });
-				TileEffect->EffectRender->SetRenderScale({ 35, 35 });
-			}
+			TileEffect->SetDir(WalkDir);
+			TileEffect->EffectRender->SetRenderPos({ TilePos.X , TilePos.Y + 5 });
+			TileEffect->EffectRender->SetRenderScale({ 35, 35 });
+
 		}
 
-		if (EffectInterval < 0)
-		{
-			EffectInterval = 0.001f;
-		}
 	}
 
 	else if (false == IsMove)
