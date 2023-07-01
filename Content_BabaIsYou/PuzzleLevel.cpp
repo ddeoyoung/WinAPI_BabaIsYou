@@ -634,6 +634,7 @@ void PuzzleLevel::WinCheck()
 					// WinTiles에 이펙트 추가
 					if (EffectInterval < 0)
 					{
+						Effect* TileEffect = nullptr;
 						TileEffect = CreateActor<Effect>();
 						TileEffect->EffectRender->ChangeAnimation("FLAG_WIN");
 						TileEffect->EffectRender->SetRenderPos(TilePos);
@@ -989,6 +990,8 @@ void PuzzleLevel::MoveCheck()
 			// 플레이어 타일에 이펙트 추가
 			if (EffectInterval < 0)
 			{
+				Effect* TileEffect = nullptr;
+
 				TileEffect = CreateActor<Effect>();
 				TileEffect->EffectRender->ChangeAnimation("BABA_WALK");
 

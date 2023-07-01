@@ -90,8 +90,6 @@ private:
 
 	class CongratsUI* Congratulations = nullptr;
 
-	class Effect* TileEffect = nullptr;
-
 	GameEngineRenderer* MainRenderer = nullptr;
 	GameEngineRenderer* TileRenderer = nullptr;
 	GameEngineRenderer* TextRenderer = nullptr;
