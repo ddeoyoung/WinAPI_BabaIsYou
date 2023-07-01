@@ -968,6 +968,39 @@ void PuzzleLevel::MoveCheck()
 			if (nullptr == NextTile)
 			{
 				CurTileMap->LerpTile(PlayerTiles[i], Dir, BackGridPos);
+
+				// 플레이어 타일에 이펙트 추가
+				if (EffectInterval < 0)
+				{
+					TileEffect = CreateActor<Effect>();
+					TileEffect->EffectRender->ChangeAnimation("BABA_WALK");
+
+					float4 WalkDir = { 0, 0 };
+
+					switch (Dir)
+					{
+					case MOVEDIR::LEFT:
+						WalkDir = { 1, 0 };
+						break;
+					case MOVEDIR::RIGHT:
+						WalkDir = { -1, 0 };
+						break;
+					case MOVEDIR::UP:
+						WalkDir = { 0, 1 };
+						break;
+					case MOVEDIR::DOWN:
+						WalkDir = { 0, -1 };
+						break;
+					case MOVEDIR::NONE:
+						break;
+					default:
+						break;
+					}
+
+					TileEffect->SetDir(WalkDir);
+					TileEffect->EffectRender->SetRenderPos({ TilePos.X , TilePos.Y + 5});
+					TileEffect->EffectRender->SetRenderScale({35, 35});
+				}
 			}
 
 			// 이동할 다음 위치에 타일이 있으면
@@ -976,8 +1009,45 @@ void PuzzleLevel::MoveCheck()
 				// 밀어야할 타일을 처음(First) 위치에서 다음(Second) 위치로 이동
 				CurTileMap->LerpTile(FirstX, FirstY, SecondX, SecondY, BackGridPos);
 				CurTileMap->LerpTile(PlayerTiles[i], Dir, BackGridPos);
+
+				if (EffectInterval < 0)
+				{
+					TileEffect = CreateActor<Effect>();
+					TileEffect->EffectRender->ChangeAnimation("BABA_WALK");
+
+					float4 WalkDir = { 0, 0 };
+
+					switch (Dir)
+					{
+					case MOVEDIR::LEFT:
+						WalkDir = { 1, 0 };
+						break;
+					case MOVEDIR::RIGHT:
+						WalkDir = { -1, 0 };
+						break;
+					case MOVEDIR::UP:
+						WalkDir = { 0, 1 };
+						break;
+					case MOVEDIR::DOWN:
+						WalkDir = { 0, -1 };
+						break;
+					case MOVEDIR::NONE:
+						break;
+					default:
+						break;
+					}
+
+					TileEffect->SetDir(WalkDir);
+					TileEffect->EffectRender->SetRenderPos({ TilePos.X , TilePos.Y + 5 });
+					TileEffect->EffectRender->SetRenderScale({ 35, 35 });
+				}
 			}
 
+		}
+
+		if (EffectInterval < 0)
+		{
+			EffectInterval = 0.001f;
 		}
 	}
 
@@ -985,9 +1055,4 @@ void PuzzleLevel::MoveCheck()
 	{
 		return;
 	}
-}
-
-void PuzzleLevel::MovePuzzleTile(std::vector<GameEngineRenderer*> _PlayerTiles)
-{
-	std::vector<GameEngineRenderer*> PlayerTiles;
 }

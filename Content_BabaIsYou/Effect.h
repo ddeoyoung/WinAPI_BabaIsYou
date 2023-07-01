@@ -17,12 +17,12 @@ public:
 
 	class GameEngineRenderer* EffectRender = nullptr;
 
-	float4 GetDir()
-	{
-		return Dir;
-	}
-
 	void SetEffect();
+
+	void SetDir(float4 _Dir)
+	{
+		Dir = _Dir;
+	}
 
 protected:
 

@@ -74,7 +74,7 @@ private:
 	float4 BackScale = { 840, 600 };
 	float4 BackGridPos = { 0, 0 };
 
-	float EffectInterval = 0.5f;
+	float EffectInterval = 0.0f;
 
 	class Background_Black* BackgroundUI_Black = nullptr;
 	class Background_Gray* BackgroundUI_Gray = nullptr;
@@ -106,8 +106,6 @@ private:
 	void PlayerCheck();
 	void MoveCheck();
 	void WinCheck();
-
-	void MovePuzzleTile(std::vector<GameEngineRenderer*> _PlayerTiles);
 
 	// 다음 이동방향에 막히는 타일 체크
 	bool IsMoveTile(std::vector<GameEngineRenderer*> _PlayerTiles, std::vector<GameEngineRenderer*> _BreakTiles, MOVEDIR _Dir);
