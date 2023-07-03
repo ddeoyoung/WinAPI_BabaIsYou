@@ -6,7 +6,7 @@
 #include <set>
 #include <vector>
 
-class RuleInfo 
+class RuleInfo1
 {
 public:
 	std::string Subject;
@@ -59,7 +59,7 @@ private:
 	std::vector<GameEngineRenderer*> BreakTiles;
 	std::vector<GameEngineRenderer*> WinTiles;
 
-	RuleInfo Rules;
+	RuleInfo1 Rules;
 
 	bool IsTile = false;
 	bool IsMove = false;
@@ -95,7 +95,7 @@ private:
 	GameEngineRenderer* CurTile = nullptr;
 
 
-	RuleInfo GetRuleInfo(const std::string& _Text);
+	RuleInfo1 GetRuleInfo(const std::string& _Text);
 
 	void UpdateStringRuleCheck();
 	void PlayerCheck();

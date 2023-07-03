@@ -355,7 +355,7 @@ void PuzzleLevel::UpdateStringRuleCheck()
 
 								if (nullptr != SubjectRenderer && nullptr != VerbRenderer && nullptr != BehaveRenderer)
 								{
-									RuleInfo Info = GetRuleInfo(SubjectTileName + VerbTileName + BehaveTileName);
+									RuleInfo1 Info = GetRuleInfo(SubjectTileName + VerbTileName + BehaveTileName);
 
 									Renders.insert(SubjectRenderer);
 									Renders.insert(VerbRenderer);
@@ -400,7 +400,7 @@ void PuzzleLevel::UpdateStringRuleCheck()
 
 								if (nullptr != SubjectRenderer && nullptr != VerbRenderer && nullptr != BehaveRenderer)
 								{
-									RuleInfo Info = GetRuleInfo(SubjectTileName + VerbTileName + BehaveTileName);
+									RuleInfo1 Info = GetRuleInfo(SubjectTileName + VerbTileName + BehaveTileName);
 
 									Renders.insert(SubjectRenderer);
 									Renders.insert(VerbRenderer);
@@ -455,9 +455,9 @@ void PuzzleLevel::UpdateStringRuleCheck()
 }
 
 
-RuleInfo PuzzleLevel::GetRuleInfo(const std::string& _Text)
+RuleInfo1 PuzzleLevel::GetRuleInfo(const std::string& _Text)
 {
-	RuleInfo Return;
+	RuleInfo1 Return;
 
 	// 문자열 자르기
 	std::istringstream StringSplit(_Text);
@@ -590,7 +590,7 @@ std::vector<GameEngineRenderer*> PuzzleLevel::GetWinTile(const std::string& _Win
 
 void PuzzleLevel::WinCheck()
 {
-	RuleInfo Rules;
+	RuleInfo1 Rules;
 
 	// WIN이 포함된 문장이 있는지 체크
 	for (std::string Text : RuleSet)
@@ -666,7 +666,7 @@ void PuzzleLevel::WinCheck()
 
 void PuzzleLevel::PlayerCheck()
 {
-	RuleInfo Rules;
+	RuleInfo1 Rules;
 
 	// YOU가 포함된 문장이 있는지 체크
 	for (std::string Text : RuleSet)

@@ -28,6 +28,8 @@ public:
 	PuzzleLevelBase& operator=(const PuzzleLevelBase& _Other) = delete;
 	PuzzleLevelBase& operator=(PuzzleLevelBase&& _Other) noexcept = delete;
 
+	void PuzzleLevelInit(std::string _DataText);
+
 	void UpdateStringRuleCheck();
 	void PlayerCheck();
 	void MoveCheck();

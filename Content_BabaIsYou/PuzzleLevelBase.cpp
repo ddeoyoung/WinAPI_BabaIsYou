@@ -44,7 +44,7 @@ void PuzzleLevelBase::Start()
 
 }
 
-void PuzzleLevelBase::LevelStart(GameEngineLevel* _PrevLevel)
+void PuzzleLevelBase::PuzzleLevelInit(std::string _DataText)
 {
 	// Background
 	BackgroundUI_Gray = CreateActor<Background_Gray>();
@@ -112,8 +112,10 @@ void PuzzleLevelBase::LevelStart(GameEngineLevel* _PrevLevel)
 	// ¸Ê ¼¼ÆÃ
 	// MapTexture - Tutorial
 	Background_Pixel* MapDataImage = CreateActor<Background_Pixel>();
-	MapDataImage->Init("Tutorial.bmp", { 850, 600 });
-	MapTexture = ResourcesManager::GetInst().FindTexture("Tutorial.bmp");
+	MapDataImage->Init(_DataText, { 850, 600 });
+	MapTexture = ResourcesManager::GetInst().FindTexture(_DataText);
+	
+	// MapTexture = ResourcesManager::GetInst().FindTexture("Tutorial.bmp");
 	MapDataImage->Off();
 
 	for (int y = 0; y < 15; y++)
@@ -279,6 +281,11 @@ void PuzzleLevelBase::LevelStart(GameEngineLevel* _PrevLevel)
 			}
 		}
 	}
+}
+
+void PuzzleLevelBase::LevelStart(GameEngineLevel* _PrevLevel)
+{
+
 }
 
 void PuzzleLevelBase::LevelEnd(GameEngineLevel* _NextLevel)
