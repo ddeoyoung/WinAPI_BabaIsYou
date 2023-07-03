@@ -34,11 +34,13 @@ void TutorialLevel::LevelStart(GameEngineLevel* _PrevLevel)
 }
 void TutorialLevel::LevelEnd(GameEngineLevel* _NextLevel)
 {
+	PuzzleLevelBase::LevelEnd(_NextLevel);
 }
+
 void TutorialLevel::Start()
 {
 }
 void TutorialLevel::Update(float _Delta)
 {
-
+	PuzzleLevelBase::Update(_Delta);
 }
