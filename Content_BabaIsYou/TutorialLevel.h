@@ -30,6 +30,25 @@ public:
 	TutorialLevel& operator=(const TutorialLevel& _Other) = delete;
 	TutorialLevel& operator=(TutorialLevel&& _Other) noexcept = delete;
 
+	void UpdateStringRuleCheck();
+	void PlayerCheck();
+	void MoveCheck();
+	void WinCheck();
+
+	void GetTiles();
+
+	std::vector<GameEngineRenderer*> GetPlayerTile(const std::string& _PlayerTileName);
+	std::vector<GameEngineRenderer*> GetBreakTile(const std::string& _BreakTileName);
+	std::vector<GameEngineRenderer*> GetWinTile(const std::string& _WinTileName);
+	std::vector<GameEngineRenderer*> GetPushTile(const std::string& _PushTileName);
+
+
+	TutorialRuleInfo GetTutorialRuleInfo(const std::string& _Text);
+
+	bool IsMoveTile(std::vector<GameEngineRenderer*> _PlayerTiles, std::vector<GameEngineRenderer*> _BreakTiles, MOVEDIR _Dir);
+
+	void RuleTilePushRecursive(GameEngineRenderer* _Render, MOVEDIR _Dir, float4 Pos);
+
 protected:
 	void LevelStart(GameEngineLevel* _PrevLevel) override;
 	void LevelEnd(GameEngineLevel* _NextLevel) override;
@@ -69,6 +88,7 @@ private:
 
 	bool IsTile = false;
 	bool IsMove = false;
+	bool IsPushMove = true;
 	bool IsWin = false;
 	bool IsCongratsUI = false;
 	bool IsCongratsContUI = false;
@@ -81,10 +101,6 @@ private:
 
 	class Background_Black* BackgroundUI_Black = nullptr;
 	class Background_Gray* BackgroundUI_Gray = nullptr;
-
-	//class TileMap* TileGrid = nullptr;
-	//class TileMap* TileGrid = nullptr;
-	//class TileMap* UpTileGrid = nullptr;
 
 	class std::vector<TileMap*> TileGrids;
 
@@ -109,23 +125,6 @@ private:
 
 	void ChangeBabaAnimation(MOVEDIR _Dir, const std::string& _AnimationName);
 
-	TutorialRuleInfo GetTutorialRuleInfo(const std::string& _Text);
-
-	void UpdateStringRuleCheck();
-	void PlayerCheck();
-	void MoveCheck();
-	void WinCheck();
-
-	bool IsMoveTile(std::vector<GameEngineRenderer*> _PlayerTiles, std::vector<GameEngineRenderer*> _BreakTiles, MOVEDIR _Dir);
-
-	std::vector<GameEngineRenderer*> GetPlayerTile(const std::string& _PlayerTileName);
-	std::vector<GameEngineRenderer*> GetBreakTile(const std::string& _BreakTileName);
-	std::vector<GameEngineRenderer*> GetWinTile(const std::string& _WinTileName);
-	std::vector<GameEngineRenderer*> GetPushTile(const std::string& _PushTileName);
-
-	std::vector<GameEngineRenderer*> Tiles;
-	std::vector<GameEngineRenderer*> GetTiles(const std::string& _TileName, const std::string& _Behave);
-
-	void RuleTilePushRecursive(GameEngineRenderer* _Render, MOVEDIR _Dir, float4 Pos);
+	
 };
 

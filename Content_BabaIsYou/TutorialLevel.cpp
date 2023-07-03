@@ -290,6 +290,8 @@ void TutorialLevel::Update(float _Delta)
 {
 	UpdateStringRuleCheck();
 
+	GetTiles();
+
 	MoveCheck();
 
 	WinCheck();
@@ -326,8 +328,7 @@ void TutorialLevel::Update(float _Delta)
 
 void TutorialLevel::UpdateStringRuleCheck()
 {
-
-	RuleSet.clear(); // 매번 리셋
+	RuleSet.clear();
 
 	GameEngineRenderer* SubjectRenderer = nullptr;
 	GameEngineRenderer* VerbRenderer = nullptr;
@@ -335,126 +336,133 @@ void TutorialLevel::UpdateStringRuleCheck()
 
 	std::set<GameEngineRenderer*> Renders;
 
-	for (int y = 0; y < 15; y++)
+	GameEngineRenderer* CurTile = nullptr;
+	std::string TileName = "";
+
+	for (size_t i = 0; i < TileGrids.size(); i++)
 	{
-		for (int x = 0; x < 21; x++)
+		for (int y = 0; y < 15; y++)
 		{
-			SubjectTileName = "";
-			VerbTileName = "";
-			BehaveTileName = "";
-
-			CurTile = TileGrids[2]->GetTile(x, y);
-
-			if (nullptr != CurTile)
+			for (int x = 0; x < 21; x++)
 			{
-				TileName = CurTile->GetName();
+				std::string SubjectTileName = "";
+				std::string VerbTileName = "";
+				std::string BehaveTileName = "";
 
-				// 주어 - Subject
-				if (SubjectSet.contains(TileName))
+				CurTile = TileGrids[i]->GetTile(x, y);
+
+				if (nullptr != CurTile)
 				{
-					SubjectTileName = TileName + " ";
-					SubjectRenderer = CurTile;
+					TileName = CurTile->GetName();
 
-					CurTile = TileGrids[2]->GetTile(x, y + 1); // 세로 문장 체크
-
-					if (nullptr != CurTile)
+					// 주어 - Subject
+					if (SubjectSet.contains(TileName))
 					{
-						TileName = CurTile->GetName();
+						SubjectTileName = TileName + " ";
+						SubjectRenderer = CurTile;
 
-						// 동사 - Verb
-						if (VerbSet.contains(TileName))
-						{
-							VerbTileName = TileName + " ";
-						}
-
-						VerbRenderer = CurTile;
-
-						// 행동 - Behave
-						CurTile = TileGrids[2]->GetTile(x, y + 2);
+						CurTile = TileGrids[i]->GetTile(x, y + 1); // 세로 문장 체크
 
 						if (nullptr != CurTile)
 						{
 							TileName = CurTile->GetName();
 
-							if (BehaveSet.contains(TileName))
+							// 동사 - Verb
+							if (VerbSet.contains(TileName))
 							{
-								BehaveTileName = TileName;
-								BehaveRenderer = CurTile;
+								VerbTileName = TileName + " ";
+							}
 
-								RuleSet.insert(SubjectTileName + VerbTileName + BehaveTileName);
+							VerbRenderer = CurTile;
 
-								if (nullptr != SubjectRenderer && nullptr != VerbRenderer && nullptr != BehaveRenderer)
+							// 행동 - Behave
+							CurTile = TileGrids[i]->GetTile(x, y + 2);
+
+							if (nullptr != CurTile)
+							{
+								TileName = CurTile->GetName();
+
+								if (BehaveSet.contains(TileName))
 								{
-									TutorialRuleInfo Info = GetTutorialRuleInfo(SubjectTileName + VerbTileName + BehaveTileName);
+									BehaveTileName = TileName;
+									BehaveRenderer = CurTile;
 
-									Renders.insert(SubjectRenderer);
-									Renders.insert(VerbRenderer);
-									Renders.insert(BehaveRenderer);
+									RuleSet.insert(SubjectTileName + VerbTileName + BehaveTileName);
 
-									SubjectRenderer->ChangeAnimation(Info.Subject);
-									VerbRenderer->ChangeAnimation(Info.Verb);
-									BehaveRenderer->ChangeAnimation(Info.Behave);
+									if (nullptr != SubjectRenderer && nullptr != VerbRenderer && nullptr != BehaveRenderer)
+									{
+										TutorialRuleInfo Info = GetTutorialRuleInfo(SubjectTileName + VerbTileName + BehaveTileName);
+
+										Renders.insert(SubjectRenderer);
+										Renders.insert(VerbRenderer);
+										Renders.insert(BehaveRenderer);
+
+										SubjectRenderer->ChangeAnimation(Info.Subject);
+										VerbRenderer->ChangeAnimation(Info.Verb);
+										BehaveRenderer->ChangeAnimation(Info.Behave);
+									}
 								}
 							}
 						}
-					}
 
 
-					CurTile = TileGrids[2]->GetTile(x + 1, y); // 가로 문장 체크
-
-					if (nullptr != CurTile)
-					{
-						TileName = CurTile->GetName();
-
-						// 동사 - Verb
-						if (VerbSet.contains(TileName))
-						{
-							VerbTileName = TileName + " ";
-						}
-
-						VerbRenderer = CurTile;
-
-						// 행동 - Behave
-						CurTile = TileGrids[2]->GetTile(x + 2, y);
+						CurTile = TileGrids[i]->GetTile(x + 1, y); // 가로 문장 체크
 
 						if (nullptr != CurTile)
 						{
 							TileName = CurTile->GetName();
 
-							if (BehaveSet.contains(TileName))
+							// 동사 - Verb
+							if (VerbSet.contains(TileName))
 							{
-								BehaveTileName = TileName;
-								BehaveRenderer = CurTile;
-								RuleSet.insert(SubjectTileName + VerbTileName + BehaveTileName);
-
-
-								if (nullptr != SubjectRenderer && nullptr != VerbRenderer && nullptr != BehaveRenderer)
-								{
-									TutorialRuleInfo Info = GetTutorialRuleInfo(SubjectTileName + VerbTileName + BehaveTileName);
-
-									Renders.insert(SubjectRenderer);
-									Renders.insert(VerbRenderer);
-									Renders.insert(BehaveRenderer);
-
-									SubjectRenderer->ChangeAnimation(Info.Subject);
-									VerbRenderer->ChangeAnimation(Info.Verb);
-									BehaveRenderer->ChangeAnimation(Info.Behave);
-								}
-
-
+								VerbTileName = TileName + " ";
 							}
 
-						}
-					}
+							VerbRenderer = CurTile;
 
+							// 행동 - Behave
+							CurTile = TileGrids[i]->GetTile(x + 2, y);
+
+							if (nullptr != CurTile)
+							{
+								TileName = CurTile->GetName();
+
+								if (BehaveSet.contains(TileName))
+								{
+									BehaveTileName = TileName;
+									BehaveRenderer = CurTile;
+									RuleSet.insert(SubjectTileName + VerbTileName + BehaveTileName);
+
+
+									if (nullptr != SubjectRenderer && nullptr != VerbRenderer && nullptr != BehaveRenderer)
+									{
+										TutorialRuleInfo Info = GetTutorialRuleInfo(SubjectTileName + VerbTileName + BehaveTileName);
+
+										Renders.insert(SubjectRenderer);
+										Renders.insert(VerbRenderer);
+										Renders.insert(BehaveRenderer);
+
+										SubjectRenderer->ChangeAnimation(Info.Subject);
+										VerbRenderer->ChangeAnimation(Info.Verb);
+										BehaveRenderer->ChangeAnimation(Info.Behave);
+									}
+
+
+								}
+
+							}
+						}
+
+
+					}
 
 				}
 
 			}
-
 		}
 	}
 
+	// 완성된 문장이 아닌 텍스트 타일 - 애니메이션 Off
 	for (int y = 0; y < 15; y++)
 	{
 		for (int x = 0; x < 21; x++)
@@ -470,7 +478,6 @@ void TutorialLevel::UpdateStringRuleCheck()
 
 			if (true == SubjectSet.contains(TileName) || true == VerbSet.contains(TileName) || true == BehaveSet.contains(TileName))
 			{
-				// 완성된 문장이 아닌 텍스트 타일 - 애니메이션 Off
 				if (false == Renders.contains(CurTile))
 				{
 					CurTile->ChangeAnimation(TileName + "_OFF");
@@ -614,7 +621,7 @@ void TutorialLevel::WinCheck()
 	{
 		Rules = GetTutorialRuleInfo(Text);
 
-		if (Rules.Behave == "WIN") // WIN 문장이 있다
+		if (Rules.Behave == "WIN")
 		{
 			// Rules = 주어, IS, WIN
 			WinTileName = Rules.Subject;
@@ -706,7 +713,6 @@ void TutorialLevel::PlayerCheck()
 
 bool TutorialLevel::IsMoveTile(std::vector<GameEngineRenderer*> _PlayerTiles, std::vector<GameEngineRenderer*> _BreakTiles, MOVEDIR _Dir)
 {
-
 	for (size_t i = 0; i < _PlayerTiles.size(); i++)
 	{
 		GameEngineRenderer* PlayerTile = _PlayerTiles[i];
@@ -750,7 +756,6 @@ bool TutorialLevel::IsMoveTile(std::vector<GameEngineRenderer*> _PlayerTiles, st
 			{
 				return false;
 			}
-
 		}
 	}
 
@@ -760,7 +765,6 @@ bool TutorialLevel::IsMoveTile(std::vector<GameEngineRenderer*> _PlayerTiles, st
 
 void TutorialLevel::MoveCheck()
 {
-
 	PlayerCheck();
 
 	MOVEDIR Dir = MOVEDIR::NONE;
@@ -811,7 +815,7 @@ void TutorialLevel::MoveCheck()
 	}
 
 
-	// 성립된 문장 체크
+	// 문장 체크
 	for (std::string Text : RuleSet)
 	{
 		Rules = GetTutorialRuleInfo(Text);
@@ -827,19 +831,21 @@ void TutorialLevel::MoveCheck()
 			IsMove = IsMoveTile(PlayerTiles, BreakTiles, Dir);
 		}
 
-		// 플레이어가 PUSH 할 수 있는 오브젝트 체크
+		// 플레이어가 PUSH 할 수 있는 타일 체크
 		if (Rules.Behave == "PUSH")
 		{
 			PushTiles.clear();
-			 
+			
 			PushTileName = Rules.Subject;
-			PushTiles = GetPushTile(PushTileName + "_ACTOR"); // PUSH 오브젝트 담기는거 확인
+			PushTiles = GetPushTile(PushTileName + "_ACTOR");
 
-			//CurTileMap = TileGrid; // 오브젝트 타일
+			IsPushMove = IsMoveTile(PlayerTiles, PushTiles, Dir);
 		}
 	}
 
-	// 무조건 움직일 수 있는 경우 -> BreakTile이 아닌 타일이 있다면 밀어야 함
+	// 무조건 움직일 수 있는 경우 
+	// BreakTile이 아닌 타일
+	// PushTile인 타일
 	if (true == IsMove)
 	{
 		for (size_t i = 0; i < PlayerTiles.size(); i++)
@@ -847,42 +853,34 @@ void TutorialLevel::MoveCheck()
 			bool Check = false;
 			GameEngineRenderer* CheckTile = PlayerTiles[i];
 
-			float4 HaflTileSize = TileGrids[1]->GetTileSize().Half();
+			float4 TileSize = TileGrids[1]->GetTileSize().Half();
 			float4 TilePos = CheckTile->GetRenderPos();
-			float4 TileIndex = TileGrids[1]->PosToIndex(TilePos - BackGridPos - HaflTileSize); // 플레이어[i]의 인덱스
+			float4 TileIndex = TileGrids[1]->PosToIndex(TilePos - BackGridPos - TileSize); // 플레이어[i]의 인덱스
 
 			// 밀어야 하는 타일의 처음 위치
-			int FirstX = TileIndex.iX();
-			int FirstY = TileIndex.iY();
+			int TileX = TileIndex.iX();
+			int TileY = TileIndex.iY();
 
-			// 밀어야 하는 타일의 다음 위치
-			int SecondX = FirstX;
-			int SecondY = FirstY;
-
-			// 플레이어 타일에 이펙트 추가
-			float4 WalkDir = { 0, 0 };
+			// 플레이어 이펙트 방향
+			float4 EffectDir = { 0, 0 };
 
 			switch (Dir)
 			{
 			case MOVEDIR::LEFT:
-				FirstX -= 1;
-				SecondX -= 2;
-				WalkDir = { 1, 0 };
+				TileX -= 1;
+				EffectDir = { 1, 0 };
 				break;
 			case MOVEDIR::RIGHT:
-				FirstX += 1;
-				SecondX += 2;
-				WalkDir = { -1, 0 };
+				TileX += 1;
+				EffectDir = { -1, 0 };
 				break;
 			case MOVEDIR::UP:
-				FirstY -= 1;
-				SecondY -= 2;
-				WalkDir = { 0, 1 };
+				TileY -= 1;
+				EffectDir = { 0, 1 };
 				break;
 			case MOVEDIR::DOWN:
-				FirstY += 1;
-				SecondY += 2;
-				WalkDir = { 0, -1 };
+				TileY += 1;
+				EffectDir = { 0, -1 };
 				break;
 			case MOVEDIR::NONE:
 				break;
@@ -893,40 +891,38 @@ void TutorialLevel::MoveCheck()
 			// 나는 일단 무조건 움직여야 한다.
 			TileGrids[2]->LerpTile(PlayerTiles[i], Dir, BackGridPos);
 
-
 			{
 				// 글자 타일들 체크
-				GameEngineRenderer* OtherNextTile;
-				OtherNextTile = TileGrids[2]->GetTile(FirstX, FirstY);
-				if (OtherNextTile != nullptr)
+				GameEngineRenderer* NextTile;
+				NextTile = TileGrids[2]->GetTile(TileX, TileY);
+				if (NextTile != nullptr)
 				{
-					RuleTilePushRecursive(OtherNextTile, Dir, BackGridPos);
+					RuleTilePushRecursive(NextTile, Dir, BackGridPos);
 				}
 			}
 
 			{
 				// PUSH 타일들 체크
-				GameEngineRenderer* OtherNextTile;
-				OtherNextTile = TileGrids[1]->GetTile(FirstX, FirstY);
+				GameEngineRenderer* NextTile;
+				NextTile = TileGrids[1]->GetTile(TileX, TileY);
 
 				for (size_t j = 0; j < PushTiles.size(); j++)
 				{
-					if (OtherNextTile == PushTiles[j])
+					if (NextTile == PushTiles[j])
 					{
-						// UpTileGrid
-						TileGrids[1]->LerpTile(PushTiles[j], Dir, BackGridPos);
+						if (false == IsPushMove)
+						{
+							TileGrids[1]->LerpTile(PushTiles[j], Dir, BackGridPos);
+						}
+						//TileGrids[1]->LerpTile(PushTiles[j], Dir, BackGridPos);
 					}
 				}
 			}
 
-
-
-
-
 			// 플레이어 타일에 이펙트 추가
 			TileEffect = CreateActor<Effect>();
 			TileEffect->EffectRender->ChangeAnimation("BABA_WALK");
-			TileEffect->SetDir(WalkDir);
+			TileEffect->SetDir(EffectDir);
 			TileEffect->EffectRender->SetRenderPos(TilePos);
 			TileEffect->EffectRender->SetRenderScale({ 35, 35 });
 
@@ -996,18 +992,19 @@ void TutorialLevel::RuleTilePushRecursive(GameEngineRenderer* _Render, MOVEDIR _
 
 	TileGrids[2]->LerpTile(_Render, _Dir, _Pos);
 
-	float4 TileSize = TileGrids[2]->GetTileSize();
-	float4 TileIndex = TileGrids[2]->PosToIndex(_Render->GetRenderPos() - _Pos - TileSize.Half());
-	TileIndex += PushDir;
+	float4 TextTileSize = TileGrids[2]->GetTileSize();
+	float4 TextTileIndex = TileGrids[2]->PosToIndex(_Render->GetRenderPos() - _Pos - TextTileSize.Half());
+	TextTileIndex += PushDir;
 
-	GameEngineRenderer* OtherNextTile;
-	OtherNextTile = TileGrids[2]->GetTile(TileIndex.iX(), TileIndex.iY());
-	if (OtherNextTile == nullptr)
+	GameEngineRenderer* TextTile;
+	TextTile = TileGrids[2]->GetTile(TextTileIndex.iX(), TextTileIndex.iY());
+	if (TextTile == nullptr)
 	{
 		return;
 	}
 
-	RuleTilePushRecursive(OtherNextTile, _Dir, _Pos);
+
+	RuleTilePushRecursive(TextTile, _Dir, _Pos);
 }
 
 
@@ -1038,8 +1035,47 @@ void TutorialLevel::ChangeBabaAnimation(MOVEDIR _Dir, const std::string& _DirNam
 	}
 }
 
-std::vector<GameEngineRenderer*> TutorialLevel::GetTiles(const std::string& _TileName, const std::string& _Behave)
-{
 
-	return Tiles;
+void TutorialLevel::GetTiles()
+{
+	GameEngineRenderer* Tile = nullptr;
+	std::string TileName = "";
+
+
+	// 문장에 맞는 타일 저장
+	for (size_t i = 0; i < TileGrids.size(); i++)
+	{
+		for (int y = 0; y < 15; y++)
+		{
+			for (int x = 0; x < 21; x++)
+			{
+				Tile = TileGrids[i]->GetTile(x, y);
+
+				if (nullptr != Tile)
+				{
+					TileName = Tile->GetName();
+
+					if (Rules.Behave == "YOU" && TileName == Rules.Subject)
+					{
+						PlayerTiles.push_back(Tile);
+					}
+
+					else if (Rules.Behave == "WIN" && TileName == Rules.Subject)
+					{
+						WinTiles.push_back(Tile);
+					}
+
+					else if (Rules.Behave == "STOP" && TileName == Rules.Subject)
+					{
+						BreakTiles.push_back(Tile);
+					}
+
+					else if (Rules.Behave == "PUSH" && TileName == Rules.Subject)
+					{
+						PushTiles.push_back(Tile);
+					}
+				}
+			}
+		}
+	}
 }

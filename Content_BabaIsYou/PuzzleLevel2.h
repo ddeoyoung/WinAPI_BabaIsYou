@@ -6,17 +6,10 @@
 #include <set>
 #include <vector>
 
-
-class Stage2RuleInfo
-{
-public:
-	std::string Subject;
-	std::string Verb;
-	std::string Behave;
-};
+#include "TutorialLevel.h"
 
 // 설명 :
-class PuzzleLevel2 : public GameEngineLevel
+class PuzzleLevel2 : public TutorialLevel
 {
 public:
 	// constrcuter destructer
@@ -38,9 +31,7 @@ private:
 	void Update(float _Delta) override;
 
 
-	int Index_X = 13;
-	int Index_Y = 11;
-	int BabaMoveStep = 0;
+	TutorialRuleInfo Rules;
 
 	std::string AnimationName = "";
 	std::string TileName = "";
@@ -62,8 +53,6 @@ private:
 	std::vector<GameEngineRenderer*> PlayerTiles;
 	std::vector<GameEngineRenderer*> BreakTiles;
 	std::vector<GameEngineRenderer*> WinTiles;
-
-	Stage2RuleInfo Rules;
 
 	bool IsTile = false;
 	bool IsMove = false;
@@ -97,21 +86,6 @@ private:
 
 	GameEngineRenderer* NextTile = nullptr;
 	GameEngineRenderer* CurTile = nullptr;
-
-
-	Stage2RuleInfo GetStage2RuleInfo(const std::string& _Text);
-
-	void UpdateStringRuleCheck();
-	void PlayerCheck();
-	void MoveCheck();
-	void WinCheck();
-
-	// 다음 이동방향에 막히는 타일 체크
-	bool IsMoveTile(std::vector<GameEngineRenderer*> _PlayerTiles, std::vector<GameEngineRenderer*> _BreakTiles, MOVEDIR _Dir);
-
-	std::vector<GameEngineRenderer*> GetPlayerTile(TileMap* _TileMap, const std::string& _PlayerTileName);
-	std::vector<GameEngineRenderer*> GetBreakTile(const std::string& _BreakTileName);
-	std::vector<GameEngineRenderer*> GetWinTile(const std::string& _WinTileName);
 
 };
 
