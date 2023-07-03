@@ -6,8 +6,6 @@
 #include <set>
 #include <vector>
 
-#include "PuzzleLevel.h"
-
 class TutorialRuleInfo
 {
 public:
@@ -127,8 +125,5 @@ private:
 	GameEngineRenderer* NextTile = nullptr;
 	GameEngineRenderer* CurTile = nullptr;
 
-
-
-	
 };
 

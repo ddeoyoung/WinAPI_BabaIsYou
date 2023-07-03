@@ -1,20 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="TitleLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
     <ClInclude Include="ContentCore.h" />
     <ClInclude Include="ContentsEnum.h">
       <Filter>Global</Filter>
     </ClInclude>
-    <ClInclude Include="LogoLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
     <ClInclude Include="WorldMapLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
-    <ClInclude Include="PuzzleLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="Background_WorldMap.h">
@@ -53,28 +44,31 @@
     <ClInclude Include="CongratsUI.h">
       <Filter>UIActor\Puzzle</Filter>
     </ClInclude>
-    <ClInclude Include="TutorialLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
     <ClInclude Include="Effect.h">
       <Filter>UIActor\Puzzle</Filter>
     </ClInclude>
     <ClInclude Include="MoveUI.h">
       <Filter>UIActor\Puzzle</Filter>
     </ClInclude>
+    <ClInclude Include="LogoLevel.h">
+      <Filter>Level\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleLevel.h">
+      <Filter>Level\Title</Filter>
+    </ClInclude>
+    <ClInclude Include="PuzzleLevel2.h">
+      <Filter>Level\Puzzle</Filter>
+    </ClInclude>
+    <ClInclude Include="PuzzleLevel.h">
+      <Filter>Level\Puzzle</Filter>
+    </ClInclude>
+    <ClInclude Include="TutorialLevel.h">
+      <Filter>Level\Puzzle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="TitleLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
     <ClCompile Include="ContentCore.cpp" />
-    <ClCompile Include="LogoLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
     <ClCompile Include="WorldMapLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
-    <ClCompile Include="PuzzleLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="Background_WorldMap.cpp">
@@ -113,14 +107,26 @@
     <ClCompile Include="CongratsUI.cpp">
       <Filter>UIActor\Puzzle</Filter>
     </ClCompile>
-    <ClCompile Include="TutorialLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
     <ClCompile Include="Effect.cpp">
       <Filter>UIActor\Puzzle</Filter>
     </ClCompile>
     <ClCompile Include="MoveUI.cpp">
       <Filter>UIActor\Puzzle</Filter>
+    </ClCompile>
+    <ClCompile Include="LogoLevel.cpp">
+      <Filter>Level\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleLevel.cpp">
+      <Filter>Level\Title</Filter>
+    </ClCompile>
+    <ClCompile Include="PuzzleLevel2.cpp">
+      <Filter>Level\Puzzle</Filter>
+    </ClCompile>
+    <ClCompile Include="PuzzleLevel.cpp">
+      <Filter>Level\Puzzle</Filter>
+    </ClCompile>
+    <ClCompile Include="TutorialLevel.cpp">
+      <Filter>Level\Puzzle</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -144,6 +150,12 @@
     </Filter>
     <Filter Include="UIActor\Puzzle">
       <UniqueIdentifier>{05889bad-1504-40b7-a532-52340d091a20}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Title">
+      <UniqueIdentifier>{32245f64-8b63-4525-971a-357c2a953412}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Puzzle">
+      <UniqueIdentifier>{f8bca58a-9353-4a36-ad17-9ec9a2e0a4de}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>
