@@ -30,6 +30,7 @@ void Effect::Start()
 	EffectRender->SetRenderScaleToTexture();
 	EffectRender->CreateAnimation("FLAG_WIN", "Effect.bmp", 231, 237, 0.1f, false);
 	EffectRender->CreateAnimation("BABA_WALK", "Effect.bmp", 0, 6, 0.1f, false);
+	EffectRender->CreateAnimation("WALL_WALK", "Effect.bmp", 56, 62, 0.1f, false);
 
 	Dir.X = GameEngineRandom::MainRandom.RandomFloat(-1, 1);
 	Dir.Y = GameEngineRandom::MainRandom.RandomFloat(-1, 1);
@@ -48,6 +49,12 @@ void Effect::Update(float _Delta)
 
 	// 플레이어 타일 발자국 이펙트
 	if (true == EffectRender->IsAnimation("BABA_WALK"))
+	{
+		Speed = 50.f;
+		AddPos(Dir * Speed * _Delta * 0.5);
+	}
+
+	if (true == EffectRender->IsAnimation("WALL_WALK"))
 	{
 		Speed = 50.f;
 		AddPos(Dir * Speed * _Delta * 0.5);

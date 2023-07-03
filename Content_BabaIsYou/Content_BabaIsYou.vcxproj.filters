@@ -62,6 +62,9 @@
     <ClInclude Include="MoveUI.h">
       <Filter>UIActor\Puzzle</Filter>
     </ClInclude>
+    <ClInclude Include="PuzzleLevel2.h">
+      <Filter>Level</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TitleLevel.cpp">
@@ -121,6 +124,9 @@
     </ClCompile>
     <ClCompile Include="MoveUI.cpp">
       <Filter>UIActor\Puzzle</Filter>
+    </ClCompile>
+    <ClCompile Include="PuzzleLevel2.cpp">
+      <Filter>Level</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
