@@ -52,6 +52,7 @@ private:
 	std::string PlayerTileName = "";
 	std::string BreakTileName = "";
 	std::string WinTileName = "";
+	std::string PushTileName = "";
 
 	std::set<std::string> SubjectSet;
 	std::set<std::string> VerbSet;
@@ -62,6 +63,7 @@ private:
 	std::vector<GameEngineRenderer*> PlayerTiles;
 	std::vector<GameEngineRenderer*> BreakTiles;
 	std::vector<GameEngineRenderer*> WinTiles;
+	std::vector<GameEngineRenderer*> PushTiles;
 
 	TutorialRuleInfo Rules;
 
@@ -115,5 +117,6 @@ private:
 	std::vector<GameEngineRenderer*> GetPlayerTile(TileMap* _TileMap, const std::string& _PlayerTileName);
 	std::vector<GameEngineRenderer*> GetBreakTile(const std::string& _BreakTileName);
 	std::vector<GameEngineRenderer*> GetWinTile(const std::string& _WinTileName);
+	std::vector<GameEngineRenderer*> GetPushTile(const std::string& _PushTileName);
 };
 

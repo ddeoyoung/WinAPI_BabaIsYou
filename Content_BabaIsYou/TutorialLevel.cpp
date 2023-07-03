@@ -898,24 +898,33 @@ void TutorialLevel::MoveCheck()
 	}
 
 
-
-	// 플레이어가 통과하지 못하는 타일 체크
+	// 성립된 문장 체크
 	for (std::string Text : RuleSet)
 	{
 		Rules = GetTutorialRuleInfo(Text);
 
+		// 플레이어가 통과하지 못하는 타일 체크
 		if (Rules.Behave == "STOP")
 		{
 			BreakTiles.clear();
 
-			//				WALL
 			BreakTileName = Rules.Subject;
 			BreakTiles = GetBreakTile(BreakTileName + "_ACTOR");
 
 			CurTileMap = UpTileGrid;
 
 			IsMove = IsMoveTile(PlayerTiles, BreakTiles, Dir);
+		}
 
+		// 플레이어가 PUSH 할 수 있는 오브젝트 체크
+		if (Rules.Behave == "PUSH")
+		{
+			PushTiles.clear();
+			 
+			PushTileName = Rules.Subject;
+			PushTiles = GetPushTile(PushTileName + "_ACTOR"); // PUSH 오브젝트 담기는거 확인
+
+			//CurTileMap = TileGrid; // 오브젝트 타일
 		}
 	}
 
@@ -924,7 +933,6 @@ void TutorialLevel::MoveCheck()
 	{
 		for (size_t i = 0; i < PlayerTiles.size(); i++)
 		{
-
 			bool Check = false;
 			GameEngineRenderer* CheckTile = PlayerTiles[i];
 
@@ -990,6 +998,24 @@ void TutorialLevel::MoveCheck()
 			}
 
 
+
+			// PUSH 타일들 체크
+			GameEngineRenderer* OtherNextTile;
+			OtherNextTile = TileGrid->GetTile(FirstX, FirstY);
+
+			for (size_t j = 0; j < PushTiles.size(); j++)
+			{
+				if (OtherNextTile == PushTiles[j])
+				{
+					TileGrid->LerpTile(FirstX, FirstY, SecondX, SecondY, BackGridPos);
+					TileGrid->LerpTile(PlayerTiles[i], Dir, BackGridPos);
+				}
+			}
+
+
+
+
+
 			// 플레이어 타일에 이펙트 추가
 			TileEffect = CreateActor<Effect>();
 			TileEffect->EffectRender->ChangeAnimation("BABA_WALK");
@@ -1004,4 +1030,35 @@ void TutorialLevel::MoveCheck()
 	{
 		return;
 	}
+}
+
+// Push가 가능한 오브젝트 타일들 집합
+std::vector<GameEngineRenderer*> TutorialLevel::GetPushTile(const std::string& _PushTileName)
+{
+	PushTiles.clear();
+
+	GameEngineRenderer* Tile = nullptr;
+	std::string TileName = "";
+	std::string PushTileName = _PushTileName;
+
+	for (int y = 0; y < 15; y++)
+	{
+		for (int x = 0; x < 21; x++)
+		{
+			// PUSH가 가능한 오브젝트 타일은 TileGrid에만 존재
+			Tile = TileGrid->GetTile(x, y);
+
+			if (nullptr != Tile)
+			{
+				TileName = Tile->GetName();
+
+				if (TileName == PushTileName)
+				{
+					PushTiles.push_back(Tile);
+				}
+			}
+		}
+	}
+
+	return PushTiles;
 }

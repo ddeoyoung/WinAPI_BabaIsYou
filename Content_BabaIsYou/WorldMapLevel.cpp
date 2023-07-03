@@ -678,6 +678,13 @@ void WorldMapLevel::Update(float _Delta)
 			FadeUI->FadeOut();
 			StageName = "PuzzleLevel";
 		}
+
+		if (SelectX == 9 && SelectY == 14)
+		{
+			FadeUI->On();
+			FadeUI->FadeOut();
+			StageName = "TutorialLevel";
+		}
 	}
 
 	if (true == FadeUI->FadeRender->IsAnimation("FadeIn")
