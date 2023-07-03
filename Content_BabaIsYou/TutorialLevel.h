@@ -49,6 +49,10 @@ public:
 
 	void RuleTilePushRecursive(GameEngineRenderer* _Render, MOVEDIR _Dir, float4 Pos);
 
+	void RuleTilePushRecursive(GameEngineRenderer* _Render, MOVEDIR _Dir, float4 Pos, int _GridNum);
+
+	void ChangeBabaAnimation(MOVEDIR _Dir, const std::string& _AnimationName);
+
 protected:
 	void LevelStart(GameEngineLevel* _PrevLevel) override;
 	void LevelEnd(GameEngineLevel* _NextLevel) override;
@@ -123,7 +127,7 @@ private:
 	GameEngineRenderer* NextTile = nullptr;
 	GameEngineRenderer* CurTile = nullptr;
 
-	void ChangeBabaAnimation(MOVEDIR _Dir, const std::string& _AnimationName);
+
 
 	
 };

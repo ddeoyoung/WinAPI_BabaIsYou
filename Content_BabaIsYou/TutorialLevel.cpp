@@ -912,9 +912,9 @@ void TutorialLevel::MoveCheck()
 					{
 						if (false == IsPushMove)
 						{
-							TileGrids[1]->LerpTile(PushTiles[j], Dir, BackGridPos);
+							//TileGrids[1]->LerpTile(PushTiles[j], Dir, BackGridPos);
+							RuleTilePushRecursive(NextTile, Dir, BackGridPos, 1);
 						}
-						//TileGrids[1]->LerpTile(PushTiles[j], Dir, BackGridPos);
 					}
 				}
 			}
@@ -1005,6 +1005,50 @@ void TutorialLevel::RuleTilePushRecursive(GameEngineRenderer* _Render, MOVEDIR _
 
 
 	RuleTilePushRecursive(TextTile, _Dir, _Pos);
+}
+
+void TutorialLevel::RuleTilePushRecursive(GameEngineRenderer* _Render, MOVEDIR _Dir, float4 _Pos, int _GridNum)
+{
+	float4 PushDir = { 0, 0 };
+
+	switch (_Dir)
+	{
+	case MOVEDIR::LEFT:
+		PushDir = { -1, 0 };
+		break;
+	case MOVEDIR::RIGHT:
+		PushDir = { 1, 0 };
+		break;
+	case MOVEDIR::UP:
+		PushDir = { 0, -1 };
+		break;
+	case MOVEDIR::DOWN:
+		PushDir = { 0, 1 };
+		break;
+	case MOVEDIR::NONE:
+		break;
+	default:
+		break;
+	}
+
+	int Num = _GridNum;
+
+	TileGrids[Num]->LerpTile(_Render, _Dir, _Pos);
+
+	float4 TextTileSize = TileGrids[Num]->GetTileSize();
+	float4 TextTileIndex = TileGrids[Num]->PosToIndex(_Render->GetRenderPos() - _Pos - TextTileSize.Half());
+	TextTileIndex += PushDir;
+
+	GameEngineRenderer* TextTile;
+	TextTile = TileGrids[Num]->GetTile(TextTileIndex.iX(), TextTileIndex.iY());
+
+	if (TextTile == nullptr)
+	{
+		return;
+	}
+
+
+	RuleTilePushRecursive(TextTile, _Dir, _Pos, Num);
 }
 
 
