@@ -79,13 +79,10 @@ void TutorialLevel::LevelStart(GameEngineLevel* _PrevLevel)
 	BackGridPos = { WinScale.X - (BackScale.X / 2), WinScale.Y - (BackScale.Y / 2) };
 
 	// 21 x 15 개의 타일맵 생성
-	// 오브젝트
-
 	{
-		// 0번 바닥
-		// 텍스트, 플레이어
+		// 배경 타일
 		TileMap* TileGrid = CreateActor<TileMap>();
-		TileGrid->CreateTileMap("Actor.bmp", 21, 15, { 40 , 40 }, 5);
+		TileGrid->CreateTileMap("Actor.bmp", 21, 15, { 40 , 40 }, (int)RENDER_ORDER::BACK_GRID);
 		TileGrid->SetLerpSpeed(10.0f);
 
 		TileGrids.push_back(TileGrid);
@@ -93,19 +90,18 @@ void TutorialLevel::LevelStart(GameEngineLevel* _PrevLevel)
 
 
 	{
-		// 1번 오브젝트
+		// 오브젝트 타일
 		TileMap* TileGrid = CreateActor<TileMap>();
-		TileGrid->CreateTileMap("Actor.bmp", 21, 15, { 40 , 40 }, 6);
+		TileGrid->CreateTileMap("Actor.bmp", 21, 15, { 40 , 40 }, (int)RENDER_ORDER::ACTOR_GRID);
 		TileGrid->SetLerpSpeed(10.0f);
 
 		TileGrids.push_back(TileGrid);
 	}
 
 	{
-		// 2번 글자
-		// 텍스트, 플레이어
+		// 텍스트, 플레이어 타일
 		TileMap* TileGrid = CreateActor<TileMap>();
-		TileGrid->CreateTileMap("Actor.bmp", 21, 15, { 40 , 40 }, 7);
+		TileGrid->CreateTileMap("Actor.bmp", 21, 15, { 40 , 40 }, (int)RENDER_ORDER::TEXT_GRID);
 		TileGrid->SetLerpSpeed(10.0f);
 
 		TileGrids.push_back(TileGrid);
@@ -287,7 +283,7 @@ void TutorialLevel::LevelStart(GameEngineLevel* _PrevLevel)
 
 void TutorialLevel::LevelEnd(GameEngineLevel* _NextLevel)
 {
-
+	FadeUI->Off();
 }
 
 void TutorialLevel::Update(float _Delta)
@@ -472,10 +468,9 @@ void TutorialLevel::UpdateStringRuleCheck()
 
 			std::string TileName = CurTile->GetName();
 
-			// 룰에 관련된 타일인데도
 			if (true == SubjectSet.contains(TileName) || true == VerbSet.contains(TileName) || true == BehaveSet.contains(TileName))
 			{
-				// 완성된 룰을 만드는데 사용되지 않은 랜더러들은 off 시킨다.
+				// 완성된 문장이 아닌 텍스트 타일 - 애니메이션 Off
 				if (false == Renders.contains(CurTile))
 				{
 					CurTile->ChangeAnimation(TileName + "_OFF");
@@ -484,7 +479,7 @@ void TutorialLevel::UpdateStringRuleCheck()
 		}
 	}
 
-
+	
 	return;
 }
 
@@ -685,11 +680,11 @@ void TutorialLevel::PlayerCheck()
 {
 	TutorialRuleInfo Rules;
 
-	// YOU가 포함된 문장이 있는지 체크
 	for (std::string Text : RuleSet)
 	{
 		Rules = GetTutorialRuleInfo(Text);
 
+		// YOU가 포함된 문장이 있는지 체크
 		if (Rules.Behave == "YOU")
 		{
 			break;
@@ -702,11 +697,9 @@ void TutorialLevel::PlayerCheck()
 		return;
 	}
 
-
 	PlayerTiles.clear();
-	CurTileMap = nullptr;
 
-	// Player로써 움직일 수 있는 타일 체크
+	// Player로써 움직일 수 있는 타일 저장
 	PlayerTileName = Rules.Subject;
 	PlayerTiles = GetPlayerTile(PlayerTileName + "_ACTOR");
 }
@@ -778,27 +771,7 @@ void TutorialLevel::MoveCheck()
 
 		if (PlayerTileName == "BABA")
 		{
-			switch (BabaMoveStep)
-			{
-			case 0:
-				PlayerTiles[0]->ChangeAnimation("Baba_Right");
-				BabaMoveStep += 1;
-				break;
-			case 1:
-				PlayerTiles[0]->ChangeAnimation("Baba_Right2");
-				BabaMoveStep += 1;
-				break;
-			case 2:
-				PlayerTiles[0]->ChangeAnimation("Baba_Right3");
-				BabaMoveStep += 1;
-				break;
-			case 3:
-				PlayerTiles[0]->ChangeAnimation("Baba_Right4");
-				BabaMoveStep = 0;
-				break;
-			default:
-				break;
-			}
+			ChangeBabaAnimation(Dir, "Right");
 		}
 	}
 
@@ -808,27 +781,7 @@ void TutorialLevel::MoveCheck()
 
 		if (PlayerTileName == "BABA")
 		{
-			switch (BabaMoveStep)
-			{
-			case 0:
-				PlayerTiles[0]->ChangeAnimation("Baba_Left");
-				BabaMoveStep += 1;
-				break;
-			case 1:
-				PlayerTiles[0]->ChangeAnimation("Baba_Left2");
-				BabaMoveStep += 1;
-				break;
-			case 2:
-				PlayerTiles[0]->ChangeAnimation("Baba_Left3");
-				BabaMoveStep += 1;
-				break;
-			case 3:
-				PlayerTiles[0]->ChangeAnimation("Baba_Left4");
-				BabaMoveStep = 0;
-				break;
-			default:
-				break;
-			}
+			ChangeBabaAnimation(Dir, "Left");
 		}
 	}
 
@@ -838,27 +791,7 @@ void TutorialLevel::MoveCheck()
 
 		if (PlayerTileName == "BABA")
 		{
-			switch (BabaMoveStep)
-			{
-			case 0:
-				PlayerTiles[0]->ChangeAnimation("Baba_Up");
-				BabaMoveStep += 1;
-				break;
-			case 1:
-				PlayerTiles[0]->ChangeAnimation("Baba_Up2");
-				BabaMoveStep += 1;
-				break;
-			case 2:
-				PlayerTiles[0]->ChangeAnimation("Baba_Up3");
-				BabaMoveStep += 1;
-				break;
-			case 3:
-				PlayerTiles[0]->ChangeAnimation("Baba_Up4");
-				BabaMoveStep = 0;
-				break;
-			default:
-				break;
-			}
+			ChangeBabaAnimation(Dir, "Up");
 		}
 	}
 
@@ -868,27 +801,7 @@ void TutorialLevel::MoveCheck()
 
 		if (PlayerTileName == "BABA")
 		{
-			switch (BabaMoveStep)
-			{
-			case 0:
-				PlayerTiles[0]->ChangeAnimation("Baba_Down");
-				BabaMoveStep += 1;
-				break;
-			case 1:
-				PlayerTiles[0]->ChangeAnimation("Baba_Down");
-				BabaMoveStep += 1;
-				break;
-			case 2:
-				PlayerTiles[0]->ChangeAnimation("Baba_Down");
-				BabaMoveStep += 1;
-				break;
-			case 3:
-				PlayerTiles[0]->ChangeAnimation("Baba_Down");
-				BabaMoveStep = 0;
-				break;
-			default:
-				break;
-			}
+			ChangeBabaAnimation(Dir, "Down");
 		}
 	}
 
@@ -1059,23 +972,21 @@ std::vector<GameEngineRenderer*> TutorialLevel::GetPushTile(const std::string& _
 
 void TutorialLevel::RuleTilePushRecursive(GameEngineRenderer* _Render, MOVEDIR _Dir, float4 _Pos)
 {
-
-
-	float4 WalkDir = { 0, 0 };
+	float4 PushDir = { 0, 0 };
 
 	switch (_Dir)
 	{
 	case MOVEDIR::LEFT:
-		WalkDir = { -1, 0 };
+		PushDir = { -1, 0 };
 		break;
 	case MOVEDIR::RIGHT:
-		WalkDir = { 1, 0 };
+		PushDir = { 1, 0 };
 		break;
 	case MOVEDIR::UP:
-		WalkDir = { 0, -1 };
+		PushDir = { 0, -1 };
 		break;
 	case MOVEDIR::DOWN:
-		WalkDir = { 0, 1 };
+		PushDir = { 0, 1 };
 		break;
 	case MOVEDIR::NONE:
 		break;
@@ -1087,10 +998,7 @@ void TutorialLevel::RuleTilePushRecursive(GameEngineRenderer* _Render, MOVEDIR _
 
 	float4 TileSize = TileGrids[2]->GetTileSize();
 	float4 TileIndex = TileGrids[2]->PosToIndex(_Render->GetRenderPos() - _Pos - TileSize.Half());
-	TileIndex += WalkDir;
-
-	// 5, 5 오른쪽으로 밀릴겁니다.
-	// 6, 5
+	TileIndex += PushDir;
 
 	GameEngineRenderer* OtherNextTile;
 	OtherNextTile = TileGrids[2]->GetTile(TileIndex.iX(), TileIndex.iY());
@@ -1101,3 +1009,36 @@ void TutorialLevel::RuleTilePushRecursive(GameEngineRenderer* _Render, MOVEDIR _
 
 	RuleTilePushRecursive(OtherNextTile, _Dir, _Pos);
 }
+
+
+void TutorialLevel::ChangeBabaAnimation(MOVEDIR _Dir, const std::string& _DirName)
+{
+	std::string AnimationName = "Baba_" + _DirName;
+
+	switch (BabaMoveStep)
+	{
+	case 0:
+		PlayerTiles[0]->ChangeAnimation(AnimationName);
+		BabaMoveStep += 1;
+		break;
+	case 1:
+		PlayerTiles[0]->ChangeAnimation(AnimationName + "2");
+		BabaMoveStep += 1;
+		break;
+	case 2:
+		PlayerTiles[0]->ChangeAnimation(AnimationName + "3");
+		BabaMoveStep += 1;
+		break;
+	case 3:
+		PlayerTiles[0]->ChangeAnimation(AnimationName + "4");
+		BabaMoveStep = 0;
+		break;
+	default:
+		break;
+	}
+}
+
+//std::vector<GameEngineRenderer*> TutorialLevel::GetTiles(const std::string& _TileName, const std::string& _Behave)
+//{
+//
+//}

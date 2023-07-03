@@ -107,6 +107,7 @@ private:
 	GameEngineRenderer* NextTile = nullptr;
 	GameEngineRenderer* CurTile = nullptr;
 
+	void ChangeBabaAnimation(MOVEDIR _Dir, const std::string& _AnimationName);
 
 	TutorialRuleInfo GetTutorialRuleInfo(const std::string& _Text);
 
@@ -121,6 +122,8 @@ private:
 	std::vector<GameEngineRenderer*> GetBreakTile(const std::string& _BreakTileName);
 	std::vector<GameEngineRenderer*> GetWinTile(const std::string& _WinTileName);
 	std::vector<GameEngineRenderer*> GetPushTile(const std::string& _PushTileName);
+
+	std::vector<GameEngineRenderer*> GetTiles(const std::string& _TileName, const std::string& _Behave);
 
 	void RuleTilePushRecursive(GameEngineRenderer* _Render, MOVEDIR _Dir, float4 Pos);
 };
