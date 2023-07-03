@@ -1038,7 +1038,8 @@ void TutorialLevel::ChangeBabaAnimation(MOVEDIR _Dir, const std::string& _DirNam
 	}
 }
 
-//std::vector<GameEngineRenderer*> TutorialLevel::GetTiles(const std::string& _TileName, const std::string& _Behave)
-//{
-//
-//}
+std::vector<GameEngineRenderer*> TutorialLevel::GetTiles(const std::string& _TileName, const std::string& _Behave)
+{
+
+	return Tiles;
+}

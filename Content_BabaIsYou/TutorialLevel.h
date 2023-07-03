@@ -123,6 +123,7 @@ private:
 	std::vector<GameEngineRenderer*> GetWinTile(const std::string& _WinTileName);
 	std::vector<GameEngineRenderer*> GetPushTile(const std::string& _PushTileName);
 
+	std::vector<GameEngineRenderer*> Tiles;
 	std::vector<GameEngineRenderer*> GetTiles(const std::string& _TileName, const std::string& _Behave);
 
 	void RuleTilePushRecursive(GameEngineRenderer* _Render, MOVEDIR _Dir, float4 Pos);
