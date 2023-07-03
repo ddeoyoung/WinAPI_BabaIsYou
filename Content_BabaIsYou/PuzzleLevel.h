@@ -36,9 +36,6 @@ private:
 	void Start() override;
 	void Update(float _Delta) override;
 
-
-	int Index_X = 13;
-	int Index_Y = 11;
 	int BabaMoveStep = 0;
 
 	std::string AnimationName = "";

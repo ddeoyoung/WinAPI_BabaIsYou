@@ -80,14 +80,38 @@ void TutorialLevel::LevelStart(GameEngineLevel* _PrevLevel)
 
 	// 21 x 15 개의 타일맵 생성
 	// 오브젝트
-	TileGrid = CreateActor<TileMap>();
-	TileGrid->CreateTileMap("Actor.bmp", 21, 15, { 40 , 40 }, 2);
-	TileGrid->SetLerpSpeed(10.0f);
 
-	// 텍스트, 플레이어
-	UpTileGrid = CreateActor<TileMap>();
-	UpTileGrid->CreateTileMap("Actor.bmp", 21, 15, { 40 , 40 }, 3);
-	UpTileGrid->SetLerpSpeed(10.0f);
+	{
+		// 0번 바닥
+		// 텍스트, 플레이어
+		TileMap* TileGrid = CreateActor<TileMap>();
+		TileGrid->CreateTileMap("Actor.bmp", 21, 15, { 40 , 40 }, 5);
+		TileGrid->SetLerpSpeed(10.0f);
+
+		TileGrids.push_back(TileGrid);
+	}
+
+
+	{
+		// 1번 오브젝트
+		TileMap* TileGrid = CreateActor<TileMap>();
+		TileGrid->CreateTileMap("Actor.bmp", 21, 15, { 40 , 40 }, 6);
+		TileGrid->SetLerpSpeed(10.0f);
+
+		TileGrids.push_back(TileGrid);
+	}
+
+	{
+		// 2번 글자
+		// 텍스트, 플레이어
+		TileMap* TileGrid = CreateActor<TileMap>();
+		TileGrid->CreateTileMap("Actor.bmp", 21, 15, { 40 , 40 }, 7);
+		TileGrid->SetLerpSpeed(10.0f);
+
+		TileGrids.push_back(TileGrid);
+	}
+
+
 
 	// 맵 세팅
 	// MapTexture - Tutorial
@@ -106,7 +130,7 @@ void TutorialLevel::LevelStart(GameEngineLevel* _PrevLevel)
 			// WALL_ACTOR
 			if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(255, 0, 0))
 			{
-				TileRenderer = TileGrid->SetTile(x, y, 290, BackGridPos);
+				TileRenderer = TileGrids[1]->SetTile(x, y, 290, BackGridPos);
 				TileRenderer->SetName("WALL_ACTOR");
 				TileRenderer->CreateAnimationToFrame("WALL_ACTOR", "Actor.bmp", { 290, 314, 338 }, 0.2f, true);
 				TileRenderer->ChangeAnimation("WALL_ACTOR");
@@ -115,7 +139,7 @@ void TutorialLevel::LevelStart(GameEngineLevel* _PrevLevel)
 			// BABA_ACTOR
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(0, 0, 0))
 			{
-				TileRenderer = UpTileGrid->SetTile(x, y, 2, BackGridPos);
+				TileRenderer = TileGrids[2]->SetTile(x, y, 2, BackGridPos);
 				TileRenderer->SetName("BABA_ACTOR");
 				TileRenderer->CreateAnimationToFrame("Baba_Left", "Actor.bmp", { 10, 34, 58 }, 0.2f, true);
 				TileRenderer->CreateAnimationToFrame("Baba_Right", "Actor.bmp", { 2, 26, 50 }, 0.2f, true);
@@ -144,7 +168,7 @@ void TutorialLevel::LevelStart(GameEngineLevel* _PrevLevel)
 			// ROCK_ACTOR
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(255, 150, 0))
 			{
-				TileRenderer = TileGrid->SetTile(x, y, 734, BackGridPos);
+				TileRenderer = TileGrids[1]->SetTile(x, y, 734, BackGridPos);
 				TileRenderer->SetName("ROCK_ACTOR");
 				TileRenderer->CreateAnimationToFrame("ROCK_ACTOR", "Actor.bmp", { 734, 758, 782 }, 0.2f, true);
 				TileRenderer->ChangeAnimation("ROCK_ACTOR");
@@ -153,7 +177,7 @@ void TutorialLevel::LevelStart(GameEngineLevel* _PrevLevel)
 			// BLOCK_ACTOR
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(0, 0, 100))
 			{
-				TileRenderer = TileGrid->SetTile(x, y, 737, BackGridPos);
+				TileRenderer = TileGrids[0]->SetTile(x, y, 737, BackGridPos);
 				TileRenderer->SetName("BLOCK_ACTOR");
 				TileRenderer->CreateAnimationToFrame("BLOCK_ACTOR", "Actor.bmp", { 737, 761, 785 }, 0.2f, true);
 				TileRenderer->ChangeAnimation("BLOCK_ACTOR");
@@ -162,7 +186,7 @@ void TutorialLevel::LevelStart(GameEngineLevel* _PrevLevel)
 			// FLAG_ACTOR
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(255, 255, 0))
 			{
-				TileRenderer = TileGrid->SetTile(x, y, 728, BackGridPos);
+				TileRenderer = TileGrids[1]->SetTile(x, y, 728, BackGridPos);
 				TileRenderer->SetName("FLAG_ACTOR");
 				TileRenderer->CreateAnimationToFrame("FLAG_ACTOR", "Actor.bmp", { 728, 752, 776 }, 0.2f, true);
 				TileRenderer->ChangeAnimation("FLAG_ACTOR");
@@ -171,7 +195,7 @@ void TutorialLevel::LevelStart(GameEngineLevel* _PrevLevel)
 			// WALL
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(50, 50, 50))
 			{
-				TileRenderer = UpTileGrid->SetTile(x, y, 288, BackGridPos);
+				TileRenderer = TileGrids[2]->SetTile(x, y, 288, BackGridPos);
 				TileRenderer->SetName("WALL");
 				TileRenderer->CreateAnimationToFrame("WALL", "Actor.bmp", { 288, 312, 336 }, 0.2f, true);
 				TileRenderer->CreateAnimationToFrame("WALL_OFF", "Actor.bmp", { 289, 313, 337 }, 0.2f, true); // Off
@@ -181,7 +205,7 @@ void TutorialLevel::LevelStart(GameEngineLevel* _PrevLevel)
 			// IS
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(200, 200, 200))
 			{
-				TileRenderer = UpTileGrid->SetTile(x, y, 792, BackGridPos);
+				TileRenderer = TileGrids[2]->SetTile(x, y, 792, BackGridPos);
 				TileRenderer->SetName("IS");
 				TileRenderer->CreateAnimationToFrame("IS", "Actor.bmp", { 792, 816, 840 }, 0.2f, true);
 				TileRenderer->CreateAnimationToFrame("IS_OFF", "Actor.bmp", { 793, 817, 841 }, 0.2f, true); // Off
@@ -191,7 +215,7 @@ void TutorialLevel::LevelStart(GameEngineLevel* _PrevLevel)
 			// FLAG
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(255, 200, 0))
 			{
-				TileRenderer = UpTileGrid->SetTile(x, y, 726, BackGridPos);
+				TileRenderer = TileGrids[2]->SetTile(x, y, 726, BackGridPos);
 				TileRenderer->SetName("FLAG");
 				TileRenderer->CreateAnimationToFrame("FLAG", "Actor.bmp", { 726, 750, 774 }, 0.2f, true);
 				TileRenderer->CreateAnimationToFrame("FLAG_OFF", "Actor.bmp", { 727, 751, 775 }, 0.2f, true); // Off
@@ -201,7 +225,7 @@ void TutorialLevel::LevelStart(GameEngineLevel* _PrevLevel)
 			// BABA
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(255, 100, 100))
 			{
-				TileRenderer = UpTileGrid->SetTile(x, y, 0, BackGridPos);
+				TileRenderer = TileGrids[2]->SetTile(x, y, 0, BackGridPos);
 				TileRenderer->SetName("BABA");
 				TileRenderer->CreateAnimationToFrame("BABA", "Actor.bmp", { 0, 24, 48 }, 0.2f, true);
 				TileRenderer->CreateAnimationToFrame("BABA_OFF", "Actor.bmp", { 1, 25, 49 }, 0.2f, true); // Off
@@ -211,7 +235,7 @@ void TutorialLevel::LevelStart(GameEngineLevel* _PrevLevel)
 			// YOU
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(100, 50, 50))
 			{
-				TileRenderer = UpTileGrid->SetTile(x, y, 864, BackGridPos);
+				TileRenderer = TileGrids[2]->SetTile(x, y, 864, BackGridPos);
 				TileRenderer->SetName("YOU");
 				TileRenderer->CreateAnimationToFrame("YOU", "Actor.bmp", { 864, 888, 912 }, 0.2f, true);
 				TileRenderer->CreateAnimationToFrame("YOU_OFF", "Actor.bmp", { 865, 889, 913 }, 0.2f, true); // Off
@@ -221,7 +245,7 @@ void TutorialLevel::LevelStart(GameEngineLevel* _PrevLevel)
 			// WIN
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(200, 200, 0))
 			{
-				TileRenderer = UpTileGrid->SetTile(x, y, 864, BackGridPos);
+				TileRenderer = TileGrids[2]->SetTile(x, y, 864, BackGridPos);
 				TileRenderer->SetName("WIN");
 				TileRenderer->CreateAnimationToFrame("WIN", "Actor.bmp", { 866, 890, 914 }, 0.2f, true);
 				TileRenderer->CreateAnimationToFrame("WIN_OFF", "Actor.bmp", { 867, 891, 915 }, 0.2f, true); // Off
@@ -231,7 +255,7 @@ void TutorialLevel::LevelStart(GameEngineLevel* _PrevLevel)
 			// STOP
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(0, 100, 0))
 			{
-				TileRenderer = UpTileGrid->SetTile(x, y, 868, BackGridPos);
+				TileRenderer = TileGrids[2]->SetTile(x, y, 868, BackGridPos);
 				TileRenderer->SetName("STOP");
 				TileRenderer->CreateAnimationToFrame("STOP", "Actor.bmp", { 868, 892, 916 }, 0.2f, true);
 				TileRenderer->CreateAnimationToFrame("STOP_OFF", "Actor.bmp", { 869, 893, 917 }, 0.2f, true); // Off
@@ -241,7 +265,7 @@ void TutorialLevel::LevelStart(GameEngineLevel* _PrevLevel)
 			// ROCK
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(200, 150, 0))
 			{
-				TileRenderer = UpTileGrid->SetTile(x, y, 732, BackGridPos);
+				TileRenderer = TileGrids[2]->SetTile(x, y, 732, BackGridPos);
 				TileRenderer->SetName("ROCK");
 				TileRenderer->CreateAnimationToFrame("ROCK", "Actor.bmp", { 732, 756, 780 }, 0.2f, true);
 				TileRenderer->CreateAnimationToFrame("ROCK_OFF", "Actor.bmp", { 733, 757, 781 }, 0.2f, true); // Off
@@ -251,7 +275,7 @@ void TutorialLevel::LevelStart(GameEngineLevel* _PrevLevel)
 			// PUSH
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(0, 0, 200))
 			{
-				TileRenderer = UpTileGrid->SetTile(x, y, 870, BackGridPos);
+				TileRenderer = TileGrids[2]->SetTile(x, y, 870, BackGridPos);
 				TileRenderer->SetName("PUSH");
 				TileRenderer->CreateAnimationToFrame("PUSH", "Actor.bmp", { 870, 894, 918 }, 0.2f, true);
 				TileRenderer->CreateAnimationToFrame("PUSH_OFF", "Actor.bmp", { 871, 895, 919 }, 0.2f, true); // Off
@@ -323,7 +347,7 @@ void TutorialLevel::UpdateStringRuleCheck()
 			VerbTileName = "";
 			BehaveTileName = "";
 
-			CurTile = UpTileGrid->GetTile(x, y);
+			CurTile = TileGrids[2]->GetTile(x, y);
 
 			if (nullptr != CurTile)
 			{
@@ -335,7 +359,7 @@ void TutorialLevel::UpdateStringRuleCheck()
 					SubjectTileName = TileName + " ";
 					SubjectRenderer = CurTile;
 
-					CurTile = UpTileGrid->GetTile(x, y + 1); // 세로 문장 체크
+					CurTile = TileGrids[2]->GetTile(x, y + 1); // 세로 문장 체크
 
 					if (nullptr != CurTile)
 					{
@@ -350,7 +374,7 @@ void TutorialLevel::UpdateStringRuleCheck()
 						VerbRenderer = CurTile;
 
 						// 행동 - Behave
-						CurTile = UpTileGrid->GetTile(x, y + 2);
+						CurTile = TileGrids[2]->GetTile(x, y + 2);
 
 						if (nullptr != CurTile)
 						{
@@ -380,7 +404,7 @@ void TutorialLevel::UpdateStringRuleCheck()
 					}
 
 
-					CurTile = UpTileGrid->GetTile(x + 1, y); // 가로 문장 체크
+					CurTile = TileGrids[2]->GetTile(x + 1, y); // 가로 문장 체크
 
 					if (nullptr != CurTile)
 					{
@@ -395,7 +419,7 @@ void TutorialLevel::UpdateStringRuleCheck()
 						VerbRenderer = CurTile;
 
 						// 행동 - Behave
-						CurTile = UpTileGrid->GetTile(x + 2, y);
+						CurTile = TileGrids[2]->GetTile(x + 2, y);
 
 						if (nullptr != CurTile)
 						{
@@ -439,7 +463,7 @@ void TutorialLevel::UpdateStringRuleCheck()
 	{
 		for (int x = 0; x < 21; x++)
 		{
-			CurTile = UpTileGrid->GetTile(x, y);
+			CurTile = TileGrids[2]->GetTile(x, y);
 
 			if (nullptr == CurTile)
 			{
@@ -496,74 +520,62 @@ std::vector<GameEngineRenderer*> TutorialLevel::GetBreakTile(const std::string& 
 
 	BreakTiles.clear();
 
-	// UpTileGrid
-	for (int y = 0; y < 15; y++)
+	for (size_t i = 0; i < TileGrids.size(); i++)
 	{
-		for (int x = 0; x < 21; x++)
+		// UpTileGrid
+		for (int y = 0; y < 15; y++)
 		{
-			Tile = UpTileGrid->GetTile(x, y);
-
-			if (nullptr != Tile)
+			for (int x = 0; x < 21; x++)
 			{
-				TileName = Tile->GetName();
+				Tile = TileGrids[i]->GetTile(x, y);
 
-				if (TileName == _BreakTileName)
+				if (nullptr != Tile)
 				{
-					BreakTiles.push_back(Tile);
+					TileName = Tile->GetName();
+
+					if (TileName == _BreakTileName)
+					{
+						BreakTiles.push_back(Tile);
+					}
 				}
 			}
 		}
+
 	}
 
-	// TileGrid
-	for (int y = 0; y < 15; y++)
-	{
-		for (int x = 0; x < 21; x++)
-		{
-			Tile = TileGrid->GetTile(x, y);
-
-			if (nullptr != Tile)
-			{
-				TileName = Tile->GetName();
-
-				// WALL				WALL_ACTOR
-				if (TileName == _BreakTileName)
-				{
-					BreakTiles.push_back(Tile);
-				}
-			}
-		}
-	}
 
 	return BreakTiles;
 }
 
 // Player로써 움직일 수 있는 타일 집합 (= YOU)
-std::vector<GameEngineRenderer*> TutorialLevel::GetPlayerTile(TileMap* _TileMap, const std::string& _PlayerTileName)
+std::vector<GameEngineRenderer*> TutorialLevel::GetPlayerTile(const std::string& _PlayerTileName)
 {
 	PlayerTiles.clear();
 
 	GameEngineRenderer* Tile = nullptr;
 	std::string TileName = "";
 
-	for (int y = 0; y < 15; y++)
+	for (size_t i = 0; i < TileGrids.size(); i++)
 	{
-		for (int x = 0; x < 21; x++)
+		for (int y = 0; y < 15; y++)
 		{
-			Tile = _TileMap->GetTile(x, y);
-
-			if (nullptr != Tile)
+			for (int x = 0; x < 21; x++)
 			{
-				TileName = Tile->GetName();
+				Tile = TileGrids[i]->GetTile(x, y);
 
-				if (TileName == _PlayerTileName)
+				if (nullptr != Tile)
 				{
-					PlayerTiles.push_back(Tile);
+					TileName = Tile->GetName();
+
+					if (TileName == _PlayerTileName)
+					{
+						PlayerTiles.push_back(Tile);
+					}
 				}
 			}
 		}
-	}
 
+	}
 	return PlayerTiles;
 }
 
@@ -580,7 +592,7 @@ std::vector<GameEngineRenderer*> TutorialLevel::GetWinTile(const std::string& _W
 		for (int x = 0; x < 21; x++)
 		{
 			// Win 타일은 TileGrid에만 존재
-			Tile = TileGrid->GetTile(x, y);
+			Tile = TileGrids[1]->GetTile(x, y);
 
 			if (nullptr != Tile)
 			{
@@ -613,7 +625,6 @@ void TutorialLevel::WinCheck()
 			WinTileName = Rules.Subject;
 
 			WinTiles.clear();
-			CurTileMap = TileGrid;
 			WinTiles = GetWinTile(WinTileName + "_ACTOR");
 
 			// PlayerTiles가 WinTiles에 닿으면 스테이지 클리어
@@ -623,9 +634,9 @@ void TutorialLevel::WinCheck()
 			{
 				GameEngineRenderer* CheckTile = PlayerTiles[i];
 
-				float4 HaflTileSize = CurTileMap->GetTileSize().Half();
+				float4 HaflTileSize = TileGrids[1]->GetTileSize().Half();
 				float4 TilePos = CheckTile->GetRenderPos();
-				float4 TileIndex = CurTileMap->PosToIndex(TilePos - BackGridPos - HaflTileSize);
+				float4 TileIndex = TileGrids[1]->PosToIndex(TilePos - BackGridPos - HaflTileSize);
 
 				int PlayerX = TileIndex.iX();
 				int PlayerY = TileIndex.iY();
@@ -634,7 +645,7 @@ void TutorialLevel::WinCheck()
 				{
 					GameEngineRenderer* WinTile = WinTiles[j];
 					float4 TilePos = WinTile->GetRenderPos();
-					float4 TileIndex = CurTileMap->PosToIndex(TilePos - BackGridPos - HaflTileSize);
+					float4 TileIndex = TileGrids[1]->PosToIndex(TilePos - BackGridPos - HaflTileSize);
 					float4 TileScale = { 35, 35 };
 
 					int WinX = TileIndex.iX();
@@ -697,18 +708,7 @@ void TutorialLevel::PlayerCheck()
 
 	// Player로써 움직일 수 있는 타일 체크
 	PlayerTileName = Rules.Subject;
-	CurTileMap = TileGrid;
-	PlayerTiles = GetPlayerTile(TileGrid, PlayerTileName + "_ACTOR");
-
-	if (0 >= PlayerTiles.size())
-	{
-		CurTileMap = UpTileGrid;
-		PlayerTiles = GetPlayerTile(UpTileGrid, PlayerTileName + "_ACTOR");
-		if (0 >= PlayerTiles.size())
-		{
-			return;
-		}
-	}
+	PlayerTiles = GetPlayerTile(PlayerTileName + "_ACTOR");
 }
 
 bool TutorialLevel::IsMoveTile(std::vector<GameEngineRenderer*> _PlayerTiles, std::vector<GameEngineRenderer*> _BreakTiles, MOVEDIR _Dir)
@@ -718,7 +718,7 @@ bool TutorialLevel::IsMoveTile(std::vector<GameEngineRenderer*> _PlayerTiles, st
 	{
 		GameEngineRenderer* PlayerTile = _PlayerTiles[i];
 		float4 TilePos = PlayerTile->GetRenderPos();
-		float4 TileIndex = TileGrid->PosToIndex(TilePos);
+		float4 TileIndex = TileGrids[1]->PosToIndex(TilePos);
 
 		int PlayerX = TileIndex.iX();
 		int PlayerY = TileIndex.iY();
@@ -747,7 +747,7 @@ bool TutorialLevel::IsMoveTile(std::vector<GameEngineRenderer*> _PlayerTiles, st
 		{
 			GameEngineRenderer* BreakTile = _BreakTiles[j];
 			float4 TilePos = BreakTile->GetRenderPos();
-			float4 TileIndex = TileGrid->PosToIndex(TilePos);
+			float4 TileIndex = TileGrids[1]->PosToIndex(TilePos);
 
 			int BreakX = TileIndex.iX();
 			int BreakY = TileIndex.iY();
@@ -911,8 +911,6 @@ void TutorialLevel::MoveCheck()
 			BreakTileName = Rules.Subject;
 			BreakTiles = GetBreakTile(BreakTileName + "_ACTOR");
 
-			CurTileMap = UpTileGrid;
-
 			IsMove = IsMoveTile(PlayerTiles, BreakTiles, Dir);
 		}
 
@@ -936,9 +934,9 @@ void TutorialLevel::MoveCheck()
 			bool Check = false;
 			GameEngineRenderer* CheckTile = PlayerTiles[i];
 
-			float4 HaflTileSize = CurTileMap->GetTileSize().Half();
+			float4 HaflTileSize = TileGrids[1]->GetTileSize().Half();
 			float4 TilePos = CheckTile->GetRenderPos();
-			float4 TileIndex = CurTileMap->PosToIndex(TilePos - BackGridPos - HaflTileSize); // 플레이어[i]의 인덱스
+			float4 TileIndex = TileGrids[1]->PosToIndex(TilePos - BackGridPos - HaflTileSize); // 플레이어[i]의 인덱스
 
 			// 밀어야 하는 타일의 처음 위치
 			int FirstX = TileIndex.iX();
@@ -979,36 +977,32 @@ void TutorialLevel::MoveCheck()
 				break;
 			}
 
-			// CurTileMap = UpTileGrid (텍스트, 플레이어 타일)
-			GameEngineRenderer* NextTile;
-			NextTile = CurTileMap->GetTile(FirstX, FirstY);
+			// 나는 일단 무조건 움직여야 한다.
+			TileGrids[2]->LerpTile(PlayerTiles[i], Dir, BackGridPos);
 
-			// 이동할 다음 위치에 타일이 없다면 그냥 플레이어만 이동
-			if (nullptr == NextTile)
+
 			{
-				CurTileMap->LerpTile(PlayerTiles[i], Dir, BackGridPos);
-			}
-
-			// 이동할 다음 위치에 타일이 있으면
-			else if (nullptr != NextTile)
-			{
-				// 밀어야할 타일을 처음(First) 위치에서 다음(Second) 위치로 이동
-				CurTileMap->LerpTile(FirstX, FirstY, SecondX, SecondY, BackGridPos);
-				CurTileMap->LerpTile(PlayerTiles[i], Dir, BackGridPos);
-			}
-
-
-
-			// PUSH 타일들 체크
-			GameEngineRenderer* OtherNextTile;
-			OtherNextTile = TileGrid->GetTile(FirstX, FirstY);
-
-			for (size_t j = 0; j < PushTiles.size(); j++)
-			{
-				if (OtherNextTile == PushTiles[j])
+				// 글자 타일들 체크
+				GameEngineRenderer* OtherNextTile;
+				OtherNextTile = TileGrids[2]->GetTile(FirstX, FirstY);
+				if (OtherNextTile != nullptr)
 				{
-					TileGrid->LerpTile(FirstX, FirstY, SecondX, SecondY, BackGridPos);
-					TileGrid->LerpTile(PlayerTiles[i], Dir, BackGridPos);
+					RuleTilePushRecursive(OtherNextTile, Dir, BackGridPos);
+				}
+			}
+
+			{
+				// PUSH 타일들 체크
+				GameEngineRenderer* OtherNextTile;
+				OtherNextTile = TileGrids[1]->GetTile(FirstX, FirstY);
+
+				for (size_t j = 0; j < PushTiles.size(); j++)
+				{
+					if (OtherNextTile == PushTiles[j])
+					{
+						// UpTileGrid
+						TileGrids[1]->LerpTile(PushTiles[j], Dir, BackGridPos);
+					}
 				}
 			}
 
@@ -1046,7 +1040,7 @@ std::vector<GameEngineRenderer*> TutorialLevel::GetPushTile(const std::string& _
 		for (int x = 0; x < 21; x++)
 		{
 			// PUSH가 가능한 오브젝트 타일은 TileGrid에만 존재
-			Tile = TileGrid->GetTile(x, y);
+			Tile = TileGrids[1]->GetTile(x, y);
 
 			if (nullptr != Tile)
 			{
@@ -1061,4 +1055,49 @@ std::vector<GameEngineRenderer*> TutorialLevel::GetPushTile(const std::string& _
 	}
 
 	return PushTiles;
+}
+
+void TutorialLevel::RuleTilePushRecursive(GameEngineRenderer* _Render, MOVEDIR _Dir, float4 _Pos)
+{
+
+
+	float4 WalkDir = { 0, 0 };
+
+	switch (_Dir)
+	{
+	case MOVEDIR::LEFT:
+		WalkDir = { -1, 0 };
+		break;
+	case MOVEDIR::RIGHT:
+		WalkDir = { 1, 0 };
+		break;
+	case MOVEDIR::UP:
+		WalkDir = { 0, -1 };
+		break;
+	case MOVEDIR::DOWN:
+		WalkDir = { 0, 1 };
+		break;
+	case MOVEDIR::NONE:
+		break;
+	default:
+		break;
+	}
+
+	TileGrids[2]->LerpTile(_Render, _Dir, _Pos);
+
+	float4 TileSize = TileGrids[2]->GetTileSize();
+	float4 TileIndex = TileGrids[2]->PosToIndex(_Render->GetRenderPos() - _Pos - TileSize.Half());
+	TileIndex += WalkDir;
+
+	// 5, 5 오른쪽으로 밀릴겁니다.
+	// 6, 5
+
+	GameEngineRenderer* OtherNextTile;
+	OtherNextTile = TileGrids[2]->GetTile(TileIndex.iX(), TileIndex.iY());
+	if (OtherNextTile == nullptr)
+	{
+		return;
+	}
+
+	RuleTilePushRecursive(OtherNextTile, _Dir, _Pos);
 }

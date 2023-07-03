@@ -981,8 +981,6 @@ void PuzzleLevel::MoveCheck()
 			// 이동할 다음 위치에 타일이 있으면
 			else if (nullptr != NextTile)
 			{
-				// 밀어야할 타일을 처음(First) 위치에서 다음(Second) 위치로 이동
-				CurTileMap->LerpTile(FirstX, FirstY, SecondX, SecondY, BackGridPos);
 				CurTileMap->LerpTile(PlayerTiles[i], Dir, BackGridPos);
 
 			}
