@@ -28,10 +28,13 @@ void Effect::Start()
 
 	EffectRender = CreateRenderer("Effect.bmp", RENDER_ORDER::PLAY_UI);
 	EffectRender->SetRenderScaleToTexture();
-	EffectRender->CreateAnimation("FLAG_WIN", "Effect.bmp", 231, 237, 0.1f, false);
+	EffectRender->CreateAnimation("WIN_SHINE", "Effect.bmp", 231, 237, 0.1f, false);
 	EffectRender->CreateAnimation("BABA_WALK", "Effect.bmp", 0, 6, 0.1f, false);
 	EffectRender->CreateAnimation("WALL_WALK", "Effect.bmp", 56, 62, 0.1f, false);
 
+	EffectRender->CreateAnimation("WIN_POP", "Effect.bmp", 238, 244, 0.2f, false);
+
+	// 랜덤 방향으로
 	Dir.X = GameEngineRandom::MainRandom.RandomFloat(-1, 1);
 	Dir.Y = GameEngineRandom::MainRandom.RandomFloat(-1, 1);
 	Dir.Normalize();
@@ -41,9 +44,16 @@ void Effect::Start()
 void Effect::Update(float _Delta)
 {
 	// 승리 타일 이펙트
-	if (true == EffectRender->IsAnimation("FLAG_WIN"))
+	if (true == EffectRender->IsAnimation("WIN_SHINE"))
 	{
 		Speed = 80.f;
+		AddPos(Dir * Speed * _Delta);
+	}
+
+	// 스테이지 클리어 이펙트
+	if (true == EffectRender->IsAnimation("WIN_POP"))
+	{
+		Speed = 200.f;
 		AddPos(Dir * Speed * _Delta);
 	}
 

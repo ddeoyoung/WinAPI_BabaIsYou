@@ -610,9 +610,9 @@ void PuzzleLevelBase::WinCheck()
 			{
 				GameEngineRenderer* CheckTile = PlayerTiles[i];
 
-				float4 HaflTileSize = TileGrids[1]->GetTileSize().Half();
+				float4 TileSize = TileGrids[1]->GetTileSize().Half();
 				float4 TilePos = CheckTile->GetRenderPos();
-				float4 TileIndex = TileGrids[1]->PosToIndex(TilePos - BackGridPos - HaflTileSize);
+				float4 TileIndex = TileGrids[1]->PosToIndex(TilePos - BackGridPos - TileSize);
 
 				int PlayerX = TileIndex.iX();
 				int PlayerY = TileIndex.iY();
@@ -621,8 +621,8 @@ void PuzzleLevelBase::WinCheck()
 				{
 					GameEngineRenderer* WinTile = WinTiles[j];
 					float4 TilePos = WinTile->GetRenderPos();
-					float4 TileIndex = TileGrids[1]->PosToIndex(TilePos - BackGridPos - HaflTileSize);
-					float4 TileScale = { 35, 35 };
+					float4 TileIndex = TileGrids[1]->PosToIndex(TilePos - BackGridPos - TileSize);
+					float4 EffectScale = { 35, 35 };
 
 					int WinX = TileIndex.iX();
 					int WinY = TileIndex.iY();
@@ -632,9 +632,9 @@ void PuzzleLevelBase::WinCheck()
 					if (EffectInterval < 0)
 					{
 						TileEffect = CreateActor<Effect>();
-						TileEffect->EffectRender->ChangeAnimation("FLAG_WIN");
+						TileEffect->EffectRender->ChangeAnimation("WIN_SHINE");
 						TileEffect->EffectRender->SetRenderPos(TilePos);
-						TileEffect->EffectRender->SetRenderScale(TileScale);
+						TileEffect->EffectRender->SetRenderScale(EffectScale);
 					}
 
 					// PlayerTile이 WinTile에 닿음
@@ -642,6 +642,15 @@ void PuzzleLevelBase::WinCheck()
 					{
 						// 스테이지 클리어
 						IsWin = true;
+
+						if (EffectInterval < 0)
+						{
+							TileEffect = CreateActor<Effect>();
+							TileEffect->EffectRender->ChangeAnimation("WIN_POP");
+							TileEffect->EffectRender->SetRenderPos(TilePos);
+							TileEffect->EffectRender->SetRenderScale(EffectScale);
+						}
+
 					}
 
 				}

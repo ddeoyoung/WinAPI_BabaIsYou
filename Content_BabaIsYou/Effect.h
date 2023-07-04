@@ -17,8 +17,6 @@ public:
 
 	class GameEngineRenderer* EffectRender = nullptr;
 
-	void SetEffect();
-
 	void SetDir(float4 _Dir)
 	{
 		Dir = _Dir;
