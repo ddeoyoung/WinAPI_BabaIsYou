@@ -108,7 +108,7 @@ private:
 
 	class std::vector<TileMap*> TileGrids;
 
-	class TileMap* CurTileMap = nullptr;
+	class TileMap* PlayerTileMap = nullptr;
 
 	class FadeAnimation* FadeUI = nullptr;
 	class TextUI* Text = nullptr;

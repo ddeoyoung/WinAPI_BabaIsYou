@@ -672,19 +672,27 @@ void WorldMapLevel::Update(float _Delta)
 	// 스테이지 이동
 	if (true == GameEngineInput::IsDown(VK_SPACE))
 	{
-		if (SelectX == 10 && SelectY == 12)
-		{
-			FadeUI->On();
-			FadeUI->FadeOut();
-			StageName = "PuzzleLevel";
-		}
-
 		if (SelectX == 9 && SelectY == 14)
 		{
 			FadeUI->On();
 			FadeUI->FadeOut();
 			StageName = "TutorialLevel";
 		}
+
+		if (SelectX == 10 && SelectY == 12)
+		{
+			FadeUI->On();
+			FadeUI->FadeOut();
+			StageName = "PuzzleLevel1";
+		}
+
+		if (SelectX == 10 && SelectY == 11)
+		{
+			FadeUI->On();
+			FadeUI->FadeOut();
+			StageName = "PuzzleLevel2";
+		}
+
 	}
 
 	if (true == FadeUI->FadeRender->IsAnimation("FadeIn")

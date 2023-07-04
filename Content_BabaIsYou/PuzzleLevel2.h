@@ -1,9 +1,8 @@
 #pragma once
-#include <GameEngineCore/GameEngineLevel.h>
-#include "TutorialLevel.h"
+#include "PuzzleLevelBase.h"
 
 // Ό³Έν :
-class PuzzleLevel2 : public TutorialLevel
+class PuzzleLevel2 : public PuzzleLevelBase
 {
 public:
 	// constrcuter destructer

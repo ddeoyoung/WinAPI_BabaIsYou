@@ -68,6 +68,9 @@
     <ClInclude Include="PuzzleLevelBase.h">
       <Filter>Level\Puzzle</Filter>
     </ClInclude>
+    <ClInclude Include="PuzzleLevel1.h">
+      <Filter>Level\Puzzle</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentCore.cpp" />
@@ -132,6 +135,9 @@
       <Filter>Level\Puzzle</Filter>
     </ClCompile>
     <ClCompile Include="PuzzleLevelBase.cpp">
+      <Filter>Level\Puzzle</Filter>
+    </ClCompile>
+    <ClCompile Include="PuzzleLevel1.cpp">
       <Filter>Level\Puzzle</Filter>
     </ClCompile>
   </ItemGroup>

@@ -62,7 +62,7 @@ void PuzzleLevelBase::PuzzleLevelInit(std::string _DataText)
 
 
 	// MoveUI
-	TutorialMoveUI = CreateActor<MoveUI>();
+	//TutorialMoveUI = CreateActor<MoveUI>();
 
 	// Puzzle Tiles
 	if (false == ResourcesManager::GetInst().IsLoadTexture("Actor.Bmp"))
@@ -579,6 +579,9 @@ std::vector<GameEngineRenderer*> PuzzleLevelBase::GetPlayerTile(const std::strin
 					if (TileName == _PlayerTileName)
 					{
 						PlayerTiles.push_back(Tile);
+
+						// 현재 플레이어가 있는 타일맵 번호
+						PlayerTileMap = TileGrids[i];
 					}
 				}
 			}
@@ -896,7 +899,8 @@ void PuzzleLevelBase::MoveCheck()
 			}
 
 			// 나는 일단 무조건 움직여야 한다.
-			TileGrids[2]->LerpTile(PlayerTiles[i], Dir, BackGridPos);
+			//TileGrids[2]->LerpTile(PlayerTiles[i], Dir, BackGridPos);
+			PlayerTileMap->LerpTile(PlayerTiles[i], Dir, BackGridPos);
 
 			{
 				// 글자 타일들 체크
@@ -904,7 +908,7 @@ void PuzzleLevelBase::MoveCheck()
 				NextTile = TileGrids[2]->GetTile(TileX, TileY);
 				if (NextTile != nullptr)
 				{
-					RuleTilePushRecursive(NextTile, Dir, BackGridPos);
+					RuleTilePushRecursive(NextTile, Dir, BackGridPos, 2);
 				}
 			}
 

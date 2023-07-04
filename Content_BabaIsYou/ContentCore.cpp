@@ -3,7 +3,7 @@
 #include "TitleLevel.h"
 #include "WorldMapLevel.h"
 #include "TutorialLevel.h"
-#include "PuzzleLevel.h"
+#include "PuzzleLevel1.h"
 #include "PuzzleLevel2.h"
 
 #include <GameEnginePlatform/GameEngineWindow.h>
@@ -24,10 +24,10 @@ void ContentCore::Start()
 	GameEngineCore::CreateLevel<TitleLevel>("TitleLevel");
 	GameEngineCore::CreateLevel<WorldMapLevel>("WorldMapLevel");
 	GameEngineCore::CreateLevel<TutorialLevel>("TutorialLevel");
-	GameEngineCore::CreateLevel<PuzzleLevel>("PuzzleLevel");
+	GameEngineCore::CreateLevel<PuzzleLevel1>("PuzzleLevel1");
 	GameEngineCore::CreateLevel<PuzzleLevel2>("PuzzleLevel2");
 
-	GameEngineCore::ChangeLevel("TutorialLevel");
+	GameEngineCore::ChangeLevel("WorldMapLevel");
 }
 
 void ContentCore::Update(float _Delta)
