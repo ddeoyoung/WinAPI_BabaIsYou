@@ -5,6 +5,7 @@
 #include "TutorialLevel.h"
 #include "PuzzleLevel1.h"
 #include "PuzzleLevel2.h"
+#include "PuzzleLevel3.h"
 
 #include <GameEnginePlatform/GameEngineWindow.h>
 
@@ -26,6 +27,7 @@ void ContentCore::Start()
 	GameEngineCore::CreateLevel<TutorialLevel>("TutorialLevel");
 	GameEngineCore::CreateLevel<PuzzleLevel1>("PuzzleLevel1");
 	GameEngineCore::CreateLevel<PuzzleLevel2>("PuzzleLevel2");
+	GameEngineCore::CreateLevel<PuzzleLevel3>("PuzzleLevel3");
 
 	GameEngineCore::ChangeLevel("WorldMapLevel");
 }

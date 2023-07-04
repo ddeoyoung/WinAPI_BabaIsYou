@@ -31,7 +31,6 @@ void Effect::Start()
 	EffectRender->CreateAnimation("WIN_SHINE", "Effect.bmp", 231, 237, 0.1f, false);
 	EffectRender->CreateAnimation("BABA_WALK", "Effect.bmp", 0, 6, 0.1f, false);
 	EffectRender->CreateAnimation("WALL_WALK", "Effect.bmp", 56, 62, 0.1f, false);
-
 	EffectRender->CreateAnimation("WIN_POP", "Effect.bmp", 238, 244, 0.2f, false);
 
 	// 랜덤 방향으로

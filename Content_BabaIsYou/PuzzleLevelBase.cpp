@@ -25,6 +25,7 @@ PuzzleLevelBase::PuzzleLevelBase()
 	SubjectSet.insert("WALL");
 	SubjectSet.insert("FLAG");
 	SubjectSet.insert("ROCK");
+	SubjectSet.insert("WATER");
 
 	VerbSet.insert("IS");
 
@@ -32,6 +33,8 @@ PuzzleLevelBase::PuzzleLevelBase()
 	BehaveSet.insert("PUSH");
 	BehaveSet.insert("STOP");
 	BehaveSet.insert("WIN");
+	BehaveSet.insert("SINK");
+
 }
 
 PuzzleLevelBase::~PuzzleLevelBase()
@@ -127,6 +130,15 @@ void PuzzleLevelBase::PuzzleLevelInit(std::string _DataText)
 				TileRenderer->ChangeAnimation("WALL_ACTOR");
 			}
 
+			// GRASS_ACTOR
+			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(0, 180, 0))
+			{
+				TileRenderer = TileGrids[0]->SetTile(x, y, 506, BackGridPos);
+				TileRenderer->SetName("GRASS_ACTOR");
+				TileRenderer->CreateAnimationToFrame("GRASS_ACTOR", "Actor.bmp", { 506, 530, 554 }, 0.2f, true);
+				TileRenderer->ChangeAnimation("GRASS_ACTOR");
+			}
+
 			// BABA_ACTOR
 			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(0, 0, 0))
 			{
@@ -179,6 +191,15 @@ void PuzzleLevelBase::PuzzleLevelInit(std::string _DataText)
 				TileRenderer->SetName("FLAG_ACTOR");
 				TileRenderer->CreateAnimationToFrame("FLAG_ACTOR", "Actor.bmp", { 728, 752, 776 }, 0.2f, true);
 				TileRenderer->ChangeAnimation("FLAG_ACTOR");
+			}
+
+			// WATER_ACTOR
+			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(50, 0, 255))
+			{
+				TileRenderer = TileGrids[1]->SetTile(x, y, 728, BackGridPos);
+				TileRenderer->SetName("WATER_ACTOR");
+				TileRenderer->CreateAnimationToFrame("WATER_ACTOR", "Actor.bmp", { 362, 386, 410 }, 0.2f, true);
+				TileRenderer->ChangeAnimation("WATER_ACTOR");
 			}
 
 			// WALL
@@ -269,6 +290,26 @@ void PuzzleLevelBase::PuzzleLevelInit(std::string _DataText)
 				TileRenderer->CreateAnimationToFrame("PUSH", "Actor.bmp", { 870, 894, 918 }, 0.2f, true);
 				TileRenderer->CreateAnimationToFrame("PUSH_OFF", "Actor.bmp", { 871, 895, 919 }, 0.2f, true); // Off
 				TileRenderer->ChangeAnimation("PUSH");
+			}
+
+			// WATER
+			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(100, 255, 255))
+			{
+				TileRenderer = TileGrids[2]->SetTile(x, y, 870, BackGridPos);
+				TileRenderer->SetName("WATER");
+				TileRenderer->CreateAnimationToFrame("WATER", "Actor.bmp", { 360, 384, 408 }, 0.2f, true);
+				TileRenderer->CreateAnimationToFrame("WATER_OFF", "Actor.bmp", { 361, 385, 409 }, 0.2f, true); // Off
+				TileRenderer->ChangeAnimation("WATER");
+				}
+
+			// SINK
+			else if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(100, 255, 200))
+			{
+				TileRenderer = TileGrids[2]->SetTile(x, y, 870, BackGridPos);
+				TileRenderer->SetName("SINK");
+				TileRenderer->CreateAnimationToFrame("SINK", "Actor.bmp", { 872, 896, 920 }, 0.2f, true);
+				TileRenderer->CreateAnimationToFrame("SINK_OFF", "Actor.bmp", { 873, 897, 921 }, 0.2f, true); // Off
+				TileRenderer->ChangeAnimation("SINK");
 			}
 		}
 	}
