@@ -59,9 +59,6 @@
     <ClInclude Include="PuzzleLevel2.h">
       <Filter>Level\Puzzle</Filter>
     </ClInclude>
-    <ClInclude Include="PuzzleLevel.h">
-      <Filter>Level\Puzzle</Filter>
-    </ClInclude>
     <ClInclude Include="TutorialLevel.h">
       <Filter>Level\Puzzle</Filter>
     </ClInclude>
@@ -126,9 +123,6 @@
       <Filter>Level\Title</Filter>
     </ClCompile>
     <ClCompile Include="PuzzleLevel2.cpp">
-      <Filter>Level\Puzzle</Filter>
-    </ClCompile>
-    <ClCompile Include="PuzzleLevel.cpp">
       <Filter>Level\Puzzle</Filter>
     </ClCompile>
     <ClCompile Include="TutorialLevel.cpp">
