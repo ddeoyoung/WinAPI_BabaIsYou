@@ -35,23 +35,37 @@ public:
 	void MoveCheck();
 	void WinCheck();
 
-	void GetTiles();
-
 	std::vector<GameEngineRenderer*> GetPlayerTile(const std::string& _PlayerTileName);
 	std::vector<GameEngineRenderer*> GetBreakTile(const std::string& _BreakTileName);
 	std::vector<GameEngineRenderer*> GetWinTile(const std::string& _WinTileName);
 	std::vector<GameEngineRenderer*> GetPushTile(const std::string& _PushTileName);
-
 
 	RuleInfo GetRuleInfo(const std::string& _Text);
 
 	bool IsMoveTile(std::vector<GameEngineRenderer*> _PlayerTiles, std::vector<GameEngineRenderer*> _BreakTiles, MOVEDIR _Dir);
 
 	void RuleTilePushRecursive(GameEngineRenderer* _Render, MOVEDIR _Dir, float4 Pos);
-
 	void RuleTilePushRecursive(GameEngineRenderer* _Render, MOVEDIR _Dir, float4 Pos, int _GridNum);
 
 	void ChangeBabaAnimation(MOVEDIR _Dir, const std::string& _AnimationName);
+
+	void StageClearCheck();
+
+
+	GameEngineRenderer* GetTileRenderer()
+	{
+		return TileRenderer;
+	}
+
+	std::vector<TileMap*> GetTileGrids()
+	{
+		return TileGrids;
+	}
+
+	float4 GetBackGridPos()
+	{
+		return BackGridPos;
+	}
 
 protected:
 	void LevelStart(GameEngineLevel* _PrevLevel) override;
@@ -61,8 +75,6 @@ protected:
 
 private:
 
-	int Index_X = 13;
-	int Index_Y = 11;
 	int BabaMoveStep = 0;
 
 	std::string AnimationName = "";
@@ -88,9 +100,10 @@ private:
 	std::vector<GameEngineRenderer*> WinTiles;
 	std::vector<GameEngineRenderer*> PushTiles;
 
+	std::vector<TileMap*> TileGrids;
+
 	RuleInfo Rules;
 
-	bool IsTile = false;
 	bool IsMove = false;
 	bool IsPushMove = true;
 	bool IsWin = false;
@@ -98,7 +111,7 @@ private:
 	bool IsCongratsContUI = false;
 
 	float4 WinScale = { 0, 0 };
-	float4 BackScale = { 840, 600 };
+	float4 BackScale = { 0, 0 };
 	float4 BackGridPos = { 0, 0 };
 
 	float EffectInterval = 0.0f;
@@ -106,19 +119,13 @@ private:
 	class Background_Black* BackgroundUI_Black = nullptr;
 	class Background_Gray* BackgroundUI_Gray = nullptr;
 
-	class std::vector<TileMap*> TileGrids;
-
 	class TileMap* PlayerTileMap = nullptr;
 
 	class FadeAnimation* FadeUI = nullptr;
 	class TextUI* Text = nullptr;
 	class GameEngineWindowTexture* MapTexture = nullptr;
-
 	class CongratsUI* Congratulations = nullptr;
-
 	class Effect* TileEffect = nullptr;
-
-	class MoveUI* TutorialMoveUI = nullptr;
 
 	GameEngineRenderer* MainRenderer = nullptr;
 	GameEngineRenderer* TileRenderer = nullptr;

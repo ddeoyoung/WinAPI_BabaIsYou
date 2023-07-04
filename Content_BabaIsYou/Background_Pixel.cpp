@@ -32,8 +32,3 @@ void Background_Pixel::Init(const std::string& _FileName, float4 _Scale)
 	float4 WinScale = GameEngineWindow::MainWindow.GetScale().Half();
 	SetPos(WinScale);
 }
-
-void Background_Pixel::GetPixelColor(int _X, int _Y)
-{
-	//Back->GetColor();
-}

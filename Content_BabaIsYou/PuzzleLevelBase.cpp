@@ -16,7 +16,6 @@
 #include "FadeAnimation.h"
 #include "TextUI.h"
 #include "Effect.h"
-#include "MoveUI.h"
 
 #include <sstream>
 
@@ -60,10 +59,6 @@ void PuzzleLevelBase::PuzzleLevelInit(std::string _DataText)
 	Congratulations = CreateActor<CongratsUI>();
 	Congratulations->Off();
 
-
-	// MoveUI
-	//TutorialMoveUI = CreateActor<MoveUI>();
-
 	// Puzzle Tiles
 	if (false == ResourcesManager::GetInst().IsLoadTexture("Actor.Bmp"))
 	{
@@ -76,6 +71,7 @@ void PuzzleLevelBase::PuzzleLevelInit(std::string _DataText)
 	}
 
 	WinScale = GameEngineWindow::MainWindow.GetScale().Half();
+	BackScale = { 840, 600 };
 	BackGridPos = { WinScale.X - (BackScale.X / 2), WinScale.Y - (BackScale.Y / 2) };
 
 	// 21 x 15 개의 타일맵 생성
@@ -87,7 +83,6 @@ void PuzzleLevelBase::PuzzleLevelInit(std::string _DataText)
 
 		TileGrids.push_back(TileGrid);
 	}
-
 
 	{
 		// 오브젝트 타일
@@ -110,20 +105,18 @@ void PuzzleLevelBase::PuzzleLevelInit(std::string _DataText)
 
 
 	// 맵 세팅
-	// MapTexture - Tutorial
+	// MapTexture
 	Background_Pixel* MapDataImage = CreateActor<Background_Pixel>();
 	MapDataImage->Init(_DataText, { 850, 600 });
 	MapTexture = ResourcesManager::GetInst().FindTexture(_DataText);
-	
-	// MapTexture = ResourcesManager::GetInst().FindTexture("Tutorial.bmp");
 	MapDataImage->Off();
 
 	for (int y = 0; y < 15; y++)
 	{
 		for (int x = 0; x < 21; x++)
 		{
-			float fx = x;
-			float fy = y;
+			float fx = static_cast<float>(x);
+			float fy = static_cast<float>(y);
 
 			// WALL_ACTOR
 			if (MapTexture->GetColor(RGB(0, 0, 0), { fx, fy }) == RGB(255, 0, 0))
@@ -159,8 +152,6 @@ void PuzzleLevelBase::PuzzleLevelInit(std::string _DataText)
 				TileRenderer->CreateAnimationToFrame("Baba_Up4", "Actor.bmp", { 9, 33, 57 }, 0.2f, true);
 				TileRenderer->CreateAnimationToFrame("Baba_Down4", "Actor.bmp", { 17, 41, 65 }, 0.2f, true);
 				TileRenderer->ChangeAnimation("Baba_Right");
-
-				MainRenderer = TileRenderer;
 			}
 
 			// ROCK_ACTOR
@@ -297,38 +288,11 @@ void PuzzleLevelBase::Update(float _Delta)
 {
 	UpdateStringRuleCheck();
 
-	GetTiles();
-
 	MoveCheck();
 
 	WinCheck();
 
-	if (true == IsWin && false == IsCongratsUI)
-	{
-		Congratulations->On();
-		Congratulations->CongratsRender->ChangeAnimation("Congrats");
-
-		if (true == Congratulations->CongratsRender->IsAnimation("Congrats")
-			&& true == Congratulations->CongratsRender->IsAnimationEnd())
-		{
-			Congratulations->CongratsRender->ChangeAnimation("CongratsCont");
-			IsCongratsUI = true;
-		}
-	}
-
-	if (true == IsCongratsUI
-		&& true == Congratulations->CongratsRender->IsAnimation("CongratsCont")
-		&& true == Congratulations->CongratsRender->IsAnimationEnd())
-	{
-		Congratulations->Off();
-		FadeUI->FadeOut();
-	}
-
-	if (true == FadeUI->FadeRender->IsAnimation("FadeOut")
-		&& true == FadeUI->FadeRender->IsAnimationEnd())
-	{
-		GameEngineCore::ChangeLevel("WorldMapLevel");
-	}
+	StageClearCheck();
 
 	EffectInterval -= _Delta;
 }
@@ -1090,47 +1054,78 @@ void PuzzleLevelBase::ChangeBabaAnimation(MOVEDIR _Dir, const std::string& _DirN
 	}
 }
 
-
-void PuzzleLevelBase::GetTiles()
+// 스테이지 클리어 후 Congratulations
+void PuzzleLevelBase::StageClearCheck()
 {
-	GameEngineRenderer* Tile = nullptr;
-	std::string TileName = "";
-
-
-	// 문장에 맞는 타일 저장
-	for (size_t i = 0; i < TileGrids.size(); i++)
+	if (true == IsWin && false == IsCongratsUI)
 	{
-		for (int y = 0; y < 15; y++)
+		Congratulations->On();
+		Congratulations->CongratsRender->ChangeAnimation("Congrats");
+
+		if (true == Congratulations->CongratsRender->IsAnimation("Congrats")
+			&& true == Congratulations->CongratsRender->IsAnimationEnd())
 		{
-			for (int x = 0; x < 21; x++)
-			{
-				Tile = TileGrids[i]->GetTile(x, y);
-
-				if (nullptr != Tile)
-				{
-					TileName = Tile->GetName();
-
-					if (Rules.Behave == "YOU" && TileName == Rules.Subject)
-					{
-						PlayerTiles.push_back(Tile);
-					}
-
-					else if (Rules.Behave == "WIN" && TileName == Rules.Subject)
-					{
-						WinTiles.push_back(Tile);
-					}
-
-					else if (Rules.Behave == "STOP" && TileName == Rules.Subject)
-					{
-						BreakTiles.push_back(Tile);
-					}
-
-					else if (Rules.Behave == "PUSH" && TileName == Rules.Subject)
-					{
-						PushTiles.push_back(Tile);
-					}
-				}
-			}
+			Congratulations->CongratsRender->ChangeAnimation("CongratsCont");
+			IsCongratsUI = true;
 		}
 	}
+
+	if (true == IsCongratsUI
+		&& true == Congratulations->CongratsRender->IsAnimation("CongratsCont")
+		&& true == Congratulations->CongratsRender->IsAnimationEnd())
+	{
+		Congratulations->Off();
+		FadeUI->FadeOut();
+	}
+
+	if (true == FadeUI->FadeRender->IsAnimation("FadeOut")
+		&& true == FadeUI->FadeRender->IsAnimationEnd())
+	{
+		GameEngineCore::ChangeLevel("WorldMapLevel");
+	}
 }
+
+//
+//void PuzzleLevelBase::GetTiles()
+//{
+//	GameEngineRenderer* Tile = nullptr;
+//	std::string TileName = "";
+//
+//
+//	// 문장에 맞는 타일 저장
+//	for (size_t i = 0; i < TileGrids.size(); i++)
+//	{
+//		for (int y = 0; y < 15; y++)
+//		{
+//			for (int x = 0; x < 21; x++)
+//			{
+//				Tile = TileGrids[i]->GetTile(x, y);
+//
+//				if (nullptr != Tile)
+//				{
+//					TileName = Tile->GetName();
+//
+//					if (Rules.Behave == "YOU" && TileName == Rules.Subject)
+//					{
+//						PlayerTiles.push_back(Tile);
+//					}
+//
+//					else if (Rules.Behave == "WIN" && TileName == Rules.Subject)
+//					{
+//						WinTiles.push_back(Tile);
+//					}
+//
+//					else if (Rules.Behave == "STOP" && TileName == Rules.Subject)
+//					{
+//						BreakTiles.push_back(Tile);
+//					}
+//
+//					else if (Rules.Behave == "PUSH" && TileName == Rules.Subject)
+//					{
+//						PushTiles.push_back(Tile);
+//					}
+//				}
+//			}
+//		}
+//	}
+//}
