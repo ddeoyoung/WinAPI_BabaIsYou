@@ -865,6 +865,17 @@ void PuzzleLevelBase::MoveCheck()
 
 			IsPushMove = IsMoveTile(PlayerTiles, PushTiles, Dir);
 		}
+
+		// 플레이어가 SINK 되
+		if (Rules.Behave == "SINK")
+		{
+			SinkTiles.clear();
+
+			SinkTileName = Rules.Subject;
+			SinkTiles = GetSinkTile(SinkTileName + "_ACTOR");
+
+			IsSinkMove = IsMoveTile(PlayerTiles, SinkTiles, Dir);
+		}
 	}
 
 	// 무조건 움직일 수 있는 경우 
@@ -1133,6 +1144,35 @@ void PuzzleLevelBase::StageClearCheck()
 	{
 		GameEngineCore::ChangeLevel("WorldMapLevel");
 	}
+}
+
+std::vector<GameEngineRenderer*> PuzzleLevelBase::GetSinkTile(const std::string& _SinkTileName)
+{
+	SinkTiles.clear();
+
+	GameEngineRenderer* Tile = nullptr;
+	std::string TileName = "";
+	std::string SinkTileName = _SinkTileName;
+
+	for (int y = 0; y < 15; y++)
+	{
+		for (int x = 0; x < 21; x++)
+		{
+			// SINK가 가능한 WATER 타일 : 1번
+			Tile = TileGrids[1]->GetTile(x, y);
+
+			if (nullptr != Tile)
+			{
+				TileName = Tile->GetName();
+
+				if (TileName == SinkTileName)
+				{
+					SinkTiles.push_back(Tile);
+				}
+			}
+		}
+	}
+	return SinkTiles;
 }
 
 //

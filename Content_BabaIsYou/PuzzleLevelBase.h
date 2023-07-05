@@ -34,11 +34,13 @@ public:
 	void PlayerCheck();
 	void MoveCheck();
 	void WinCheck();
+	void SinkCheck();
 
 	std::vector<GameEngineRenderer*> GetPlayerTile(const std::string& _PlayerTileName);
 	std::vector<GameEngineRenderer*> GetBreakTile(const std::string& _BreakTileName);
 	std::vector<GameEngineRenderer*> GetWinTile(const std::string& _WinTileName);
 	std::vector<GameEngineRenderer*> GetPushTile(const std::string& _PushTileName);
+	std::vector<GameEngineRenderer*> GetSinkTile(const std::string& _SinkTileName);
 
 	RuleInfo GetRuleInfo(const std::string& _Text);
 
@@ -88,6 +90,7 @@ private:
 	std::string BreakTileName = "";
 	std::string WinTileName = "";
 	std::string PushTileName = "";
+	std::string SinkTileName = "";
 
 	std::set<std::string> SubjectSet;
 	std::set<std::string> VerbSet;
@@ -99,6 +102,7 @@ private:
 	std::vector<GameEngineRenderer*> BreakTiles;
 	std::vector<GameEngineRenderer*> WinTiles;
 	std::vector<GameEngineRenderer*> PushTiles;
+	std::vector<GameEngineRenderer*> SinkTiles;
 
 	std::vector<TileMap*> TileGrids;
 
@@ -106,6 +110,7 @@ private:
 
 	bool IsMove = false;
 	bool IsPushMove = true;
+	bool IsSinkMove = false;
 	bool IsWin = false;
 	bool IsCongratsUI = false;
 	bool IsCongratsContUI = false;
