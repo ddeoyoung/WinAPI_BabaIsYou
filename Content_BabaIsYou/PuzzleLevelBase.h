@@ -110,7 +110,7 @@ private:
 
 	bool IsMove = false;
 	bool IsPushMove = true;
-	bool IsSinkMove = false;
+	bool IsSink = false;
 	bool IsWin = false;
 	bool IsCongratsUI = false;
 	bool IsCongratsContUI = false;

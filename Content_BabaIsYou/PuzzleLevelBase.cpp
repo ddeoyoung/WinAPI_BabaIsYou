@@ -327,6 +327,11 @@ void PuzzleLevelBase::LevelEnd(GameEngineLevel* _NextLevel)
 
 void PuzzleLevelBase::Update(float _Delta)
 {
+	if (false == TileGrids[2]->IsLerpMove() && true == IsSink)
+	{
+		int a = 0;
+	}
+
 	UpdateStringRuleCheck();
 
 	MoveCheck();
@@ -866,15 +871,14 @@ void PuzzleLevelBase::MoveCheck()
 			IsPushMove = IsMoveTile(PlayerTiles, PushTiles, Dir);
 		}
 
-		// 플레이어가 SINK 되
+		// 플레이어가 SINK 되는 타일 체크
 		if (Rules.Behave == "SINK")
 		{
 			SinkTiles.clear();
 
 			SinkTileName = Rules.Subject;
 			SinkTiles = GetSinkTile(SinkTileName + "_ACTOR");
-
-			IsSinkMove = IsMoveTile(PlayerTiles, SinkTiles, Dir);
+			//IsSinkMove = IsMoveTile(PlayerTiles, SinkTiles, Dir);
 		}
 	}
 
@@ -955,12 +959,33 @@ void PuzzleLevelBase::MoveCheck()
 				}
 			}
 
-			// 플레이어 타일에 이펙트 추가
-			TileEffect = CreateActor<Effect>();
-			TileEffect->EffectRender->ChangeAnimation("BABA_WALK");
-			TileEffect->SetDir(EffectDir);
-			TileEffect->EffectRender->SetRenderPos(TilePos);
-			TileEffect->EffectRender->SetRenderScale({ 35, 35 });
+			{
+				// 플레이어가 이동한 위치가 SINK 타일이면 게임오버
+				GameEngineRenderer* NextTile;
+				NextTile = TileGrids[1]->GetTile(TileX, TileY);
+
+				for (size_t j = 0; j < SinkTiles.size(); j++)
+				{
+					if (NextTile == SinkTiles[j])
+					{
+						// 플레이어와 Sink타일 둘 다 Death
+						PlayerTileMap->DeathTile(TileX, TileY);
+						TileGrids[1]->DeathTile(TileX, TileY);
+						
+						IsSink = true;
+					}
+				}
+			}
+
+			if (false == PlayerTiles[i]->IsDeath())
+			{
+				// 플레이어 타일에 이펙트 추가
+				TileEffect = CreateActor<Effect>();
+				TileEffect->EffectRender->ChangeAnimation("BABA_WALK");
+				TileEffect->SetDir(EffectDir);
+				TileEffect->EffectRender->SetRenderPos(TilePos);
+				TileEffect->EffectRender->SetRenderScale({ 35, 35 });
+			}
 
 		}
 	}

@@ -32,6 +32,7 @@ void Effect::Start()
 	EffectRender->CreateAnimation("BABA_WALK", "Effect.bmp", 0, 6, 0.1f, false);
 	EffectRender->CreateAnimation("WALL_WALK", "Effect.bmp", 56, 62, 0.1f, false);
 	EffectRender->CreateAnimation("WIN_POP", "Effect.bmp", 238, 244, 0.2f, false);
+	EffectRender->CreateAnimation("WATER_SINK", "Effect.bmp", 98, 104, 0.1f, false);
 
 	// 랜덤 방향으로
 	Dir.X = GameEngineRandom::MainRandom.RandomFloat(-1, 1);
@@ -63,7 +64,15 @@ void Effect::Update(float _Delta)
 		AddPos(Dir * Speed * _Delta * 0.5);
 	}
 
+	// 벽 타일 발자국 이펙트
 	if (true == EffectRender->IsAnimation("WALL_WALK"))
+	{
+		Speed = 50.f;
+		AddPos(Dir * Speed * _Delta * 0.5);
+	}
+
+	// 물에 빠지는 이펙트
+	if (true == EffectRender->IsAnimation("WATER_SINK"))
 	{
 		Speed = 50.f;
 		AddPos(Dir * Speed * _Delta * 0.5);
