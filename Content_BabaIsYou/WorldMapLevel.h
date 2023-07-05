@@ -1,5 +1,7 @@
 #pragma once
 #include <GameEngineCore/GameEngineLevel.h>
+#include <GameEnginePlatform/GameEngineSound.h>
+
 #include <vector>
 
 // Ό³Έν :
@@ -16,6 +18,8 @@ public:
 	WorldMapLevel(WorldMapLevel&& _Other) noexcept = delete;
 	WorldMapLevel& operator=(const WorldMapLevel& _Other) = delete;
 	WorldMapLevel& operator=(WorldMapLevel&& _Other) noexcept = delete;
+
+	GameEngineSoundPlayer BGMPlayer;
 
 protected:
 	void LevelStart(GameEngineLevel* _PrevLevel) override;

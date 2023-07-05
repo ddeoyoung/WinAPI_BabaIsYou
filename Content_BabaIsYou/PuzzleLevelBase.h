@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineLevel.h>
+#include <GameEnginePlatform/GameEngineSound.h>
 #include <GameEngineCore/TileMap.h>
 #include <Windows.h>
 #include <string>
@@ -27,6 +28,8 @@ public:
 	PuzzleLevelBase(PuzzleLevelBase&& _Other) noexcept = delete;
 	PuzzleLevelBase& operator=(const PuzzleLevelBase& _Other) = delete;
 	PuzzleLevelBase& operator=(PuzzleLevelBase&& _Other) noexcept = delete;
+
+	GameEngineSoundPlayer BGMPlayer;
 
 	void PuzzleLevelInit(std::string _DataText);
 

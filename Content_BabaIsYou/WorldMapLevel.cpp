@@ -2,6 +2,7 @@
 #include <GameEngineBase/GameEnginePath.h>
 #include <GameEnginePlatform/GameEngineInput.h>
 #include <GameEnginePlatform/GameEngineWindow.h>
+#include <GameEnginePlatform/GameEngineSound.h>
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEngineCore/GameEngineCore.h>
 #include <GameEngineCore/TileMap.h>
@@ -24,6 +25,18 @@ WorldMapLevel::~WorldMapLevel()
 
 void WorldMapLevel::Start()
 {
+	// 사운드
+	if (nullptr == GameEngineSound::FindSound("map.ogg"))
+	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Sound\\BGM\\");
+
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("map.ogg"));
+	}
+
+
 	// WorldMapNumberBack
 	if (false == ResourcesManager::GetInst().IsLoadTexture("WorldMapNumberBack.Bmp"))
 	{
@@ -84,6 +97,8 @@ void WorldMapLevel::Start()
 
 void WorldMapLevel::LevelStart(GameEngineLevel* _PrevLevel)
 {
+	// 사운드
+	BGMPlayer = GameEngineSound::SoundPlay("map.ogg");
 
 	// Background
 	BackgroundUI = CreateActor<Background_Gray>();
@@ -535,6 +550,7 @@ void WorldMapLevel::LevelEnd(GameEngineLevel* _NextLevel)
 {
 	FadeUI->Off();
 	SelectGrid->DeathTile(SelectX, SelectY);
+	BGMPlayer.Stop();
 }
 
 

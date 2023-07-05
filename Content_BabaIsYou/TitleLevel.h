@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineLevel.h>
+#include <GameEnginePlatform/GameEngineSound.h>
 
 // Ό³Έν :
 class TitleLogo;
@@ -19,6 +20,7 @@ public:
 	TitleLevel& operator=(const TitleLevel& _Other) = delete;
 	TitleLevel& operator=(TitleLevel&& _Other) noexcept = delete;
 
+	GameEngineSoundPlayer BGMPlayer;
 
 protected:
 
@@ -34,5 +36,6 @@ private:
 	FadeAnimation* FadeUI = nullptr;
 
 	Button* StartButton = nullptr;
+
 };
 

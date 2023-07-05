@@ -33,6 +33,8 @@ void TutorialLevel::LevelStart(GameEngineLevel* _PrevLevel)
 	MoveUI* TutorialMoveUI = CreateActor<MoveUI>();
 
 	PuzzleLevelInit("Tutorial.bmp");
+
+	PuzzleLevelBase::LevelStart(_PrevLevel);
 }
 void TutorialLevel::LevelEnd(GameEngineLevel* _NextLevel)
 {

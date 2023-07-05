@@ -3,6 +3,7 @@
 #include <GameEnginePlatform/GameEngineWindowTexture.h>
 #include <GameEnginePlatform/GameEngineWindow.h>
 #include <GameEnginePlatform/GameEngineInput.h>
+#include <GameEnginePlatform/GameEngineSound.h>
 #include <GameEngineCore/TileMap.h>
 #include <GameEngineCore/ResourcesManager.h>
 #include <GameEngineCore/GameEngineRenderer.h>
@@ -43,11 +44,12 @@ PuzzleLevelBase::~PuzzleLevelBase()
 
 void PuzzleLevelBase::Start()
 {
-
+	
 }
 
 void PuzzleLevelBase::PuzzleLevelInit(std::string _DataText)
 {
+
 	// Background
 	BackgroundUI_Gray = CreateActor<Background_Gray>();
 	BackgroundUI_Gray->Init("Background_Gray.bmp");
@@ -61,6 +63,17 @@ void PuzzleLevelBase::PuzzleLevelInit(std::string _DataText)
 	// CongratsUI
 	Congratulations = CreateActor<CongratsUI>();
 	Congratulations->Off();
+
+	// BGM
+	if (nullptr == GameEngineSound::FindSound("baba.ogg"))
+	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Sound\\BGM\\");
+
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("baba.ogg"));
+	}
 
 	// Puzzle Tiles
 	if (false == ResourcesManager::GetInst().IsLoadTexture("Actor.Bmp"))
@@ -317,12 +330,14 @@ void PuzzleLevelBase::PuzzleLevelInit(std::string _DataText)
 
 void PuzzleLevelBase::LevelStart(GameEngineLevel* _PrevLevel)
 {
-
+	BGMPlayer = GameEngineSound::SoundPlay("baba.ogg");
+	BGMPlayer.SetLoop(100000);
 }
 
 void PuzzleLevelBase::LevelEnd(GameEngineLevel* _NextLevel)
 {
 	FadeUI->Off();
+	BGMPlayer.Stop();
 }
 
 void PuzzleLevelBase::Update(float _Delta)

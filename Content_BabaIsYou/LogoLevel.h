@@ -1,9 +1,9 @@
 #pragma once
 #include <GameEngineCore/GameEngineLevel.h>
+#include <GameEnginePlatform/GameEngineSound.h>
 
 
 // 설명 :
-
 class LogoLevel : public GameEngineLevel
 {
 public:
@@ -16,6 +16,8 @@ public:
 	LogoLevel(LogoLevel&& _Other) noexcept = delete;
 	LogoLevel& operator=(const LogoLevel& _Other) = delete;
 	LogoLevel& operator=(LogoLevel&& _Other) noexcept = delete;
+
+	GameEngineSoundPlayer BGMPlayer;
 
 protected:
 
@@ -31,5 +33,6 @@ private:
 
 	// 로고
 	class Logo* LogoUI = nullptr;
+
 };
 

@@ -11,6 +11,7 @@ PuzzleLevel1::~PuzzleLevel1()
 void PuzzleLevel1::LevelStart(GameEngineLevel* _PrevLevel)
 {
 	PuzzleLevelInit("stage1.bmp");
+	PuzzleLevelBase::LevelStart(_PrevLevel);
 }
 void PuzzleLevel1::LevelEnd(GameEngineLevel* _NextLevel)
 {

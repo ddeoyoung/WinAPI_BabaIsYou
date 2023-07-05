@@ -43,13 +43,16 @@ void TitleLevel::Start()
 	StartButton->Collision->SetCollisionScale(StartButton->GetScale());
 	StartButton->Collision->Off();
 
+	BGMPlayer = GameEngineSound::SoundPlay("title.ogg");
 }
+
 void TitleLevel::Update(float _Delta)
 {
 	if (true == GameEngineInput::IsDown('P'))
 	{
 		FadeUI->On();
 		FadeUI->FadeOut();
+		BGMPlayer.Stop();
 	}
 
 	if (true == FadeUI->FadeRender->IsAnimation("FadeIn")

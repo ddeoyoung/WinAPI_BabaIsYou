@@ -1,5 +1,6 @@
 #include "LogoLevel.h"
 #include <GameEnginePlatform/GameEngineInput.h>
+#include <GameEnginePlatform/GameEngineSound.h>
 #include <GameEngineCore/GameEngineRenderer.h>
 #include <GameEngineCore/GameEngineCore.h>
 
@@ -25,6 +26,20 @@ void LogoLevel::Start()
 	LogoUI = CreateActor<Logo>();
 	FadeUI = CreateActor<FadeAnimation>();
 	FadeUI->FadeIn();
+
+
+	if (nullptr == GameEngineSound::FindSound("title.ogg"))
+	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Sound\\BGM\\");
+
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("title.ogg"));
+	}
+
+	//GameEngineSound::SetGlobalVolume(0.5f);
+	BGMPlayer = GameEngineSound::SoundPlay("title.ogg");
 }
 
 void LogoLevel::Update(float _Delta)
@@ -33,6 +48,7 @@ void LogoLevel::Update(float _Delta)
 	{
 		FadeUI->On();
 		FadeUI->FadeOut();
+		BGMPlayer.Stop();
 	}
 
 	if (true == FadeUI->FadeRender->IsAnimation("FadeIn")
