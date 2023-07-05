@@ -122,7 +122,6 @@ private:
 	float4 BackGridPos = { 0, 0 };
 
 	float EffectInterval = 0.0f;
-	float SinkInterval = 0.0f;
 
 	class Background_Black* BackgroundUI_Black = nullptr;
 	class Background_Gray* BackgroundUI_Gray = nullptr;

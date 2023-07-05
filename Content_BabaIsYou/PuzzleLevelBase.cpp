@@ -339,7 +339,6 @@ void PuzzleLevelBase::Update(float _Delta)
 	StageClearCheck();
 
 	EffectInterval -= _Delta;
-	SinkInterval -= _Delta;
 }
 
 void PuzzleLevelBase::SinkCheck()
@@ -367,7 +366,16 @@ void PuzzleLevelBase::SinkCheck()
 					PlayerTileMap->DeathTile(PlayerTileIndex.iX(), PlayerTileIndex.iY());
 					TileGrids[1]->DeathTile(SinkTileIndex.iX(), SinkTileIndex.iY());
 
+					IsPlayerSink = false;
+
 					// 물에 빠지는 이펙트
+					for (size_t i = 0; i < 8; i++)
+					{
+						TileEffect = CreateActor<Effect>();
+						TileEffect->EffectRender->ChangeAnimation("BABA_SINK");
+						TileEffect->EffectRender->SetRenderPos(SinkTilePos);
+						TileEffect->EffectRender->SetRenderScale({ 45, 45 });
+					}
 
 					/*FadeUI->FadeOut();
 					if (true == FadeUI->FadeRender->IsAnimation("FadeOut")
@@ -405,12 +413,12 @@ void PuzzleLevelBase::SinkCheck()
 					IsPushSink = false;
 
 					//// 물에 빠지는 이펙트
-					for (size_t i = 0; i < 6; i++)
+					for (size_t i = 0; i < 8; i++)
 					{
 						TileEffect = CreateActor<Effect>();
 						TileEffect->EffectRender->ChangeAnimation("WATER_SINK");
 						TileEffect->EffectRender->SetRenderPos(PushTilePos);
-						TileEffect->EffectRender->SetRenderScale({ 35, 35 });
+						TileEffect->EffectRender->SetRenderScale({ 45, 45 });
 					}
 					
 					// 타일 삭제
