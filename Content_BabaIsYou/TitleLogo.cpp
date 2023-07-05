@@ -32,6 +32,6 @@ void TitleLogo::Start()
 
 		TitleLogoRender->CreateAnimation("TitleLogoUI", "TitleLogo.bmp", 0, 2, 0.2f, true);
 		TitleLogoRender->ChangeAnimation("TitleLogoUI");
-		TitleLogoRender->SetRenderScale({ 500, 250 });
+		TitleLogoRender->SetRenderScale({ 600, 250 });
 	}
 }

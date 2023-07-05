@@ -29,7 +29,7 @@ void ContentCore::Start()
 	GameEngineCore::CreateLevel<PuzzleLevel2>("PuzzleLevel2");
 	GameEngineCore::CreateLevel<PuzzleLevel3>("PuzzleLevel3");
 
-	GameEngineCore::ChangeLevel("WorldMapLevel");
+	GameEngineCore::ChangeLevel("LogoLevel");
 }
 
 void ContentCore::Update(float _Delta)
