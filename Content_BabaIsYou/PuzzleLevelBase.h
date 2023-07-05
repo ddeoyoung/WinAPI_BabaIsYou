@@ -34,6 +34,7 @@ public:
 	void PlayerCheck();
 	void MoveCheck();
 	void WinCheck();
+
 	void SinkCheck();
 
 	std::vector<GameEngineRenderer*> GetPlayerTile(const std::string& _PlayerTileName);
@@ -110,7 +111,8 @@ private:
 
 	bool IsMove = false;
 	bool IsPushMove = true;
-	bool IsSink = false;
+	bool IsPlayerSink = false;
+	bool IsPushSink = false;
 	bool IsWin = false;
 	bool IsCongratsUI = false;
 	bool IsCongratsContUI = false;
@@ -120,6 +122,7 @@ private:
 	float4 BackGridPos = { 0, 0 };
 
 	float EffectInterval = 0.0f;
+	float SinkInterval = 0.0f;
 
 	class Background_Black* BackgroundUI_Black = nullptr;
 	class Background_Gray* BackgroundUI_Gray = nullptr;

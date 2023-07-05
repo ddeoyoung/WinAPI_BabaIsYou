@@ -327,21 +327,108 @@ void PuzzleLevelBase::LevelEnd(GameEngineLevel* _NextLevel)
 
 void PuzzleLevelBase::Update(float _Delta)
 {
-	if (false == TileGrids[2]->IsLerpMove() && true == IsSink)
-	{
-		int a = 0;
-	}
 
 	UpdateStringRuleCheck();
 
 	MoveCheck();
+
+	SinkCheck();
 
 	WinCheck();
 
 	StageClearCheck();
 
 	EffectInterval -= _Delta;
+	SinkInterval -= _Delta;
 }
+
+void PuzzleLevelBase::SinkCheck()
+{
+	// 플레이어가 Sink일 경우
+	if (false == TileGrids[2]->IsLerpMove() && true == IsPlayerSink)
+	{
+		for (size_t i = 0; i < PlayerTiles.size(); i++)
+		{
+			for (size_t j = 0; j < SinkTiles.size(); j++)
+			{
+				GameEngineRenderer* PlayerTile = PlayerTiles[i];
+				GameEngineRenderer* SinkTile = SinkTiles[j];
+
+				float4 TileSize = TileGrids[1]->GetTileSize().Half();
+				float4 PlayerTilePos = PlayerTile->GetRenderPos();
+				float4 PlayerTileIndex = PlayerTileMap->PosToIndex(PlayerTilePos - BackGridPos - TileSize);
+
+				float4 SinkTilePos = SinkTile->GetRenderPos();
+				float4 SinkTileIndex = TileGrids[1]->PosToIndex(SinkTilePos - BackGridPos - TileSize);
+
+				if (PlayerTileIndex.iX() == SinkTileIndex.iX() 
+					&& PlayerTileIndex.iY() == SinkTileIndex.iY())
+				{
+					PlayerTileMap->DeathTile(PlayerTileIndex.iX(), PlayerTileIndex.iY());
+					TileGrids[1]->DeathTile(SinkTileIndex.iX(), SinkTileIndex.iY());
+
+					// 물에 빠지는 이펙트
+
+					/*FadeUI->FadeOut();
+					if (true == FadeUI->FadeRender->IsAnimation("FadeOut")
+						&& true == FadeUI->FadeRender->IsAnimationEnd())
+					{
+						GameEngineCore::ChangeLevel("WorldMapLevel");
+					}*/
+				}
+			}
+		}
+	}
+
+
+	// Push 오브젝트가 Sink일 경우
+	if (false == TileGrids[2]->IsLerpMove() && true == IsPushSink)
+	{
+		for (size_t i = 0; i < PushTiles.size(); i++)
+		{
+			for (size_t j = 0; j < SinkTiles.size(); j++)
+			{
+				GameEngineRenderer* PushTile = PushTiles[i];
+				GameEngineRenderer* SinkTile = SinkTiles[j];
+
+				float4 TileSize = TileGrids[1]->GetTileSize().Half();
+
+				float4 PushTilePos = PushTile->GetRenderPos();
+				float4 PushTileIndex = TileGrids[1]->PosToIndex(PushTilePos - BackGridPos - TileSize);
+
+				float4 SinkTilePos = SinkTile->GetRenderPos();
+				float4 SinkTileIndex = TileGrids[1]->PosToIndex(SinkTilePos - BackGridPos - TileSize);
+
+				if (PushTileIndex.iX() == SinkTileIndex.iX()
+					&& PushTileIndex.iY() == SinkTileIndex.iY())
+				{
+					IsPushSink = false;
+
+					//// 물에 빠지는 이펙트
+					for (size_t i = 0; i < 6; i++)
+					{
+						TileEffect = CreateActor<Effect>();
+						TileEffect->EffectRender->ChangeAnimation("WATER_SINK");
+						TileEffect->EffectRender->SetRenderPos(PushTilePos);
+						TileEffect->EffectRender->SetRenderScale({ 35, 35 });
+					}
+					
+					// 타일 삭제
+					TileGrids[1]->DeathTile(PushTileIndex.iX(), PushTileIndex.iY());
+					TileGrids[1]->DeathTile(SinkTileIndex.iX(), SinkTileIndex.iY());
+
+					PushTile->Death();
+					PushTile = nullptr;
+
+					SinkTile->Death();
+					SinkTile = nullptr;
+
+				}
+			}
+		}
+	}
+}
+
 
 void PuzzleLevelBase::UpdateStringRuleCheck()
 {
@@ -882,7 +969,7 @@ void PuzzleLevelBase::MoveCheck()
 		}
 	}
 
-	// 무조건 움직일 수 있는 경우 
+	// 무조건 움직일 수 있는 경우
 	// BreakTile이 아닌 타일
 	// PushTile인 타일
 	if (true == IsMove)
@@ -952,7 +1039,6 @@ void PuzzleLevelBase::MoveCheck()
 					{
 						if (false == IsPushMove)
 						{
-							//TileGrids[1]->LerpTile(PushTiles[j], Dir, BackGridPos);
 							RuleTilePushRecursive(NextTile, Dir, BackGridPos, 1);
 						}
 					}
@@ -960,7 +1046,7 @@ void PuzzleLevelBase::MoveCheck()
 			}
 
 			{
-				// 플레이어가 이동한 위치가 SINK 타일이면 게임오버
+				// 플레이어가 이동한 위치가 SINK 타일인지 체크
 				GameEngineRenderer* NextTile;
 				NextTile = TileGrids[1]->GetTile(TileX, TileY);
 
@@ -968,25 +1054,17 @@ void PuzzleLevelBase::MoveCheck()
 				{
 					if (NextTile == SinkTiles[j])
 					{
-						// 플레이어와 Sink타일 둘 다 Death
-						PlayerTileMap->DeathTile(TileX, TileY);
-						TileGrids[1]->DeathTile(TileX, TileY);
-						
-						IsSink = true;
+						IsPlayerSink = true;
 					}
 				}
 			}
 
-			if (false == PlayerTiles[i]->IsDeath())
-			{
-				// 플레이어 타일에 이펙트 추가
-				TileEffect = CreateActor<Effect>();
-				TileEffect->EffectRender->ChangeAnimation("BABA_WALK");
-				TileEffect->SetDir(EffectDir);
-				TileEffect->EffectRender->SetRenderPos(TilePos);
-				TileEffect->EffectRender->SetRenderScale({ 35, 35 });
-			}
-
+			// 플레이어 타일에 이펙트 추가
+			TileEffect = CreateActor<Effect>();
+			TileEffect->EffectRender->ChangeAnimation("BABA_WALK");
+			TileEffect->SetDir(EffectDir);
+			TileEffect->EffectRender->SetRenderPos(TilePos);
+			TileEffect->EffectRender->SetRenderScale({ 35, 35 });
 		}
 	}
 
@@ -1096,20 +1174,34 @@ void PuzzleLevelBase::RuleTilePushRecursive(GameEngineRenderer* _Render, MOVEDIR
 
 	TileGrids[Num]->LerpTile(_Render, _Dir, _Pos);
 
-	float4 TextTileSize = TileGrids[Num]->GetTileSize();
-	float4 TextTileIndex = TileGrids[Num]->PosToIndex(_Render->GetRenderPos() - _Pos - TextTileSize.Half());
-	TextTileIndex += PushDir;
+	float4 TileSize = TileGrids[Num]->GetTileSize().Half();
+	float4 TileIndex = TileGrids[Num]->PosToIndex(_Render->GetRenderPos() - _Pos - TileSize);
+	TileIndex += PushDir;
 
-	GameEngineRenderer* TextTile;
-	TextTile = TileGrids[Num]->GetTile(TextTileIndex.iX(), TextTileIndex.iY());
+	GameEngineRenderer* Tile;
+	Tile = TileGrids[Num]->GetTile(TileIndex.iX(), TileIndex.iY());
 
-	if (TextTile == nullptr)
+	if (Tile == nullptr)
 	{
 		return;
 	}
 
+	// Push한 타일이 Sink타일에 들어갔을 경우
+	for (size_t i = 0; i < SinkTiles.size(); i++)
+	{
+		GameEngineRenderer* SinkTile = SinkTiles[i];
+		float4 SinkTilePos = SinkTile->GetRenderPos();
+		float4 SinkTileIndex = TileGrids[1]->PosToIndex(SinkTilePos - BackGridPos - TileSize);
 
-	RuleTilePushRecursive(TextTile, _Dir, _Pos, Num);
+		if (TileIndex.iX() == SinkTileIndex.iX() && TileIndex.iY() == SinkTileIndex.iY())
+		{
+			IsPushSink = true;
+			return;
+		}
+	}
+
+	
+	RuleTilePushRecursive(Tile, _Dir, _Pos, Num);
 }
 
 
@@ -1199,48 +1291,3 @@ std::vector<GameEngineRenderer*> PuzzleLevelBase::GetSinkTile(const std::string&
 	}
 	return SinkTiles;
 }
-
-//
-//void PuzzleLevelBase::GetTiles()
-//{
-//	GameEngineRenderer* Tile = nullptr;
-//	std::string TileName = "";
-//
-//
-//	// 문장에 맞는 타일 저장
-//	for (size_t i = 0; i < TileGrids.size(); i++)
-//	{
-//		for (int y = 0; y < 15; y++)
-//		{
-//			for (int x = 0; x < 21; x++)
-//			{
-//				Tile = TileGrids[i]->GetTile(x, y);
-//
-//				if (nullptr != Tile)
-//				{
-//					TileName = Tile->GetName();
-//
-//					if (Rules.Behave == "YOU" && TileName == Rules.Subject)
-//					{
-//						PlayerTiles.push_back(Tile);
-//					}
-//
-//					else if (Rules.Behave == "WIN" && TileName == Rules.Subject)
-//					{
-//						WinTiles.push_back(Tile);
-//					}
-//
-//					else if (Rules.Behave == "STOP" && TileName == Rules.Subject)
-//					{
-//						BreakTiles.push_back(Tile);
-//					}
-//
-//					else if (Rules.Behave == "PUSH" && TileName == Rules.Subject)
-//					{
-//						PushTiles.push_back(Tile);
-//					}
-//				}
-//			}
-//		}
-//	}
-//}
