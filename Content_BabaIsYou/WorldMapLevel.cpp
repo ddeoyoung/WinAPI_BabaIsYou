@@ -445,6 +445,70 @@ void WorldMapLevel::LevelStart(GameEngineLevel* _PrevLevel)
 	StageTitle2.push_back(TextQues1);
 
 
+	// TextUI
+	// Stage 3 - OUT OF REACH
+	TextUI* TextO4 = CreateActor<TextUI>();
+	TextO4->SetPuzzleText('O', StageTextScale);
+	TextO4->SetPos({ 50, 17 });
+	StageTitle3.push_back(TextO4);
+
+	TextUI* TextU1 = CreateActor<TextUI>();
+	TextU1->SetPuzzleText('U', StageTextScale);
+	TextU1->SetPos({ 70, 17 });
+	StageTitle3.push_back(TextU1);
+
+	TextUI* TextT2 = CreateActor<TextUI>();
+	TextT2->SetPuzzleText('T', StageTextScale);
+	TextT2->SetPos({ 90, 17 });
+	StageTitle3.push_back(TextT2);
+
+	TextUI* TextSpace7 = CreateActor<TextUI>();
+	TextSpace7->SetPuzzleText(' ', StageTextScale);
+	TextSpace7->SetPos({ 110, 17 });
+	StageTitle3.push_back(TextSpace7);
+
+	TextUI* TextO5 = CreateActor<TextUI>();
+	TextO5->SetPuzzleText('O', StageTextScale);
+	TextO5->SetPos({ 130, 17 });
+	StageTitle3.push_back(TextO5);
+
+	TextUI* TextF = CreateActor<TextUI>();
+	TextF->SetPuzzleText('F', StageTextScale);
+	TextF->SetPos({ 150, 17 });
+	StageTitle3.push_back(TextF);
+
+	TextUI* TextSpace8 = CreateActor<TextUI>();
+	TextSpace8->SetPuzzleText(' ', StageTextScale);
+	TextSpace8->SetPos({ 170, 17 });
+	StageTitle3.push_back(TextSpace8);
+
+	TextUI* TextR1 = CreateActor<TextUI>();
+	TextR1->SetPuzzleText('R', StageTextScale);
+	TextR1->SetPos({ 190, 17 });
+	StageTitle3.push_back(TextR1);
+
+	TextUI* TextE2 = CreateActor<TextUI>();
+	TextE2->SetPuzzleText('E', StageTextScale);
+	TextE2->SetPos({ 210, 17 });
+	StageTitle3.push_back(TextE2);
+
+	TextUI* TextA4 = CreateActor<TextUI>();
+	TextA4->SetPuzzleText('A', StageTextScale);
+	TextA4->SetPos({ 230, 17 });
+	StageTitle3.push_back(TextA4);
+
+	TextUI* TextC = CreateActor<TextUI>();
+	TextC->SetPuzzleText('C', StageTextScale);
+	TextC->SetPos({ 250, 17 });
+	StageTitle3.push_back(TextC);
+
+	TextUI* TextH3 = CreateActor<TextUI>();
+	TextH3->SetPuzzleText('H', StageTextScale);
+	TextH3->SetPos({ 270, 17 });
+	StageTitle3.push_back(TextH3);
+
+
+
 	// TextUI - Off
 	for (size_t i = 0; i < StageTitle0.size(); i++)
 	{
