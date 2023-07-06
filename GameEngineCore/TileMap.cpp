@@ -262,8 +262,9 @@ bool TileMap::LerpTile(GameEngineRenderer* _Renderer, MOVEDIR _Dir, float4 _Tile
 
 	PosToIndex(Pos);
 
-	int X = (Pos.X - TileSize.Half().X - _TilePos.X) / TileSize.X;
-	int Y = (Pos.Y - TileSize.Half().Y - _TilePos.Y) / TileSize.Y;
+	int X = static_cast<int>((Pos.X - TileSize.Half().X - _TilePos.X) / TileSize.X);
+	int Y = static_cast<int>((Pos.Y - TileSize.Half().Y - _TilePos.Y) / TileSize.Y);
+
 
 	// 너 우리 타일맵에 있는애 맞아?
 	if (Tiles[Y][X] != _Renderer)

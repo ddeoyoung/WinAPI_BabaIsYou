@@ -354,6 +354,11 @@ void PuzzleLevelBase::Update(float _Delta)
 		MapDataImage->On();
 	}
 
+	if (true == GameEngineInput::IsPress(VK_F2))
+	{
+		MapDataImage->Off();
+	}
+
 }
 
 void PuzzleLevelBase::SinkCheck()
