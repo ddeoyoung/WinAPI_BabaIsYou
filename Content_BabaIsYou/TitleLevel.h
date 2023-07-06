@@ -23,7 +23,8 @@ public:
 	GameEngineSoundPlayer BGMPlayer;
 
 protected:
-
+	void LevelStart(GameEngineLevel* _PrevLevel) override;
+	void LevelEnd(GameEngineLevel* _NextLevel) override;
 
 private:
 	void Start() override;

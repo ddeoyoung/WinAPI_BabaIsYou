@@ -330,32 +330,15 @@ void PuzzleLevelBase::LevelStart(GameEngineLevel* _PrevLevel)
 		FilePath.MoveChild("ContentsResources\\Sound\\BGM\\");
 
 		GameEngineSound::SoundLoad(FilePath.PlusFilePath("baba.ogg"));
-	}
 
-	BGMPlayer = GameEngineSound::SoundPlay("baba.ogg");
-	BGMPlayer.SetLoop(100000);
-
-	if (nullptr == GameEngineSound::FindSound("baba.ogg"))
-	{
-		GameEnginePath FilePath;
-		FilePath.SetCurrentPath();
-		FilePath.MoveParentToExistsChild("ContentsResources");
-		FilePath.MoveChild("ContentsResources\\Sound\\BGM\\");
-
-		GameEngineSound::SoundLoad(FilePath.PlusFilePath("baba.ogg"));
-	}
-
-
-	// Effect Sound
-	// 바바 움직임 - Move_4
-	if (nullptr == GameEngineSound::FindSound("Move_4.ogg"))
-	{
-		GameEnginePath FilePath;
-		FilePath.SetCurrentPath();
 		FilePath.MoveParentToExistsChild("ContentsResources");
 		FilePath.MoveChild("ContentsResources\\Sound\\Effect\\");
 
 		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Move_4.ogg"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Move_3.ogg"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Move_2.ogg"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Move_1.ogg"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Move_0.ogg"));
 		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Sink_0.ogg"));
 		GameEngineSound::SoundLoad(FilePath.PlusFilePath("TextCompletion_0.ogg"));
 		GameEngineSound::SoundLoad(FilePath.PlusFilePath("TextCompletion_1.ogg"));
@@ -363,6 +346,8 @@ void PuzzleLevelBase::LevelStart(GameEngineLevel* _PrevLevel)
 		GameEngineSound::SoundLoad(FilePath.PlusFilePath("PuzzleLoading.ogg"));
 		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Win.ogg"));
 	}
+
+	BGMPlayer = GameEngineSound::SoundPlay("baba.ogg");
 }
 
 void PuzzleLevelBase::LevelEnd(GameEngineLevel* _NextLevel)
@@ -383,6 +368,7 @@ void PuzzleLevelBase::Update(float _Delta)
 	WinCheck();
 
 	StageClearCheck();
+
 
 	EffectInterval -= _Delta;
 }
@@ -1119,6 +1105,9 @@ void PuzzleLevelBase::MoveCheck()
 			TileEffect->SetDir(EffectDir);
 			TileEffect->EffectRender->SetRenderPos(TilePos);
 			TileEffect->EffectRender->SetRenderScale({ 35, 35 });
+
+			// 플레이어 타일 사운드
+			EffectPlayer = GameEngineSound::SoundPlay("Move_4.ogg");
 		}
 	}
 
@@ -1289,6 +1278,14 @@ void PuzzleLevelBase::ChangeBabaAnimation(MOVEDIR _Dir, const std::string& _DirN
 // 스테이지 클리어 후 Congratulations
 void PuzzleLevelBase::StageClearCheck()
 {
+	if (true == IsWin && false == IsWinSound)
+	{
+		BGMPlayer.Stop();
+		EffectPlayer = GameEngineSound::SoundPlay("Win.ogg");
+		IsWinSound = true;
+	}
+
+
 	if (true == IsWin && false == IsCongratsUI)
 	{
 		Congratulations->On();
@@ -1300,6 +1297,8 @@ void PuzzleLevelBase::StageClearCheck()
 			Congratulations->CongratsRender->ChangeAnimation("CongratsCont");
 			IsCongratsUI = true;
 		}
+
+		IsWin = false;
 	}
 
 	if (true == IsCongratsUI

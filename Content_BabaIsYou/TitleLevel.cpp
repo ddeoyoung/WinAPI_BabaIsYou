@@ -10,6 +10,8 @@
 #include "Button.h"
 #include "Cursor.h"
 
+#include "LogoLevel.h"
+
 #include "ContentsEnum.h"
 
 TitleLevel::TitleLevel()
@@ -68,3 +70,12 @@ void TitleLevel::Update(float _Delta)
 	}
 }
 
+void TitleLevel::LevelStart(GameEngineLevel* _PrevLevel)
+{
+
+}
+
+void TitleLevel::LevelEnd(GameEngineLevel* _NextLevel)
+{
+
+}

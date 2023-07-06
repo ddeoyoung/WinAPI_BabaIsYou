@@ -8,6 +8,7 @@
 #include "PuzzleLevel3.h"
 
 #include <GameEnginePlatform/GameEngineWindow.h>
+#include <GameEnginePlatform/GameEngineSound.h>
 
 ContentCore::ContentCore()
 {
@@ -20,6 +21,7 @@ ContentCore::~ContentCore()
 void ContentCore::Start()
 {
 	GameEngineWindow::MainWindow.SetPosAndScale({ 100, 100 }, { 1280, 720 });
+	GameEngineSound::SetGlobalVolume(30.f);
 
 	GameEngineCore::CreateLevel<LogoLevel>("LogoLevel");
 	GameEngineCore::CreateLevel<TitleLevel>("TitleLevel");

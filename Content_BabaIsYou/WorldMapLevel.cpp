@@ -36,6 +36,26 @@ void WorldMapLevel::Start()
 		GameEngineSound::SoundLoad(FilePath.PlusFilePath("map.ogg"));
 	}
 
+	// Effect Sound
+	if (nullptr == GameEngineSound::FindSound("Move_4.ogg"))
+	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Sound\\Effect\\");
+
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Move_4.ogg"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Move_3.ogg"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Move_2.ogg"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Move_1.ogg"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Sink_0.ogg"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("TextCompletion_0.ogg"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("TextCompletion_1.ogg"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("TextCompletion_2.ogg"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("PuzzleLoading.ogg"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Win.ogg"));
+	}
+
 
 	// WorldMapNumberBack
 	if (false == ResourcesManager::GetInst().IsLoadTexture("WorldMapNumberBack.Bmp"))
@@ -99,6 +119,7 @@ void WorldMapLevel::LevelStart(GameEngineLevel* _PrevLevel)
 {
 	// 사운드
 	BGMPlayer = GameEngineSound::SoundPlay("map.ogg");
+	BGMPlayer.SetLoop(100);
 
 	// Background
 	BackgroundUI = CreateActor<Background_Gray>();
@@ -109,9 +130,6 @@ void WorldMapLevel::LevelStart(GameEngineLevel* _PrevLevel)
 	FadeUI = CreateActor<FadeAnimation>();
 	FadeUI->FadeIn();
 
-	// WorldMapSelect
-	//SelectUI = CreateActor<WorldMapSelect>();
-	//SelectUI->Off();
 
 	float4 WinScale = GameEngineWindow::MainWindow.GetScale().Half();
 	float4 BackScale = { 1190 , 650 };
@@ -134,9 +152,7 @@ void WorldMapLevel::LevelStart(GameEngineLevel* _PrevLevel)
 		for (int x = 0; x < 31; x++)
 		{
 			// NumberGrid 0번 : 이미지 없음
-			//TileGrid->SetTile(x, y, 0, BackGridPos);
 			NumberGrid->SetTile(x, y, 0, BackGridPos);
-			//SelectGrid->SetTile(x, y, 0, BackGridPos);
 		}
 	}
 
@@ -551,6 +567,7 @@ void WorldMapLevel::LevelEnd(GameEngineLevel* _NextLevel)
 	FadeUI->Off();
 	SelectGrid->DeathTile(SelectX, SelectY);
 	BGMPlayer.Stop();
+	//EffectPlayer.Stop();
 }
 
 
@@ -688,6 +705,7 @@ void WorldMapLevel::MoveCheck()
 		if (nullptr == NextTile)
 		{
 			IsMove = SelectGrid->LerpTile(SelectX, SelectY, SelectX + 1, SelectY, BackGridPos);
+			EffectPlayer = GameEngineSound::SoundPlay("Move_4.ogg");
 
 			if (true == IsMove)
 			{
@@ -703,6 +721,7 @@ void WorldMapLevel::MoveCheck()
 		if (nullptr == NextTile)
 		{
 			IsMove = SelectGrid->LerpTile(SelectX, SelectY, SelectX, SelectY - 1, BackGridPos);
+			EffectPlayer = GameEngineSound::SoundPlay("Move_4.ogg");
 
 			if (true == IsMove)
 			{
@@ -718,6 +737,7 @@ void WorldMapLevel::MoveCheck()
 		if (nullptr == NextTile)
 		{
 			IsMove = SelectGrid->LerpTile(SelectX, SelectY, SelectX - 1, SelectY, BackGridPos);
+			EffectPlayer = GameEngineSound::SoundPlay("Move_4.ogg");
 
 			if (true == IsMove)
 			{
@@ -733,6 +753,7 @@ void WorldMapLevel::MoveCheck()
 		if (nullptr == NextTile)
 		{
 			IsMove = SelectGrid->LerpTile(SelectX, SelectY, SelectX, SelectY + 1, BackGridPos);
+			EffectPlayer = GameEngineSound::SoundPlay("Move_4.ogg");
 
 			if (true == IsMove)
 			{
@@ -740,6 +761,7 @@ void WorldMapLevel::MoveCheck()
 			}
 		}
 	}
+
 
 	StageTitleUI(SelectX, SelectY);
 }
@@ -757,6 +779,7 @@ void WorldMapLevel::Update(float _Delta)
 			FadeUI->On();
 			FadeUI->FadeOut();
 			StageName = "TutorialLevel";
+			EffectPlayer = GameEngineSound::SoundPlay("PuzzleLoading.ogg");
 		}
 
 		if (SelectX == 10 && SelectY == 12)
@@ -764,6 +787,7 @@ void WorldMapLevel::Update(float _Delta)
 			FadeUI->On();
 			FadeUI->FadeOut();
 			StageName = "PuzzleLevel1";
+			EffectPlayer = GameEngineSound::SoundPlay("PuzzleLoading.ogg");
 		}
 
 		if (SelectX == 10 && SelectY == 11)
@@ -771,6 +795,7 @@ void WorldMapLevel::Update(float _Delta)
 			FadeUI->On();
 			FadeUI->FadeOut();
 			StageName = "PuzzleLevel2";
+			EffectPlayer = GameEngineSound::SoundPlay("PuzzleLoading.ogg");
 		}
 
 		if (SelectX == 11 && SelectY == 12)
@@ -778,6 +803,7 @@ void WorldMapLevel::Update(float _Delta)
 			FadeUI->On();
 			FadeUI->FadeOut();
 			StageName = "PuzzleLevel3";
+			EffectPlayer = GameEngineSound::SoundPlay("PuzzleLoading.ogg");
 		}
 
 	}

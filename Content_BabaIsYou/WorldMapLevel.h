@@ -20,6 +20,7 @@ public:
 	WorldMapLevel& operator=(WorldMapLevel&& _Other) noexcept = delete;
 
 	GameEngineSoundPlayer BGMPlayer;
+	GameEngineSoundPlayer EffectPlayer;
 
 protected:
 	void LevelStart(GameEngineLevel* _PrevLevel) override;

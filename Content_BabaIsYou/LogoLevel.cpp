@@ -38,7 +38,6 @@ void LogoLevel::Start()
 		GameEngineSound::SoundLoad(FilePath.PlusFilePath("title.ogg"));
 	}
 
-	//GameEngineSound::SetGlobalVolume(0.5f);
 	BGMPlayer = GameEngineSound::SoundPlay("title.ogg");
 }
 
@@ -48,7 +47,6 @@ void LogoLevel::Update(float _Delta)
 	{
 		FadeUI->On();
 		FadeUI->FadeOut();
-		BGMPlayer.Stop();
 	}
 
 	if (true == FadeUI->FadeRender->IsAnimation("FadeIn")
@@ -62,4 +60,14 @@ void LogoLevel::Update(float _Delta)
 	{
 		GameEngineCore::ChangeLevel("TitleLevel");
 	}
+}
+
+void LogoLevel::LevelStart(GameEngineLevel* _PrevLevel)
+{
+	
+}
+
+void LogoLevel::LevelEnd(GameEngineLevel* _NextLevel)
+{
+	BGMPlayer.Stop();
 }

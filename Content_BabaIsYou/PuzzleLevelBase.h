@@ -121,6 +121,8 @@ private:
 	bool IsCongratsUI = false;
 	bool IsCongratsContUI = false;
 
+	bool IsWinSound = false;
+
 	float4 WinScale = { 0, 0 };
 	float4 BackScale = { 0, 0 };
 	float4 BackGridPos = { 0, 0 };
