@@ -27,7 +27,6 @@ void LogoLevel::Start()
 	FadeUI = CreateActor<FadeAnimation>();
 	FadeUI->FadeIn();
 
-
 	if (nullptr == GameEngineSound::FindSound("title.ogg"))
 	{
 		GameEnginePath FilePath;
@@ -37,8 +36,6 @@ void LogoLevel::Start()
 
 		GameEngineSound::SoundLoad(FilePath.PlusFilePath("title.ogg"));
 	}
-
-	BGMPlayer = GameEngineSound::SoundPlay("title.ogg");
 }
 
 void LogoLevel::Update(float _Delta)
@@ -69,5 +66,5 @@ void LogoLevel::LevelStart(GameEngineLevel* _PrevLevel)
 
 void LogoLevel::LevelEnd(GameEngineLevel* _NextLevel)
 {
-	BGMPlayer.Stop();
+	//BGMPlayer.Stop();
 }

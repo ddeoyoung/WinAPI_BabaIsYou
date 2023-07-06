@@ -25,6 +25,7 @@ public:
 		return Scale;
 	}
 
+	class GameEngineRenderer* ButtonRender = nullptr;
 
 protected:
 
@@ -32,7 +33,6 @@ private:
 	void Start();
 	std::string FileName = "";
 
-	class GameEngineRenderer* ButtonRender = nullptr;
 	class GameEngineSprite* Texture = nullptr;
 
 	float4 Scale = float4::ZERO;

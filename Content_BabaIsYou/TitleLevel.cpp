@@ -44,14 +44,14 @@ void TitleLevel::Start()
 	StartButton->Collision = StartButton->CreateCollision();
 	StartButton->Collision->SetCollisionScale(StartButton->GetScale());
 	StartButton->Collision->Off();
-
-	BGMPlayer = GameEngineSound::SoundPlay("title.ogg");
 }
 
 void TitleLevel::Update(float _Delta)
 {
 	if (true == GameEngineInput::IsDown('P'))
 	{
+		StartButton->ButtonRender->SetSprite("StartButton.bmp", 1);
+
 		FadeUI->On();
 		FadeUI->FadeOut();
 		BGMPlayer.Stop();
@@ -72,10 +72,10 @@ void TitleLevel::Update(float _Delta)
 
 void TitleLevel::LevelStart(GameEngineLevel* _PrevLevel)
 {
-
+	BGMPlayer = GameEngineSound::SoundPlay("title.ogg");
 }
 
 void TitleLevel::LevelEnd(GameEngineLevel* _NextLevel)
 {
-
+	BGMPlayer.Stop();
 }

@@ -16,7 +16,7 @@
 
 WorldMapLevel::WorldMapLevel()
 {
-
+	
 }
 
 WorldMapLevel::~WorldMapLevel()
@@ -34,16 +34,12 @@ void WorldMapLevel::Start()
 		FilePath.MoveChild("ContentsResources\\Sound\\BGM\\");
 
 		GameEngineSound::SoundLoad(FilePath.PlusFilePath("map.ogg"));
-	}
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("baba.ogg"));
 
-	// Effect Sound
-	if (nullptr == GameEngineSound::FindSound("Move_4.ogg"))
-	{
-		GameEnginePath FilePath;
-		FilePath.SetCurrentPath();
 		FilePath.MoveParentToExistsChild("ContentsResources");
 		FilePath.MoveChild("ContentsResources\\Sound\\Effect\\");
 
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Move_5.ogg"));
 		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Move_4.ogg"));
 		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Move_3.ogg"));
 		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Move_2.ogg"));
@@ -55,7 +51,6 @@ void WorldMapLevel::Start()
 		GameEngineSound::SoundLoad(FilePath.PlusFilePath("PuzzleLoading.ogg"));
 		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Win.ogg"));
 	}
-
 
 	// WorldMapNumberBack
 	if (false == ResourcesManager::GetInst().IsLoadTexture("WorldMapNumberBack.Bmp"))
@@ -705,7 +700,7 @@ void WorldMapLevel::MoveCheck()
 		if (nullptr == NextTile)
 		{
 			IsMove = SelectGrid->LerpTile(SelectX, SelectY, SelectX + 1, SelectY, BackGridPos);
-			EffectPlayer = GameEngineSound::SoundPlay("Move_4.ogg");
+			EffectPlayer = GameEngineSound::SoundPlay("Move_5.ogg");
 
 			if (true == IsMove)
 			{
@@ -721,7 +716,7 @@ void WorldMapLevel::MoveCheck()
 		if (nullptr == NextTile)
 		{
 			IsMove = SelectGrid->LerpTile(SelectX, SelectY, SelectX, SelectY - 1, BackGridPos);
-			EffectPlayer = GameEngineSound::SoundPlay("Move_4.ogg");
+			EffectPlayer = GameEngineSound::SoundPlay("Move_5.ogg");
 
 			if (true == IsMove)
 			{
@@ -737,7 +732,7 @@ void WorldMapLevel::MoveCheck()
 		if (nullptr == NextTile)
 		{
 			IsMove = SelectGrid->LerpTile(SelectX, SelectY, SelectX - 1, SelectY, BackGridPos);
-			EffectPlayer = GameEngineSound::SoundPlay("Move_4.ogg");
+			EffectPlayer = GameEngineSound::SoundPlay("Move_5.ogg");
 
 			if (true == IsMove)
 			{
@@ -753,7 +748,7 @@ void WorldMapLevel::MoveCheck()
 		if (nullptr == NextTile)
 		{
 			IsMove = SelectGrid->LerpTile(SelectX, SelectY, SelectX, SelectY + 1, BackGridPos);
-			EffectPlayer = GameEngineSound::SoundPlay("Move_4.ogg");
+			EffectPlayer = GameEngineSound::SoundPlay("Move_5.ogg");
 
 			if (true == IsMove)
 			{

@@ -64,7 +64,8 @@ void PuzzleLevelBase::PuzzleLevelInit(std::string _DataText)
 	Congratulations = CreateActor<CongratsUI>();
 	Congratulations->Off();
 
-	
+
+	EffectPlayer.SetVolume(20.f);
 
 	// Puzzle Tiles
 	if (false == ResourcesManager::GetInst().IsLoadTexture("Actor.Bmp"))
@@ -113,7 +114,7 @@ void PuzzleLevelBase::PuzzleLevelInit(std::string _DataText)
 
 	// 맵 세팅
 	// MapTexture
-	Background_Pixel* MapDataImage = CreateActor<Background_Pixel>();
+	MapDataImage = CreateActor<Background_Pixel>();
 	MapDataImage->Init(_DataText, { 850, 600 });
 	MapTexture = ResourcesManager::GetInst().FindTexture(_DataText);
 	MapDataImage->Off();
@@ -317,36 +318,11 @@ void PuzzleLevelBase::PuzzleLevelInit(std::string _DataText)
 			}
 		}
 	}
+
 }
 
 void PuzzleLevelBase::LevelStart(GameEngineLevel* _PrevLevel)
 {
-	// BGM
-	if (nullptr == GameEngineSound::FindSound("baba.ogg"))
-	{
-		GameEnginePath FilePath;
-		FilePath.SetCurrentPath();
-		FilePath.MoveParentToExistsChild("ContentsResources");
-		FilePath.MoveChild("ContentsResources\\Sound\\BGM\\");
-
-		GameEngineSound::SoundLoad(FilePath.PlusFilePath("baba.ogg"));
-
-		FilePath.MoveParentToExistsChild("ContentsResources");
-		FilePath.MoveChild("ContentsResources\\Sound\\Effect\\");
-
-		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Move_4.ogg"));
-		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Move_3.ogg"));
-		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Move_2.ogg"));
-		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Move_1.ogg"));
-		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Move_0.ogg"));
-		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Sink_0.ogg"));
-		GameEngineSound::SoundLoad(FilePath.PlusFilePath("TextCompletion_0.ogg"));
-		GameEngineSound::SoundLoad(FilePath.PlusFilePath("TextCompletion_1.ogg"));
-		GameEngineSound::SoundLoad(FilePath.PlusFilePath("TextCompletion_2.ogg"));
-		GameEngineSound::SoundLoad(FilePath.PlusFilePath("PuzzleLoading.ogg"));
-		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Win.ogg"));
-	}
-
 	BGMPlayer = GameEngineSound::SoundPlay("baba.ogg");
 }
 
@@ -371,6 +347,13 @@ void PuzzleLevelBase::Update(float _Delta)
 
 
 	EffectInterval -= _Delta;
+
+	// MapTexture On
+	if (true == GameEngineInput::IsPress(VK_F1))
+	{
+		MapDataImage->On();
+	}
+
 }
 
 void PuzzleLevelBase::SinkCheck()
@@ -409,12 +392,8 @@ void PuzzleLevelBase::SinkCheck()
 						TileEffect->EffectRender->SetRenderScale({ 45, 45 });
 					}
 
-					/*FadeUI->FadeOut();
-					if (true == FadeUI->FadeRender->IsAnimation("FadeOut")
-						&& true == FadeUI->FadeRender->IsAnimationEnd())
-					{
-						GameEngineCore::ChangeLevel("WorldMapLevel");
-					}*/
+					EffectPlayer = GameEngineSound::SoundPlay("Sink_0.ogg");
+
 				}
 			}
 		}
@@ -443,6 +422,8 @@ void PuzzleLevelBase::SinkCheck()
 					&& PushTileIndex.iY() == SinkTileIndex.iY())
 				{
 					IsPushSink = false;
+
+					EffectPlayer = GameEngineSound::SoundPlay("Sink_0.ogg");
 
 					//// 물에 빠지는 이펙트
 					for (size_t i = 0; i < 8; i++)
