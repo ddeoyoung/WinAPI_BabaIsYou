@@ -344,6 +344,25 @@ void PuzzleLevelBase::LevelStart(GameEngineLevel* _PrevLevel)
 
 		GameEngineSound::SoundLoad(FilePath.PlusFilePath("baba.ogg"));
 	}
+
+
+	// Effect Sound
+	// 바바 움직임 - Move_4
+	if (nullptr == GameEngineSound::FindSound("Move_4.ogg"))
+	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Sound\\Effect\\");
+
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Move_4.ogg"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Sink_0.ogg"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("TextCompletion_0.ogg"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("TextCompletion_1.ogg"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("TextCompletion_2.ogg"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("PuzzleLoading.ogg"));
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("Win.ogg"));
+	}
 }
 
 void PuzzleLevelBase::LevelEnd(GameEngineLevel* _NextLevel)
