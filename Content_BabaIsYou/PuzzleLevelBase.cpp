@@ -64,16 +64,7 @@ void PuzzleLevelBase::PuzzleLevelInit(std::string _DataText)
 	Congratulations = CreateActor<CongratsUI>();
 	Congratulations->Off();
 
-	// BGM
-	if (nullptr == GameEngineSound::FindSound("baba.ogg"))
-	{
-		GameEnginePath FilePath;
-		FilePath.SetCurrentPath();
-		FilePath.MoveParentToExistsChild("ContentsResources");
-		FilePath.MoveChild("ContentsResources\\Sound\\BGM\\");
-
-		GameEngineSound::SoundLoad(FilePath.PlusFilePath("baba.ogg"));
-	}
+	
 
 	// Puzzle Tiles
 	if (false == ResourcesManager::GetInst().IsLoadTexture("Actor.Bmp"))
@@ -330,8 +321,29 @@ void PuzzleLevelBase::PuzzleLevelInit(std::string _DataText)
 
 void PuzzleLevelBase::LevelStart(GameEngineLevel* _PrevLevel)
 {
+	// BGM
+	if (nullptr == GameEngineSound::FindSound("baba.ogg"))
+	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Sound\\BGM\\");
+
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("baba.ogg"));
+	}
+
 	BGMPlayer = GameEngineSound::SoundPlay("baba.ogg");
 	BGMPlayer.SetLoop(100000);
+
+	if (nullptr == GameEngineSound::FindSound("baba.ogg"))
+	{
+		GameEnginePath FilePath;
+		FilePath.SetCurrentPath();
+		FilePath.MoveParentToExistsChild("ContentsResources");
+		FilePath.MoveChild("ContentsResources\\Sound\\BGM\\");
+
+		GameEngineSound::SoundLoad(FilePath.PlusFilePath("baba.ogg"));
+	}
 }
 
 void PuzzleLevelBase::LevelEnd(GameEngineLevel* _NextLevel)

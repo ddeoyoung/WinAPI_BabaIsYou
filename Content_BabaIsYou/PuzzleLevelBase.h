@@ -30,6 +30,7 @@ public:
 	PuzzleLevelBase& operator=(PuzzleLevelBase&& _Other) noexcept = delete;
 
 	GameEngineSoundPlayer BGMPlayer;
+	GameEngineSoundPlayer EffectPlayer;
 
 	void PuzzleLevelInit(std::string _DataText);
 
