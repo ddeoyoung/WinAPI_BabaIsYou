@@ -6,6 +6,8 @@
 
 ![image](https://github.com/ddeoyoung/WinAPI_BabaIsYou/assets/67747071/903f755e-19e4-4852-b7e6-0288e8d26ed5)
 
+[![Video Label](http://img.youtube.com/vi/3ab9Xa9sX6w/0.jpg)](https://youtu.be/3ab9Xa9sX6w)
+
 - 개발 기간 : 2023.06.01 ~ 2023.07.07 (약 1개월)
 - 참여 인원 : 개인 프로젝트(1명)
 - 플랫폼 : <img src="https://img.shields.io/badge/Window-0078D4?style=flat-square&logo=windows&logoColor=white"/>
